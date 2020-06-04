@@ -1,0 +1,15 @@
+output
+bedstat_output
+lolacore.csv
+config.yaml
+__pycache__
+*/__pycache__
+*/#*
+.idea
+*.DS_Store*
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+docs_jupyter/bedbase_tutorial

@@ -1,0 +1,12 @@
+path:
+  bedstat_output: $BBTUTORIAL/outputs/bedstat_output
+  bedbuncher_output: $BBTUTORIAL/outputs/bedbuncher_output
+
+database:
+  host: localhost
+  bed_index: bed_index
+  bedset_index: bedset_index
+
+server:
+  host: 0.0.0.0
+  port: 8000

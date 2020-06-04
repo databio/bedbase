@@ -1,0 +1,2 @@
+sample_name,bedset_name,JSONquery_name,bbconfig_name,JSONquery_path,bedbase_config
+bedset1,bedbase_demo_bedset,test_query,bedbase_configuration,source1,source2
