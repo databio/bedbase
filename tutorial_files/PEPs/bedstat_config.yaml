@@ -16,4 +16,4 @@ sample_modifiers:
     sources:
       OUTPUT: "$BBTUTORIAL/bed_files/{file_name}" 
       SAMPLE_YAML: "$BBTUTORIAL/outputs/bedstat_pipeline_logs/submission/{sample_name}.yaml"
-      MATRIX: "$BBTUTORIAL/openSignalMatrix_{genome}_quantileNormalized_round4.txt.gz"
+      MATRIX: "$BBTUTORIAL/openSignalMatrix_{genome}_percentile99_01_quantNormalized_round4d.txt.gz"
