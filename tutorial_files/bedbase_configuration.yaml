@@ -4,8 +4,8 @@ path:
 
 database:
   host: localhost
-  bed_index: bed_index
-  bedset_index: bedset_index
+  bed_table: bedfiles
+  bedsets_table: bedsets
 
 server:
   host: 0.0.0.0

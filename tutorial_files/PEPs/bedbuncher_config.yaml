@@ -8,7 +8,6 @@ sample_modifiers:
   append:
     pipeline_interfaces: $BBTUTORIAL/bedbuncher/pipeline_interface.yaml 
   derive:
-    attributes: [JSONquery_path, bedbase_config]
+    attributes: [bedbase_config]
     sources:
-      source1: $BBTUTORIAL/bedbuncher/tests/{JSONquery_name}.json
-      source2: $BBTUTORIAL/bedbase/tutorial_files/{bbconfig_name}.yaml
+      source1: $BBTUTORIAL/bedbase/tutorial_files/{bbconfig_name}.yaml
