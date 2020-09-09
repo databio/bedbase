@@ -1,2 +1,4 @@
 sample_name,bedset_name,query,bbconfig_name,bedbase_config
-bedset1,bedbase_demo_bedset,'regions_no>1000',bedbase_configuration,source1
+sample1,bedsetOver1kRegions,'regions_no>1000',bedbase_configuration,source1
+sample2,bedsetOver50GCContent,'gc_content>0.5',bedbase_configuration,source1
+sample3,bedsetUnder500MeanWidth,'mean_region_width<500',bedbase_configuration,source1
