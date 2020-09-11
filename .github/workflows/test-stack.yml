@@ -1,6 +1,16 @@
 name: Test BEDBASE stack
 
-on: [workflow_dispatch, release]
+on:
+  workflow_dispatch:
+    inputs:
+      bedstat_branch:
+        description: 'bedstat branch to checkout'     
+        required: true
+        default: 'master'
+      bedbuncher_branch:
+        description: 'bedbuncher branch to checkout'     
+        required: true
+        default: 'master'
 
 jobs:
   pytest:
@@ -26,13 +36,13 @@ jobs:
     - uses: actions/checkout@v2
       with:
         repository: databio/bedstat
-        ref: dev
+        ref: ${{ github.event.inputs.bedstat_branch }}
         path: bedstat
 
     # - uses: actions/checkout@v2
     #   with:
     #     repository: databio/bedbuncher
-    #     ref: dev
+    #     ref: ${{ github.event.inputs.bedbuncher_branch }}
     #     path: bedbuncher
 
     - name: Set up Python ${{ matrix.python-version }}
