@@ -29,11 +29,11 @@ jobs:
         ref: dev
         path: bedstat
 
-    - uses: actions/checkout@v2
-      with:
-        repository: databio/bedbuncher
-        ref: dev
-        path: bedbuncher
+    # - uses: actions/checkout@v2
+    #   with:
+    #     repository: databio/bedbuncher
+    #     ref: dev
+    #     path: bedbuncher
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
@@ -49,14 +49,14 @@ jobs:
     - name: Install bedstat test dependancies
       run: if [ -f bedstat/requirements/requirements-test.txt ]; then pip install -r bedstat/requirements/requirements-test.txt; fi
 
-    - name: Install bedbuncher dependancies
-      run: if [ -f bedbuncher/requirements/requirements-all.txt ]; then pip install -r bedbuncher/requirements/requirements-all.txt; fi
+    # - name: Install bedbuncher dependancies
+    #   run: if [ -f bedbuncher/requirements/requirements-all.txt ]; then pip install -r bedbuncher/requirements/requirements-all.txt; fi
 
-    - name: Install bedbuncher dev dependancies
-      run: if [ -f bedbuncher/requirements/requirements-dev.txt ]; then pip install -r bedbuncher/requirements/requirements-dev.txt; fi
+    # - name: Install bedbuncher dev dependancies
+    #   run: if [ -f bedbuncher/requirements/requirements-dev.txt ]; then pip install -r bedbuncher/requirements/requirements-dev.txt; fi
 
-    - name: Install bedbuncher test dependancies
-      run: if [ -f bedbuncher/requirements/requirements-test.txt ]; then pip install -r bedbuncher/requirements/requirements-test.txt; fi
+    # - name: Install bedbuncher test dependancies
+    #   run: if [ -f bedbuncher/requirements/requirements-test.txt ]; then pip install -r bedbuncher/requirements/requirements-test.txt; fi
 
     - name: Install libcurl
       run: sudo apt-get install libcurl4-openssl-dev
@@ -84,5 +84,5 @@ jobs:
       run: |
         echo "from bbconf import BedBaseConf; from bbconf.const import *; bbc = BedBaseConf('$GITHUB_WORKSPACE/ci/cfg/config_min.yaml'); assert len(bbc.select(table_name=BED_TABLE, columns='id')) == 1, 'Number of records in the bedfiles table not equal 1'" | python3 -
 
-    - name: Run bedbuncher pipeline
-      run: looper run -p local ci/cfg/bedbuncher_config.yaml
+    # - name: Run bedbuncher pipeline
+    #   run: looper run -p local ci/cfg/bedbuncher_config.yaml
