@@ -1,0 +1,5 @@
+# min config example. Refer to bbconf/const.py for key names and default values
+
+path:
+  bedstat_output: $GITHUB_WORKSPACE/outputs/bedstat_output
+  bedbuncher_output: $GITHUB_WORKSPACE/outputs/bedbuncher_output

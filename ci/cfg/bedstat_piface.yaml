@@ -1,0 +1,11 @@
+pipeline_name: BEDSTAT
+pipeline_type: sample
+path: ../../bedstat/pipeline/bedstat.py
+input_schema: http://schema.databio.org/pipelines/bedstat.yaml
+command_template: >
+  {pipeline.path}
+  --bedfile {sample.output_file_path}
+  --genome {sample.genome}
+  --sample-yaml {sample.yaml_file}
+  {% if sample.bedbase_config is defined %} --bedbase-config {sample.bedbase_config} {% endif %}
+  {% if sample.open_signal_matrix is defined %} --open-signal-matrix {sample.open_signal_matrix} {% endif %}

@@ -1,0 +1,10 @@
+pep_version: 2.0.0
+sample_table: bedbuncher_annotation_sheet.csv
+
+looper:
+  output_dir: $GITHUB_WORKSPACE/outputs/bedbuncher_output
+
+sample_modifiers:
+  append:
+    bedbase_config: $GITHUB_WORKSPACE/ci/cfg/config_min.yaml
+    pipeline_interfaces: $GITHUB_WORKSPACE/ci/cfg/bedbuncher_piface.yaml

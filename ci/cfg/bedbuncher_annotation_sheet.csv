@@ -1,0 +1,2 @@
+sample_name,bedset_name,query
+bedset1,bedbase_demo_bedset,'regions_no>1000'
