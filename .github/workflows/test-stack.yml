@@ -33,13 +33,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: actions/checkout@v2
+    - name: Checkout bedstat@${{ github.event.inputs.bedstat_branch }}
+      uses: actions/checkout@v2
       with:
         repository: databio/bedstat
         ref: ${{ github.event.inputs.bedstat_branch }}
         path: bedstat
 
-    # - uses: actions/checkout@v2
+    # - name: Checkout bedbuncher@${{ github.event.inputs.bedbuncher_branch }}
+    #   uses: actions/checkout@v2
     #   with:
     #     repository: databio/bedbuncher
     #     ref: ${{ github.event.inputs.bedbuncher_branch }}
@@ -71,7 +73,8 @@ jobs:
     - name: Install libcurl
       run: sudo apt-get install libcurl4-openssl-dev
 
-    - uses: r-lib/actions/setup-r@master
+    - name: Set up R ${{ matrix.r-version }}
+      uses: r-lib/actions/setup-r@master
       with:
         r-version: ${{ matrix.r }}
 
@@ -86,7 +89,7 @@ jobs:
         if ls $GITHUB_WORKSPACE/ci/outputs/bedstat_output/a6a08126cb6f4b1953ba0ec8675df85a/test_hg38*.png 1> /dev/null 2>&1; then
           echo "SUCCESS";
         else
-          echo "ERROR: files do not exist: $GITHUB_WORKSPACE/ci/outputs/bedstat_output/a6a08126cb6f4b1953ba0ec8675df85a/test_hg38*.png";
+          echo "ERROR: files do not exist: $GITHUB_WORKSPACE/outputs/bedstat_output/a6a08126cb6f4b1953ba0ec8675df85a/test_hg38*.png";
           exit 1
         fi
 
