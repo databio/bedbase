@@ -24,16 +24,16 @@ jobs:
     - uses: actions/checkout@v2
 
     - uses: actions/checkout@v2
-        with:
-          repository: databio/bedstat
-          ref: dev
-          path: bedstat
+      with:
+        repository: databio/bedstat
+        ref: dev
+        path: bedstat
 
     - uses: actions/checkout@v2
-        with:
-          repository: databio/bedbuncher
-          ref: dev
-          path: bedbuncher
+      with:
+        repository: databio/bedbuncher
+        ref: dev
+        path: bedbuncher
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
