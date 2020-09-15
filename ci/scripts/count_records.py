@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from argparse import ArgumentParser
 from bbconf import BedBaseConf
 from bbconf.const import *
 
@@ -15,6 +16,5 @@ args = parser.parse_args()
 bbc = BedBaseConf('$GITHUB_WORKSPACE/ci/cfg/config_min.yaml')
 row_count = bbc._count_rows(table_name=args.table)
 if args.expected_count:
-	assert row_count == args.expected_count, 
-	f"Number of records in the '{args.table}' table ({row_count}) not equal {args.expected_count}"
+	assert row_count == args.expected_count, "Number of records in the '{}' table ({}) not equal {}".format(args.table, row_count, args.expected_count)
 sys.exit(0)
