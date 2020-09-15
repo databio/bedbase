@@ -93,9 +93,23 @@ jobs:
           exit 1
         fi
 
-    - name: Test record in PostgreSQL
+    - name: Test metadata exist
       run: |
-        echo "from bbconf import BedBaseConf; from bbconf.const import *; bbc = BedBaseConf('$GITHUB_WORKSPACE/ci/cfg/config_min.yaml'); assert len(bbc.select(table_name=BED_TABLE, columns='id')) == 1, 'Number of records in the bedfiles table not equal 1'" | python3 -
+        if ls $GITHUB_WORKSPACE/outputs/bedstat_output/a6a08126cb6f4b1953ba0ec8675df85a/test_hg38.json 1> /dev/null 2>&1; then
+          echo "SUCCESS";
+        else
+          echo "ERROR: file does not exist: $GITHUB_WORKSPACE/outputs/bedstat_output/a6a08126cb6f4b1953ba0ec8675df85a/test_hg38.json";
+          exit 1
+        fi
+
+    - name: Test records in bedfiles table
+      run: python3 ci/scripts/count_records.py -t bedfiles -e 2
 
     - name: Run bedbuncher pipeline
       run: looper run -p local ci/cfg/bedbuncher_config.yaml
+
+    - name: Test records in bedsets table
+      run: python3 ci/scripts/count_records.py -t bedsets -e 1
+
+    - name: Test records in bedset_bedfiles
+      run: python3 ci/scripts/count_records.py -t bedset_bedfiles -e 2
