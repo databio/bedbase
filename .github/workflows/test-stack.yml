@@ -95,7 +95,7 @@ jobs:
 
     - name: Test metadata exist
       run: |
-        if ls $GITHUB_WORKSPACE/outputs/bedstat_output/a6a08126cb6f4b1953ba0ec8675df85a/test_hg38.json 1> /dev/null 2>&1; then
+        if ls $GITHUB_WORKSPACE/outputs/bedstat_output/a6a08126cb6f4b1953ba0ec8675df85a/test_hg38*.json 1> /dev/null 2>&1; then
           echo "SUCCESS";
         else
           echo "ERROR: file does not exist: $GITHUB_WORKSPACE/outputs/bedstat_output/a6a08126cb6f4b1953ba0ec8675df85a/test_hg38.json";
