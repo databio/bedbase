@@ -1,5 +1,7 @@
 # Bedbase
 
+![Test BEDBASE stack](https://github.com/databio/bedbase/workflows/Test%20BEDBASE%20stack/badge.svg)
+
 A project to aggregate, analyze, and serve genomic regions better (*aka* BED files).
 
 Components:
