@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
-from bbconf import BedBaseConf, get_bedbase_config
+from bbconf import BedBaseConf, get_bedbase_cfg
 from bbconf.const import *
 
 parser = ArgumentParser(description="Count records in a PostgreSQL table and verify")
