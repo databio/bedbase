@@ -3,6 +3,7 @@
 from argparse import ArgumentParser
 from bbconf import BedBaseConf, get_bedbase_cfg
 from bbconf.const import *
+import sys
 
 parser = ArgumentParser(description="Count records in a PostgreSQL table and verify")
 
