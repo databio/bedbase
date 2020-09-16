@@ -84,7 +84,7 @@ jobs:
         cd IGD
         make 
         cd ..
-        export PATH=$GITHUB_WORKSPACE/IGD/bin/:$PATH
+        echo "::add-path::$GITHUB_WORKSPACE/IGD/bin/"
         igd
 
     - name: Set up R ${{ matrix.r-version }}
