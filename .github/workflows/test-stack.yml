@@ -85,7 +85,6 @@ jobs:
         make 
         cd ..
         echo "::add-path::$GITHUB_WORKSPACE/IGD/bin/"
-        igd
 
     - name: Set up R ${{ matrix.r-version }}
       uses: r-lib/actions/setup-r@master
