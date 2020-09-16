@@ -70,8 +70,13 @@ jobs:
     - name: Install bedbuncher test dependancies
       run: if [ -f bedbuncher/requirements/requirements-test.txt ]; then pip install -r bedbuncher/requirements/requirements-test.txt; fi
 
-    - name: Install libcurl and zlib
-      run: sudo apt-get install libcurl4-openssl-dev libpng12-0
+    - name: Install libcurl
+      run: sudo apt-get install libcurl4-openssl-dev
+
+    - name: Install libpng
+      run: |
+        sudo wget http://se.archive.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb
+        sudo dpkg -i libpng12-0_1.2.54-1ubuntu1_amd64.deb
 
     - name: Compile and install IGD
       run: |
