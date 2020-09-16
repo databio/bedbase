@@ -70,8 +70,16 @@ jobs:
     - name: Install bedbuncher test dependancies
       run: if [ -f bedbuncher/requirements/requirements-test.txt ]; then pip install -r bedbuncher/requirements/requirements-test.txt; fi
 
-    - name: Install libcurl
-      run: sudo apt-get install libcurl4-openssl-dev
+    - name: Install libcurl and zlib
+      run: sudo apt-get install libcurl4-openssl-dev libpng12-0
+
+    - name: Compile and install IGD
+      run: |
+        git clone https://github.com/databio/IGD.git
+        cd IGD
+        make 
+        cd ..
+        export PATH=IGD/bin/:$PATH
 
     - name: Set up R ${{ matrix.r-version }}
       uses: r-lib/actions/setup-r@master
