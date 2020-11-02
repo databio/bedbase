@@ -3,6 +3,7 @@ sample_table: bedbuncher_query.csv
 
 looper:
     output_dir: $BBTUTORIAL/outputs/bedbuncher_output/bedbuncher_pipeline_logs
+    piface_dir: $BBTUTORIAL/bedbuncher
 
 sample_modifiers:
   append:
