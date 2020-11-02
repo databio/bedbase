@@ -3,6 +3,7 @@ sample_table: bedstat_annotation_sheet.csv
 
 looper:
     output-dir: $BBTUTORIAL/outputs/bedstat_output/bedstat_pipeline_logs 
+    piface_dir: $BBTUTORIAL/bedstat
 
 sample_modifiers:
   append:
