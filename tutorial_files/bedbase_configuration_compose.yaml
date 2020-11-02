@@ -1,0 +1,15 @@
+path:
+  bedstat_output: $BEDBASE_DATA_PATH/outputs/bedstat_output
+  bedbuncher_output: $BEDBASE_DATA_PATH/outputs/bedbuncher_output
+database:
+  host: $DB_HOST_URL
+  port: $POSTGRES_PORT
+  password: $POSTGRES_PASSWORD
+  user: $POSTGRES_USER
+  name: $POSTGRES_DB
+  bed_table: bedfiles
+  bedset_table: bedsets
+  relationship_table: bedset_bedfiles
+server:
+  host: 0.0.0.0
+  port: 8000
