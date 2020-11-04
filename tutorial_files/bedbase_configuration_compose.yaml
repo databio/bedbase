@@ -1,6 +1,8 @@
 path:
-  bedstat_output: $BEDBASE_DATA_PATH/outputs/bedstat_output
-  bedbuncher_output: $BEDBASE_DATA_PATH/outputs/bedbuncher_output
+  pipeline_output_path: $BEDBASE_DATA_PATH/outputs
+  bedstat_dir: bedstat_output
+  bedbuncher_dir: bedbuncher_output
+  remote_url_base: null
 database:
   host: $DB_HOST_URL
   port: $POSTGRES_PORT
