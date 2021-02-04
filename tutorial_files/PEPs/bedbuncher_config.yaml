@@ -2,13 +2,12 @@ pep_version: 2.0.0
 sample_table: bedbuncher_query.csv
 
 looper:
-    output_dir: $BBTUTORIAL/outputs/bedbuncher_output/bedbuncher_pipeline_logs
-    piface_dir: $BBTUTORIAL/bedbuncher
+    output_dir: $BEDBASE_DATA_PATH_HOST/outputs/bedbuncher_output/bedbuncher_pipeline_logs
 
 sample_modifiers:
   append:
-    pipeline_interfaces: $BBTUTORIAL/bedbuncher/pipeline_interface.yaml 
+    pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedbuncher/pipeline_interface.yaml 
   derive:
     attributes: [bedbase_config]
     sources:
-      source1: $BBTUTORIAL/bedbase/tutorial_files/{bbconfig_name}.yaml
+      source1: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/{bbconfig_name}.yaml

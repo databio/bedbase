@@ -1,4 +1,4 @@
 sample_name,bedset_name,query,query_val,bbconfig_name,bedbase_config
-sample1,bedsetOver1kRegions,'regions_no>%s',1000,bedbase_configuration,source1
-sample2,bedsetOver50GCContent,'gc_content>%s',0.5,bedbase_configuration,source1
-sample3,bedsetUnder500MeanWidth,'mean_region_width<%s',500,bedbase_configuration,source1
+sample1,bedsetOver1kRegions,'regions_no>%s',1000,bedbase_configuration_compose,source1
+sample2,bedsetOver50GCContent,'gc_content>%s',0.5,bedbase_configuration_compose,source1
+sample3,bedsetUnder500MeanWidth,'mean_region_width<%s',500,bedbase_configuration_compose,source1
