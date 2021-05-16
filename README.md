@@ -14,6 +14,7 @@ There's a tutorial for bedbase in the [docs_jupyter](/docs_jupyter) folder.
 ## Components
 
 - [bedmaker](http://github.com/databio/bedmaker): a pipeline to convert non-bed files into bed files
+- [bedqc](http://github.com/databio/bedqc): a pipeline to flag bed files for futher evaluation to determine whether they should be included in the downstream analysis
 - [bedstat](http://github.com/databio/bedstat): a pipeline to calculate stats for a bed file
 - [bedbuncher](http://github.com/databio/bedbuncher): a pipeline to create bedsets
 - [bbconf](http://github.com/databio/bbconf): bedbase configuration
