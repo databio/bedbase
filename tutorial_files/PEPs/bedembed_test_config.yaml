@@ -1,0 +1,18 @@
+bedembed_version: 0.0.0
+sample_table: bedstat_annotation_sheet.csv
+
+looper:
+  output-dir: $BEDBASE_DATA_PATH_HOST/outputs/bedembed_output/bedembed_pipeline_logs 
+sample_modifiers:
+  append:
+    bedbase_config: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedbase_configuration_compose.yaml
+    pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedembed/pipeline_interface_test.yaml
+    universe: /project/shefflab/data/StarSpace/universe/universe_tilelen1000.bed
+    input_file_path: INPUT
+    output_file_path: $BEDBASE_DATA_PATH_HOST/outputs/bedembed_output
+    yaml_file: SAMPLE_YAML
+  derive:
+    attributes: [yaml_file, input_file_path]
+    sources:
+      INPUT: "/project/shefflab/data/encode/{file_name}"
+      SAMPLE_YAML: "$BEDBASE_DATA_PATH_HOST/outputs/bedembed_output/bedembed_pipeline_logs/submission/{sample_name}_sample.yaml"
