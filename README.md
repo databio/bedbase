@@ -17,6 +17,7 @@ There's a tutorial for bedbase in the [docs_jupyter](/docs_jupyter) folder.
 - [bedqc](http://github.com/databio/bedqc): a pipeline to flag bed files for futher evaluation to determine whether they should be included in the downstream analysis
 - [bedstat](http://github.com/databio/bedstat): a pipeline to calculate stats for a bed file
 - [bedbuncher](http://github.com/databio/bedbuncher): a pipeline to create bedsets
+- [bedembed](http://github.com/databio/bedembed): a pipeline uses the StarSpace method to embed the bed files and the meta data, and calculate the distances between bedfile labels and trained search terms.
 - [bbconf](http://github.com/databio/bbconf): bedbase configuration
 - [bedhost](http://github.com/databio/bedhost): a FastAPI application that hosts the web interface to the database
 - [bedhost-ui](http://github.com/databio/bedhost-ui): the source files for bedhost user interface built with React
