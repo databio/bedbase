@@ -6,8 +6,8 @@ looper:
 
 sample_modifiers:
   append:
-    pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedbuncher/pipeline_interface.yaml 
+    pipeline_interfaces: $CODE/bedbuncher/pipeline_interface.yaml 
   derive:
     attributes: [bedbase_config]
     sources:
-      source1: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/{bbconfig_name}.yaml
+      source1: $CODE/bedbase/tutorial_files/{bbconfig_name}.yaml

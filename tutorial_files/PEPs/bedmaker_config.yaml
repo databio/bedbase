@@ -6,7 +6,7 @@ looper:
 
 sample_modifiers:
   append:
-    pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedmaker/pipeline_interface.yaml
+    pipeline_interfaces: $CODE/bedmaker/pipeline_interface.yaml
     input_file_path: INPUT
     output_bed_path: BOUT
     output_bigbed_path: $BEDBASE_DATA_PATH_HOST/bigbed_files

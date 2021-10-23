@@ -1,4 +1,11 @@
-sample_name,bedset_name,genome,query,query_val,bbconfig_name,bedbase_config
-sample1,bedsetOver1kRegions,hg38,'regions_no>%s',1000,bedbase_configuration_compose,source1
-sample2,bedsetOver50GCContent,hg38,'gc_content>%s',0.5,bedbase_configuration_compose,source1
-sample3,bedsetUnder500MeanWidth,hg38,'mean_region_width<%s',500,bedbase_configuration_compose,source1
+sample_name,bedset_name,genome,query,operator,query_val,bbconfig_name,bedbase_config
+sample1,bedsetOver1kRegions,hg38,'regions_no',gt,"""1000""",bedbase_configuration_compose,source1
+sample2,bedsetOver50GCContent,hg38,'gc_content',gt,"""0.5""",bedbase_configuration_compose,source1
+sample3,bedsetUnder500MeanWidth,hg38,'mean_region_width',lt,"""500""",bedbase_configuration_compose,source1
+sample4,bedsetTestSelectCellType,hg38,"""other::text~~:str_1 or other::text~~:str_2""","""str_1,str_2""","""%GM12878%,%HEK293%""",bedbase_configuration_compose,source1
+sample5,bedsetTestSelectGenome,hg38,"""name=:name_1 or name=:name_2""","""name_1,name_2""","""GSE105587_ENCFF018NNF_conservative_idr_thresholded_peaks_GRCh38,GSE91663_ENCFF553KIK_optimal_idr_thresholded_peaks_GRCh38""",bedbase_configuration_compose,source1
+sample6,bedsetTestCellType,hg38,"""other""",contains,"""""{\""cell_type\"":\ \""K562\""}""""",bedbase_configuration_compose,source1
+sample7,bedsetTestSpace,hg38,"""other""",contains,"""""{\""description\"":\ \""IKZF1\ ChIP-seq\ on\ human\ GM12878\""}""""",bedbase_configuration_compose,source1
+sample8,bedsetTestsSpaceMult,hg38,"""other::text~~:str_1 or other::text~~:str_2""","""str_1,str_2""","""%IKZF1 ChIP-seq on human GM12878%,%ZEB2 ChIP-seq on human K562 (ENCODE)%""",bedbase_configuration_compose,source1
+sample9,bedsetTestSpace2,hg38,"""other""",contains,"""""{\""description\"":\ \""HEK293\ cell\ line\ stably\ expressing\ N-terminal\ tagged\ eGFP-GLI2\ under\ the\ control\ of\ a\ CMV\ promoter\""}""""",bedbase_configuration_compose,source1
+sample10,bedsetTestsSpaceMult2,hg38,"""other::text~~:str_1 or other::text~~:str_2""","""str_1,str_2""","""%ZEB2 ChIP-seq on human K562 (ENCODE)%,%HEK293 cell line stably expressing N-terminal tagged eGFP-GLI2 under the control of a CMV promoter %""",bedbase_configuration_compose,source1

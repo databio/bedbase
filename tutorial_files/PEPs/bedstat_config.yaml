@@ -6,8 +6,8 @@ looper:
 
 sample_modifiers:
   append:
-    bedbase_config: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedbase_configuration_compose.yaml
-    pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedstat/pipeline_interface.yaml
+    bedbase_config: $CODE/bedbase/tutorial_files/bedbase_configuration_compose.yaml
+    pipeline_interfaces: $CODE/bedstat/pipeline_interface.yaml
     output_file_path: OUTPUT
     yaml_file: SAMPLE_YAML
     open_signal_matrix: MATRIX
