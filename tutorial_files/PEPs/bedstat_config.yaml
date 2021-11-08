@@ -2,18 +2,20 @@ pep_version: 2.0.0
 sample_table: bedstat_annotation_sheet.csv
 
 looper:
-  output-dir: $BBTUTORIAL/outputs/bedstat_output/bedstat_pipeline_logs 
+    output-dir: $BEDBASE_DATA_PATH_HOST/outputs/bedstat_output/bedstat_pipeline_logs
 
 sample_modifiers:
   append:
-    bedbase_config: $BBTUTORIAL/bedbase/tutorial_files/bedbase_configuration.yaml
-    pipeline_interfaces: $BBTUTORIAL/bedstat/pipeline_interface.yaml
+    bedbase_config: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedbase_configuration_compose.yaml
+    pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedstat/pipeline_interface.yaml
     output_file_path: OUTPUT
     yaml_file: SAMPLE_YAML
     open_signal_matrix: MATRIX
+    bigbed:  BIGBED
   derive:
-    attributes: [output_file_path, yaml_file, open_signal_matrix]
+    attributes: [output_file_path, yaml_file, open_signal_matrix, bigbed]
     sources:
-      OUTPUT: "$BBTUTORIAL/bed_files/{file_name}" 
-      SAMPLE_YAML: "$BBTUTORIAL/outputs/bedstat_output/bedstat_pipeline_logs/submission/{sample_name}_sample.yaml"
-      MATRIX: "$BBTUTORIAL/openSignalMatrix_{genome}_percentile99_01_quantNormalized_round4d.txt.gz"
+      OUTPUT: "$BEDBASE_DATA_PATH_HOST/bed_files/{file_name}"
+      SAMPLE_YAML: "$BEDBASE_DATA_PATH_HOST/outputs/bedstat_output/bedstat_pipeline_logs/submission/{sample_name}_sample.yaml"
+      MATRIX: "$BEDBASE_DATA_PATH_HOST/openSignalMatrix_{genome}_percentile99_01_quantNormalized_round4d.txt.gz"
+      BIGBED: "$BEDBASE_DATA_PATH_HOST/bigbed_files"
