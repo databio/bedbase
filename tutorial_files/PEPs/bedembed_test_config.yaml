@@ -5,8 +5,8 @@ looper:
   output-dir: $BEDBASE_DATA_PATH_HOST/outputs/bedembed_output/bedembed_pipeline_logs 
 sample_modifiers:
   append:
-    bedbase_config: $CODE/bedbase/tutorial_files/bedbase_configuration_compose.yaml
-    pipeline_interfaces: $CODE/bedembed/pipeline_interface_test.yaml
+    bedbase_config: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedbase_configuration_compose.yaml
+    pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedembed/pipeline_interface_test.yaml
     universe: $BEDBASE_DATA_PATH_HOST/universe_tilelen1000.bed
     label1: "exp_protocol"
     label2: "cell_type"
