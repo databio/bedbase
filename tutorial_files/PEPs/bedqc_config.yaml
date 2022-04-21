@@ -6,7 +6,7 @@ looper:
 
 sample_modifiers:
   append:
-    pipeline_interfaces: $CODE/bedqc/pipeline_interface.yaml
+    pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedqc/pipeline_interface.yaml
     input_file_path: INPUT
     output_dir: $BEDBASE_DATA_PATH_HOST/outputs/bedqc_output/bedqc_pipeline_logs
   derive:
