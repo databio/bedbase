@@ -8,8 +8,7 @@ sample_modifiers:
     bedbase_config: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedbase_configuration_compose.yaml
     pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedembed/pipeline_interface_test.yaml
     universe: $BEDBASE_DATA_PATH_HOST/universe_tilelen1000.bed
-    label1: "exp_protocol"
-    label2: "cell_type"
+    labels: "exp_protocol,cell_type,tissue,antibody,treatment"
     input_file_path: INPUT
     output_file_path: $BEDBASE_DATA_PATH_HOST/outputs/bedembed_output
     yaml_file: SAMPLE_YAML
