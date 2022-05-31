@@ -33,13 +33,13 @@ Now, use geofetch to grab all the SOFT-formatted metadata:
 For just the test samples:
 
 ```
-geofetch -i geo_bed_test.txt --just-metadata
+geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_small.txt --just-metadata --filter "\.(bed|bigBed|narrowPeak|broadPeak)\." --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata 
 ```
 
 For everything:
 
 ```
-geofetch -i GEO_GSM_191202.txt --just-metadata
+geofetch --processed -i  /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_human.txt --just-metadata --filter "*\.(bed|bigBed|narrowPeak|broadPeak)\.*" --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata
 ```
 
 ## Grab actual data
@@ -47,27 +47,19 @@ geofetch -i GEO_GSM_191202.txt --just-metadata
 For test examples
 
 ```
-geofetch -i geo_bed_test.txt -p -g /project/shefflab/data/geo/geo_bed_test/ --filter '.*(bed|bigBed|narrowPeak).*'
+geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_small.txt --just-metadata --filter "*\.(bed|bigBed|narrowPeak|broadPeak)\.*" --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata --geo-folder /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/data
 ```
 
-```
-geofetch -i GEO_GSM_191202.txt -p -g /project/shefflab/data/geo/geo_bed_test/
-```
 
 or, more completely:
 
 ```
-geofetch -i /project/shefflab/bbbe/GEO_GSM_191202.txt -p -g /project/shefflab/data/geo/geo_bed_test/ --filter '.*(bed|bigBed|narrowPeak).*'
+geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_human.txt --just-metadata --filter "*\.(bed|bigBed|narrowPeak|broadPeak)\.*" --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata --geo-folder /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/data
 ```
 
 
-```
-cd 
-geofetch -i /project/shefflab/bbbe/GEO_GSM_191202.txt -p -g /project/shefflab/data/geo/geo_bed_test/ --filter '.*(bed|bigBed|narrowPeak).*'
-```
-
-
-## Syncing
+___
+## Syncing ?
 
 Grab RAW.tar files from project backup to yeti. Remove the `-n` and the `| wc` to run for real.
 
