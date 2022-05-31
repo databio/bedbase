@@ -1,20 +1,13 @@
 bedembed_version: 0.0.0
 sample_table: bedstat_annotation_sheet.csv
+bedembed:
+  input_file_path: $BEDBASE_DATA_PATH_HOST/bed_files/
+  meta: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/PEPs/bedstat_annotation_sheet.csv
+  universe: $BEDBASE_DATA_PATH_HOST/tiles1000.hg19.bed
+  output_file_path: $BEDBASE_DATA_PATH_HOST/outputs/bedembed_output
+  labels: "exp_protocol,cell_type,tissue,antibody,treatment"
+  bedbase_config: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedbase_configuration_compose.yaml
 
 looper:
-  output-dir: $BEDBASE_DATA_PATH_HOST/outputs/bedembed_output/bedembed_pipeline_logs 
-sample_modifiers:
-  append:
-    bedbase_config: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedbase_configuration_compose.yaml
-    pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedembed/pipeline_interface_test.yaml
-    universe: $BEDBASE_DATA_PATH_HOST/universe_tilelen1000.bed
-    label1: "exp_protocol"
-    label2: "cell_type"
-    input_file_path: INPUT
-    output_file_path: $BEDBASE_DATA_PATH_HOST/outputs/bedembed_output
-    yaml_file: SAMPLE_YAML
-  derive:
-    attributes: [yaml_file, input_file_path]
-    sources:
-      INPUT: "$BEDBASE_DATA_PATH_HOST/bed_files/{file_name}"
-      SAMPLE_YAML: "$BEDBASE_DATA_PATH_HOST/outputs/bedembed_output/bedembed_pipeline_logs/submission/{sample_name}_sample.yaml"
+  output_dir: $BEDBASE_DATA_PATH_HOST/outputs/bedembed_output/bedembed_pipeline_logs
+  pipeline_interfaces: $BEDBASE_DATA_PATH_HOST/bedembed/pipeline_interface_test.yaml
