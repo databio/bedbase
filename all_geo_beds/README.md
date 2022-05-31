@@ -39,7 +39,7 @@ geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_
 For everything:
 
 ```
-geofetch --processed -i  /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_human.txt --just-metadata --filter "*\.(bed|bigBed|narrowPeak|broadPeak)\.*" --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata
+geofetch --processed -i  /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_human.txt --just-metadata --filter "\.(bed|bigBed|narrowPeak|broadPeak)\." --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata
 ```
 
 ## Grab actual data
@@ -47,14 +47,14 @@ geofetch --processed -i  /sfs/qumulo/qproject/shefflab/resources/regions/all_geo
 For test examples
 
 ```
-geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_small.txt --just-metadata --filter "*\.(bed|bigBed|narrowPeak|broadPeak)\.*" --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata --geo-folder /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/data
+geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_small.txt --filter "\.(bed|bigBed|narrowPeak|broadPeak)\." --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata --geo-folder /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/data
 ```
 
 
 or, more completely:
 
 ```
-geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_human.txt --just-metadata --filter "*\.(bed|bigBed|narrowPeak|broadPeak)\.*" --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata --geo-folder /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/data
+geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_human.txt --filter "\.(bed|bigBed|narrowPeak|broadPeak)\." --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata --geo-folder /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/data
 ```
 
 
