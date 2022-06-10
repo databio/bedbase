@@ -9,7 +9,7 @@ First we need a list of accessions that contain BED files. Search for "BED" in G
 These files have been placed in `$PROCESSED/bbbe`
 
 ```
-cd $PROCESSED/bbbe
+cd $RESOURCES/regions/all_geo_beds/bed_22_05_27/
 ```
 
 You can pull out just the accessions like this:
@@ -18,45 +18,68 @@ You can pull out just the accessions like this:
 grep Accession GEO_BED_191202.txt | cut -d' ' -f2 | cut -f1 > GEO_GSM_191202.txt
 ```
 
-This file is a list of GSE accession, with one row per accession. For a test, let's just choose the first 100 accessions:
+This file is a list of GSE accession, with one row per accession. For a test, let's just choose the first 100 accessions (There is no example for this test run. You can try it by yourself:D ):
 
 ```
 head GEO_GSM_191202.txt -n 1000 > geo_bed_test.txt
 ```
 
+___
 
-
-## Grab metadata
+## Grab just metadata
 
 Now, use geofetch to grab all the SOFT-formatted metadata:
 
-For just the test samples:
+#### Download metadata for all samples:
 
 ```
-geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_small.txt --just-metadata --filter "\.(bed|bigBed|narrowPeak|broadPeak)\.|\.bigBed" --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata 
+geofetch --processed \
+-i $RESOURCES/regions/all_geo_beds/bed_22_05_27/GEO_GSM_complete_june6.txt \
+--just-metadata \
+--data-source samples \
+--filter "\.(bed|bigBed|narrowPeak|broadPeak)\." \
+--metadata-root $RESOURCES/regions/all_geo_beds/bed_22_05_27/data/metadata
 ```
 
-For everything:
-
-```
-geofetch --processed -i  /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_human.txt --just-metadata --filter "\.(bed|bigBed|narrowPeak|broadPeak)\.|\.bigBed" --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata
-```
 
 ## Grab actual data
 
-For test examples
+
+#### Download metadata for all samples:
 
 ```
-geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_small.txt --filter "\.(bed|bigBed|narrowPeak|broadPeak)\.|\.bigBed" --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata --geo-folder /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/data
+geofetch --processed \
+-i $RESOURCES/regions/all_geo_beds/bed_22_05_27/GEO_GSM_complete_june6.txt \
+--data-source samples \
+--filter "\.(bed|bigBed|narrowPeak|broadPeak)\." \
+--metadata-root $RESOURCES/regions/all_geo_beds/bed_22_05_27/data/metadata \
+--geo-folder $RESOURCES/regions/all_geo_beds/bed_22_05_27/data/data
 ```
 
+## Additional flags and arguments:
+```
+--data-source all
+--data-source samples
+--data-source series
+--attr-limit-truncate 2000
+--filter-size 25MB
+```
 
-or, more completely:
+## Downloading all bed data with all metadata, where each processed bed file is lest then 25MB
 
 ```
-geofetch --processed -i /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/geoacc_human.txt --filter "\.(bed|bigBed|narrowPeak|broadPeak)\.|\.bigBed" --metadata-root /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/metadata --geo-folder /sfs/qumulo/qproject/shefflab/resources/regions/all_geo_beds/bed_22_05_27/data/data
+geofetch --processed \
+-i $RESOURCES/regions/all_geo_beds/bed_22_05_27/GEO_GSM_complete_june6.txt \
+--data-source samples \
+--filter "\.(bed|bigBed|narrowPeak|broadPeak)\." \
+--metadata-root $RESOURCES/regions/all_geo_beds/bed_22_05_27/data/metadata \
+--geo-folder $RESOURCES/regions/all_geo_beds/bed_22_05_27/data/data \
+--attr-limit-truncate 2000 \
+--data-source all \
+--filter-size 25MB
 ```
 
+\* where $RESOURCES = /sfs/qumulo/qproject/shefflab/resources
 
 ___
 ## Syncing ?
