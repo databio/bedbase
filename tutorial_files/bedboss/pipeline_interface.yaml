@@ -1,0 +1,12 @@
+pipeline_name: BEDMAKER
+pipeline_type: sample
+command_template: >
+  bedboss
+  --sample-name {sample.sample_name}
+  --input-file {sample.input_file_path}
+  --input-type {sample.format}
+  --genome {sample.genome}
+  --output_folder {sample.output_folder}
+  --narrowpeak {sample.narrowpeak}
+  --rfg-config {sample.rfg_config_path}
+  --bedbase-config {sample.bedbase_config}

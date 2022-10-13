@@ -1,0 +1,16 @@
+path:
+  pipeline_output_path: output
+  bedstat_dir: outputs/bedstat_output
+  bedbuncher_dir: outputs/bedbuncher_output
+  remote_url_base: null
+database:
+  host: localhost
+  port: 5432
+  password: bedbasepassword
+  user: postgres
+  name: postgres
+  dialect: postgresql
+  driver: psycopg2
+server:
+  host: 0.0.0.0
+  port: 8080
