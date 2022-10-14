@@ -11,7 +11,7 @@ sample_modifiers:
     output_folder: "$BEDBASE_DATA_PATH_HOST/output"
     narrowpeak: TRUE
     rfg_config_path: RFG
-    bedbase_config: "./config_db_local.yaml"
+    bedbase_config: "$BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedboss/config_db_local.yaml"
   derive:
     attributes: [input_file_path, rfg_config_path]
     sources:

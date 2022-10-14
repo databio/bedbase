@@ -1,7 +1,7 @@
 path:
-  pipeline_output_path: output
-  bedstat_dir: outputs/bedstat_output
-  bedbuncher_dir: outputs/bedbuncher_output
+  pipeline_output_path: $BEDBOSS_OUTPUT_PATH
+  bedstat_dir: bedstat_output
+  bedbuncher_dir: $BEDBOSS_OUTPUT_PATH/bedbuncher_output
   remote_url_base: null
 database:
   host: localhost
