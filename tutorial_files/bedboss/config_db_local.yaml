@@ -1,5 +1,5 @@
 path:
-  pipeline_output_path: $BEDBOSS_OUTPUT_PATH
+  pipeline_output_path: $BEDBASE_DATA_PATH_HOST/outputs
   bedstat_dir: bedstat_output
   bedbuncher_dir: bedbuncher_output
   remote_url_base: null
