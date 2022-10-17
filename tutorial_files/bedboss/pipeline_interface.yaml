@@ -10,3 +10,4 @@ command_template: >
   --narrowpeak {sample.narrowpeak}
   --rfg-config {sample.rfg_config_path}
   --bedbase-config {sample.bedbase_config}
+  --sample-yaml {sample.yaml_file}
