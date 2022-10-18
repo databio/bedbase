@@ -18,7 +18,7 @@ sample_modifiers:
     sources:
       INPUT: "$BEDBASE_DATA_PATH_HOST/files/{file_name}"
       RFG: "$REFGENIE"
-      YAMLFILE: "$BEDBASE_DATA_PATH_HOST/output/meta_yaml/{sample_name}.yaml"
+      YAMLFILE: "$BEDBASE_DATA_PATH_HOST/outputs/meta_yaml/{sample_name}.yaml"
   imply:
     - if:
         antibody: [ H3K4me3, H3K27me3, H3K27ac, H3K9ac, H4K5ac, H3K4me, H3K36me3, H4K5ac, H3K9ac ]
