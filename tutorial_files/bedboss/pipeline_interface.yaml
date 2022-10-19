@@ -1,12 +1,20 @@
-pipeline_name: BEDMAKER
+pipeline_name: BEDBOSS
 pipeline_type: sample
+pre_submit:
+  python_functions:
+    - looper.write_sample_yaml
 command_template: >
   bedboss
   --sample-name {sample.sample_name}
   --input-file {sample.input_file_path}
   --input-type {sample.format}
   --genome {sample.genome}
+  --sample-yaml {sample.yaml_file}
   --output_folder {sample.output_folder}
   --narrowpeak {sample.narrowpeak}
   --rfg-config {sample.rfg_config_path}
-  --bedbase-config {sample.bedbase_config}
+  {% if sample.bedbase_config is defined %} --bedbase-config {sample.bedbase_config} {% endif %}
+  {% if sample.chrom_sizes is defined %} --chrom-sizes {sample.chrom_sizes} {% endif %}
+  {% if sample.open_signal_matrix is defined %} --open-signal-matrix {sample.open_signal_matrix} {% endif %}
+  {% if sample.ensdb is defined %} --ensdb {sample.ensdb} {% endif %}
+  {% if sample.fasta is defined %} --fasta {sample.fasta} {% endif %}

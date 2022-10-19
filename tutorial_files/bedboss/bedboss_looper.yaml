@@ -2,7 +2,7 @@ pep_version: 2.1.0
 sample_table: bedstat_annotation_sheet.csv
 
 looper:
-    output-dir: $BEDBASE_DATA_PATH_HOST/outputs/bedboss_output/bedstat_pipeline_logs
+    output-dir: $BEDBASE_DATA_PATH_HOST/outputs/bedstat_output/bedstat_pipeline_logs
 
 sample_modifiers:
   append:
@@ -11,11 +11,13 @@ sample_modifiers:
     output_folder: "$BEDBASE_DATA_PATH_HOST/outputs"
     narrowpeak: TRUE
     rfg_config_path: RFG
+    yaml_file: SAMPLE_YAML
     bedbase_config: "$BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedboss/config_db_local.yaml"
   derive:
-    attributes: [input_file_path, rfg_config_path]
+    attributes: [input_file_path, yaml_file, rfg_config_path]
     sources:
       INPUT: "$BEDBASE_DATA_PATH_HOST/files/{file_name}"
+      SAMPLE_YAML: "$BEDBASE_DATA_PATH_HOST/outputs/bedstat_output/bedstat_pipeline_logs/submission/{sample_name}_sample.yaml"
       RFG: "$REFGENIE"
   imply:
     - if:
