@@ -18,7 +18,7 @@ There's a tutorial for bedbase in the [docs_jupyter](/docs_jupyter) folder.
 - ~~[bedstat](http://github.com/databio/bedstat): a pipeline to calculate stats for a bed file~~ moved to bedboss
 - ~~[bedbuncher](http://github.com/databio/bedbuncher): a pipeline to create bedsets~~ moved to bedboss
 - [bedembed](https://github.com/databio/bedembed): a pipeline to create bed file embeddings
-- [bedboss](https://github.com/databio/bedboss): a pipeline to create bed file embeddings
+- [bedboss](https://github.com/databio/bedboss): main bedbase processing pipeline, combining bedqc, bedmaker, bedstat, and bedbuncher
 - [bbconf](http://github.com/databio/bbconf): bedbase configuration
 - [bedhost](http://github.com/databio/bedhost): a FastAPI application that hosts the web interface to the database
 - [bedhost-ui](http://github.com/databio/bedhost-ui): the source files for bedhost user interface built with React
