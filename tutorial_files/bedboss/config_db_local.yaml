@@ -4,11 +4,11 @@ path:
   bedbuncher_dir: outputs/bedbuncher_output
   remote_url_base: null
 database:
-  host: localhost
-  port: 5432
-  password: bedbasepassword
-  user: postgres
-  name: postgres
+  host: $DB_HOST_URL
+  port: $POSTGRES_PORT
+  password: $POSTGRES_PASSWORD
+  user: $POSTGRES_USER
+  name: $POSTGRES_DB
   dialect: postgresql
   driver: psycopg2
 server:
