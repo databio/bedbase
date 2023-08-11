@@ -1,5 +1,5 @@
 pep_version: 2.1.0
-sample_table: bedstat_annotation_sheet.csv
+sample_table: sample_table.csv
 
 sample_modifiers:
   append:
