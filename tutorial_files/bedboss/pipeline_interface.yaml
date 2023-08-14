@@ -4,7 +4,7 @@ pre_submit:
   python_functions:
     - looper.write_sample_yaml
 command_template: >
-  bedboss
+  bedboss all
   --sample-name {sample.sample_name}
   --input-file {sample.input_file_path}
   --input-type {sample.format}
@@ -18,3 +18,4 @@ command_template: >
   {% if sample.open_signal_matrix is defined %} --open-signal-matrix {sample.open_signal_matrix} {% endif %}
   {% if sample.ensdb is defined %} --ensdb {sample.ensdb} {% endif %}
   {% if sample.fasta is defined %} --fasta {sample.fasta} {% endif %}
+  --outfolder $BEDBASE_DATA_PATH_HOST/outputs/outputs/bedstat_output/bedstat_pipeline_logs
