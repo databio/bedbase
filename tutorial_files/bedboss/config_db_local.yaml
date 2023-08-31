@@ -1,0 +1,16 @@
+path:
+  pipeline_output_path: $BEDBASE_DATA_PATH_HOST/outputs
+  bedstat_dir: outputs/bedstat_output
+  bedbuncher_dir: outputs/bedbuncher_output
+  remote_url_base: null
+database:
+  host: $DB_HOST_URL
+  port: $POSTGRES_PORT
+  password: $POSTGRES_PASSWORD
+  user: $POSTGRES_USER
+  name: $POSTGRES_DB
+  dialect: postgresql
+  driver: psycopg2
+server:
+  host: 0.0.0.0
+  port: 8080

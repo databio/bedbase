@@ -12,15 +12,9 @@ sample_modifiers:
     output_bigbed_path: $BEDBASE_DATA_PATH_HOST/bigbed_files
     narrowpeak: TRUE
     rfg_config_path: RFG
-    protocol: "make_bed"
   derive:
     attributes: [input_file_path, output_bed_path, rfg_config_path]
     sources:
       INPUT: "$BEDBASE_DATA_PATH_HOST/files/{file_name}"
       BOUT: "$BEDBASE_DATA_PATH_HOST/bed_files/{file_name}" 
       RFG: "$REFGENIE"
-  imply:
-    - if:
-        antibody: [H3K4me3, H3K27me3, H3K27ac, H3K9ac, H4K5ac, H3K4me, H3K36me3, H4K5ac, H3K9ac]
-      then:
-        narrowpeak: FALSE

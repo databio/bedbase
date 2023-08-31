@@ -1,0 +1,22 @@
+pep_version: 2.1.0
+sample_table: sample_table.csv
+
+sample_modifiers:
+  append:
+    input_file_path: INPUT
+    output_folder: "$BEDBASE_DATA_PATH_HOST/outputs"
+    narrowpeak: TRUE
+    rfg_config_path: RFG
+    bedbase_config: "$BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedboss/config_db_local.yaml"
+    yaml_file: YAMLFILE
+  derive:
+    attributes: [input_file_path, rfg_config_path, yaml_file]
+    sources:
+      INPUT: "$BEDBASE_DATA_PATH_HOST/files/{file_name}"
+      RFG: "$REFGENIE"
+      YAMLFILE: "$BEDBASE_DATA_PATH_HOST/outputs/outputs/bedstat_output/bedstat_pipeline_logs/submission/{sample_name}_sample.yaml"
+  imply:
+    - if:
+        antibody: [ H3K4me3, H3K27me3, H3K27ac, H3K9ac, H4K5ac, H3K4me, H3K36me3, H4K5ac, H3K9ac ]
+      then:
+        narrowpeak: FALSE

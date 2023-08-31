@@ -1,0 +1,5 @@
+pep_config: $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedboss/bedboss_pep_config.yaml
+output_dir: $BEDBASE_DATA_PATH_HOST/outputs/outputs/bedstat_output/bedstat_pipeline_logs
+
+pipeline_interfaces:
+  sample:  $BEDBASE_DATA_PATH_HOST/bedbase/tutorial_files/bedboss/pipeline_interface.yaml
