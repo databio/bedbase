@@ -12,7 +12,11 @@ docker volume create postgres-data
 ```
 
 ```bash
-docker run -d --name bedbase-postgres -p 5432:5432 -e POSTGRES_PASSWORD=bedbasepassword -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -v postgres-data:/var/lib/postgresql/data postgres:13
+docker run -d --name bedbase-postgres -p 5432:5432 \
+  -e POSTGRES_PASSWORD=bedbasepassword \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_DB=postgres \
+  -v postgres-data:/var/lib/postgresql/data postgres:13
 ```
 
 Now we have created docker and can run pipelines.

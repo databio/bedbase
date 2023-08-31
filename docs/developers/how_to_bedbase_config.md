@@ -33,6 +33,6 @@ remotes:
     description: S3 compatible path
 ```
 
-### Download example bedbase configuration file here: <a href="../bedbase_configuration.yaml" download>Example bedbase configuration file</a>
+Download example bedbase configuration file here: <a href="../bedbase_configuration.yaml" download>Example bedbase configuration file</a>
 
 .
