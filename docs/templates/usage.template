@@ -1,0 +1,16 @@
+# Usage reference
+
+BEDboss is command-line tool-warehouse of 3 pipelines for genomic interval files
+
+BEDboss include: bedmaker, bedqc, bedstat. This pipelines can be run using next positional arguments:
+
+- `bedbase all`:  Runs all pipelines one in order: bedmaker -> bedqc -> bedstat
+
+- `bedbase make`:  Creates Bed and BigBed files from  other type of genomic interval files [bigwig|bedgraph|bed|bigbed|wig]
+
+- `bedbase qc`: Runs Quality control for bed file (Works only with bed files)
+
+- `bedbase stat`: Runs statistics for bed and bigbed files.
+
+Here you can see the command-line usage instructions for the main bedboss command and for each subcommand:
+

@@ -1,5 +1,5 @@
 path:
-  pipeline_output_path: $BEDBASE_DATA_PATH/outputs
+  pipeline_output_path: $BEDBASE_DATA_PATH_HOST/outputs
   bedstat_dir: bedstat_output
   bedbuncher_dir: bedbuncher_output
   remote_url_base: null
@@ -9,9 +9,15 @@ database:
   password: $POSTGRES_PASSWORD
   user: $POSTGRES_USER
   name: $POSTGRES_DB
-  bed_table: bedfiles
-  bedset_table: bedsets
-  relationship_table: bedset_bedfiles
+  dialect: postgresql
+  driver: psycopg2
 server:
   host: 0.0.0.0
   port: 8000
+remotes:
+  http:
+    prefix: http://data.bedbase.org/
+    description: HTTP compatible path
+  s3:
+    prefix: s3://data.bedbase.org/
+    description: S3 compatible path
