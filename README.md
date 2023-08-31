@@ -13,16 +13,21 @@ There's a tutorial for bedbase in the [docs_jupyter](/docs_jupyter) folder.
 
 ## Components
 
-- [bedmaker](http://github.com/databio/bedmaker): a pipeline to convert non-bed files into bed files
-- [bedqc](http://github.com/databio/bedqc): a pipeline to flag bed files for futher evaluation to determine whether they should be included in the downstream analysis
-- [bedstat](http://github.com/databio/bedstat): a pipeline to calculate stats for a bed file
-- [bedbuncher](http://github.com/databio/bedbuncher): a pipeline to create bedsets
-- [bedembed](http://github.com/databio/bedembed): a pipeline uses the StarSpace method to embed the bed files and the meta data, and calculate the distances between bedfile labels and trained search terms.
+- ~~[bedqc](https://github.com/databio/bedqc): a pipeline for QC of BED files.~~ moved to bedboss
+- ~~[bedmaker](http://github.com/databio/bedmaker): a pipeline to convert non-bed files into bed files~~ moved to bedboss
+- ~~[bedstat](http://github.com/databio/bedstat): a pipeline to calculate stats for a bed file~~ moved to bedboss
+- [bedbuncher](http://github.com/databio/bedbuncher): a pipeline to create bedsets ~~moved to bedboss~~
+- ~~[bedembed](https://github.com/databio/bedembed): a pipeline to create bed file embeddings~~ now part of geniml
+- [bedboss](https://github.com/databio/bedboss): main bedbase processing pipeline, combining bedqc, bedmaker,and  bedstat
 - [bbconf](http://github.com/databio/bbconf): bedbase configuration
 - [bedhost](http://github.com/databio/bedhost): a FastAPI application that hosts the web interface to the database
 - [bedhost-ui](http://github.com/databio/bedhost-ui): the source files for bedhost user interface built with React
 - [bedbase.org repository](https://github.com/databio/bedbase.org): Repository for deploying the bedhost container to AWS.
 - [all_geo_beds](all_geo_beds): a subfolder, is the scripts to download all bed files on GEO using geofetch and build a backend to host the metadata using bedstat
+
+Not part of bedbase, but used by it:
+
+- [geniml](https://github.com/databio/geniml):
 
 ## URLs
 
