@@ -1,0 +1,32 @@
+site_name: bedboss
+site_url: https://bedboss.databio.org/
+repo_url: https://github.com/bedbase/bedboss
+site_logo: ./img/bedboss.svg
+pypi_name: bedboss
+
+nav:
+  - Getting started:
+    - Introduction: README.md
+  - Tutorials:
+    - Bedmaker tutorial: bedmaker_tutorial.md
+    - Bedqc tutorial: bedqc_tutorial.md
+    - Bedstat tutorial: bedstat_tutorial.md
+    - Bedboss tutorial (all): tutorial_all.md
+  - How-to Guides:
+    - Create bedbase config file: how_to_bedbase_config.md
+    - Create bedbase postgres database: how_to_create_database.md
+    - How to install R dependencies: how_to_install_r_dep.md
+  - Reference:
+    - Usage: usage.md
+    - Support: https://github.com/bedbase/bedboss/issues
+    - Contributing: contributing.md
+    - Changelog: changelog.md
+
+theme: databio
+
+plugins:
+  - search
+
+  - databio:
+      jupyter_source: "docs_jupyter"
+      jupyter_build: "docs_jupyter/build"
