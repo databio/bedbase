@@ -1,6 +1,6 @@
-site_name: bedboss
-site_url: https://bedboss.databio.org/
-repo_url: https://github.com/bedbase/bedboss
+site_name: bedbase
+site_url: https://bedbase.databio.org/
+repo_url: https://github.com/databio/bedbase
 site_logo: ./img/bedbase_logo.svg
 
 nav:
