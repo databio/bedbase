@@ -20,8 +20,8 @@ There's a tutorial for bedbase in the [docs_jupyter](/docs_jupyter) folder.
 - ~~[bedembed](https://github.com/databio/bedembed): a pipeline to create bed file embeddings~~ now part of geniml
 - [bedboss](https://github.com/databio/bedboss): main bedbase processing pipeline, combining bedqc, bedmaker,and  bedstat
 - [bbconf](http://github.com/databio/bbconf): bedbase configuration
-- [bedhost](http://github.com/databio/bedhost): a FastAPI application that hosts the web interface to the database
-- [bedhost-ui](http://github.com/databio/bedhost-ui): the source files for bedhost user interface built with React
+- [bedhost](http://github.com/databio/bedhost): FastAPI application with API for accessing data
+- [bedhost-ui](http://github.com/databio/bedhost-ui): front-end user interface built with React
 - [bedbase.org repository](https://github.com/databio/bedbase.org): Repository for deploying the bedhost container to AWS.
 - [all_geo_beds](all_geo_beds): a subfolder, is the scripts to download all bed files on GEO using geofetch and build a backend to host the metadata using bedstat
 
