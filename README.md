@@ -18,7 +18,7 @@ There's a tutorial for bedbase in the [docs_jupyter](/docs_jupyter) folder.
 - ~~[bedstat](http://github.com/databio/bedstat): a pipeline to calculate stats for a bed file~~ moved to bedboss
 - ~~[bedbuncher](http://github.com/databio/bedbuncher): a pipeline to create bedsets~~ moved to bedboss
 - ~~[bedembed](https://github.com/databio/bedembed): a pipeline to create bed file embeddings~~ now part of geniml
-- [bedboss](https://github.com/databio/bedboss): main bedbase processing pipeline, combining bedqc, bedmaker,and  bedstat
+- [bedboss](https://github.com/databio/bedboss): main bedbase processing pipeline, combining bedqc, bedmaker, bedstat, and bedbuncher
 - [bbconf](http://github.com/databio/bbconf): bedbase configuration
 - [bedhost](http://github.com/databio/bedhost): FastAPI application with API for accessing data
 - [bedhost-ui](http://github.com/databio/bedhost-ui): front-end user interface built with React
@@ -29,8 +29,11 @@ Not part of bedbase, but used by it:
 
 - [geniml](https://github.com/databio/geniml):
 
-## URLs
+## Services
 
-- bedbase.org - bedhost API server
-- data.bedbase.org - file server that backs bedbase.org
+- API, production: https://api.bedbase.org/
+- API, dev: https://api-dev.bedbase.org/
+- Front-end, production: https://bedbase.org (alias https://bedhost-ui.pages.dev/)
+- Front-end, dev: https://dev.bedbase.org
+- Object store, production: https://data2.bedbase.org/ - base URL for cloudflare/backblaze
 
