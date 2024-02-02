@@ -1,37 +1,118 @@
-site_name: bedbase
-site_url: https://bedbase.databio.org/
-repo_url: https://github.com/databio/bedbase
-site_logo: ./img/bedbase_logo.svg
+site_name: "BEDbase: a unified platform for genomic regions"
+
+theme:
+  logo: img/bedbase_logo.svg
+  favicon: img/bedbase_bug.svg
+  name: material
+  custom_dir: overrides
+
+  features:
+    - header.autohide
+    - navigation.sections
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes 
+    - toc.follow
+    - content.action.edit
+    - content.action.view
+    - navigation.tabs
+    - navigation.top
+
+markdown_extensions:
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_css:
+  - stylesheets/extra.css
+extra:
+  generator: false  # turn off theme link
+copyright: >
+    <a class="" href="http://databio.org/">
+      <img src="https://databio.org/images/logo/logo_databio_long.svg"
+        style="height:60px;"
+        alt="Databio logo">
+    </a>
 
 nav:
-  - Getting started:
-    - Introduction: README.md
-  - User documentation:
-    - The bedbase API: users/api.md
-  - Developer documentation:
-    - bedboss: developers/bedboss.md
-    - Bedboss-all pipeline: tutorial_all.md
-    - Bedboss insert: developers/tutorial_insert.md
-    - Bedmaker tutorial: bedmaker_tutorial.md
-    - Bedqc tutorial: bedqc_tutorial.md
-    - Bedstat tutorial: bedstat_tutorial.md
-    - Configuring bedbase: developers/how_to_bedbase_config.md
-    - Create bedbase postgres database: developers/how_to_create_database.md
-    - How to install R dependencies: developers/how_to_install_r_dep.md
-    - bbconf config: bbconf_config.md
-    - bbconf demo: bbconf_demo.md
-    - bedbase tutorial: bedbase_tutorial.md
-  - Reference:
-    - Usage: bedboss_usage.md
-    - Support: https://github.com/bedbase/bedboss/issues
-    - Contributing: contributing.md
-    - Changelog: changelog.md
+  - BEDbase:
+    - BEDbase: bedbase/README.md
+    - User guide:
+      - The BEDbase API: users/api.md
+    - Developer guides:
+      - BEDhost:
+        - BEDhost: bedhost/README.md
+        - Guide: bedhost/guide.md
+        - Changelog: bedhost/changelog.md
+      - BEDboss: developers/bedboss.md
+      - BEDboss-all pipeline: tutorial_all.md
+      - BEDboss insert: developers/tutorial_insert.md
+      - BEDmaker tutorial: bedmaker_tutorial.md
+      - BEDqc tutorial: bedqc_tutorial.md
+      - BEDstat tutorial: bedstat_tutorial.md
+      - Configuring bedbase: developers/how_to_bedbase_config.md
+      - Create bedbase postgres database: developers/how_to_create_database.md
+      - How to install R dependencies: developers/how_to_install_r_dep.md
+      - bbconf config: bbconf_config.md
+      - bbconf demo: bbconf_demo.md
+      - BEDbase tutorial: bedbase_tutorial.md
+      - BBConf:
+        - BBConf: bbconf/README.md
+        - Guide: bbconf/bbc_api.md
+        - Changelog: bbconf/changelog.md
+    - Reference:
+      - Usage: bedboss_usage.md
+      - Support: https://github.com/bedbase/bedboss/issues
+      - Contributing: contributing.md
+      - Changelog: changelog.md
+  - BEDboss:
+    - BEDBoss: bedboss/README.md
+    - How to guides:
+      - Configure bedboss: bedboss/how_to_bedbase_config.md
+      - Run from Python: bedboss/how-to-run-from-python.md
+      - Install R dependencies: bedboss/how-to-install-r-dependencies.md
+      - Create BEDbase database: bedboss/how-to-create-database.md
+    - Reference:
+      - Usage: bedboss/usage.md
+  - Geniml:
+    - Geniml: geniml/README.md
+    - Getting Started: 
+      - Module overviews: geniml/Rmodules.md
+    - How-to guides:    
+      - Assess universe fit: tutorials/assess-universe.md
+      - Search intervals with BEDSpace: tutorials/bedspace.md
+      - Evaluate embeddings: tutorials/evaluation.md
+      - Train region2vec embeddings: tutorials/region2vec.md
+      - Train single-cell embeddings: tutorials/train-scembed-model.md
+      - Tokenization: tutorials/tokenization.md
+      - Tokenize a BED file on the command line: tutorials/cli-tokenization.md
+      - Create consensus peaks: tutorials/create-consensus-peaks.md
+      - Fine-tune embeddings: tutorials/fine-tune-region2vec-model.md
+      - Randomize bed files: tutorials/bedshift.md
+      - Create evaluation dataset with bedshift: tutorials/bedshift-evaluation-guide.md
+    - Reference:
+      - API: autodoc_build/geniml.md
+      - Support: support.md
+      - Contributing: contributing.md
+      - Changelog: changelog.md
+  - Genimtools:
+    - Genimtools: genimtools/README.md
+  - How to cite: citations.md
 
-theme: databio
-
-plugins:
-  - search
-  - databio:
-      jupyter_source: "docs_jupyter"
-      jupyter_build: "docs/autodoc_build"
-
+jupyter:
+  - in: eido/notebooks
+    out: eido/code
+  - in: geofetch/notebooks
+    out: geofetch/code
+  - in: looper/notebooks
+    out: looper/code
+  - in: peppy/notebooks
+    out: peppy/code
+  - in: pipestat/notebooks
+    out: pipestat/code
+  - in: pypiper/notebooks
+    out: pypiper/code
