@@ -41,25 +41,12 @@ copyright: >
 nav:
   - BEDbase:
     - BEDbase: bedbase/README.md
-    - User guide:
-      - The BEDbase API: users/api.md
-    - Developer guides:
-      - BEDhost:
+    - UI guide:
+      - Public BEDbase instance: bedbase/bedbase-user-guide.md
+    - API guides:
+      - BEDhost API guide:
         - BEDhost: bedhost/README.md
-        - Guide: bedhost/guide.md
         - Changelog: bedhost/changelog.md
-      - BEDboss: developers/bedboss.md
-      - BEDboss-all pipeline: tutorial_all.md
-      - BEDboss insert: developers/tutorial_insert.md
-      - BEDmaker tutorial: bedmaker_tutorial.md
-      - BEDqc tutorial: bedqc_tutorial.md
-      - BEDstat tutorial: bedstat_tutorial.md
-      - Configuring bedbase: developers/how_to_bedbase_config.md
-      - Create bedbase postgres database: developers/how_to_create_database.md
-      - How to install R dependencies: developers/how_to_install_r_dep.md
-      - bbconf config: bbconf_config.md
-      - bbconf demo: bbconf_demo.md
-      - BEDbase tutorial: bedbase_tutorial.md
       - BBConf:
         - BBConf: bbconf/README.md
         - Guide: bbconf/bbc_api.md
@@ -72,33 +59,34 @@ nav:
   - BEDboss:
     - BEDBoss: bedboss/README.md
     - How to guides:
-      - Configure bedboss: bedboss/how_to_bedbase_config.md
+      - Configure bedboss: bedboss/how-to-configure.md
       - Run from Python: bedboss/how-to-run-from-python.md
       - Install R dependencies: bedboss/how-to-install-r-dependencies.md
       - Create BEDbase database: bedboss/how-to-create-database.md
+      - BEDboss insert: bedboss/bedboss-insert.md
     - Reference:
       - Usage: bedboss/usage.md
   - Geniml:
     - Geniml: geniml/README.md
     - Getting Started: 
-      - Module overviews: geniml/Rmodules.md
+      - Module overviews: geniml/modules.md
     - How-to guides:    
-      - Assess universe fit: tutorials/assess-universe.md
-      - Search intervals with BEDSpace: tutorials/bedspace.md
-      - Evaluate embeddings: tutorials/evaluation.md
-      - Train region2vec embeddings: tutorials/region2vec.md
-      - Train single-cell embeddings: tutorials/train-scembed-model.md
-      - Tokenization: tutorials/tokenization.md
-      - Tokenize a BED file on the command line: tutorials/cli-tokenization.md
-      - Create consensus peaks: tutorials/create-consensus-peaks.md
-      - Fine-tune embeddings: tutorials/fine-tune-region2vec-model.md
-      - Randomize bed files: tutorials/bedshift.md
-      - Create evaluation dataset with bedshift: tutorials/bedshift-evaluation-guide.md
+      - Assess universe fit: geniml/tutorials/assess-universe.md
+      - Search intervals with BEDSpace: geniml/tutorials/bedspace.md
+      - Evaluate embeddings: geniml/tutorials/evaluation.md
+      - Train region2vec embeddings: geniml/tutorials/region2vec.md
+      - Train single-cell embeddings: geniml/tutorials/train-scembed-model.md
+      - Tokenization: geniml/tutorials/tokenization.md
+      - Tokenize a BED file on the command line: geniml/tutorials/cli-tokenization.md
+      - Create consensus peaks: geniml/tutorials/create-consensus-peaks.md
+      - Fine-tune embeddings: geniml/tutorials/fine-tune-region2vec-model.md
+      - Randomize bed files: geniml/tutorials/bedshift.md
+      - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
     - Reference:
-      - API: autodoc_build/geniml.md
-      - Support: support.md
-      - Contributing: contributing.md
-      - Changelog: changelog.md
+      - API: geniml/autodoc_build/geniml.md
+      - Support: geniml/support.md
+      - Contributing: geniml/contributing.md
+      - Changelog: geniml/changelog.md
   - Genimtools:
     - Genimtools: genimtools/README.md
   - How to cite: citations.md

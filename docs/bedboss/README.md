@@ -4,7 +4,8 @@ It has 3 components:
 
 1) bedmaker (`bedboss make`); </br>
 2) bedqc (`bedboss qc`);</br>
-3) bedstat (`bedboss stat`).
+3) bedstat (`bedboss stat`);</br>
+4) bedbuncher (`bedboss bunch`).
 
 You may run all 3 pipelines together, or separately.
 
@@ -44,6 +45,20 @@ It produces BED file Statistics:
 - **5' UTR percentage**. The percentage of the regions in the BED file that are annotated as 5'-UTR.
 - **3' UTR percentage**. The percentage of the regions in the BED file that are annotated as 3'-UTR.
 
+## bedbuncher
+
+Pipeline designed to create **bedsets** (sets of BED files) that will be retrieved from bedbase.
+
+Example bedsets:
+- Bed files from the AML database.
+- Bed files from the [Excluderanges](https://github.com/dozmorovlab/excluderanges#bedbase-data-download) database.
+- Bed files from the LOLA database.
+
+Bedbuncher calculates statistics:
+- Bedset statistics (currenty means and standard deviations).
+
+
+----
 # Additional information
 
 ## bedmaker
@@ -63,3 +78,5 @@ regionstat.R script is used to calculate the bed file statistics, so the pipelin
 All dependencies you can find in R helper script, and use it to easily install the required packages:
 
 - Rscript scripts/installRdeps.R [How to install R dependencies](./how_to_install_r_dep.md)
+
+
