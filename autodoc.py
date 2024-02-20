@@ -94,7 +94,7 @@ if args["x_jupyter"] is False and "jupyter" in cfg:
             bn, _ = os.path.splitext(os.path.basename(nb))
             out = f"docs/{item['out']}/{bn}.md"
             print(f"Converting '{nb}' to '{out}'")
-            md_result = nbconvert.exporters.export(nbconvert.MarkdownExporter(), nb)[0]
+            md_result = nbconvert.exporters.export(nbconvert.HTMLExporter(), nb)[0]
             Path(os.path.dirname(out)).mkdir(parents=True, exist_ok=True)
             with open(out, "w") as stream:
                 stream.write(md_result)

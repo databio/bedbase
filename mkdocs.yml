@@ -95,6 +95,8 @@ nav:
       - Fine-tune embeddings: geniml/tutorials/fine-tune-region2vec-model.md
       - Randomize bed files: geniml/tutorials/bedshift.md
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
+    - Tutorials:
+      - Using BEDspace: geniml/code/bedspace-analysis.md
     - Reference:
       - How to cite: citations.md
       - API: geniml/autodoc_build/geniml.md
@@ -107,5 +109,7 @@ nav:
 
 autodoc:
   jupyter:
-    - in: bbconf/notebooks
-      out: bbconf/code
+  - in: bbconf/notebooks
+    out: bbconf/code
+  - in: geniml/notebooks
+    out: geniml/code
