@@ -82,24 +82,26 @@ nav:
     - Getting Started: 
       - Module overviews: geniml/modules.md
     - How-to guides:    
-      - Train region2vec embeddings: geniml/tutorials/region2vec.md
-      - Train single-cell embeddings: geniml/tutorials/train-scembed-model.md
+      - Cache BED files with BBClient: geniml/tutorials/bbclient.md
       - Tokenization: geniml/tutorials/tokenization.md
-      - Tokenize a BED file on the command line: geniml/tutorials/cli-tokenization.md
+      - Tokenize a BED file with CLI: geniml/tutorials/cli-tokenization.md
+      - Train region2vec embeddings: geniml/tutorials/region2vec.md
+      - Train BEDspace model:
+        - Train BEDSpace embeddings: geniml/tutorials/bedspace.md
+        - BEDspace results notebook: geniml/code/bedspace-analysis.md
+      - Use scEmbed model:
+        - Train single-cell embeddings: geniml/tutorials/train-scembed-model.md
+        - Populate a vector store: geniml/tutorials/load-qdrant-with-cell-embeddings.md
+        - Predict cell-types using KNN: geniml/tutorials/cell-type-annotation-with-knn.md
       - Evaluate embeddings: geniml/tutorials/evaluation.md
-      - Search intervals with BEDSpace: geniml/tutorials/bedspace.md
-      - Load vector database with embeddings: tutorials/load-qdrant-with-cell-embeddings.md
-      - Cell-type prediction using KNN: tutorials/cell-type-annotation-with-knn.md
       - Create consensus peaks: geniml/tutorials/create-consensus-peaks.md
       - Assess universe fit: geniml/tutorials/assess-universe.md
       - Fine-tune embeddings: geniml/tutorials/fine-tune-region2vec-model.md
       - Randomize bed files: geniml/tutorials/bedshift.md
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
-    - Tutorials:
-      - Using BEDspace: geniml/code/bedspace-analysis.md
     - Reference:
       - How to cite: citations.md
-      - API: geniml/autodoc_build/geniml.md
+      - API documentation: geniml/autodoc_build/geniml.md
       - Support: geniml/support.md
       - Contributing: geniml/contributing.md
       - Changelog: geniml/changelog.md
