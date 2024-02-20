@@ -76,6 +76,8 @@ nav:
       - Evaluate embeddings: geniml/tutorials/evaluation.md
       - Train region2vec embeddings: geniml/tutorials/region2vec.md
       - Train single-cell embeddings: geniml/tutorials/train-scembed-model.md
+      - Load vector database with embeddings: tutorials/load-qdrant-with-cell-embeddings.md
+      - Cell-type prediction using KNN: tutorials/cell-type-annotation-with-knn.md
       - Tokenization: geniml/tutorials/tokenization.md
       - Tokenize a BED file on the command line: geniml/tutorials/cli-tokenization.md
       - Create consensus peaks: geniml/tutorials/create-consensus-peaks.md
