@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## [0.2.0] -- 2024-02-20
 
 - Fixed a bug with pydantic
+- Integrate `lightning` for easier training of models with SLURM and the [DDP framework]([url](https://pytorch.org/tutorials/intermediate/ddp_tutorial.html))
+- New datasets for streaming `.gtok` files to models
+- New tutorials for updated ScEmbed
+- Start working on `Atacformer`
 
 ## [0.1.0] -- 2023-12-18
 
