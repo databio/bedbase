@@ -13,6 +13,10 @@ Thanks for citing us! If you use BEDbase, geniml, or their components in your re
 |---------------|-----------------|
 | `geniml` region set evaluations | Zheng et al. (2023) *bioRxiv* |
 | `region2vec` embeddings | Gharavi et al. (2021) *Bioinformatics* |
+| `bedspace` search and embeddings | Gharavi et al. (2023) *bioRxiv* |
+| `geniml hmm` module | Rymuza et al. (2023) *bioRxiv* |
+| `bedbase` database | Unpublished |
+| `scEmbed` single-cell embedding framework | LeRoy et al. (2023) *bioRxiv* |
 
 
 

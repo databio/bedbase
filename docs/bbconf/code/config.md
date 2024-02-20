@@ -1,4 +1,3 @@
-jupyter:True
 # Bedbase configuration file documentation
 
 In order to start working with the `BedBaseConf` object, it has to be initialized first. The constuctor requires one argument, which is a path to the configuration file (in YAML format).
@@ -18,14 +17,12 @@ Here's an example of a minimal bedbase configuration file:
 !cat ../tests/data/config_min.yaml
 ```
 
-```.output
-# min config example. Refer to bbconf/const.py for key names and default values
-
-path:
-  pipeline_output_path:  $HOME/bedbase
-  bedstat_dir: bedstat_output
-  bedbuncher_dir: bedbuncher_output
-```
+    # min config example. Refer to bbconf/const.py for key names and default values
+    
+    path:
+      pipeline_output_path:  $HOME/bedbase
+      bedstat_dir: bedstat_output
+      bedbuncher_dir: bedbuncher_output
 
 ## Example config file
 
@@ -38,22 +35,20 @@ Here's an example of a complete bedbase configuration file:
 !cat ../tests/data/config.yaml
 ```
 
-```.output
-database:
-  name: pipestat-test
-  user: postgres
-  password: pipestat-password
-  host: localhost
-#  port: 5432; intentionally commented out to test the defaults setting system
-path:
-  pipeline_output_path: $BEDBASE_DATA_PATH/outputs
-  bedstat_dir: bedstat_output
-  bedbuncher_dir: bedbuncher_output
-  remote_url_base: null
-server:
-  host: 0.0.0.0
-  port: 8000
-```
+    database:
+      name: pipestat-test
+      user: postgres
+      password: pipestat-password
+      host: localhost
+    #  port: 5432; intentionally commented out to test the defaults setting system
+    path:
+      pipeline_output_path: $BEDBASE_DATA_PATH/outputs
+      bedstat_dir: bedstat_output
+      bedbuncher_dir: bedbuncher_output
+      remote_url_base: null
+    server:
+      host: 0.0.0.0
+      port: 8000
 
 ## Default values
 

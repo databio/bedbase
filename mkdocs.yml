@@ -25,7 +25,7 @@ markdown_extensions:
       custom_fences:
         - name: mermaid
           class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+          format: "!!python/name:pymdownx.superfences.fence_code_format"
 
 extra_css:
   - stylesheets/extra.css
@@ -39,6 +39,7 @@ copyright: >
     </a>
 
 nav:
+  - Home: README.md
   - BEDbase:
     - BEDbase: bedbase/README.md
     - UI guide:
@@ -49,15 +50,24 @@ nav:
         - Changelog: bedhost/changelog.md
       - BBConf:
         - BBConf: bbconf/README.md
+        - Configuring: bbconf/code/config.md
+        - Demo: bbconf/code/demo.md
         - Guide: bbconf/bbc_api.md
         - Changelog: bbconf/changelog.md
     - Reference:
+      - How to cite: citations.md
       - Usage: bedboss_usage.md
       - Support: https://github.com/bedbase/bedboss/issues
       - Contributing: contributing.md
       - Changelog: changelog.md
   - BEDboss:
     - BEDBoss: bedboss/README.md
+    - Tutorials:
+      - BEDbase tutorial: bedboss/code/bedbase-tutorial.md
+      - BEDmaker tutorial: bedboss/code/bedmaker-tutorial.md
+      - BEDqc tutorial: bedboss/code/bedqc-tutorial.md
+      - BEDstat tutorial: bedboss/code/bedstat-tutorial.md
+      - Everything tutorial: bedboss/code/tutorial-all.md
     - How to guides:
       - Configure bedboss: bedboss/how-to-configure.md
       - Run from Python: bedboss/how-to-run-from-python.md
@@ -65,26 +75,28 @@ nav:
       - Create BEDbase database: bedboss/how-to-create-database.md
       - BEDboss insert: bedboss/bedboss-insert.md
     - Reference:
+      - How to cite: citations.md
       - Usage: bedboss/usage.md
   - Geniml:
     - Geniml: geniml/README.md
     - Getting Started: 
       - Module overviews: geniml/modules.md
     - How-to guides:    
-      - Assess universe fit: geniml/tutorials/assess-universe.md
-      - Search intervals with BEDSpace: geniml/tutorials/bedspace.md
-      - Evaluate embeddings: geniml/tutorials/evaluation.md
       - Train region2vec embeddings: geniml/tutorials/region2vec.md
       - Train single-cell embeddings: geniml/tutorials/train-scembed-model.md
-      - Load vector database with embeddings: tutorials/load-qdrant-with-cell-embeddings.md
-      - Cell-type prediction using KNN: tutorials/cell-type-annotation-with-knn.md
       - Tokenization: geniml/tutorials/tokenization.md
       - Tokenize a BED file on the command line: geniml/tutorials/cli-tokenization.md
+      - Evaluate embeddings: geniml/tutorials/evaluation.md
+      - Search intervals with BEDSpace: geniml/tutorials/bedspace.md
+      - Load vector database with embeddings: tutorials/load-qdrant-with-cell-embeddings.md
+      - Cell-type prediction using KNN: tutorials/cell-type-annotation-with-knn.md
       - Create consensus peaks: geniml/tutorials/create-consensus-peaks.md
+      - Assess universe fit: geniml/tutorials/assess-universe.md
       - Fine-tune embeddings: geniml/tutorials/fine-tune-region2vec-model.md
       - Randomize bed files: geniml/tutorials/bedshift.md
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
     - Reference:
+      - How to cite: citations.md
       - API: geniml/autodoc_build/geniml.md
       - Support: geniml/support.md
       - Contributing: geniml/contributing.md
@@ -93,16 +105,7 @@ nav:
     - Genimtools: genimtools/README.md
   - How to cite: citations.md
 
-jupyter:
-  - in: eido/notebooks
-    out: eido/code
-  - in: geofetch/notebooks
-    out: geofetch/code
-  - in: looper/notebooks
-    out: looper/code
-  - in: peppy/notebooks
-    out: peppy/code
-  - in: pipestat/notebooks
-    out: pipestat/code
-  - in: pypiper/notebooks
-    out: pypiper/code
+autodoc:
+  jupyter:
+    - in: bbconf/notebooks
+      out: bbconf/code

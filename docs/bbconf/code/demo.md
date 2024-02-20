@@ -1,4 +1,3 @@
-jupyter:True
 # `BedBaseConf` object usage demonstration
 
 `bbconf` standardizes reporting of [bedstat](https://github.com/databio/bedstat) and [bedbuncher](https://github.com/databio/bedsbuncher) results. It formalizes a way for these pipelines and downstream tools communicate -- the produced results can easily and reliably become an
@@ -16,10 +15,8 @@ from bbconf import *
 bbc = BedBaseConf(config_path="../tests/data/config.yaml")
 ```
 
-```.output
-DEBU 10:09:08 | bbconf:est:266 > Configured logger 'bbconf' using logmuse v0.2.6 
+    DEBU 10:09:08 | bbconf:est:266 > Configured logger 'bbconf' using logmuse v0.2.6 
 
-```
 
 As you can see above, missing entries are populated with default values.
 
@@ -36,14 +33,12 @@ The `PipestatManager` instances for bedfiles and bedsets can be accessed via the
 print(bbc.bed)
 ```
 
-```.output
-PipestatManager (bedfiles)
-Backend: PostgreSQL
-Results schema source: /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/bbconf/schemas/bedfiles_schema.yaml
-Status schema source: /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pipestat/schemas/status_schema.yaml
-Records count: 11
+    PipestatManager (bedfiles)
+    Backend: PostgreSQL
+    Results schema source: /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/bbconf/schemas/bedfiles_schema.yaml
+    Status schema source: /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pipestat/schemas/status_schema.yaml
+    Records count: 11
 
-```
 
 ### `BedBaseConf.bedset`:
 
@@ -52,14 +47,12 @@ Records count: 11
 print(bbc.bedset)
 ```
 
-```.output
-PipestatManager (bedsets)
-Backend: PostgreSQL
-Results schema source: /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/bbconf/schemas/bedsets_schema.yaml
-Status schema source: /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pipestat/schemas/status_schema.yaml
-Records count: 3
+    PipestatManager (bedsets)
+    Backend: PostgreSQL
+    Results schema source: /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/bbconf/schemas/bedsets_schema.yaml
+    Status schema source: /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pipestat/schemas/status_schema.yaml
+    Records count: 3
 
-```
 
 ### `BedBaseConf.config`:
 
@@ -70,23 +63,21 @@ Additionally, there's a `BedBaseConf.config` property, that can be used to retri
 print(bbc.config)
 ```
 
-```.output
-database:
-  name: pipestat-test
-  user: postgres
-  password: pipestat-password
-  host: localhost
-  port: 5432
-path:
-  pipeline_output_path: $BEDBASE_DATA_PATH/outputs
-  bedstat_dir: bedstat_output
-  bedbuncher_dir: bedbuncher_output
-  remote_url_base: null
-server:
-  host: 0.0.0.0
-  port: 8000
+    database:
+      name: pipestat-test
+      user: postgres
+      password: pipestat-password
+      host: localhost
+      port: 5432
+    path:
+      pipeline_output_path: $BEDBASE_DATA_PATH/outputs
+      bedstat_dir: bedstat_output
+      bedbuncher_dir: bedbuncher_output
+      remote_url_base: null
+    server:
+      host: 0.0.0.0
+      port: 8000
 
-```
 
 ## Running a database
 
@@ -108,11 +99,9 @@ print(bbc.bed.schema["name"])
 print(bbc.bed.schema["widths_histogram"])
 ```
 
-```.output
-{'type': 'string', 'description': 'BED file name'}
-{'type': 'image', 'description': 'Quantile-trimmed histogram of widths'}
+    {'type': 'string', 'description': 'BED file name'}
+    {'type': 'image', 'description': 'Quantile-trimmed histogram of widths'}
 
-```
 
 A result of type `image` is in fact a mapping with three required elements: `path`, `thumbnail_path` and `title`. The actual jsonschema schemas can be accessed as `result_schemas` property for both tables:
 
@@ -158,10 +147,8 @@ bbc.bed.record_count
 bbc.bed.report(record_identifier="78c0e4753d04b238fc07e4ebe5a02984", values={"name": "some_name"})
 ```
 
-```.output
-These results exist for '78c0e4753d04b238fc07e4ebe5a02984': ['name']
+    These results exist for '78c0e4753d04b238fc07e4ebe5a02984': ['name']
 
-```
 
 
 
@@ -216,11 +203,9 @@ Let's try reporting a new bedfile then:
 bbc.bed.report(record_identifier="78c1e4111d04b238fc11e4ebe5a02984", values={"name": "some_name"})
 ```
 
-```.output
-Reported records for '78c1e4111d04b238fc11e4ebe5a02984' in 'bedfiles' namespace:
- - name: some_name
+    Reported records for '78c1e4111d04b238fc11e4ebe5a02984' in 'bedfiles' namespace:
+     - name: some_name
 
-```
 
 
 
@@ -266,10 +251,8 @@ Naturally, a record can be removed:
 bbc.bed.remove(record_identifier="78c1e4111d04b238fc11e4ebe5a02984") 
 ```
 
-```.output
-Removing '78c1e4111d04b238fc11e4ebe5a02984' record
+    Removing '78c1e4111d04b238fc11e4ebe5a02984' record
 
-```
 
 
 

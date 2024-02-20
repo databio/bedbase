@@ -2,14 +2,25 @@
 
 ## Introduction
 
-To ensure that everything is working correctly, run: `python -c "from geniml import bedspace"`. There are four main commands in `bedspace`:
+BEDspace is an application of the StarSpace model to genomic interval data, described in [Gharavi et al. 2023](../../citations.md). It allows us to train numerical embeddings for a collection of region sets simultaneously with their metadata labels, capturing similarity between region sets and their metadata in a low-dimensional space. Using these learned co-embeddings, BEDspace solves three related information retrieval tasks using embedding distance computations: retrieving region sets related to a user query string; suggesting new labels for database region sets; and retrieving database region sets similar to a query region set.
+
+## Installation
+
+The `bedspace` module is installed with `geniml`. To ensure that everything is working correctly, run: `python -c "from geniml import bedspace"`. 
+
+## BEDspace operations
+
+There are four main commands in `bedspace`:
 
 1. `bedspace preprocess`: preprocesses a set of genomic interval regions and their associated metadata into a format that can be used by `bedspace train`.
 2. `bedspace train`: trains a StarSpace model on the preprocessed data.
 3. `bedspace distances`: computes distances between region sets in the trained model and metadata labels.
 4. `bedspace search`: searches for the most similar region sets and metadata labels to a given query. Three scenarios for this command are described in the details.
 
+These commands are accessed via the command line with `genimtools bedspace <command>`.
+
 ### `bedspace preprocess`
+
 The `preprocess` command will prepare a set of region sets and metadata labels for training. This includes things like adding the `__label__` prefix to metadata labels, and converting the region sets into a format that can be used by StarSpace. The command takes in a set of region sets and metadata labels, and outputs a set of preprocessed region sets and metadata labels. The command can be run as follows:
 
 ```console
@@ -30,6 +41,7 @@ Input Description:
 
 
 ### `bedspace train`
+
 The `train` command will train a StarSpace model on the preprocessed region sets and metadata labels. It requires that you have run the `preprocess` command first. The `train` command takes in a set of preprocessed region sets and metadata labels, and outputs a trained StarSpace model. The command can be run as follows:
 
 ```console
@@ -51,12 +63,8 @@ Input Description:
 `--epochs`: Specifies the number of epochs to train the StartSpace model.  
 `--lr`: Sets the learning rate for the training process.  
 
-
-
-
-
-
 ### `bedspace distances`
+
 The `distances` command will compute the distances between all of the region sets and metadata labels in the trained model. It requires that you have ran the `train` command first. The `distances` command takes in a trained StarSpace model, and outputs a set of distances between all of the region sets and metadata labels in the model. The command can be run as follows:
 
 ```console
@@ -116,7 +124,6 @@ geniml bedspace search \
     -n <number of results to return> \
     path/to/regions.bed
 ```
-
 
 Input Description:
 

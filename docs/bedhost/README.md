@@ -31,10 +31,10 @@ Object IDs take the form `<record_type>.<record_identifier>.<result_id>`. An exa
 
 So, you can get information about this object like this:
 
-`GET` [/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile](/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile)
+`GET` [https://api.bedbase.org/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile](https://api.bedbase.org/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile)
 
 Or, you can get a URL to download the actual file with:
 
-`GET` [/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile/access/http](/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile/access/http)
+`GET` [https://api.bedbase.org/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile/access/http](https://api.bedbase.org/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile/access/http)
 
 
