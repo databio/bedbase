@@ -75,6 +75,7 @@ nav:
       - Create BEDbase database: bedboss/how-to-create-database.md
       - Create config file: bedboss/how-to-configure.md
       - Install R dependencies: bedboss/how-to-install-r-dependencies.md
+      - Develop process: bedboss/how-to-develop.md
     - Reference:
       - How to cite: citations.md
       - Usage: bedboss/usage.md
