@@ -56,5 +56,5 @@ geniml.hmm.function()
 
 ### Shared code
 
-Any variables, functions, or other code that is shared across modules should be placed in the parent module, which is held in the [geniml](geniml) folder.
+Any variables, functions, or other code that is shared across modules should be placed in the parent module, which is held in the geniml folder.
 
