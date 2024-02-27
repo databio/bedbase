@@ -62,18 +62,19 @@ nav:
       - Changelog: changelog.md
   - BEDboss:
     - BEDBoss: bedboss/README.md
-    - Tutorials:
-      - BEDbase tutorial: bedboss/code/bedbase-tutorial.md
-      - BEDmaker tutorial: bedboss/code/bedmaker-tutorial.md
-      - BEDqc tutorial: bedboss/code/bedqc-tutorial.md
-      - BEDstat tutorial: bedboss/code/bedstat-tutorial.md
-      - Everything tutorial: bedboss/code/tutorial-all.md
+    - Tutorial:
+      - BEDboss-all pipeline: bedboss/tutorials/tutorial_all.md
+      - BEDboss insert: bedboss/tutorials/tutorial_insert.md
+      - BEDmaker tutorial: bedboss/tutorials/bedmaker_tutorial.md
+      - BEDqc tutorial: bedboss/tutorials/bedqc_tutorial.md
+      - BEDstat tutorial: bedboss/tutorials/bedstat_tutorial.md
+      - BEDbancher tutorial: bedboss/tutorials/bedbuncher_tutorial.md
+      - Bedindex tutorial: bedboss/tutorials/bedindex_tutorial.md
+      - Bedclassifier tutorial: bedboss/tutorials/bedclassifier_tutorial.md
     - How to guides:
-      - Configure bedboss: bedboss/how-to-configure.md
-      - Run from Python: bedboss/how-to-run-from-python.md
-      - Install R dependencies: bedboss/how-to-install-r-dependencies.md
       - Create BEDbase database: bedboss/how-to-create-database.md
-      - BEDboss insert: bedboss/bedboss-insert.md
+      - Create config file: bedboss/how-to-configure.md
+      - Install R dependencies: bedboss/how-to-install-r-dependencies.md
     - Reference:
       - How to cite: citations.md
       - Usage: bedboss/usage.md

@@ -1,1 +1,0 @@
-# Bedboss basic tutorial
