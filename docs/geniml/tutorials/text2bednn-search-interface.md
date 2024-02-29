@@ -1,107 +1,42 @@
 # How to create a natural language search backend for BED files
-The metadata of each BED file / region set is needed to build a natural language search backend. Embedding vectors of BED
-files are created by `Region2Vec`, and embedding vectors of metadata are created by [`SentenceTransformers`](https://www.sbert.net/). `Embed2EmbedNN`,
-a feedforward neural network (FNN), is trained to learn the embedding vectors of metadata from the embedding vectors of BED
-files. When a natural language query string is given, it will first be encoded to a vector by `SentenceTransformers`, and that
-vector will be encoded to a query vector by the FNN. `search` backend can perform k-nearest neighbors (KNN) search among the
-stored embedding vectors of BED files, and the BED files whose embedding vectors are closest to that query vector are the
-search results.
+The metadata of each BED file is needed to build a natural language search backend. BED files embedding vectors are created by
+`Region2Vec`, and metadata embedding vectors are created by [`FastEmbed`](https://github.com/qdrant/fastembed), [`SentenceTransformers`](https://www.sbert.net/), or other text embedding models.
 
-## Upload metadata and regions from files
-`RegionSetInfo` is a [`dataclass`](https://docs.python.org/3/library/dataclasses.html) that can store information about a BED file, which includes the file name, metadata, and the
-embedding vectors of region set and metadata. A list of RegionSetInfo can be created with a folder of BED files and a file of their
-metadata by `SentenceTransformers` and `Region2VecExModel`. The first column of metadata file must match the BED file names
-(the first column contains BED file names, or strings which BED file names start with), and is sorted by the first column. It can be
-sorted by a terminal command:
-```
-sort -k1 1 metadata_file >  new_metadata_file
-```
-Example code to build a list of RegionSetInfo
+`Vec2VecFNN`, a feedforward neural network (FNN), is trained to maps vectors from the embedding space of natural language to the embedding
+space of BED files. When a natural language query string is given, it will first be encoded to a vector by the text embedding model, and that 
+vector will be encoded to a query vector by the FNN. `search` backend can perform k-nearest neighbors (KNN) search among the stored BED
+file embedding vectors, and the BED files whose embedding vectors are closest to that query vector are the search results.
 
-```python
-from geniml.text2bednn.utils import build_regionset_info_list_from_files
-from geniml.region2vec.main import Region2VecExModel
-from fastembed.embedding import FlagEmbedding
-
-# load Region2Vec from hugging face
-r2v_model = Region2VecExModel("databio/r2v-ChIP-atlas")
-# load natural language embedding model
-nl_model = FlagEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
-# folder of bed file
-bed_folder = "path/to/folders/of/bed/files"
-# path for metadata file
-metadata_path = "path/to/file/of/metadata"
-
-# list of RegionSetInfo
-ri_list = build_regionset_info_list_from_files(bed_folder, metadata_path, r2v_model, nl_model)
-```
-
-## Upload metadata and regions from PEP
-A list of RegionSetInfo can also be created with a [`PEP`](https://pep.databio.org/en/latest/), which includes a `.csv` that stores metadata, and a `.yaml` as a a metadata validation
-framework.
-
-Example code to build a list of RegionSetInfo from a PEP:
-
-```python
-from geniml.text2bednn.utils import build_regionset_info_list_from_PEP
-
-# columns in the csv of PEP that contains metadata information
-columns = return [
-        "tissue",
-        "cell_line",
-        "tissue_lineage",
-        "tissue_description",
-        "diagnosis",
-        "sample_name",
-        "antibody",
-    ]
-
-# path to the yaml file
-yaml_path = "path/to/framework/yaml/file"
-
-ri_list_PEP = build_regionset_info_list_from_PEP(
-        yaml_path,
-        col_names,
-        r2v_model,
-        nl_model,
-    )
-```
+## Store embedding vectors
+It is recommended to use `geniml.search.backend.HNSWBackend` to store embedding vectors. In the `HNSWBackend` that stores each BED file embedding
+vector, the `payload` should contain the name of BED file. In the `HNSWBackend` that stores the embedding vectors of each 
+metadata string, the `payload` should contain the name of BED files that have that string in metadata.
 
 ## Train the model
-The list of RegionSetInfo can be split into 3 lists, which represent the training set, validating set, and testing set. The embedding
-vectors of metadata will be X, and the embedding vectors of the region set will be Y.
+Training a `Vec2VecFNN` needs x-y pairs of vectors (x: metadata embedding vector; y: BED embedding vector). A pair of a metadata embedding
+vector with the embedding vectors of BED files in its payload is a target pair, othersie a non-target pair. Non-target pairs are sampled for
+contrastive loss. Here is sample code to generate pairs from storage backend and train the model:
 
 ```python
-from sklearn.model_selection import train_test_split
-from geniml.text2bednn.utils region_info_list_to_vectors
-from geniml.text2bednn.text2bednn import Vec2VecFNN
+# target is an array of 1 (target) and -1 (non-target) 
+X, Y, target = vec_pairs(
+    nl_backend,  # HNSWBackend that store metadata embedding vectors
+    bed_backend,  # HNSWBackend that store BED embedding vectors
+    "name",  # key to file name in BED backend payloads
+    "files",  # key to matching files in metadata backend payloads
+    True,  # sample non-target pairs
+    1.0  # number of non-target pairs /number of target pairs = 1
+)
 
-# split the list of RegionInfoSet into different data set
-train_list, validate_list = train_test_split(ri_list, test_size=0.2)
+# train without validate data
+v2v_torch_contrast.train(
+    X,
+    Y,
+    folder_path="path/to/folder/for/checkpoint",
+    loss_func="cosine_embedding_loss",  # right now "cosine_embedding_loss" is the only contrastive loss function available
+    training_target=target,
+)
 
-# get the embedding vectors
-train_X, train_Y = region_info_list_to_vectors(train_list)
-validate_X, validate_Y = region_info_list_to_vectors(validate_list)
-
-# train the neural network
-v2vnn = Vec2VecFNN()
-v2vnn.train(train_X, train_Y, validating_data=(validate_X, validate_Y), num_epochs=50)
-```
-
-## Load the vectors and information to search backend
-[`qdrant-client`](https://github.com/qdrant/qdrant-client) and [`hnswlib`](https://github.com/nmslib/hnswlib) can store vectors and perform k-nearest neighbors (KNN) search with a given query vector, so we
-created one database backend (`QdrantBackend`) and one local file backend (`HNSWBackend`) that can store the embedding
-vectors for KNN search. `HNSWBackend` will create a .bin file with given path, which saves the searching index.
-
-```python
-from geniml.text2bednn.utils import prepare_vectors_for_database
-
-# loading data to search backend
-embeddings, labels = prepare_vectors_for_database(ri_list)
-
-# search backend
-hnsw_backend = HNSWBackend(local_index_path="path/to/local/index.bin")
-hnsw_backend.load(embeddings, labels)
 ```
 
 ## text2bednn search interface
@@ -118,4 +53,27 @@ file_interface = Text2BEDSearchInterface(nl_model, e2enn, hnsw_backend)
 query_term = "human, kidney, blood"
 # perform KNN search with K = 5, the id of stored vectors and the distance / similarity score will be returned
 ids, scores = file_interface.nl_vec_search(query_term, 5)
+```
+
+### Evaluate search performance
+With a dictionary that contains query strings and id of relevant query results in search backend in this format:
+```
+{
+    <query string>: [
+        <id of relevant result in backend>,
+        ...    
+    ],
+    ...
+}
+```
+`TextToBedNNSearchInterface` can return [mean average precision](https://www.youtube.com/watch?v=pM6DJ0ZZee0&t=157s), [average AUC-ROC](https://nlp.stanford.edu/IR-book/pdf/08eval.pdf), and [average R-Precision](https://link.springer.com/referenceworkentry/10.1007/978-0-387-39940-9_491), here is example code:
+```python
+query_dict = {
+    "metadata string 1": [2, 3],
+    "metadata string 12": [1],
+    "metadata string 3": [2, 4, 5],
+    "metadata string 1": [0]
+}
+
+MAP, AUC, RP = file_interface.eval(query_dict)
 ```
