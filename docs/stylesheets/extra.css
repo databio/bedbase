@@ -35,6 +35,15 @@
   text-align: center;
 }
 
+.img-header {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+
 .jumbotron {
   padding-top: 30px;
   padding-bottom: 30px;

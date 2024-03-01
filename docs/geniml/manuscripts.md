@@ -1,29 +1,8 @@
----
-hide:
-  - navigation
-  - toc
-  - navigation.footer
----
+# Published manuscripts describing geniml components
 
-# How to cite BEDbase and geniml
-
-Thanks for citing us! If you use BEDbase, geniml, or their components in your research, here are papers you can cite.
-
-| If you use... | Please cite ... |
-|---------------|-----------------|
-| `geniml` region set evaluations | Zheng et al. (2023) *bioRxiv* |
-| `region2vec` embeddings | Gharavi et al. (2021) *Bioinformatics* |
-| `bedspace` search and embeddings | Gharavi et al. (2023) *bioRxiv* |
-| `geniml hmm` module | Rymuza et al. (2023) *bioRxiv* |
-| `bedbase` database | Unpublished |
-| `scEmbed` single-cell embedding framework | LeRoy et al. (2023) *bioRxiv* |
-
-
+If you find `geniml` useful for your research, please cite us! It helps us convince others that our work is useful. Here is a list of published papers that describe different modules or components in the `geniml` package.
 
 ---
-
-## Full citation information for manuscripts 
-
 
 N. J. LeRoy et al., “Fast clustering and cell-type annotation of scATACdata with pre-trained embeddings,” bioRxiv, 2023, doi: 10.1101/2023.08.01.551452.
 
