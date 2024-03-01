@@ -1,7 +1,10 @@
-# <img src="img/geniml_logo_horizontal.svg" class="img-header">
+<p align="center">
+<img align="center" src="img/geniml_logo_horizontal.svg" class="img-header" height="100">
+</p>
+
 
 <p align="center">
-<a href="https://img.shields.io/pypi/v/geniml"><img src="https://img.shields.io/pypi/v/geniml"></a>
+<a href="https://img.shields.io/pypi/v/geniml"><img src="https://img.shields.io/pypi/v/geniml" alt=""></a>
 <a href="https://github.com/databio/geniml"><img src="https://img.shields.io/badge/source-github-354a75?logo=github"></a>
 </p>
 
