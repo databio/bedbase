@@ -1,11 +1,11 @@
-# How to create bedbase config file (for bedstat)
+# How to create bedbase config file
 
 ### Bedbase config file is yaml file with 4 parts:
-- path to output files
-- database credentials 
-- qdrant credentials (can be skipped for if indexing is not needed)
-- server information 
-- remote info (can be skipped for bedboss)
+- paths and vector models
+- relational database credentials
+- qdrant credentials
+- server information
+- remote info
 
 ### Example:
 ```yaml
@@ -14,7 +14,7 @@ path:
   pipeline_output_path: /data/outputs
   bedstat_dir: outputs/bedstat_output
   bedbuncher_dir: outputs/bedbuncher_output
-  region2vec: databio/r2v-ChIP-atlas-hg38
+  region2vec: databio/r2v-ChIP-atlas-hg38-v2
   vec2vec: databio/v2v-MiniLM-v2-ATAC-hg38
   text2vec: sentence-transformers/all-MiniLM-L6-v2
 database:
@@ -23,8 +23,11 @@ database:
   password: $POSTGRES_PASSWORD
   user: $POSTGRES_USER
   name: bedbase
+  bed_table: bedfiles
+  bedset_table: bedsets
+  relationship_table: bedset_bedfiles
   dialect: postgresql
-  driver: psycopg
+  driver: psycopg2
 qdrant:
   host: $QDRANT_HOST
   port: 6333
@@ -35,26 +38,9 @@ server:
   port: 8000
 remotes:
   http:
-    prefix: http://data.bedbase.org/
-    description: HTTP compatible path
-  s3:
-    prefix: s3://data.bedbase.org/
-    description: S3 compatible path
-access_methods:
-  http:
-    type: "https"
-    description: HTTP compatible path
     prefix: https://data2.bedbase.org/
+    description: HTTP compatible path
   s3:
-    type: "s3"
-    description: S3 compatible path
     prefix: s3://data2.bedbase.org/
-  local:
-    type: "https"
-    description: How to serve local files.
-    prefix: /static/
+    description: S3 compatible path
 ```
-
-Download example bedbase configuration file here: <a href="../bedbase_configuration.yaml" download>Example bedbase configuration file</a>
-
-.
