@@ -1,31 +1,6 @@
-<h1 align="center">bedhost</h1>
-
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Github badge](https://img.shields.io/badge/source-github-354a75?logo=github)](https://github.com/databio/bedhost)
-
-
-`bedhost` is a Python FastAPI module for the API that powers BEDbase
-It needs a path to the *bedbase configuration file*, which can be provided either via `-c`/`--config` argument or read from `$BEDBASE_CONFIG` environment variable. 
-
----
-
-**Deployed public instance**: <a href="https://bedbase.org/" target="_blank">https://bedbase.org/</a>
-
-**Documentation**: <a href="https://docs.bedbase.org/" target="_blank">https://docs.bedbase.org/bedhost</a>
-
-**API**: <a href="https://api.bedbase.org/" target="_blank">https://api.bedbase.org/</a>
-
-**Source Code**: <a href="https://github.com/databio/bedhost/" target="_blank">https://github.com/databio/bedhost/</a>
-
----
-
+# Developer Guide
 
 ## Introduction
-
-You can find the formal OpenAPI documentation and interactive interface at <http://api.bedbase.org/docs>. This document provides more conceptual introduction and explanations to how to use the API effectively.
-
-
-## General API organization
 
 ### Data types
 
@@ -45,16 +20,16 @@ Therefore, to get information and statistics about BED or BEDset records, or wha
 
 Each record has an identifier. For example, `eaf9ee97241f300f1c7e76e1f945141f` is a BED identifier. You can use this identifier for the metadata endpoints. To download files, you'll need something slightly different -- you need an *object identifier*. This is because each BED record includes multiple files, such as the original BED file, the BigBed file, analysis plots, and so on. To download a file, you will construct what we call the `object_id`, which identifies the specific file.
 
-### How to construct object identifiers
+## How to construct object identifiers
 
 Object IDs take the form `<record_type>.<record_identifier>.<result_id>`. An example of an object_id for a BED file is `bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile`
 
 So, you can get information about this object like this:
 
-`GET` [https://api.bedbase.org/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile](https://api.bedbase.org/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile)
+`GET` [/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile](/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile)
 
 Or, you can get a URL to download the actual file with:
 
-`GET` [https://api.bedbase.org/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile/access/http](https://api.bedbase.org/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile/access/http)
+`GET` [/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile/access/http](/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile/access/http)
 
 

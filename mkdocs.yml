@@ -47,6 +47,7 @@ nav:
     - API guides:
       - BEDhost API guide:
         - BEDhost: bedhost/README.md
+        - Developer Guide: bedhost/dev-guide.md
         - Changelog: bedhost/changelog.md
       - BBConf:
         - BBConf: bbconf/README.md
@@ -63,8 +64,8 @@ nav:
   - BEDboss:
     - BEDBoss: bedboss/README.md
     - Tutorial:
-      - BEDboss-all pipeline: bedboss/tutorials/tutorial_all.md
       - BEDboss insert: bedboss/tutorials/tutorial_insert.md
+      - BEDboss-all pipeline: bedboss/tutorials/tutorial_all.md
       - BEDmaker tutorial: bedboss/tutorials/bedmaker_tutorial.md
       - BEDqc tutorial: bedboss/tutorials/bedqc_tutorial.md
       - BEDstat tutorial: bedboss/tutorials/bedstat_tutorial.md

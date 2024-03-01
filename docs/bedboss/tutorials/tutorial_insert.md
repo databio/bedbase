@@ -1,13 +1,13 @@
 ## Bedboss insert 
 
-Bedboss insert is intended to run each sample in provided PEP. 
-PEP can be provided as a file or as a registry path of the PEPhub.
+Bedboss insert is designed to process each sample in the provided PEP. 
+The PEP can be provided either as a path to config file or as a registry path of the PEPhub.
 
 
 ### Step 1: Install all dependencies
  
-First you have to install bedboss and check if all requirements are satisfied. 
-To do so, you can run next command:
+First, you have to install bedboss and check if all requirements are satisfied. 
+To do so, you can run the following command:
 ```bash
 bedboss requirements-check
 ```
@@ -15,7 +15,7 @@ If requirements are not satisfied, you will see the list of missing packages.
 
 ### Step 2: Create bedconf.yaml file 
 To run bedboss insert, you need to create a bedconf.yaml file with configuration. 
-Detail instructions are in the configuration section.
+Detailed instructions are in the configuration section.
 
 ### Step 3: Create PEP with bed files.
 BEDboss PEP should contain next fields: sample_name, input_file, input_type, genome.
@@ -33,14 +33,14 @@ bedboss insert \
     
 ```
 
-Above command will run bedboss on the bed file and create a bedstat file in the output directory.
+Above command will run bedboss on the bed file and create a file with statistics in the output directory. 
 It contains only required parameters. For more details, please check the usage section.
 
-By default, results will be uploaded only to postgres database.
-- To upload results to PEPhub, you need to make `databio` org available on GitHub, then login to PEPhub, and add `--upload-pephub` flag to the command.
-- To upload results to Qdrant, you need to add `--upload-qdrant` flag to the command.
-- To upload actual files to s3, you need to add `--upload-s3` flag to the command, and Before uploading you have to set up all necessary env vars: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_ENDPOINT_URL.
-- To create bedset of provided pep files, you need to add `--create-bedset` flag to the command.
+By default, results will be uploaded only to the PostgreSQL database.
+- To upload results to PEPhub, you need to make the `databio` org available on GitHub, then login to PEPhub, and add the `--upload-pephub` flag to the command.
+- To upload results to Qdrant, you need to add the `--upload-qdrant` flag to the command.
+- To upload actual files to S3, you need to add the `--upload-s3` flag to the command, and before uploading, you have to set up all necessary environment variables: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_ENDPOINT_URL.
+- To create a bedset of provided pep files, you need to add the `--create-bedset` flag to the command.
 
 
 ---
