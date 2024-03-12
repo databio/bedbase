@@ -27,7 +27,7 @@ database:
   bedset_table: bedsets
   relationship_table: bedset_bedfiles
   dialect: postgresql
-  driver: psycopg2
+  driver: psycopg
 qdrant:
   host: $QDRANT_HOST
   port: 6333
@@ -36,11 +36,17 @@ qdrant:
 server:
   host: 0.0.0.0
   port: 8000
-remotes:
+access_methods:
   http:
-    prefix: https://data2.bedbase.org/
+    type: "https"
     description: HTTP compatible path
+    prefix: https://data2.bedbase.org/
   s3:
-    prefix: s3://data2.bedbase.org/
+    type: "s3"
     description: S3 compatible path
+    prefix: s3://data2.bedbase.org/
+  local:
+    type: "https"
+    description: How to serve local files.
+    prefix: /static/
 ```
