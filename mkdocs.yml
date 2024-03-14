@@ -62,16 +62,16 @@ nav:
       - Contributing: contributing.md
       - Changelog: changelog.md
   - BEDboss:
-    - BEDBoss: bedboss/README.md
+    - BEDboss: bedboss/README.md
     - Tutorial:
       - BEDboss insert: bedboss/tutorials/tutorial_insert.md
       - BEDboss-all pipeline: bedboss/tutorials/tutorial_all.md
       - BEDmaker tutorial: bedboss/tutorials/bedmaker_tutorial.md
       - BEDqc tutorial: bedboss/tutorials/bedqc_tutorial.md
       - BEDstat tutorial: bedboss/tutorials/bedstat_tutorial.md
-      - BEDbancher tutorial: bedboss/tutorials/bedbuncher_tutorial.md
-      - Bedindex tutorial: bedboss/tutorials/bedindex_tutorial.md
-      - Bedclassifier tutorial: bedboss/tutorials/bedclassifier_tutorial.md
+      - BEDbuncher tutorial: bedboss/tutorials/bedbuncher_tutorial.md
+      - BEDindex tutorial: bedboss/tutorials/bedindex_tutorial.md
+      - BEDclassifier tutorial: bedboss/tutorials/bedclassifier_tutorial.md
     - How to guides:
       - Create BEDbase database: bedboss/how-to-create-database.md
       - Create config file: bedboss/how-to-configure.md
@@ -80,6 +80,7 @@ nav:
     - Reference:
       - How to cite: citations.md
       - Usage: bedboss/usage.md
+      - Changelog: bedboss/changelog.md
   - Geniml:
     - Geniml: geniml/README.md
     - Getting Started: 

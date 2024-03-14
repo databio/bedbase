@@ -1,7 +1,10 @@
-![Test BEDBASE stack](https://github.com/databio/bedbase/workflows/Test%20BEDBASE%20stack/badge.svg)
+<p align="center">
+<h1><img align="center" src="../img/bedbase_logo.svg" class="img-header" height="100"></h1>
+</p>
 
-# BEDbase
-
+<p align="center">
+<img src="https://github.com/databio/bedbase/workflows/Test%20BEDBASE%20stack/badge.svg" alt="">
+</p>
 
 BEDbase is a unifying platform for aggregating, analyzing and serving genomic region data as BED files. Input files are processed by a series of Python pipelines. The output of these pipelines is displayed through a RESTful API where users can access BED files along with useful statistics and plots. A project to aggregate, analyze, and serve genomic regions better (*aka* BED files).
 

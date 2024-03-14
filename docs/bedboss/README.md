@@ -1,4 +1,16 @@
-# BEDboss
+<p align="center">
+<h1><img align="center" src="img/bedboss_logo.svg" class="img-header" height="100"></h1>
+</p>
+
+
+<p align="center">
+<a href="https://pypi.org/project/bedboss/"><img src="https://img.shields.io/pypi/v/bedboss" alt=""></a>
+<a href="https://github.com/databio/bedboss"><img src="https://img.shields.io/badge/source-github-354a75?logo=github"></a>
+</p>
+
+
+
+
 bedboss is a command-line pipeline that standardizes and calculates statistics for genomic interval data, and enters the results into a BEDbase database. 
 It has 3 components: 
 
