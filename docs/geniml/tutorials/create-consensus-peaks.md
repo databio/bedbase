@@ -1,26 +1,24 @@
 # How to build a new universe
 
-We will start with simple example of how to create a consensus peak set from a
-collection of files. Example data can be found in `tests/consenus/raw`. 
-
 ## Data preprocessing
+In this tutorial, you will use CLI to build different types of universes from example files.
 
-First step of analysis is creating three tracks with genome coverage by peaks,
-their starts and ends. To do that we have to:
+To build any kind of a universe you need bigWig files with genome coverage by the analyzed collection, which can be made it using [uniwig](https://github.com/databio/uniwig). Detailed description of this process can be found [here](https://github.com/databio/uniwig). In this tutorial we will used precomputed example that can be found XXX. 
 
-1. install [uniwig](https://github.com/databio/uniwig/tree/smoothing), make sure to use branch dev
-2. use [create_unsorted.sh](https://github.com/databio/uniwig/blob/smoothing/create_unsorted.sh) to make three bigWig:
-    - {prefix}_start.bw - with smoothed coverage of genome by starts
-    - {prefix}_core.bw - with coverage of genome by peaks
-    - {prefix}_start.bw - with smoothed coverage of genome by ends
+Additionally, to build a universe based on likelihood, you first will need a likelihood model. To make it, you only need coverage files, result of uniwig, and the size of the collection, here it is 4. 
 
-In this tutorial we will use prefix "all" as it is a default prefix in
-`geniml` module
+```
+geniml lh build_model --model-file tests/consenus/model.tar \
+                      --coverage-folder tests/consenus/coverage/ \
+                      --file-no 4 
+```
+
+As the result you will create a tar file with the likelihood model of the collection, which we will use further. 
+
 
 ## Coverage cutoff universe
 
-We will start by making a coverage universe with cutoff that results in maximum 
-likelihood universe. We can build it through CLI:
+First, we will create a coverage universe. This is the simplest type of a universe that only includes genomic positions with coverage greater or equal to cutoff x. This cutoff by default is calculated using simple likelihood model that calculates the probability of appearing in a collection. It can be build just based on genome coverage:
 
 ```console
  geniml build-universe cc --coverage-folder tests/consenus/coverage/ \
@@ -28,23 +26,9 @@ likelihood universe. We can build it through CLI:
 
 ```  
 
-Where:
-
-- `--coverage-folder`, takes the path to bigWig folder with genome coverage by collection 
-- `--output-file`, takes the path to output file 
-
-Or we can import it directly into Python:
-
-```
-from geniml.universe.cc_universe import cc_universe
-
-cc_universe("tests/consenus/coverage/all_core.bw",
-        file_out="tests/consenus/universe/universe.bed")
-```
-
-Depending on the task we can also smooth the output universe by setting `--merge` 
+Depending on the task the universe can be smooth by setting `--merge` 
 flag with the distance beloved witch peaks should be merged together and 
-`--filter-size` with minimum size of peak that should be part of the universe. We can also not use the maximum likelihood cut-off and instead of it use user defined cutoff. For that we have to set `--cutoff` . If we set it to 1 we get union universe, and when to number of files we will get intersection universe.
+`--filter-size` with minimum size of peak that should be part of the universe. Instead of it using maximum likelihood cutoff one can also defined cutoff with `--cutoff` flag. If it is set to 1 the result is union universe, and when to number of files it wil produce intersection universe.
 
 ## Coverage cutoff flexible universe
 Next presented universe is coverage cutoff flexible universe. We can do it through CLI:
