@@ -66,3 +66,13 @@ jupyter:
 ``` 
 
 There, you can specify which folders contain notebooks, and to where they should be rendered as markdown.
+
+#### Rendering jupyter notebooks in this repository
+
+By convention, we're putting jupyter notebooks in a `/notebooks` subfolder under each tool (look around for examples). These are then built into the `code/<notebook_name>.md` file by the authodoc.py. So, to add a new notebook:
+
+1. put the notebook into a `<module>/notebooks/<notebook_name>.ipynb`
+2. make sure that's listed in the `jupyter` section of the yaml (it already should be there if you're adding a notebook to an existing folder).
+3. link to the notebook in `mkdocs.yaml` by linking to `<module>/code/<notebook_name>.md`.
+4. you can build your rendered markdown version by running `python autodoc.py`.
+
