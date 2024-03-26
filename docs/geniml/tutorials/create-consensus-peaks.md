@@ -14,7 +14,7 @@ consensus:
     chrom.sizes
 ```
 
-In the raw folder there are example BED files used in this tutorial and in file_list.txt are names of files we will analyze. Additionally there is a file with chromosome sizes, which you will use to preprocess the data. 
+In the raw folder there are example BED files used in this tutorial and in file_list.txt are names of files you will analyze. Additionally there is a file with chromosome sizes, which you will use to preprocess the data. 
 
 To build any kind of a universe you need bigWig files with genome coverage by the analyzed collection, which can be made it using [uniwig](https://github.com/databio/uniwig/). First we have to combine all the analyzed files into one BED file:
 
@@ -42,10 +42,10 @@ geniml build-universe cc --coverage-folder coverage/ \
 
 Depending on the task the universe can be smooth by setting `--merge` 
 flag with the distance beloved witch peaks should be merged together and 
-`--filter-size` with minimum size of peak that should be part of the universe. Instead of it using maximum likelihood cutoff one can also defined cutoff with `--cutoff` flag. If it is set to 1 the result is union universe, and when to number of analyzed files it wil produce intersection universe.
+`--filter-size` with minimum size of peak that should be part of the universe. Instead of using maximum likelihood cutoff one can also defined cutoff with `--cutoff` flag. If it is set to 1 the result is union universe, and when to number of analyzed files it wil produce intersection universe.
 
 ## Coverage cutoff flexible universe
-A more complex version of coverage cutoff universe is coverage cutoff flexible universe (CCF). In contrast to its' fixed version it produces flexible universe. It builds  confidence interval around the maximum likelihood cutoff. This results in two values one for the cutoff for boundaries, and the other one for the region core. Despite the fact that the CFF universe is more complex it is build using the same input as the CC universe: 
+A more complex version of coverage cutoff universe is coverage cutoff flexible universe (CCF). In contrast to its' fixed version it produces flexible universe. It builds confidence interval around the maximum likelihood cutoff. This results in two values one for the cutoff for boundaries, and the other one for the region core. Despite the fact that the CFF universe is more complex it is build using the same input as the CC universe: 
 
 ```
 geniml build-universe ccf --coverage-folder coverage/ \
@@ -62,7 +62,7 @@ geniml lh build_model --model-file model.tar \
                       --file-no `wc -l file_list.txt`
 ```
 
-The resulting tar archiver contains LH model. This model can be used as a scoring function that assigns to each position probability of it being a start, core or end. It can be both used for universe assessment and universe building. Combination of LH model and optimization algorithm is for building flexible universes called a maximum likelihood universe (ML):
+The resulting tar archiver contains LH model. This model can be used as a scoring function that assigns to each position probability of it being a start, core or end of a region. It can be both used for universe assessment and universe building. Combination of LH model and optimization algorithm for building flexible universes results in maximum likelihood universe (ML):
 
 ```
 geniml build-universe ml --model-file model.tar \
@@ -83,7 +83,7 @@ geniml build-universe hmm --coverage-folder coverage/ \
 
 So far you used many different methods for creating new universes. But choosing, which universe represents data the best can be challenging. To help with this decision we created three different metrics for assessing universe fit to the region collections: a base-level overlap score, a region boundary score, and a likelihood score. The two first metrics can be calculated separately for each file in the collections and than summarized. To calculate them you need raw files as well as the analyzed universe. It is also necessary to choose at least one assessment metric to be calculated: 
 
-* `--overlap` - to calculate base pair overlap between universe and regions in the file, number of base pair in only the universe, number of base pair in only the file, which can be used to calculate F10 score; 
+* `--overlap` - to calculate base pair overlap between universe and regions in the file, number of base pair only in the universe, number of base pair only in the file, which can be used to calculate F10 score; 
 * `--distance` - to calculate median of distance form regions in the raw file to the universe;
 * `--distance-universe-to-file` - to calculate median of distance form the universe to regions in the raw file;
 * `--distance-flexible` - to calculate median of distance form regions in the raw file to the universe taking into account universe flexibility;
