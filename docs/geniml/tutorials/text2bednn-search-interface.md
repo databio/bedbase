@@ -10,7 +10,7 @@ file embedding vectors, and the BED files whose embedding vectors are closest to
 ## Store embedding vectors
 It is recommended to use `geniml.search.backend.HNSWBackend` to store embedding vectors. In the `HNSWBackend` that stores each BED file embedding
 vector, the `payload` should contain the name of BED file. In the `HNSWBackend` that stores the embedding vectors of each 
-metadata string, the `payload` should contain the name of BED files that have that string in metadata.
+metadata string, the `payload` should contain the original string text and the names of BED files that have that string in metadata.
 
 ## Train the model
 Training a `Vec2VecFNN` needs x-y pairs of vectors (x: metadata embedding vector; y: BED embedding vector). A pair of a metadata embedding
@@ -39,24 +39,45 @@ v2v_torch_contrast.train(
 
 ```
 
-## text2bednn search interface
-The `TextToBedNNSearchInterface` includes model that encode natural language to vectors (default: `FlagEmbedding`), a
-model that encode natural language embedding vectors to BED file embedding vectors (`Embed2EmbedNN`), and a `search` backend.
+## Search interface
+A search interface consists of a storage backend where vectors are stored, and a module (`geniml.search.query2vec`) that embed the query.
+`geniml.search` supports two types of queries: region set query and text query. 
+
+### Region set query
+
+`BED2Vec` embed the query region set with a `Region2VecExModel`, and the embedding vector is used to perform KNN search within the backend.
 
 ```python
-from geniml.text2bednn.text2bednn import Text2BEDSearchInterface
+from geniml.search import BED2BEDSearchInterface, BED2Vec
 
-# initiate the search interface
-file_interface = Text2BEDSearchInterface(nl_model, e2enn, hnsw_backend)
+# init BED2Vec with a hugging face repo of a Region2VecExModel
+bed2vec = BED2Vec("databio/r2v-ChIP-atlas-hg38-v2")
 
-# natural language query string
-query_term = "human, kidney, blood"
-# perform KNN search with K = 5, the id of stored vectors and the distance / similarity score will be returned
-ids, scores = file_interface.nl_vec_search(query_term, 5)
+# the search_backend can be QdrantBackend or HNSWBackend
+search_interface = BED2BEDSearchInterface(search_backend, bed2vec)
+
+# the query cam be a RegionSet object (see geniml.io) or path to a BED file in disk
+file_search_result = search_interface.query_search("path/to/a/bed/file.bed", 5)
 ```
 
-### Evaluate search performance
+### Text query
+
+`Text2Vec` embed the query string with a with a natural language embedding model first (default: `FlagEmbedding`), and then maps the text embedding vector into the embedding space of region sets through a trained `Vec2VecFNN`.
+
+```
+from geniml.search import Text2BEDSearchInterface, Text2Vec
+
+text2vec = Text2Vec(
+    "sentence-transformers/all-MiniLM-L6-v2",  # either a hugging face repo or an object from geniml.text2bednn.embedder
+    "databio/v2v-geo-hg38"  # either a hugging face repo or a Vec2VecFNN
+)
+
+search_interface = Text2BEDSearchInterface(search_backend, text2vec)
+text_search_result = search_interface.query_search("cancer cells", 5)
+```
+
 With a dictionary that contains query strings and id of relevant query results in search backend in this format:
+
 ```
 {
     <query string>: [
@@ -66,7 +87,9 @@ With a dictionary that contains query strings and id of relevant query results i
     ...
 }
 ```
-`TextToBedNNSearchInterface` can return [mean average precision](https://www.youtube.com/watch?v=pM6DJ0ZZee0&t=157s), [average AUC-ROC](https://nlp.stanford.edu/IR-book/pdf/08eval.pdf), and [average R-Precision](https://link.springer.com/referenceworkentry/10.1007/978-0-387-39940-9_491), here is example code:
+
+`Text2BEDSearchInterface` can return [mean average precision](https://www.youtube.com/watch?v=pM6DJ0ZZee0&t=157s), [average AUC-ROC](https://nlp.stanford.edu/IR-book/pdf/08eval.pdf), and [average R-Precision](https://link.springer.com/referenceworkentry/10.1007/978-0-387-39940-9_491), here is example code:
+
 ```python
 query_dict = {
     "metadata string 1": [2, 3],
@@ -75,5 +98,5 @@ query_dict = {
     "metadata string 1": [0]
 }
 
-MAP, AUC, RP = file_interface.eval(query_dict)
+MAP, AUC, RP = search_interface.eval(query_dict)
 ```
