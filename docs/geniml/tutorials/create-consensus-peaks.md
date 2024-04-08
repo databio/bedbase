@@ -38,12 +38,12 @@ Or we can import it directly into Python:
 ```
 from geniml.universe.cc_universe import cc_universe
 
-cc_universe("tests/consenus/coverage/all_core.bw",
+cc_universe("tests/consenus/coverage/",
         file_out="tests/consenus/universe/universe.bed")
 ```
 
 Depending on the task we can also smooth the output universe by setting `--merge` 
-flag with the distance beloved witch peaks should be merged together and 
+flag with the distance beyond which peaks should be merged together and 
 `--filter-size` with minimum size of peak that should be part of the universe. We can also not use the maximum likelihood cut-off and instead of it use user defined cutoff. For that we have to set `--cutoff` . If we set it to 1 we get union universe, and when to number of files we will get intersection universe.
 
 ## Coverage cutoff flexible universe
@@ -64,7 +64,7 @@ Or we can import it directly into python:
 ```
 from geniml.universe.ccf_universe import ccf_universe
 
-ccf_universe("tests/consenus/coverage/all_core.bw",
+ccf_universe("tests/consenus/coverage/",
         file_out="tests/consenus/universe/universe.bed")
 ```
 
