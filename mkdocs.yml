@@ -51,8 +51,8 @@ nav:
         - Changelog: bedhost/changelog.md
       - BBConf:
         - BBConf: bbconf/README.md
-        - Configuring: bbconf/code/config.md
-        - Demo: bbconf/code/demo.md
+        - Configuring: bedboss/how-to-configure.md
+        - Demo: bbconf/demo.md
         - Guide: bbconf/bbc_api.md
         - Changelog: bbconf/changelog.md
     - Reference:
