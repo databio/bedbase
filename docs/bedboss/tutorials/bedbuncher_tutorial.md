@@ -19,11 +19,25 @@ bedboss bunch \
   --bedbase-config path/to/bedbase_config.yaml \
   --bedset-name bedset1 \
   --pep path/to/pep.yaml \
-  --bedset-pep bedset_pep.yaml \
-  --cache-path CACHE_PATH
+  --outfolder path/to/output/dir \
+  --heavy \
+  --upload-pephub \
+  --upload-s3 
 ```
 
 ### Run bedboss bunch from within Python
 ```python
+from bedboss.bedbuncher.bedbuncher import run_bedbuncher_form_pep
 
+run_bedbuncher_form_pep(
+    bedbase_config=bedbase_config,
+    bedset_pep=pep,
+    output_folder=outfolder,
+    bedset_name=bedset_name,
+    heavy=heavy,
+    upload_pephub=upload_pephub,
+    upload_s3=upload_s3,
+    no_fail=no_fail,
+    force_overwrite=force_overwrite,
+    )
 ```

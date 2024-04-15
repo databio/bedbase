@@ -5,7 +5,7 @@
 
 #### From command line
 ```bash
-bedboss index --bedbase-config path/to/bedbase_config.yaml
+bedboss reindex --bedbase-config path/to/bedbase_config.yaml
 ```
 
 After running this comman all files that are in the database and weren't indexed will be indexed to qdrant database.
@@ -13,9 +13,7 @@ After running this comman all files that are in the database and weren't indexed
 
 #### From within Python
 ```python
-from bedboss.qdrant_index import add_to_qdrant
+from bedboss.qdrant_index.qdrant_index import add_to_qdrant
 
-add_to_qdrant(
-    bedbase_config="path/to/bedbase_config.yaml"
-)
+add_to_qdrant(config=bedbase_config)
 ```

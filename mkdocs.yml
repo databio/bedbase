@@ -64,7 +64,7 @@ nav:
   - BEDboss:
     - BEDboss: bedboss/README.md
     - Tutorial:
-      - BEDboss insert: bedboss/tutorials/tutorial_insert.md
+      - BEDboss run-pep: bedboss/tutorials/tutorial_run_pep.md
       - BEDboss-all pipeline: bedboss/tutorials/tutorial_all.md
       - BEDmaker tutorial: bedboss/tutorials/bedmaker_tutorial.md
       - BEDqc tutorial: bedboss/tutorials/bedqc_tutorial.md
@@ -75,8 +75,7 @@ nav:
     - How to guides:
       - Create BEDbase database: bedboss/how-to-create-database.md
       - Create config file: bedboss/how-to-configure.md
-      - Install R dependencies: bedboss/how-to-install-r-dependencies.md
-      - Develop process: bedboss/how-to-develop.md
+      - Install dependencies: bedboss/how-to-install-requirements.md
     - Reference:
       - How to cite: citations.md
       - Usage: bedboss/usage.md

@@ -26,4 +26,4 @@ docker run -d --name bedbase-postgres -p 5432:5432 \
 ```
 
 Now we have created docker and can run pipelines.
-To connect to the database, change your credentials in the `bedbase_config.yaml` file.
+To connect to the database, change your credentials in your configuration file.

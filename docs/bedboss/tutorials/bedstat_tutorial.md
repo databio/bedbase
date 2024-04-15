@@ -23,7 +23,7 @@ It produces BED file Statistics:
 First you have to install bedboss and check if all requirements are satisfied. 
 To do so, you can run next command:
 ```bash
-bedboss requirements-check
+bedboss check-requirements
 ```
 If requirements are not satisfied, you will see the list of missing packages.
 
@@ -36,7 +36,6 @@ bedboss stats \
     --bedfile path/to/bedfile.bed \
     --outfolder path/to/output/dir \
     --genome hg38 \
-    --bigbed "path/to/bigbedfile.bigbed" # optional
 ```
 
 ----
@@ -48,7 +47,6 @@ bedstat(
     bedfile="path/to/bedfile.bed",
     outfolder="path/to/output/dir",
     genome="hg19",
-    bigbed="path/to/bigbedfile.bigbed", # optional
     )
 ```
 
