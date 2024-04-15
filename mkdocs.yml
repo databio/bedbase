@@ -102,6 +102,7 @@ nav:
       - Fine-tune embeddings: geniml/tutorials/fine-tune-region2vec-model.md
       - Randomize bed files: geniml/tutorials/bedshift.md
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
+      - Create search backend: geniml/tutorials/text2bednn-search-interface.md
     - Reference:
       - How to cite: citations.md
       - API documentation: geniml/autodoc_build/geniml.md

@@ -1,15 +1,15 @@
 # How to create a natural language search backend for BED files
 The metadata of each BED file is needed to build a natural language search backend. BED files embedding vectors are created by
-`Region2Vec`, and metadata embedding vectors are created by [`FastEmbed`](https://github.com/qdrant/fastembed), [`SentenceTransformers`](https://www.sbert.net/), or other text embedding models.
+`Region2Vec` model, and metadata embedding vectors are created by [`FastEmbed`](https://github.com/qdrant/fastembed), [`SentenceTransformers`](https://www.sbert.net/), or other text embedding models.
 
 `Vec2VecFNN`, a feedforward neural network (FNN), is trained to maps vectors from the embedding space of natural language to the embedding
-space of BED files. When a natural language query string is given, it will first be encoded to a vector by the text embedding model, and that 
+space of BED files. When a natural language query string is given, it will first be encoded to a vector by the text embedding model, and then created 
 vector will be encoded to a query vector by the FNN. `search` backend can perform k-nearest neighbors (KNN) search among the stored BED
 file embedding vectors, and the BED files whose embedding vectors are closest to that query vector are the search results.
 
 ## Store embedding vectors
 It is recommended to use `geniml.search.backend.HNSWBackend` to store embedding vectors. In the `HNSWBackend` that stores each BED file embedding
-vector, the `payload` should contain the name of BED file. In the `HNSWBackend` that stores the embedding vectors of each 
+vector, the `payload` should contain the name or identifier of BED file. In the `HNSWBackend` that stores the embedding vectors of each 
 metadata string, the `payload` should contain the original string text and the names of BED files that have that string in metadata.
 
 ## Train the model
