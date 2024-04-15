@@ -51,20 +51,20 @@ nav:
         - Changelog: bedhost/changelog.md
       - BBConf:
         - BBConf: bbconf/README.md
-        - Configuring: bbconf/code/config.md
-        - Demo: bbconf/code/demo.md
+        - Configuring: bedboss/how-to-configure.md
+        - Overview: bbconf/overview.md
         - Guide: bbconf/bbc_api.md
         - Changelog: bbconf/changelog.md
     - Reference:
       - How to cite: citations.md
-      - Usage: bedboss_usage.md
+      - Usage: bedboss/usage.md
       - Support: https://github.com/bedbase/bedboss/issues
       - Contributing: contributing.md
       - Changelog: changelog.md
   - BEDboss:
     - BEDboss: bedboss/README.md
-    - Tutorial:
-      - BEDboss insert: bedboss/tutorials/tutorial_insert.md
+    - Tutorials:
+      - BEDboss run-pep: bedboss/tutorials/tutorial_run_pep.md
       - BEDboss-all pipeline: bedboss/tutorials/tutorial_all.md
       - BEDmaker tutorial: bedboss/tutorials/bedmaker_tutorial.md
       - BEDqc tutorial: bedboss/tutorials/bedqc_tutorial.md
@@ -75,8 +75,7 @@ nav:
     - How to guides:
       - Create BEDbase database: bedboss/how-to-create-database.md
       - Create config file: bedboss/how-to-configure.md
-      - Install R dependencies: bedboss/how-to-install-r-dependencies.md
-      - Develop process: bedboss/how-to-develop.md
+      - Install dependencies: bedboss/how-to-install-requirements.md
     - Reference:
       - How to cite: citations.md
       - Usage: bedboss/usage.md
@@ -103,6 +102,7 @@ nav:
       - Fine-tune embeddings: geniml/tutorials/fine-tune-region2vec-model.md
       - Randomize bed files: geniml/tutorials/bedshift.md
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
+      - Create search backend: geniml/tutorials/text2bednn-search-interface.md
     - Reference:
       - How to cite: citations.md
       - API documentation: geniml/autodoc_build/geniml.md

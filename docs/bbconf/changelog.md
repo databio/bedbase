@@ -2,11 +2,44 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
-## [0.4.0] - 2023-10-17
+# [0.5.1] - 2024-04-09
+## Changed
+
+- updated qdrant uploader
+- bedset bedfile list query improvement
+- other minor fixes in uploading
+
+# [0.5.0] - 2024-04-08
+### Changed
+
+- Rebuild bbconf
+- Introduced new DB schema
+- Added bbagent that will be used to interact with the database
+- Updated config schema
+- Added new functionality to the bbagent
+- New tests
+
+
+## [0.4.2] - 2024-03-12
 ### Change
-- bbconf to use pipestat v0.4.1 and SQLModel
-- Added qdrant search, and insert methods
+- Updated logger
+- Updated requirements
+- Added `upload_status` column to the `bedfile` table
+
+
+## [0.4.1] - 2024-01-01
+### Fix
+- Requirements
+
+
+## [0.4.0] - 2023-12-18
+### Change
+- bbconf to use pipestat v0.6.0 and SQLModel
 - Fixed tests
+
+### Added
+- `qdrant` search, insert and update functionality
+- functions that return results in the DRS format for both bed and bedhost. [DRS](https://ga4gh.github.io/data-repository-service-schemas/preview/release/drs-1.2.0/docs/)
 
 ## [0.3.0] - 2022-08-18
 ### Change

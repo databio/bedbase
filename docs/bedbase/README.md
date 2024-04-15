@@ -10,11 +10,22 @@ BEDbase is a unifying platform for aggregating, analyzing and serving genomic re
 
 ## Services
 
-- API, production: <https://api.bedbase.org/>
-- API, dev: <https://api-dev.bedbase.org/>
-- Front-end, production: <https://bedbase.org> (alias <https://bedhost-ui.pages.dev/>)
-- Front-end, dev: <https://dev.bedbase.org>
-- Object store, production: <https://data2.bedbase.org/> - base URL for cloudflare/backblaze
+---
+**Deployed public instance**: <a href="https://bedbase.org/" target="_blank">https://bedbase.org/</a>
+
+**Documentation**: <a href="https://docs.bedbase.org/" target="_blank">https://docs.bedbase.org/bedhost</a>
+
+**API**: <a href="https://api.bedbase.org/" target="_blank">https://api.bedbase.org/</a>
+
+**API dev**: <a href="https://dev.bedbase.org/" target="_blank">https://api-dev.bedbase.org/</a>
+
+**UI**: <a href="https://bedbase.org/" target="_blank">https://bedbase.org/</a>
+
+**UI dev**: <a href="https://dev.bedhost.pages.dev/" target="_blank">https://dev.bedhost.pages.dev/</a>
+
+**Source Code**: <a href="https://github.com/databio/bedhost/" target="_blank">https://github.com/databio/bedhost/</a>
+
+**Object store, production** <https://data2.bedbase.org/> - base URL for cloudflare/backblaze
 
 ## Tutorial
 
@@ -22,10 +33,10 @@ There's a tutorial for bedbase in the [docs_jupyter](/docs_jupyter) folder (prob
 
 ## Components
 
-- [bedboss](https://github.com/databio/bedboss): Main BEDbase processing pipeline, combining bedqc, bedmaker, bedstat, and bedbuncher
-- [bbconf](http://github.com/databio/bbconf): BEDbase configuration
+- [bedboss](https://github.com/databio/bedboss): Main BEDbase processing pipeline and managing tool, combining bedqc, bedmaker, bedstat, and bedbuncher
+- [bbconf](http://github.com/databio/bbconf): BEDbase configuration package (core of the BEDbase stack)
 - [bedhost](http://github.com/databio/bedhost): FastAPI application with API for accessing data
-- [bedhost-ui](http://github.com/databio/bedhost-ui): Front-end user interface built with React
+- [bedhost-ui](http://github.com/databio/bedhost): Front-end user interface built with React
 - [bedbase.org repository](https://github.com/databio/bedbase.org): Repository for deploying the bedhost container to AWS.
 - [all_geo_beds](all_geo_beds): A subfolder, is the scripts to download all bed files on GEO using geofetch and build a backend to host the metadata using bedstat
 - [geniml](https://github.com/databio/geniml): Machine learning for genomic intervals

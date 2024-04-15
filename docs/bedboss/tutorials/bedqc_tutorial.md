@@ -10,8 +10,8 @@ As for now, it checks:
 ### Run BEDqc from command line
 ```bash
 bedboss qc \
-    --bedfile path/to/bedfile.bed \
-    --outfolder path/to/output/dir \
+    --bed-file path/to/bedfile.bed \
+    --outfolder path/to/output/dir
 ```
 
 ---

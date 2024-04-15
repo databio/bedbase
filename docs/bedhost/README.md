@@ -15,6 +15,12 @@ It needs a path to the *bedbase configuration file*, which can be provided eithe
 
 **API**: <a href="https://api.bedbase.org/" target="_blank">https://api.bedbase.org/</a>
 
+**API dev**: <a href="https://dev.bedbase.org/" target="_blank">https://api-dev.bedbase.org/</a>
+
+**UI**: <a href="https://bedbase.org/" target="_blank">https://bedbase.org/</a>
+
+**UI dev**: <a href="https://dev.bedhost.pages.dev/" target="_blank">https://dev.bedhost.pages.dev/</a>
+
 **Source Code**: <a href="https://github.com/databio/bedhost/" target="_blank">https://github.com/databio/bedhost/</a>
 
 ---
