@@ -52,7 +52,7 @@ nav:
       - BBConf:
         - BBConf: bbconf/README.md
         - Configuring: bedboss/how-to-configure.md
-        - Demo: bbconf/demo.md
+        - Overview: bbconf/overview.md
         - Guide: bbconf/bbc_api.md
         - Changelog: bbconf/changelog.md
     - Reference:
