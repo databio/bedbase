@@ -57,13 +57,13 @@ nav:
         - Changelog: bbconf/changelog.md
     - Reference:
       - How to cite: citations.md
-      - Usage: bedboss_usage.md
+      - Usage: bedboss/usage.md
       - Support: https://github.com/bedbase/bedboss/issues
       - Contributing: contributing.md
       - Changelog: changelog.md
   - BEDboss:
     - BEDboss: bedboss/README.md
-    - Tutorial:
+    - Tutorials:
       - BEDboss run-pep: bedboss/tutorials/tutorial_run_pep.md
       - BEDboss-all pipeline: bedboss/tutorials/tutorial_all.md
       - BEDmaker tutorial: bedboss/tutorials/bedmaker_tutorial.md

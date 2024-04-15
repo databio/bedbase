@@ -3,6 +3,10 @@
 Bedbuncher is used to create bedset of bed files in the bedbase database.
 
 ### 1) Create bedbase config file
+
+How to create config file: [configuration section](../how-to-configure.md).
+
+
 ### 2) Create pep with bed file record identifiers.
 To do so, you need to create a PEP with the following fields: sample_name (where sample_name is record_identifier), or `sample_name` + `record_identifier`
 e.g. sample_table:
