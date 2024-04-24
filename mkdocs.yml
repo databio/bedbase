@@ -97,8 +97,8 @@ nav:
         - Populate a vector store: geniml/tutorials/load-qdrant-with-cell-embeddings.md
         - Predict cell-types using KNN: geniml/tutorials/cell-type-annotation-with-knn.md
       - Evaluate embeddings: geniml/tutorials/evaluation.md
-      - Create consensus peaks: geniml/tutorials/create-consensus-peaks.md
-      - Assess universe fit: geniml/tutorials/assess-universe.md
+      - Create consensus peaks with CLI: geniml/tutorials/create-consensus-peaks.md
+      - Create consensus peaks with python: geniml/code/create-consensus-peaks-python.md
       - Fine-tune embeddings: geniml/tutorials/fine-tune-region2vec-model.md
       - Randomize bed files: geniml/tutorials/bedshift.md
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
