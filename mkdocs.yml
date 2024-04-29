@@ -98,12 +98,15 @@ nav:
         - Predict cell-types using KNN: geniml/tutorials/cell-type-annotation-with-knn.md
       - Evaluate embeddings: geniml/tutorials/evaluation.md
       - Create consensus peaks with CLI: geniml/tutorials/create-consensus-peaks.md
-      - Create consensus peaks with python: geniml/code/create-consensus-peaks-python.md
+      - Create consensus peaks with Python: geniml/code/create-consensus-peaks-python.md
+      - Assess universe fit: geniml/tutorials/assess-universe.md
       - Fine-tune embeddings: geniml/tutorials/fine-tune-region2vec-model.md
       - Randomize bed files: geniml/tutorials/bedshift.md
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
       - Create search backend: geniml/tutorials/text2bednn-search-interface.md
     - Reference:
+      - Manuscripts:
+        - Rymuza2024: geniml/manuscripts/rymuza2024.md
       - How to cite: citations.md
       - API documentation: geniml/autodoc_build/geniml.md
       - Support: geniml/support.md

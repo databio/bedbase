@@ -22,6 +22,9 @@ As of Feburary 2024, this package and its documentation are undergoing rapid dev
 pip install --user --upgrade geniml
 ```
 
-## Modules
+## Modules and resources by publication
 
-`geniml` is organized into modules. The next section is an overview of each module. You can also proceed to the how-to guides for recipes on how to do specfic tasks. 
+`geniml` is organized into modules. The modules section gives an [overview of each module](modules.md). `geniml` includes many genomic interval analysis methods published in a variety of separate publications. If you're coming here from a manuscript, you can also find the relevant tutorials by visiting the landing page for the publication of interest: 
+
+- [Rymuza et al. 2024](manuscripts/rymuza2024.md)
+
