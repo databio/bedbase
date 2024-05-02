@@ -48,6 +48,8 @@ nav:
       - BEDhost API guide:
         - BEDhost: bedhost/README.md
         - Developer Guide: bedhost/dev-guide.md
+        - Build image: bedhost/build_image.md
+        - Deploy API: bedhost/deployment.md
         - Changelog: bedhost/changelog.md
       - BBConf:
         - BBConf: bbconf/README.md
