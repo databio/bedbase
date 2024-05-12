@@ -81,27 +81,4 @@ geniml build-universe hmm --coverage-folder coverage/ \
 
 # How to assess new universe?
 
-So far you used many different methods for creating new universes. But choosing, which universe represents data the best can be challenging. To help with this decision we created three different metrics for assessing universe fit to the region collections: a base-level overlap score, a region boundary score, and a likelihood score. The two first metrics can be calculated separately for each file in the collections and than summarized. To calculate them you need raw files as well as the analyzed universe. It is also necessary to choose at least one assessment metric to be calculated: 
-
-* `--overlap` - to calculate base pair overlap between universe and regions in the file, number of base pair only in the universe, number of base pair only in the file, which can be used to calculate F10 score; 
-* `--distance` - to calculate median of distance form regions in the raw file to the universe;
-* `--distance-universe-to-file` - to calculate median of distance form the universe to regions in the raw file;
-* `--distance-flexible` - to calculate median of distance form regions in the raw file to the universe taking into account universe flexibility;
-* `--distance-flexible-universe-to-file` - - to calculate median of distance form the universe to regions in the raw file taking into account universe flexibility.  
-
-Here we present an example, which calculates all possible metrics for HMM universe:
-
-```
- geniml assess-universe --raw-data-folder raw/ \
- --file-list file_list.txt \
- --universe universe_hmm.bed \
- --folder-out . \
- --pref test_assess \
- --overlap \
- --distance \
- --distance-universe-to-file \
- --distance-flexible \
- --distance-flexible-universe-to-file
-```
-The resulting file is called test_assess_data.csv, and contains columns with the raw calculated metrics for each file: *file*, *univers/file*, *file/universe*, *universe&file*, *median_dist_file_to_universe*, *median_dist_file_to_universe_flex*, *median_dist_universe_to_file*, *median_dist_universe_to_file_flex*. 
-More information about assessing fit of universe to a collection of files can be found in jupyter notebook version of this tutorial tha can be found [here](../code/create-consensus-peaks-python.md). 
+So far you used many different methods for creating new universes. But choosing, which universe represents data the best can be challenging. To help with this we created a tutorial that can be found [here](../code/assess-universe.md), which presents different  methods that assess universe fit to the collection of files.

@@ -101,7 +101,7 @@ nav:
       - Evaluate embeddings: geniml/tutorials/evaluation.md
       - Create consensus peaks with CLI: geniml/tutorials/create-consensus-peaks.md
       - Create consensus peaks with Python: geniml/code/create-consensus-peaks-python.md
-      - Assess universe fit: geniml/tutorials/assess-universe.md
+      - Assess universe fit: geniml/code/assess-universe.md
       - Fine-tune embeddings: geniml/tutorials/fine-tune-region2vec-model.md
       - Randomize bed files: geniml/tutorials/bedshift.md
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md

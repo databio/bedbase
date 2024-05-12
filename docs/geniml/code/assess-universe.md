@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>create-consensus-peaks-python</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>assess-universe</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14580,18 +14580,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="How-to-build-a-new-universe?">How to build a new universe?<a class="anchor-link" href="#How-to-build-a-new-universe?">&#182;</a></h1><h2 id="Data-preprocessing">Data preprocessing<a class="anchor-link" href="#Data-preprocessing">&#182;</a></h2><p>This is a jupyter version of CLI tutorial that can be found <a href="../tutorials/create-consensus-peaks.md">here</a>. You will use here python functions instead of CLI to build and assess different universes. Files that you will use here can be downloaded from XXX. In there you will find a compressed folder:</p>
-
-<pre><code>consensus:
-    - raw
-        test_1.bed
-        test_2.bed
-        test_3.bed
-        test_4.bed
-    file_list.txt
-    chrom.sizes</code></pre>
-<p>In the raw folder there are example BED files used in this tutorial and in file_list.txt are names of files you will analyze. Additionally there is a file with chromosome sizes, which you will use to preprocess the data.</p>
-<p>Here we assume that you already have files of the genome coverage by the analyzed collection. The example of how to create them can be found <a href="../tutorials/create-consensus-peaks.md">here</a>.</p>
+<h1 id="How-to-assess-universe-fit-to-collection-of-BED-files">How to assess universe fit to collection of BED files<a class="anchor-link" href="#How-to-assess-universe-fit-to-collection-of-BED-files">&#182;</a></h1><h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>In this tutorial, you will see how to assess a fit of a given universe to a collection of files. (Tutorial on creating different universes from files can be found <a href="../tutorials/create-consensus-peaks.md">here</a> and <a href="create-consensus-peaks-python.md">here</a>.) Choosing, which universe represents data the best can be challenging. To help with this decision we created three different metrics for assessing universe fit to the region collections: a base-level overlap score, a region boundary score, and a likelihood score. Fit of a universe can be assessed both using CLI and python functions depending on use case. With CLI you can create a file with values of universe assessment methods for each file within the collection, while with python functions you can get measures of universe fit to the whole collection.</p>
 
 </div>
 </div>
@@ -14603,28 +14592,31 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Coverage-cutoff-universe">Coverage cutoff universe<a class="anchor-link" href="#Coverage-cutoff-universe">&#182;</a></h2><p>First, you will create a coverage cutoff universe (CC). This is the simplest type of a universe that only includes genomic positions with coverage greater or equal to cutoff <em>x</em>. This cutoff by default is calculated using simple likelihood model that calculates the probability of appearing in a collection. The universe can be build just based on genome coverage:</p>
+<h2 id="CLI">CLI<a class="anchor-link" href="#CLI">&#182;</a></h2><p>Using CLI you can calculate both base-level overlap score and region boundary score separately for each file in the collections and than summarized. To calculate them you need raw files as well as the analyzed universe. It is also necessary to choose at least one assessment metric to be calculated:</p>
+<ul>
+<li><code>--overlap</code> - to calculate base pair overlap between universe and regions in the file, number of base pair only in the universe, number of base pair only in the file, which can be used to calculate F10 score; </li>
+<li><code>--distance</code> - to calculate median of distance form regions in the raw file to the universe;</li>
+<li><code>--distance-universe-to-file</code> - to calculate median of distance form the universe to regions in the raw file;</li>
+<li><code>--distance-flexible</code> - to calculate median of distance form regions in the raw file to the universe taking into account universe flexibility;</li>
+<li><code>--distance-flexible-universe-to-file</code> - - to calculate median of distance form the universe to regions in the raw file taking into account universe flexibility.  </li>
+</ul>
+<p>Here we present an example, which calculates all possible metrics for HMM universe:</p>
+
+<pre><code> geniml assess-universe --raw-data-folder raw/ \
+ --file-list file_list.txt \
+ --universe universe_hmm.bed \
+ --folder-out . \
+ --pref test_assess \
+ --overlap \
+ --distance \
+ --distance-universe-to-file \
+ --distance-flexible \
+ --distance-flexible-universe-to-file</code></pre>
+<p>The resulting file is called test_assess_data.csv, and contains columns with the raw calculated metrics for each file: <em>file</em>, <em>univers/file</em>, <em>file/universe</em>, <em>universe&amp;file</em>, <em>median_dist_file_to_universe</em>, <em>median_dist_file_to_universe_flex</em>, <em>median_dist_universe_to_file</em>, <em>median_dist_universe_to_file_flex</em>.</p>
 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">geniml.universe.cc_universe</span> <span class="kn">import</span> <span class="n">cc_universe</span>
-<span class="n">cc_universe</span><span class="p">(</span><span class="s2">"coverage/"</span><span class="p">,</span> <span class="n">file_out</span><span class="o">=</span><span class="s2">"universe_cc.bed"</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -14632,67 +14624,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Depending on the task the universe can be smooth by setting <code>merge</code> option with the distance below witch peaks should be merged together and 
-<code>filter_size</code> with minimum size of peak that should be part of the universe. Instead of using maximum likelihood cutoff one can also defined cutoff with <code>cutoff</code> option. If it is set to 1 the result is union universe, and when to number of files it wil produce intersection universe:</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cc_universe</span><span class="p">(</span><span class="s2">"coverage/"</span><span class="p">,</span> <span class="n">file_out</span><span class="o">=</span><span class="s2">"universe_union.bed"</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">cc_universe</span><span class="p">(</span><span class="s2">"coverage/"</span><span class="p">,</span> <span class="n">file_out</span><span class="o">=</span><span class="s2">"universe_intersection.bed"</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Coverage-cutoff-flexible-universe">Coverage cutoff flexible universe<a class="anchor-link" href="#Coverage-cutoff-flexible-universe">&#182;</a></h2><p>A more complex version of coverage cutoff universe is coverage cutoff flexible universe (CCF). In contrast to its' fixed version it produces flexible universes. It uses two cutoffs calculated based on maximum likelihood cutoff, making a confidence interval around the optimal cutoff value. Despite the fact that the CFF universe is more complex it is build using the same input as the CC universe:</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">geniml.universe.ccf_universe</span> <span class="kn">import</span> <span class="n">ccf_universe</span>
-
-<span class="n">ccf_universe</span><span class="p">(</span><span class="s2">"coverage/"</span><span class="p">,</span> <span class="n">file_out</span><span class="o">=</span><span class="s2">"universe_ccf.bed"</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Maximum-likelihood-universe">Maximum likelihood universe<a class="anchor-link" href="#Maximum-likelihood-universe">&#182;</a></h2><p>In the previous examples both CC anf CCF universes used simple likelihood model to calculate the cutoff. However, we also developed more complex likelihood model that takes into account the positions of starts and ends of the regions in the collection. This LH model can build based on coverage files:</p>
+<h2 id="Python-functions">Python functions<a class="anchor-link" href="#Python-functions">&#182;</a></h2><p>The file created with CLI can be further summarized into specific metrics assessing the fit of a universe to a whole collection such as: a base-level overlap score (F10), a region boundary distance score (RBD).</p>
 
 </div>
 </div>
@@ -14702,14 +14634,133 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">geniml.likelihood.build_model</span> <span class="kn">import</span> <span class="n">main</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">geniml.assess.assess</span> <span class="kn">import</span> <span class="n">get_rbs_from_assessment_file</span><span class="p">,</span> <span class="n">get_f_10_score_from_assessment_file</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">main</span><span class="p">(</span><span class="s2">"model.tar"</span><span class="p">,</span> <span class="s2">"coverage/"</span><span class="p">,</span>
-     <span class="s2">"all"</span><span class="p">,</span>
-     <span class="n">file_no</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">assessment_file_path</span> <span class="o">=</span> <span class="s2">"test_assess_data.csv"</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">assessment_file_path</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>file</th>
+      <th>univers/file</th>
+      <th>file/universe</th>
+      <th>universe&amp;file</th>
+      <th>median_dist_file_to_universe</th>
+      <th>median_dist_file_to_universe_flex</th>
+      <th>median_dist_universe_to_file</th>
+      <th>median_dist_universe_to_file_flex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>test_1.bed</td>
+      <td>2506</td>
+      <td>403</td>
+      <td>3630</td>
+      <td>27.0</td>
+      <td>0.0</td>
+      <td>76.5</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>test_2.bed</td>
+      <td>1803</td>
+      <td>146</td>
+      <td>4333</td>
+      <td>27.0</td>
+      <td>0.0</td>
+      <td>70.0</td>
+      <td>7.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>test_3.bed</td>
+      <td>2949</td>
+      <td>0</td>
+      <td>3187</td>
+      <td>28.0</td>
+      <td>0.0</td>
+      <td>225.0</td>
+      <td>224.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>test_4.bed</td>
+      <td>2071</td>
+      <td>546</td>
+      <td>4065</td>
+      <td>27.0</td>
+      <td>0.0</td>
+      <td>116.5</td>
+      <td>105.5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rbs</span> <span class="o">=</span> <span class="n">get_rbs_from_assessment_file</span><span class="p">(</span><span class="n">assessment_file_path</span><span class="p">)</span>
+<span class="n">f_10</span> <span class="o">=</span> <span class="n">get_f_10_score_from_assessment_file</span><span class="p">(</span><span class="n">assessment_file_path</span><span class="p">)</span>
+<span class="n">rbs_flex</span> <span class="o">=</span> <span class="n">get_rbs_from_assessment_file</span><span class="p">(</span><span class="n">assessment_file_path</span><span class="p">,</span> <span class="n">flexible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Universe </span><span class="se">\n</span><span class="s2">F10: </span><span class="si">{</span><span class="n">f_10</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">RBS: </span><span class="si">{</span><span class="n">rbs</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">flexible RBS: </span><span class="si">{</span><span class="n">rbs_flex</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14731,7 +14782,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Function &#39;main&#39; executed in 0.0001min
+<pre>Universe 
+F10: 0.93
+RBS: 0.77
+flexible RBS: 0.98
 </pre>
 </div>
 </div>
@@ -14747,30 +14801,150 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The resulting tar archiver contains LH model. This model can be used as a scoring function that assigns to each position probability of it being a start, core or end of a region. It can be both used for universe assessment and universe building. Combination of LH model and optimization algorithm for building flexible universes results in maximum likelihood universe (ML):</p>
+<p>Or all of this metrics can be directly calculated from the universe and raw files including a likelihood score (LH):</p>
 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">geniml.universe.ml_universe</span> <span class="kn">import</span> <span class="n">ml_universe</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">geniml.assess.assess</span> <span class="kn">import</span> <span class="n">get_f_10_score</span>
 
-<span class="n">ml_universe</span><span class="p">(</span><span class="s2">"model.tar"</span><span class="p">,</span>
-     <span class="s2">"coverage"</span><span class="p">,</span>
-     <span class="s2">"all"</span><span class="p">,</span>
-     <span class="s2">"universe_ml.bed"</span><span class="p">)</span>
+<span class="n">f10</span> <span class="o">=</span> <span class="n">get_f_10_score</span><span class="p">(</span>
+    <span class="s2">"raw/"</span><span class="p">,</span>
+    <span class="s1">'file_list.txt'</span><span class="p">,</span>
+    <span class="s2">"universe_hmm.bed"</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">)</span>
+
+<span class="sa">f</span><span class="s2">"Universe F10: </span><span class="si">{</span><span class="n">f10</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#39;Universe F10: 0.93&#39;</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">geniml.assess.assess</span> <span class="kn">import</span> <span class="n">get_mean_rbs</span>
+<span class="n">rbs</span> <span class="o">=</span> <span class="n">get_mean_rbs</span><span class="p">(</span><span class="s2">"raw/"</span><span class="p">,</span>
+    <span class="s1">'file_list.txt'</span><span class="p">,</span>
+    <span class="s2">"universe_hmm.bed"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="sa">f</span><span class="s2">"Universe RBS: </span><span class="si">{</span><span class="n">rbs</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#39;Universe RBS: 0.77&#39;</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">geniml.assess.assess</span> <span class="kn">import</span> <span class="n">get_likelihood</span>
+<span class="n">lh</span> <span class="o">=</span> <span class="n">get_likelihood</span><span class="p">(</span>
+    <span class="s2">"model.tar"</span><span class="p">,</span>
+    <span class="s2">"universe_hmm.bed"</span><span class="p">,</span>
+    <span class="s2">"coverage/"</span>
+<span class="p">)</span>
+<span class="sa">f</span><span class="s2">"Universe LH: </span><span class="si">{</span><span class="n">lh</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#39;Universe LH: -127156.87&#39;</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14780,23 +14954,27 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="HMM">HMM<a class="anchor-link" href="#HMM">&#182;</a></h2><p>The forth presented method of creating universes utilizes Hidden Markov Models. In this approach the parts of flexible regions are hidden states of the model, while genome coverage by the collections are emissions. The resulting universe is called Hidden Markov Model universe. It can be build only based on the genome coverage by the collection:</p>
+<p>Both region boundary score and likelihood can be also calculated taking into account universe flexibility:</p>
 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">geniml.universe.hmm_universe</span> <span class="kn">import</span> <span class="n">hmm_universe</span>
-
-<span class="n">hmm_universe</span><span class="p">(</span><span class="s2">"coverage/"</span><span class="p">,</span>
-             <span class="s2">"universe_hmm.bed"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">geniml.assess.assess</span> <span class="kn">import</span> <span class="n">get_mean_rbs</span>
+<span class="n">rbs_flex</span> <span class="o">=</span> <span class="n">get_mean_rbs</span><span class="p">(</span>
+    <span class="s2">"raw/"</span><span class="p">,</span>
+    <span class="s1">'file_list.txt'</span><span class="p">,</span>
+    <span class="s2">"universe_hmm.bed"</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">,</span>
+    <span class="n">flexible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="sa">f</span><span class="s2">"Universe flexible RBS: </span><span class="si">{</span><span class="n">rbs_flex</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span>
 </pre></div>
 
      </div>
@@ -14804,18 +14982,77 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#39;Universe flexible RBS: 0.98&#39;</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="How-to-assess-new-universe?">How to assess new universe?<a class="anchor-link" href="#How-to-assess-new-universe?">&#182;</a></h1><p>So far you used many different methods for creating new universes. But choosing, which universe represents data the best can be challenging. To help with this we created a tutorial that can be found <a href="../code/assess-universe.md">here</a>, which presents different  methods that assess universe fit to the collection of files.</p>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lh_flex</span> <span class="o">=</span> <span class="n">get_likelihood</span><span class="p">(</span>
+    <span class="s2">"model.tar"</span><span class="p">,</span>
+    <span class="s2">"universe_hmm.bed"</span><span class="p">,</span>
+    <span class="s2">"coverage/"</span>
+<span class="p">)</span>
+<span class="sa">f</span><span class="s2">"Universe flexible LH: </span><span class="si">{</span><span class="n">lh_flex</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#39;Universe flexible LH: -127156.87&#39;</pre>
+</div>
 
 </div>
+
 </div>
+
 </div>
+
 </div>
 </body>
 
