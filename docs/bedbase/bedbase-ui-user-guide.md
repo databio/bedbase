@@ -1,6 +1,16 @@
 # BEDbase public instance
 
-Do we really need documentation to document the UI?
+The public BEDbase instance at [bedbase.org](https://bedbase.org) hosts public BED files.
+
+🚧 Documentation under construction.
+
+## Resource links
+
+- **Documentation**: <a href="https://docs.bedbase.org/" target="_blank">https://docs.bedbase.org/</a>
+- **Deployed public instance UI**: <a href="https://bedbase.org/" target="_blank">https://bedbase.org/</a>
+- **Dev UI**: <a href="https://dev.bedhost.pages.dev/" target="_blank">https://dev.bedhost.pages.dev/</a>
+- **API**: <a href="https://api.bedbase.org/" target="_blank">https://api.bedbase.org/</a>
+- **Dev API**: <a href="https://dev.bedbase.org/" target="_blank">https://api-dev.bedbase.org/</a>
 
 ## Finding relevant BED files
 
