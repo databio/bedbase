@@ -107,8 +107,10 @@ nav:
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
       - Create search backend: geniml/tutorials/text2bednn-search-interface.md
     - Reference:
-      - Manuscripts:
-        - Rymuza2024: geniml/manuscripts/rymuza2024.md
+      - Published manuscripts:
+        - Gharavi 2021: geniml/manuscripts/gharavi2021.md
+        - Rymuza 2024: geniml/manuscripts/rymuza2024.md
+        - Gharavi 2024: geniml/manuscripts/gharavi2024.md
       - How to cite: citations.md
       - API documentation: geniml/autodoc_build/geniml.md
       - Support: geniml/support.md
