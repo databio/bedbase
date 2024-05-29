@@ -7,6 +7,10 @@ space of BED files. When a natural language query string is given, it will first
 vector will be encoded to a query vector by the FNN. `search` backend can perform k-nearest neighbors (KNN) search among the stored BED
 file embedding vectors, and the BED files whose embedding vectors are closest to that query vector are the search results.
 
+## Search distance metrics
+
+The default distance metrics for KNN search is [cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity). Which is bounded in [0,1]. The smaller the value is, the higher similarity between the query vector and returend search results. [HNSWBackend](https://github.com/nmslib/hnswlib?tab=readme-ov-file#python-bindings) and [QdrantBackend](https://qdrant.tech/documentation/concepts/search/#metrics) also have other options of distance metrics.
+
 ## Store embedding vectors
 It is recommended to use `geniml.search.backend.HNSWBackend` to store embedding vectors. In the `HNSWBackend` that stores each BED file embedding
 vector, the `payload` should contain the name or identifier of BED file. In the `HNSWBackend` that stores the embedding vectors of each 
@@ -14,7 +18,7 @@ metadata string, the `payload` should contain the original string text and the n
 
 ## Train the model
 Training a `Vec2VecFNN` needs x-y pairs of vectors (x: metadata embedding vector; y: BED embedding vector). A pair of a metadata embedding
-vector with the embedding vectors of BED files in its payload is a target pair, othersie a non-target pair. Non-target pairs are sampled for
+vector with the embedding vectors of BED files in its payload is a target pair, otherwise a non-target pair. Non-target pairs are sampled for
 contrastive loss. Here is sample code to generate pairs from storage backend and train the model:
 
 ```python
@@ -100,3 +104,6 @@ query_dict = {
 
 MAP, AUC, RP = search_interface.eval(query_dict)
 ```
+
+
+
