@@ -9,7 +9,7 @@ file embedding vectors, and the BED files whose embedding vectors are closest to
 
 ## Search distance metrics
 
-The default distance metrics for KNN search is [cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity). Which is bounded in [0,1]. The smaller the value is, the higher similarity between the query vector and returend search results. [HNSWBackend](https://github.com/nmslib/hnswlib?tab=readme-ov-file#python-bindings) and [QdrantBackend](https://qdrant.tech/documentation/concepts/search/#metrics) also have other options of distance metrics.
+The default distance metrics for KNN search in `geniml` is [cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity). Which is bounded in [0,1]. The smaller the value is, the higher similarity between the query vector and returend search results. [HNSWBackend](https://github.com/nmslib/hnswlib?tab=readme-ov-file#python-bindings) and [QdrantBackend](https://qdrant.tech/documentation/concepts/search/#metrics) also have other options of distance metrics.
 
 ## Store embedding vectors
 It is recommended to use `geniml.search.backend.HNSWBackend` to store embedding vectors. In the `HNSWBackend` that stores each BED file embedding
