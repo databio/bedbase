@@ -1,4 +1,4 @@
-# Developer Guide
+# BEDbase API user guide
 
 ## Introduction
 

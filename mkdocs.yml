@@ -42,21 +42,22 @@ nav:
   - Home: README.md
   - BEDbase:
     - BEDbase: bedbase/README.md
-    - UI guide:
-      - Public BEDbase instance: bedbase/bedbase-user-guide.md
-    - API guides:
-      - BEDhost API guide:
-        - BEDhost: bedhost/README.md
-        - Developer Guide: bedhost/dev-guide.md
-        - Build image: bedhost/build_image.md
+    - User guides:
+      - Public BEDbase UI user guide: bedbase/bedbase-ui-user-guide.md
+      - Public BEDbase API user guide: bedbase/bedbase-api-user-guide.md
+    - Developer guides:
+      - BEDhost API server: 
+        - BEDhost overview: bedhost/README.md
+        - Building docker image: bedhost/build_image.md
         - Deploy API: bedhost/deployment.md
         - Changelog: bedhost/changelog.md
-      - BBConf:
+      - BBConf configuration:
         - BBConf: bbconf/README.md
         - Configuring: bedboss/how-to-configure.md
         - Overview: bbconf/overview.md
         - Guide: bbconf/bbc_api.md
         - Changelog: bbconf/changelog.md
+      - BEDBoss processing pipeline: ../bedboss
     - Reference:
       - How to cite: citations.md
       - Usage: bedboss/usage.md
@@ -108,8 +109,10 @@ nav:
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
       - Create search backend: geniml/tutorials/text2bednn-search-interface.md
     - Reference:
-      - Manuscripts:
-        - Rymuza2024: geniml/manuscripts/rymuza2024.md
+      - Published manuscripts:
+        - Gharavi 2021: geniml/manuscripts/gharavi2021.md
+        - Rymuza 2024: geniml/manuscripts/rymuza2024.md
+        - Gharavi 2024: geniml/manuscripts/gharavi2024.md
       - How to cite: citations.md
       - API documentation: geniml/autodoc_build/geniml.md
       - Support: geniml/support.md

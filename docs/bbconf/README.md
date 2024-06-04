@@ -8,7 +8,7 @@
 [![coverage](https://coverage-badge.samuelcolvin.workers.dev/databio/bbconf.svg)](https://coverage-badge.samuelcolvin.workers.dev/redirect/databio/bbconf)
 
 
-*BEDBASE* project configuration package (agent)
+*BEDbase* project configuration package (agent)
 
 ## What is this?
 
@@ -18,18 +18,16 @@ It formalizes communication pathways for pipelines and downstream tools, ensurin
 
 ---
 
-**Documentation**: <a href="https://docs.bedbase.org/bedboss" target="_blank">https://docs.bedbase.org/bedboss</a>
-
-**Source Code**: <a href="https://github.com/databio/bbconf" target="_blank">https://github.com/databio/bbconf</a>
-
----
-
 ## Installation
-To install `bbclient` use this command: 
+
+To install `bbconf` use this command: 
+
 ```
-pip install bbclient
+pip install bbconf
 ```
-or install the latest version from the GitHub repository:
+
+or, install the latest version from the GitHub repository:
+
 ```
 pip install git+https://github.com/databio/bbconf.git
 ```
