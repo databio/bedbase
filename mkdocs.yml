@@ -88,6 +88,7 @@ nav:
       - Module overviews: geniml/modules.md
     - How-to guides:    
       - Cache BED files with BBClient: geniml/tutorials/bbclient.md
+      - Use BED cache in R: geniml/tutorials/pyBiocFileCache.md
       - Tokenization: geniml/tutorials/tokenization.md
       - Tokenize a BED file with CLI: geniml/tutorials/cli-tokenization.md
       - Train region2vec embeddings: geniml/tutorials/region2vec.md
