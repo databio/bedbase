@@ -97,9 +97,68 @@ P.S. All links will be different on your machine, as they are generated based on
 ____
 
 
-## Zarr caching
+## Caching of tokenized bed files
 
-### Step 1: Cache Zarr File Using bbclient CLI
+To store tokenized BED files, we use the Zarr format. 
+BBClient saves tokenized files in the zarr folder within the bbcache folder (which is located in our home directory if the bbcache folder is not specified).
+
+Here's an example of how you can download and cache tokenized bed file using bbclient:
+```python
+from geniml.bbclient import BBClient
+
+bbc = BBClient()
+bbc.add_bed_tokens_to_cache( bed_id= '0dcdf8986a72a3d85805bbc9493a1302', universe_id= '58dee1672b7e581c8e1312bd4ca6b3c7')
+```
+If user didn't get any error, the tokenized file is saved in the default bbclient cache folder, or a user-provided cache folder.
 
 
-### 🚧 Tutorial in progress! Stay tuned for updates. We're working hard to bring you valuable content soon!
+### Step 1: Get zarr tokenized bed file using bbclient in Python
+```python
+from geniml.bbclient import BBClient
+
+bbc = BBClient()
+tokens_arr = bbc.load_bed_tokens(bed_id= '0dcdf8986a72a3d85805bbc9493a1302', universe_id= '58dee1672b7e581c8e1312bd4ca6b3c7')
+
+print(tokens_arr)
+```
+Result is a zarr array object:
+```text
+<zarr.core.Array '/58dee1672b7e581c8e1312bd4ca6b3c7/0dcdf8986a72a3d85805bbc9493a1302' (29438,) int64>
+```
+
+### Step 2: Get zarr tokenized bed file using Python zarr library
+```python
+import os 
+import zarr
+
+
+bbcache_folder = os.path.join(os.path.expanduser("~"), ".bbcache")
+
+# get zarr cache folder 
+bedfile_cache_folder = os.path.join(bbcache_folder, "tokens.zarr")
+
+zarr_cache = zarr.group(bedfile_cache_folder)
+
+universe_id = "58dee1672b7e581c8e1312bd4ca6b3c7"
+bed_id = "0dcdf8986a72a3d85805bbc9493a1302"
+
+tokens_arr = zarr_cache[universe_id][bed_id]
+print(tokens_arr)
+```
+Result is a zarr array object:
+```text
+<zarr.core.Array '/58dee1672b7e581c8e1312bd4ca6b3c7/0dcdf8986a72a3d85805bbc9493a1302' (29438,) int64>
+```
+
+### Step 3: Get zarr tokenized bed file using R zarr library
+```R
+## we need BiocManager to perform the installation
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+## install Rarr
+BiocManager::install("Rarr")
+
+library(Rarr)
+
+```
+🚧 Use `Rarr` library to open zarr file: https://github.com/grimbough/Rarr?tab=readme-ov-file
