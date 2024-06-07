@@ -105,5 +105,77 @@ query_dict = {
 MAP, AUC, RP = search_interface.eval(query_dict)
 ```
 
+## Hugging Face
 
+### Model
 
+`Vec2VecFNN` can be innitiated from a Hugging Face repository:
+
+```python
+model = Vec2VecFNN("databio/v2v-sentencetransformers-encode")
+```
+
+To upload the model onto huggingface, you can use `export` function to download the files of model(checkpoint.pt) and config(config.yaml).
+
+```
+v2v_torch1.export("path/totarget/folder", "checkpoint.pt")
+```
+
+Then upload both files with correct names onto the Hugging Face repository
+
+### Dataset
+
+`geniml.search.anecdotal_search_from_hf_data` can allow users to query with free-form natural language strings to search in a Hugging Face dataset. The dataset must have:
+
+* hnsw index file of BED file embeddings (index.bin)
+* dictionary file of payloads (payloads.pkl). It must have file name stored with the key of "file". For example:
+
+```
+# key of the payload is the storage index in the hnsw index
+{
+    0: {
+        "file": "Example.bed",
+        ...
+    },
+    ...
+}
+```
+
+* metadata file (metadata.json) in this format: `{<metadata attribute>: {<annotation text>: [<files>]}}`. For example:
+
+```
+{
+    "tissue": {
+        "kidney": [
+            "Example.bed",
+            ...
+        ],
+        ...
+    },
+    ...
+}
+```
+
+With the repo name of dataset, `Vec2VecFNN`, and repo name of the model that was used to encode training metadata, you can search through the dataset with any free-form query you type:
+
+```python
+from geniml.search import anecdotal_search_from_hf_data
+import pprint
+
+# vec2vec model
+search_repo = "databio/v2v-sentencetransformers-encode"
+# text encoder model
+text_repo = "sentence-transformers/all-MiniLM-L6-v2"
+# dataset
+data_repo = "databio/geo-hg38-search-test"
+result = anecdotal_search_from_hf_data(
+    "glioblastoma",
+    data_repo,
+    search_repo,
+    text_repo,
+    10
+)
+
+pprint.pprint(result)
+
+```
