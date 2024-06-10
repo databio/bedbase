@@ -15,7 +15,7 @@ This document provides tutorials for using `bbclient` via either:
 ```python
 from geniml.bbclient import BBClient
 
-bbclient = BBClient(cache_folder="cache", bedbase_api="https://api.bedbase.org
+bbclient = BBClient(cache_folder="cache", bedbase_api="https://api.bedbase.org")
 ```
 
 ### Download and cache a remote BED file from BEDbase 
@@ -33,6 +33,15 @@ from geniml.io import RegionSet
 bedfile = RegionSet("path/to/bedfile")
 gr = bedfile.to_granges()  # should return a GenomicRanges object
 bedfile_id = bbclient.add_bed_to_cache(bedfile) # compute its ID and add it to the cache
+```
+
+
+### Cache a BED file from within Python memory
+
+You can just provide a URL and it will add to cache for you:
+
+```python
+bbclient.add_bed_to_cache(url)
 ```
 
 ### Load a BED file from cache into Python session
