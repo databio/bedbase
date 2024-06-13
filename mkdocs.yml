@@ -109,20 +109,21 @@ nav:
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
       - Create search backend: geniml/tutorials/text2bednn-search-interface.md
     - Reference:
-      - Published manuscripts:
-        - Gharavi 2021: geniml/manuscripts/gharavi2021.md
-        - Rymuza 2024: geniml/manuscripts/rymuza2024.md
-        - Gharavi 2024: geniml/manuscripts/gharavi2024.md
-        - LeRoy 2024: geniml/manuscripts/leroy2024.md
-        - Zheng 2024: geniml/manuscripts/zheng2024.md
       - How to cite: citations.md
       - API documentation: geniml/autodoc_build/geniml.md
       - Support: geniml/support.md
       - Contributing: geniml/contributing.md
       - Changelog: geniml/changelog.md
-  - Genimtools:
-    - Genimtools: genimtools/README.md
-  - How to cite: citations.md
+  - Gtars:
+    - Gtars: gtars/README.md
+  - How to cite: 
+    - How to cite: citations.md
+    - Published manuscripts:
+      - Gharavi et al. 2021: geniml/manuscripts/gharavi2021.md
+      - Rymuza et al. 2024: geniml/manuscripts/rymuza2024.md
+      - Gharavi et al. 2024: geniml/manuscripts/gharavi2024.md
+      - LeRoy et al.  2024: geniml/manuscripts/leroy2024.md
+      - Zheng et al. 2024: geniml/manuscripts/zheng2024.md
 
 autodoc:
   jupyter:

@@ -1,11 +1,10 @@
----
-hide:
-  - navigation
-  - toc
-  - navigation.footer
----
 
-# How to cite BEDbase and geniml
+
+# Manuscripts describing BEDbase and geniml
+
+Components of BEDbase and geniml have been published independently. Here, we showcase the tutorials organized by the manuscript that published them, so if you're reading a paper you can more easily find the relevant features. Find the citation of interest on the left to find links to tutorials published as part of each manuscript.
+
+## How to cite BEDbase and geniml
 
 Thanks for citing us! If you use BEDbase, geniml, or their components in your research, here are papers you can cite.
 
@@ -18,9 +17,6 @@ Thanks for citing us! If you use BEDbase, geniml, or their components in your re
 | `geniml hmm` module | Rymuza et al. (2023) *bioRxiv* |
 | `bedbase` database | Unpublished |
 
-
-
----
 
 ## Full citation information for manuscripts 
 
