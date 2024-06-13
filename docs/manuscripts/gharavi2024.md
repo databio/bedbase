@@ -10,5 +10,5 @@ As available genomic interval data increase in scale, we require fast systems to
 
 This paper trained BEDspace models (using StarSpace with BED files). See these tutorials:
 
-- [How to use BEDSpace to jointly embed regions and metadata](../tutorials/bedspace.md)
+- [How to use BEDSpace to jointly embed regions and metadata](../geniml/tutorials/bedspace.md)
 

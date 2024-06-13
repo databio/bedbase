@@ -119,11 +119,12 @@ nav:
   - How to cite: 
     - How to cite: citations.md
     - Published manuscripts:
-      - Gharavi et al. 2021: geniml/manuscripts/gharavi2021.md
-      - Rymuza et al. 2024: geniml/manuscripts/rymuza2024.md
-      - Gharavi et al. 2024: geniml/manuscripts/gharavi2024.md
-      - LeRoy et al.  2024: geniml/manuscripts/leroy2024.md
-      - Zheng et al. 2024: geniml/manuscripts/zheng2024.md
+      - Gharavi et al. 2021: manuscripts/gharavi2021.md
+      - Gu et al. 2021: manuscripts/gu2021.md
+      - Rymuza et al. 2024: manuscripts/rymuza2024.md
+      - Gharavi et al. 2024: manuscripts/gharavi2024.md
+      - LeRoy et al.  2024: manuscripts/leroy2024.md
+      - Zheng et al. 2024: manuscripts/zheng2024.md
 
 autodoc:
   jupyter:

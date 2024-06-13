@@ -9,4 +9,6 @@ Representation learning models have become a mainstay of modern genomics. These 
 
 ## Relevant tutorials
 
-To evaluate, refer to this tutorial: https://github.com/databio/region2vec_eval
+Analysis from the paper is described in these tutorials: 
+
+- [How to evalute embeddings](../geniml/tutorials/evaluation.md)
