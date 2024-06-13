@@ -116,7 +116,7 @@ nav:
       - Changelog: geniml/changelog.md
   - Gtars:
     - Gtars: gtars/README.md
-  - How to cite: 
+  - Manuscripts: 
     - How to cite: citations.md
     - Published manuscripts:
       - Gharavi et al. 2021: manuscripts/gharavi2021.md
