@@ -4,7 +4,7 @@ The `geniml` tokenizers are used to prepare data for training, evaluation, and i
 
 All tokenizers require a *universe file* (or, vocab file). This is a bedfile that contains all possible regions that can be tokenized. It may also include special tokens like the start, end, unknown, and padding token.
 
-Our tokenizers are implemented in Rust for speed and efficiency. They exist in the `geniml` companion library called [`genimtools`](https://github.com/databio/genimtools). Currently, there are two tokenizers available: the TreeTokenizer, and the AnnDataTokenizer. The TreeTokenizer is a simple and flexible tokenizer that can be used for any type of data. The AnnDataTokenizer is specifically designed for use with single-cell AnnData objects from the `anndata` library.
+Our tokenizers are implemented in Rust for speed and efficiency. They exist in the `geniml` companion library called [`gtars`](https://github.com/databio/gtars). Currently, there are two tokenizers available: the TreeTokenizer, and the AnnDataTokenizer. The TreeTokenizer is a simple and flexible tokenizer that can be used for any type of data. The AnnDataTokenizer is specifically designed for use with single-cell AnnData objects from the `anndata` library.
 
 The API is loosely based on the [`transformers`](https://github.com/huggingface/tokenizers) library, so it should be familiar to users of that library.
 
@@ -41,4 +41,4 @@ ids = tokens.to_ids()
 ## Future work
 Genomic region tokenization is an active area of research. We will implement new tokenizers as they are developed. If you have a tokenizer you'd like to see implemented, please open an issue or submit a pull request.
 
-For core development of our tokenizers, see the [gtokenizers](https://github.com/databio/genimtools) repository.
+For core development of our tokenizers, see the [gtokenizers](https://github.com/databio/gtars) repository.
