@@ -4,5 +4,5 @@ The goal of this project is to download all BED files currently hosted in GEO, s
 
 ## Get a list of accessions:
 
-[Instructions in this file!](./all_bed.ipynb)
+[Instructions in this file!](all_bed.ipynb)
 
