@@ -2,6 +2,19 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format. 
 
+## [0.4.2] -- 2024-10-07
+
+- Cleaned dependencies and separated into 2 groups: basic and ml.
+- Improved efficiency of CLI
+- Fixed bbcache incorrectly saving files from url #175
+
+
+## [0.4.1] -- 2024-09-18
+
+- Fixed: bbclient ignores --cache-folder on CLI #164
+- Fixed bug in opening bed files
+
+
 ## [0.4.0] -- 2024-06-04
 
 - Added bed tokens caching to bbclient [bbclient] Add tokenized file cache and download [#153](https://github.com/databio/geniml_dev/issues/153)

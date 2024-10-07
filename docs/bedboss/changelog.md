@@ -2,6 +2,30 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
+# [0.4.1] - 2024-09-20
+## Added
+- Standardization of peps using bedbase bedms schema
+- Reference validator module
+
+## Fixed
+- Pipeline failures (due to pipeline manager)
+- Failure in cleaning temp files
+
+
+# [0.4.0] - 2024-08-26
+## Added
+- Added bbuploader (GEO uploader)
+
+# [0.3.0] - 2024-08-21
+## Added
+- Added classifier
+- Added create universe uploader
+- Added tokenization and token uploader
+
+## Changes
+- Updated efficiency of CLI help
+
+
 # [0.2.1] - 2024-04-09
 ## Changed
 - small naming tweaks
