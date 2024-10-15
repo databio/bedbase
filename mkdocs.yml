@@ -75,6 +75,7 @@ nav:
       - BEDbuncher tutorial: bedboss/tutorials/bedbuncher_tutorial.md
       - BEDindex tutorial: bedboss/tutorials/bedindex_tutorial.md
       - BEDclassifier tutorial: bedboss/tutorials/bedclassifier_tutorial.md
+      - BEDMS tutorial: bedboss/tutorials/bedms_tutorial.md
     - How to guides:
       - Create BEDbase database: bedboss/how-to-create-database.md
       - Create config file: bedboss/how-to-configure.md
