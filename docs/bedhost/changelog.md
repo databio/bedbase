@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Multiple ui improvements and fixes
 - Updated bed metadata endpoint: added `annotation` to metadata return model, with standard schema
 - Updated metadata in search endpoints.
+- Added embed endpoint. [#136](https://github.com/databio/bedhost/issues/136)
 
 
 ## [0.5.0] -- 2024-06-11
