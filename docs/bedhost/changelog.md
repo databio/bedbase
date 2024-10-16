@@ -2,7 +2,21 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format. 
 
-## [0.4.0]
+
+## [0.6.0] -- 2024-10-15
+- Multiple ui improvements and fixes
+- Updated bed metadata endpoint: added `annotation` to metadata return model, with standard schema
+- Updated metadata in search endpoints.
+
+
+## [0.5.0] -- 2024-06-11
+- Improved Bed search (speed and quality)
+- Added licenses
+- UI tweaks
+- Added universes and bed tokens to the database
+- Added embedding endpoint
+
+## [0.4.0] -- 2024-04-08
 - Support of new bbconf.
 - Updated endpoints.
 
