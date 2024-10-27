@@ -114,8 +114,14 @@ nav:
       - Support: geniml/support.md
       - Contributing: geniml/contributing.md
       - Changelog: geniml/changelog.md
-  - Gtars:
-    - Gtars: gtars/README.md
+  - gtars:
+    - gtars: gtars/README.md
+    - Getting Started:
+      - Installation: gtars/installation.md
+      - Quick start: gtars/quickstart.md
+    - Tutorials:
+      - uniwig: gtars/tutorials/uniwig.md
+
   - Manuscripts: 
     - How to cite: citations.md
     - Published manuscripts:
