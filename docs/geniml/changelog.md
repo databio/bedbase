@@ -2,9 +2,29 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format. 
 
+## [0.5.2] -- 2024-12-03
+
+- Switched bivec search to fastembed
+- Fixed: incorrect caching of the files
+
+## [0.5.1] -- 2024-10-18
+
+- Fixed: Fix search score. #187
+- Fixed: Batch search for Qdrant - Speed up search #186
+- Fixed: Some packages not in requirements #189
+
+## [0.5.0] -- 2024-10-15
+
+- Added: new bi-vector search
+
+## [0.4.3] -- 2024-12-09
+
+- Fixed: required torch version
+
+
 ## [0.4.2] -- 2024-10-07
 
-- Cleaned dependencies and separated into 2 groups: basic and ml.
+- Cleaned dependencies and separated into 2 groups: basic and ml
 - Improved efficiency of CLI
 - Fixed bbcache incorrectly saving files from url #175
 
