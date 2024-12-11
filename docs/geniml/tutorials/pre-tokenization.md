@@ -11,14 +11,14 @@ Pretokenizing data is easy. You can use the built-in tokenizers and utilities in
 
 ```python
 from genimtools.utils import write_tokens_to_gtok
-from geniml.tokenization import ITTokenizer
+from geniml.tokenization import TreeTokenizer
 
 # instantiate a tokenizer
-tokenizer = ITTokenizer("path/to/universe.bed")
+tokenizer = TreeTokenizer("path/to/universe.bed")
 
 # get tokens
 tokens = tokenizer.tokenize("path/to/bedfile.bed")
-write_tokens_to_gtok(tokens.ids, "path/to/bedfile.gtok")
+write_tokens_to_gtok("path/to/bedfile.gtok", tokens.to_ids())
 ```
 
 Thats it! Now you can use the `.gtok` file to train a model.
