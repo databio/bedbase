@@ -13545,7 +13545,7 @@ body[data-format='mobile'] .jp-InputPrompt {
   flex-direction: row;
   padding: 0px;
   margin: 0px;
-  /* Added to reveal the box-shadow on the input and output collapsers. */
+  /* Added to reveal the box-shadow on the input and output collapses. */
   overflow: visible;
 }
 
@@ -14455,7 +14455,7 @@ all of MD as it is not optimized for dense, information rich UIs.
 </style>
 
 <style type="text/css">
-/* Force rendering true colors when outputing to pdf */
+/* Force rendering true colors when outputting to pdf */
 * {
   -webkit-print-color-adjust: exact;
 }

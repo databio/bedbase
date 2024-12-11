@@ -54,7 +54,7 @@ print("Enhancer probability:", round(out.item(), 3))
 ```
 
 ## Saving the fine-tuned embeddings
-`torch`'s computational graph links the original region2vec model back to the `Region2VecExModel`. Therefore, if we want to save the fine-tuned embeddings, we simply ned to call `export` on the original model:
+`torch`'s computational graph links the original region2vec model back to the `Region2VecExModel`. Therefore, if we want to save the fine-tuned embeddings, we simply need to call `export` on the original model:
 ```python
 model.export("my-fine-tuned-model")
 ```

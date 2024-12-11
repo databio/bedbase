@@ -13545,7 +13545,7 @@ body[data-format='mobile'] .jp-InputPrompt {
   flex-direction: row;
   padding: 0px;
   margin: 0px;
-  /* Added to reveal the box-shadow on the input and output collapsers. */
+  /* Added to reveal the box-shadow on the input and output collapses. */
   overflow: visible;
 }
 
@@ -14455,7 +14455,7 @@ all of MD as it is not optimized for dense, information rich UIs.
 </style>
 
 <style type="text/css">
-/* Force rendering true colors when outputing to pdf */
+/* Force rendering true colors when outputting to pdf */
 * {
   -webkit-print-color-adjust: exact;
 }
@@ -14633,7 +14633,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Depending on the task the universe can be smooth by setting <code>merge</code> option with the distance below witch peaks should be merged together and 
-<code>filter_size</code> with minimum size of peak that should be part of the universe. Instead of using maximum likelihood cutoff one can also defined cutoff with <code>cutoff</code> option. If it is set to 1 the result is union universe, and when to number of files it wil produce intersection universe:</p>
+<code>filter_size</code> with minimum size of peak that should be part of the universe. Instead of using maximum likelihood cutoff one can also defined cutoff with <code>cutoff</code> option. If it is set to 1 the result is union universe, and when to number of files it will produce intersection universe:</p>
 
 </div>
 </div>

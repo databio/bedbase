@@ -14,7 +14,7 @@
 
 Geniml is a *genomic interval machine learning toolkit*, a Python package for building machine learning models of genomic interval data (BED files). It also includes ancillary functions to support other types of analyses of genomic interval data.
 
-As of Feburary 2024, this package and its documentation are undergoing rapid development, leading to some tutorials getting outdated. Please raise [github issues](https://github.com/databio/geniml) if you find outdated or unclear directions, so we know where to focus effort that will benefit users.
+As of February 2024, this package and its documentation are undergoing rapid development, leading to some tutorials getting outdated. Please raise [github issues](https://github.com/databio/geniml) if you find outdated or unclear directions, so we know where to focus effort that will benefit users.
 
 ## Installation
 ### To install `geniml` use this commands.

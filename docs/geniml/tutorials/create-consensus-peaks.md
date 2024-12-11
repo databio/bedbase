@@ -42,7 +42,7 @@ geniml build-universe cc --coverage-folder coverage/ \
 
 Depending on the task the universe can be smooth by setting `--merge` 
 flag with the distance beloved witch peaks should be merged together and 
-`--filter-size` with minimum size of peak that should be part of the universe. Instead of using maximum likelihood cutoff one can also defined cutoff with `--cutoff` flag. If it is set to 1 the result is union universe, and when to number of analyzed files it wil produce intersection universe.
+`--filter-size` with minimum size of peak that should be part of the universe. Instead of using maximum likelihood cutoff one can also defined cutoff with `--cutoff` flag. If it is set to 1 the result is union universe, and when to number of analyzed files it will produce intersection universe.
 
 ## Coverage cutoff flexible universe
 A more complex version of coverage cutoff universe is coverage cutoff flexible universe (CCF). In contrast to its' fixed version it produces flexible universe. It builds confidence interval around the maximum likelihood cutoff. This results in two values one for the cutoff for boundaries, and the other one for the region core. Despite the fact that the CFF universe is more complex it is build using the same input as the CC universe: 

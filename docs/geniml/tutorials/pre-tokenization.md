@@ -25,7 +25,7 @@ Thats it! Now you can use the `.gtok` file to train a model.
 
 ## How to use the `.gtok` files
 
-To facilitate working with `.gtok` files, we have some helper-classes that can be used to train a model directly from `.gtok` files. For example, you can use teh `Region2VecDataset` class to load the `.gtok` files and train a model. See the [training documentation](./train-region2vec.md) for more information.
+To facilitate working with `.gtok` files, we have some helper-classes that can be used to train a model directly from `.gtok` files. For example, you can use the `Region2VecDataset` class to load the `.gtok` files and train a model. See the [training documentation](./train-region2vec.md) for more information.
 
 ```python
 from geniml.region2vec.utils import Region2VecDataset

@@ -104,5 +104,5 @@ Example bedsets:
 - Bed files from the LOLA database [http://lolaweb.databio.org/](http://lolaweb.databio.org/)
 
 Bedbuncher calculates statistics:
-- Bedset statistics (currenty means and standard deviations).
+- Bedset statistics (currently means and standard deviations).
 
