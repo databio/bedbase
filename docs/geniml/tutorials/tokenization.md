@@ -1,6 +1,6 @@
 # How to use the tokenizers
 ## Overview
-The `geniml` tokenizers are used to prepare data for training, evaluation, and inference of genomic machine learning models. Like tokenizers for natural langauge processing, the `geniml` tokenizers convert raw data into a format that can be used by our models. `geniml` has a few tokenizers, but they all follow the same principles.
+The `geniml` tokenizers are used to prepare data for training, evaluation, and inference of genomic machine learning models. Like tokenizers for natural language processing, the `geniml` tokenizers convert raw data into a format that can be used by our models. `geniml` has a few tokenizers, but they all follow the same principles.
 
 All tokenizers require a *universe file* (or, vocab file). This is a bedfile that contains all possible regions that can be tokenized. It may also include special tokens like the start, end, unknown, and padding token.
 

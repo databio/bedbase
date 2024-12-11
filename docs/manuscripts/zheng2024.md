@@ -11,4 +11,4 @@ Representation learning models have become a mainstay of modern genomics. These 
 
 Analysis from the paper is described in these tutorials: 
 
-- [How to evalute embeddings](../geniml/tutorials/evaluation.md)
+- [How to evaluate embeddings](../geniml/tutorials/evaluation.md)

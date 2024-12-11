@@ -1,7 +1,7 @@
 # Using our models with SnapATAC2
 ## Overview
 
-[SnapATAC2](https://github.com/kaizhang/SnapATAC2) is a flexible, versatile, and scalable single-cell omics analysis framework. It is designed to process and analyze single-cell ATAC-seq data. SnapATAC2 is written in Rust with Python bindings. It seemlessly integrates with `scanpy` and `anndata` objects. Therefore, it is extremely easy to use `geniml` models with SnapATAC2. Here's how you can do it:
+[SnapATAC2](https://github.com/kaizhang/SnapATAC2) is a flexible, versatile, and scalable single-cell omics analysis framework. It is designed to process and analyze single-cell ATAC-seq data. SnapATAC2 is written in Rust with Python bindings. It seamlessly integrates with `scanpy` and `anndata` objects. Therefore, it is extremely easy to use `geniml` models with SnapATAC2. Here's how you can do it:
 
 ## Install tools
 

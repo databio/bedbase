@@ -24,7 +24,7 @@ Once a `geniml` region embedding model is trained, we may want to evaluate the e
 
 ## Module `region2vec`
 
-`Region2Vec` is an unsupervised method for creating embeddings for genomic regions and region sets from a set of raw BED files. The program uses a variation of the word2vec algorithm by building shuffled context windows from BED files. The co-occurence statistics of genomic regions in a collection of BED files allow the model to learn region embeddings.
+`Region2Vec` is an unsupervised method for creating embeddings for genomic regions and region sets from a set of raw BED files. The program uses a variation of the word2vec algorithm by building shuffled context windows from BED files. The co-occurrence statistics of genomic regions in a collection of BED files allow the model to learn region embeddings.
 
 ## Module `scembed`
 
@@ -40,9 +40,9 @@ The search module provides a generic interface for vector search. Several geniml
 
 ## Module `tokenization`
 
-In NLP, training word embeddings requires first tokenizing words such that words in different forms are represented by one word. For example, "orange", "oranges" and "Orange" are all mapped to "orange" since they essentially convey the same meaning. This reduces the vocabulary size and improves the quality of learned embeddings. Similary, many `geniml` modules (such as `region2vec`) require first tokenizating regions.
+In NLP, training word embeddings requires first tokenizing words such that words in different forms are represented by one word. For example, "orange", "oranges" and "Orange" are all mapped to "orange" since they essentially convey the same meaning. This reduces the vocabulary size and improves the quality of learned embeddings. Similarly, many `geniml` modules (such as `region2vec`) require first tokenizating regions.
 
-To tokenize reigons, we need to provide a universe, which specifies the "vocabulary" of genomic regions. The universe is a BED file, containing representative regions. With the given universe, we represent (tokenize) raw regions into the regions in the universe.
+To tokenize regions, we need to provide a universe, which specifies the "vocabulary" of genomic regions. The universe is a BED file, containing representative regions. With the given universe, we represent (tokenize) raw regions into the regions in the universe.
 
 Different strategies can be used to tokenize. The simplest case we call *hard tokenization*, which means if the overlap between a raw region in a BED file and a region in the universe exceeds a certain amount, then we use the region in the universe to represent this raw region; otherwise, we ignore this raw region. This is a "zero or one" process. After hard tokenization, each BED file will contain only regions from the universe, and the number of regions will be smaller or equal to the original number.
 
