@@ -57,16 +57,16 @@ To learn more about pre-tokenizing the data, see the [pre-tokenization tutorial]
 
 ```python
 from genimtools.utils import write_tokens_to_gtok
-from geniml.tokenization import ITTokenizer
+from geniml.tokenization import TreeTokenizer
 
 adata = sc.read_h5ad("path/to/adata.h5ad")
-tokenizer = ITTokenizer("peaks.bed")
+tokenizer = TreeTokenizer("peaks.bed")
 
 tokens = tokenizer(adata)
 
 for i, t in enumerate(tokens):
-    file = f"tokens{i}.gtok"
-    write_tokens_to_gtok(t, file)
+    filename = f"tokens{i}.gtok"
+    write_tokens_to_gtok(filename, t.to_ids())
 ```
 
 ### Training the model

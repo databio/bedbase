@@ -34,11 +34,11 @@ class EnhancerClassifier(nn.Module):
 After instantiating the tokenizer, we can can use the model like so:
 ```python
 from geniml.io import Region
-from geniml.tokenization import ITTokenizer
+from geniml.tokenization import TreeTokenizer
 
 r = Region("chr1", 1_000_000, 1_000_500) # some enhancer region (maybe)
 
-tokenizer = ITTokenizer.from_pretrained("databio/r2v-ChIP-atlas-hg38-v2")
+tokenizer = TreeTokenizer.from_pretrained("databio/r2v-ChIP-atlas-hg38-v2")
 classifier = EnhancerClassifier(model.model) # get the inner core of the model
 
 x = tokenizer.tokenize(r)
