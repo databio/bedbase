@@ -15291,7 +15291,7 @@ jp-needs-light-background
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Scenario-2:-return-a-list-of-most-similar-labels-and-thier-similarity-score-to-a-query-region-set-(r2l)">Scenario 2: return a list of most similar labels and thier similarity score to a query region set (r2l)<a class="anchor-link" href="#Scenario-2:-return-a-list-of-most-similar-labels-and-thier-similarity-score-to-a-query-region-set-(r2l)">&#182;</a></h1>
+<h1 id="Scenario-2:-return-a-list-of-most-similar-labels-and-their-similarity-score-to-a-query-region-set-(r2l)">Scenario 2: return a list of most similar labels and their similarity score to a query region set (r2l)<a class="anchor-link" href="#Scenario-2:-return-a-list-of-most-similar-labels-and-their-similarity-score-to-a-query-region-set-(r2l)">&#182;</a></h1>
 </div>
 </div>
 </div>

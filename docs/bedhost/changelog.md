@@ -44,7 +44,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [0.1.1] -- 2021-10-30
 ### change
-- `/bed/genomes` and `bedset/genomes`: impove speed
+- `/bed/genomes` and `bedset/genomes`: improve speed
 
 ## [0.1.0] -- 2021-10-25
 ### add

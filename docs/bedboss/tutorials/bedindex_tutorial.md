@@ -12,7 +12,7 @@ How to create a BEDbase configuration file is described in the [configuration se
 bedboss reindex --bedbase-config path/to/bedbase_config.yaml
 ```
 
-After running this comman all files that are in the database and weren't indexed will be indexed to qdrant database.
+After running this command all files that are in the database and weren't indexed will be indexed to qdrant database.
 
 
 #### From within Python

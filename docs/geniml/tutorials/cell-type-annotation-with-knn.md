@@ -4,7 +4,7 @@ In the [previous tutorial](./load-qdrant-with-cell-embeddings.md), we loaded a v
 If you have **not** completed the previous tutorial, you should ensure you have a vector database with cell embeddings.
 
 ## What is K-nearest-neighbors (KNN) classification?
-According to [IBM](https://www.ibm.com/topics/knn), K-nearest-neighbors classification is a non-parametric, supervised learning classifier, which uses proximity to make classifications or predictions about the grouping of an individual data point. Point more simply: KNN is a classification algorithm that uses the distance between an **unlabeled** data point and its **labeld** neighbors to classify the new data point.
+According to [IBM](https://www.ibm.com/topics/knn), K-nearest-neighbors classification is a non-parametric, supervised learning classifier, which uses proximity to make classifications or predictions about the grouping of an individual data point. Point more simply: KNN is a classification algorithm that uses the distance between an **unlabeled** data point and its **labeled** neighbors to classify the new data point.
 
 Assuming we have a vector-space of well-annotated cell embeddings, we can use KNN to classify new cell embeddings based on their proximity to the labeled cell embeddings.
 
