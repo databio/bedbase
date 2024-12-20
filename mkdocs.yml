@@ -116,6 +116,11 @@ nav:
       - Changelog: geniml/changelog.md
   - Gtars:
     - Gtars: gtars/README.md
+    - Install: gtars/install.md
+    - Modules:
+      - Digests: gtars/digests.md
+    - Reference:
+      - Changelog: gtars/changelog.md
   - Manuscripts: 
     - How to cite: citations.md
     - Published manuscripts:
