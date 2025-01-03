@@ -2,19 +2,57 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
-# [0.7.0] - 2024-09-20
-## Added 
+## [0.10.0] - 2025-01-03
+
+### Added:
+
+* Added a new method `get_neighbours` in `bbconf/modules/bedfiles.py` to retrieve the nearest neighbors of a bed file from Qdrant.
+* Added a new method `sql_search` in `bbconf/modules/bedfiles.py` for performing SQL exact searches on bed files.
+* Added a new method `get_track_hub_file` in `bbconf/modules/bedsets.py` to generate track hub files for bedsets.
+* Added `processed` for uploading bed files and bedsets
+* Added `update` bedfile method
+
+### Changed:
+* Updated exception handling in the `create` method of `bbconf/modules/bedsets.py` to provide more specific error messages.
+
+## [0.9.0] - 2024-11-07
+
+### Changed
+- Fixed bug with uploading tss dist plot\
+
+### Added
+- Added annotations to bedsets (author, source)
+- get_genome_list method to bedfiles, that lists all available genomes
+- Added method that lists all missing plots for bedfiles (get_missing_plots)
+
+
+## [0.8.0] - 2024-10-23
+## Added:
+- New text2vec search (bivec search)
+- Added get_pep to bedset methods
+
+## [0.7.1] - 2024-10-15
+
+### Added:
+- Added table with standardized bed annotation
+- Added table with bed reference genome prediction values.
+
+### Changed:
+- Updated requirements
+
+## [0.7.0] - 2024-09-20
+### Added 
 - Table and methods for reference genome validator
 - Table with standard metadata schema
 - Bed file opening improvements
 
-# [0.6.1] - 2024-08-21
-## Added 
+## [0.6.1] - 2024-08-21
+### Added 
 
 - DB tables for GEO uploader status
 
-# [0.6.0] - 2024-05-01
-## Added
+## [0.6.0] - 2024-05-01
+### Added
 
 - Added tokenized files and universes.
 - Added bed embedding get endpoint to the API #50
@@ -25,14 +63,14 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Many other small bug fixes
 
 
-# [0.5.1] - 2024-04-09
-## Changed
+## [0.5.1] - 2024-04-09
+### Changed
 
 - updated qdrant uploader
 - bedset bedfile list query improvement
 - other minor fixes in uploading
 
-# [0.5.0] - 2024-04-08
+## [0.5.0] - 2024-04-08
 ### Changed
 
 - Rebuild bbconf
