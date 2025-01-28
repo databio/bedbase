@@ -2,26 +2,29 @@
 <h1><img align="center" src="img/bedboss_logo.svg" class="img-header" height="100"></h1>
 </p>
 
-
 <p align="center">
-<a href="https://pypi.org/project/bedboss/"><img src="https://img.shields.io/pypi/v/bedboss" alt=""></a>
+
+<a href="https://pep.databio.org/"><img src="https://pepkit.github.io/img/PEP-compatible-green.svg" alt=""></a>
+<a href="https://pypi.org/project/bedboss/"><img src="https://img.shields.io/pypi/v/bedboss?color=%2334D058" alt=""></a>
 <a href="https://github.com/databio/bedboss"><img src="https://img.shields.io/badge/source-github-354a75?logo=github"></a>
 </p>
 
 
-A command-line and manager tool for calculating statistics for region set files (BED files) and managing them in the BEDbase database.
+A command-line tool and Python package for managing and processing genomic interval region files and bedsets in BEDbase.
+BEDboss is highly related to BEDbase, nevertheless, it can be used as a standalone tool for calculating statistics, converting files, and verifying the quality of BED files.
 
-### Main features:
+### Main components:
 
-1) **bedmaker** - pipeline to convert supported file types into BED format and bigBed format. </br>
-2) **bedqc** - pipeline to flag bed files for further evaluation to determine whether they should be included in the downstream analysis. </br>
+1) **bedmaker** - pipeline to convert various genomic interval file types into BED format and bigBed format. </br>
+2) **bedqc** - quality assessment pipeline of bed files </br>
 3) **bedstat** - pipeline for obtaining statistics about bed files. </br>
-4) **bedbuncher** - pipeline designed to create bedsets (sets of BED files) that will be retrieved from bedbase. </br>
-5) **index** - pipeline to create vectors of bedfiles and insert them into vector database for further search. </br>
-6) Other delete and update tools that manage bed and bedset files in the BEDbase database. </br>
+4) **bedbuncher** - pipeline for grouping bed files in collections and calculation statistics about them. </br>
+5) **bedclassifier** - scripts for classifying bed files based on their columns. </br>
+6) **refgenome_validator** - pipeline for validating the reference genome of the bed files. </br>
+7) **bbuploader** - pipeline for uploading bed files from GEO database to the BEDbase database and processing them. </br>
 
 Mainly pipelines are intended to be run from command line but nevertheless, 
-they are also available as a python function, so that user can implement them to his own code (e.g. automatic uploading tools).
+they are also available as a python functions, so that user can use them independently.
 
 ---
 
