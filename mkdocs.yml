@@ -81,11 +81,11 @@ nav:
         - Command line interface: bedboss/usage.md
     - How to guides:
       - Create BEDbase database: bedboss/how-to-create-database.md
+      - Run BEDboss in Docker: bedboss/how-to-run-in-docker.md
       - Create config file: bedbase/how-to-configure.md
       - Install dependencies: bedboss/how-to-install-requirements.md
     - Reference:
       - How to cite: citations.md
-      - Usage: bedboss/usage.md
       - Changelog: bedboss/changelog.md
   - Geniml:
     - Geniml: geniml/README.md

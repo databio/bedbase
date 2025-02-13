@@ -1,4 +1,4 @@
-# Usage reference
+# Command line interface reference
 
 BEDboss is command-line tool-manager and a set of tools for working with BED files and BEDbase. Main components of BEDboss are: </br>
 1) Pipeline for processing BED files: bedmaker, bedqc, and bedstats.</br>
