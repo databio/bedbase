@@ -15,7 +15,7 @@ If requirements are not satisfied, you will see the list of missing packages.
 
 ### Step 2: Create bedconf.yaml file 
 To run bedboss run-pep, you need to create a bedconf.yaml file with configuration. 
-Detailed instructions are in the [configuration section](../how-to-configure.md).
+Detailed instructions are in the [configuration section](../../../bedbase/how-to-configure.md).
 
 ### Step 3: Create PEP with bed files.
 BEDboss PEP should contain next fields: sample_name, input_file, input_type, genome.

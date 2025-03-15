@@ -2,7 +2,7 @@
 
 ### 1. Create bedbase config file
 
-How to create a BEDbase configuration file is described in the [configuration section](../how-to-configure.md).
+How to create a BEDbase configuration file is described in the [configuration section](../../../bedbase/how-to-configure.md).
 
 
 ### 2. Run bedboss index
