@@ -117,8 +117,12 @@ nav:
   - Gtars:
     - Gtars: gtars/README.md
     - Install: gtars/install.md
-    - Modules:
-      - Digests: gtars/digests.md
+    - Rust:
+      - Rust source API docs: https://docs.rs/gtars/latest/gtars/
+    - Python bindings:
+      - Digests: gtars/python/digests.md
+    - Using gtars from R: 
+      - gtars from R: gtars/r/README.md
     - Reference:
       - Changelog: gtars/changelog.md
   - Manuscripts: 
