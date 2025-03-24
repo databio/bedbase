@@ -126,6 +126,9 @@ nav:
       - Rust source API docs: https://docs.rs/gtars/latest/gtars/
     - Python bindings:
       - Digests: gtars/python/digests.md
+      - Tokenizers:
+        - Introduction: gtars/python/tokenizers/introduction.md
+        - Quickstart: gtars/python/tokenizers/quickstart.md
     - Using gtars from R: 
       - gtars from R: gtars/r/README.md
     - Reference:
