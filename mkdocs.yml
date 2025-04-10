@@ -19,6 +19,10 @@ theme:
     - navigation.top
 
 markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
   - pymdownx.highlight:
       use_pygments: true
   - pymdownx.superfences:
@@ -39,12 +43,14 @@ copyright: >
     </a>
 
 nav:
-  - Home: README.md
+#  - Home: README.md
   - BEDbase:
     - BEDbase: bedbase/README.md
     - User guides:
-      - Public BEDbase UI user guide: bedbase/bedbase-ui-user-guide.md
-      - Public BEDbase API user guide: bedbase/bedbase-api-user-guide.md
+      - Public BEDbase UI user guide: bedbase/user/bedbase-ui-user-guide.md
+      - Public BEDbase API user guide: bedbase/user/bedbase-api-user-guide.md
+      - Reference Genome Compatibility: bedbase/user/reference-genome-compatibility.md
+      - BED Classification:  bedbase/user/bed_classification.md
     - Developer guides:
       - BEDhost API server: 
         - BEDhost overview: bedhost/README.md
@@ -71,13 +77,12 @@ nav:
         - Python modules:
           - BEDboss run-pep: bedboss/tutorials/python/tutorial_run_pep.md
           - BEDboss-all pipeline: bedboss/tutorials/python/tutorial_all.md
-          - BEDmaker tutorial: bedboss/tutorials/python/bedmaker_tutorial.md
-          - BEDqc tutorial: bedboss/tutorials/python/bedqc_tutorial.md
-          - BEDstat tutorial: bedboss/tutorials/python/bedstat_tutorial.md
-          - BEDbuncher tutorial: bedboss/tutorials/python/bedbuncher_tutorial.md
-          - BEDindex tutorial: bedboss/tutorials/python/bedindex_tutorial.md
-          - BEDclassifier tutorial: bedboss/tutorials/python/bedclassifier_tutorial.md
-          - Ref_genome validator tutorial: bedboss/tutorials/python/ref_genome_tutorial.md
+          - BEDmaker: bedboss/tutorials/python/bedmaker_tutorial.md
+          - BEDstat: bedboss/tutorials/python/bedstat_tutorial.md
+          - BEDbuncher: bedboss/tutorials/python/bedbuncher_tutorial.md
+          - BEDindex: bedboss/tutorials/python/bedindex_tutorial.md
+          - BEDclassifier: bedboss/tutorials/python/bedclassifier_tutorial.md
+          - Ref_genome validator: bedboss/tutorials/python/ref_genome_tutorial.md
         - Command line interface: bedboss/usage.md
     - How to guides:
       - Create BEDbase database: bedboss/how-to-create-database.md
