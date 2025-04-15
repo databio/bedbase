@@ -1,62 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
-   width="34.535271mm"
-   height="28.926874mm"
-   viewBox="0 0 34.535271 28.926874"
+   height="233.0732"
+   width="275.57602"
    version="1.1"
-   id="svg1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 275.57601 233.0732"
+   style="fill:#000000"
    xml:space="preserve"
+   id="svg8"
+   sodipodi:docname="refgenome_oobr2.svg"
    inkscape:version="1.3.2 (1:1.3.2+202311252150+091e20ef0f)"
-   sodipodi:docname="ref_genome_heatmap_conceptual_modified_bedbase_docs.svg"
-   inkscape:export-filename="../Downloads/ref_genome_heatmap_conceptual.png"
-   inkscape:export-xdpi="141.11111"
-   inkscape:export-ydpi="141.11111"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm"
-     inkscape:zoom="1.1717647"
-     inkscape:cx="689.98494"
-     inkscape:cy="287.6004"
-     inkscape:window-width="2560"
-     inkscape:window-height="1325"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
-     inkscape:export-bgcolor="#ffffffff"><inkscape:page
-       x="0"
-       y="2.4978095e-15"
-       width="34.535271"
-       height="28.926874"
-       id="page2"
-       margin="0"
-       bleed="0" /></sodipodi:namedview><defs
-     id="defs1"><style
-       type="text/css"
-       id="style6">
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"><metadata
+   id="metadata14"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs12"><style
+     type="text/css"
+     id="style6">
    
     .fil1 {fill:none}
     .fil0 {fill:black}
    
   </style><style
-       type="text/css"
-       id="style1">*{stroke-linejoin: round; stroke-linecap: butt}</style><style
-       type="text/css"
-       id="style1-6">*{stroke-linejoin: round; stroke-linecap: butt}</style></defs><g
+     type="text/css"
+     id="style1">*{stroke-linejoin: round; stroke-linecap: butt}</style><style
+     type="text/css"
+     id="style1-6">*{stroke-linejoin: round; stroke-linecap: butt}</style></defs><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1082"
+   id="namedview10"
+   showgrid="false"
+   fit-margin-top="3"
+   fit-margin-left="3"
+   fit-margin-right="3"
+   fit-margin-bottom="3"
+   inkscape:zoom="0.93080228"
+   inkscape:cx="-283.08912"
+   inkscape:cy="333.04603"
+   inkscape:current-layer="svg8"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:showpageshadow="2"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"><inkscape:page
+     x="0"
+     y="0"
+     width="275.57602"
+     height="233.0732"
+     id="page1"
+     margin="4"
+     bleed="0" /></sodipodi:namedview><style
+   type="text/css"
+   id="style2">
+	.st0{fill:none;}
+</style>
+<g
+   id="g1"
+   transform="matrix(7.7581527,0,0,7.7581527,3.6461836,4.654104)"><g
      inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-106.07679,-133.58332)"><path
        inkscape:connector-curvature="0"
@@ -262,4 +279,4 @@
        id="tspan162-2-9"
        style="font-size:2.46944px;stroke-width:0.116248"
        x="30.240868"
-       y="10.323882">chr2</tspan></text></svg>
+       y="10.323882">chr2</tspan></text></g></svg>

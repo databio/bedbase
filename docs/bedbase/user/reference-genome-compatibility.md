@@ -1,7 +1,5 @@
 # Reference genome compatibility
 
-🚧 Documentation under construction.
-
 Reference genome compatibility is one of the features of BEDbase. Each file that is uploaded to the database is 
 being processed by BEDboss pipline that allows to calculate reference genome compatibility with multiple reference genomes.
 
@@ -22,6 +20,7 @@ The tiers are:
 - **TIER 3**: Medium
 - **TIER 4**: Poor
 
+---
 
 ### 🟢 Quantitatively Assess Name Overlaps (XS)
 
@@ -34,12 +33,9 @@ False negative (FN): Sequence name is in the query but not in the reference.
 
 ![XS Figure 2](../img/xs_schematic_detailed.svg)
 
-
-<!-- <img src="../img/refgenome_xs.svg" alt="Stretched Image" width="300" height="100"> --> 
-
+---
 
 ### 🟢 Out of Bounds Regions (OOBS)
-
 
 ![OOBR Figure](../img/refgenome_oobr.svg)
 
@@ -50,6 +46,7 @@ False Negative (FN): Query region extends beyond the reference sequence
 ![OOBR Figure 2](../img/oobr_schematic_detailed.svg)
 
 
+----
 ### 🟢 Sequence Fit (SF)
 
 
@@ -66,6 +63,7 @@ However, we must also consider the *lengths* of each region as well.
 ![SF Figure 2](../img/sf_schematic_detailed.svg)
 
 
+----
 ### 🟣 Assigning  Tiers
 
 Finally, tiers are assigned based on the combination of how well each query file ranks for XS, OOBR, and SF.
