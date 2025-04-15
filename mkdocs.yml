@@ -49,8 +49,10 @@ nav:
     - User guides:
       - Public BEDbase UI user guide: bedbase/user/bedbase-ui-user-guide.md
       - Public BEDbase API user guide: bedbase/user/bedbase-api-user-guide.md
-      - Reference Genome Compatibility: bedbase/user/reference-genome-compatibility.md
-      - BED Classification:  bedbase/user/bed_classification.md
+      - ✅ Reference Genome Compatibility: bedbase/user/reference-genome-compatibility.md
+      - 📝 BED Classification:  bedbase/user/bed_classification.md
+      - 💻 BBClient: bedbase/user/bbclient.md
+      - 🔍 BEDbase Search: bedbase/user/bedbase-search.md
     - Developer guides:
       - BEDhost API server: 
         - BEDhost overview: bedhost/README.md
@@ -126,13 +128,14 @@ nav:
       - Changelog: geniml/changelog.md
   - Gtars:
     - Gtars: gtars/README.md
-    - Install: gtars/install.md
+    - 💿 Install: gtars/install.md
     - Rust:
       - Rust source API docs: https://docs.rs/gtars/latest/gtars/
     - Python bindings:
       - Digests: gtars/python/digests.md
+      - RegionSet: gtars/python/regionset.md
     - Using gtars from R: 
-      - gtars from R: gtars/r/README.md
+      - Usage: gtars/r/usage.md
     - Reference:
       - Changelog: gtars/changelog.md
   - Manuscripts: 

@@ -1,8 +1,12 @@
-# Installing gtars
+# 💿 Installing gtars
 
-## Rust
+Gtars is available as a Rust crate, Python package, and R package. You can install it using the following methods:
 
-### Release versions
+
+--- 
+## 🦀 Rust
+
+- #### 🟢 Release versions
 
 You can get latest released rust gtars crate via [cargo](https://crates.io/crates/gtars):
 
@@ -10,14 +14,14 @@ You can get latest released rust gtars crate via [cargo](https://crates.io/crate
 cargo install gtars
 ```
 
-### Development versions
+- #### 🟡 Development versions
 
 You can find development versions and pre-releases on GitHub.
 
+--- 
+## 🐍 Python bindings
 
-## Python bindings
-
-### Release version
+- #### 🟢 Release version
 
 You can get latest released Python package `gtars` from PyPI:
 
@@ -25,13 +29,13 @@ You can get latest released Python package `gtars` from PyPI:
 pip install gtars
 ```
 
-### Development version
+- #### 🟡 Development version
 
 To install the development version, you'll have to build it locally. Build Python bindings like this:
 
 ```console
 cd bindings/python
-maturin build --interpreter 3.11  --release
+maturin build --interpreter 3.11 --release
 ```
 
 Then install the local wheel that was just built:
@@ -43,6 +47,6 @@ wheel_path=$(find target/wheels/gtars-${gtars_version}-cp${python_version}-cp${p
 pip install --force-reinstall ${wheel_path}
 ```
 
-## R bindings
+## 🆁 R bindings
 
-Documentation coming soon.
+🚧 **Work in progress** 🚧
