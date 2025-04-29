@@ -2,6 +2,16 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format. 
 
+
+## [0.10.0] -- 2025-04-21
+### Added:
+- Added usage statistics
+- Added Bed file statistic page
+
+### Changed:
+- Updated bed compliance and data formats
+
+
 ## [0.9.0] -- 2025-01-03
 ### Added:
 * Added a new class `CreateBEDsetRequest` in `bedhost/data_models.py` to handle BEDset creation requests.
