@@ -132,6 +132,11 @@ nav:
     - Getting started:
       - Quickstart: atacformer/quickstart.md
       - Core concepts: atacformer/core-concepts.md
+    - Tutorials:
+      - Train a model from scratch: atacformer/tutorials/train-from-scratch.md
+      - Fine-tune a model: atacformer/tutorials/fine-tune.md
+      - Use Atacformer to cluster cells: atacformer/tutorials/use-pretrained.md
+      - Integrate Atacformer with a new custom model: atacformer/tutorials/integrate-custom-model.md
   - Gtars:
     - Gtars: gtars/README.md
     - 💿 Install: gtars/install.md
