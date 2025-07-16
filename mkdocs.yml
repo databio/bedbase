@@ -127,6 +127,11 @@ nav:
       - Support: geniml/support.md
       - Contributing: geniml/contributing.md
       - Changelog: geniml/changelog.md
+  - Atacformer:
+    - Atacformer: atacformer/README.md
+    - Getting started:
+      - Quickstart: atacformer/quickstart.md
+      - Core concepts: atacformer/core-concepts.md
   - Gtars:
     - Gtars: gtars/README.md
     - 💿 Install: gtars/install.md
