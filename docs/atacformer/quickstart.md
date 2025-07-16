@@ -10,18 +10,18 @@ pip install geniml[ml]
 
 Test the installation by importing Atacformer in Python:
 
-```python
-import geniml
+```bash
+python -c "from geniml import __version__; print(__version__)"
 ```
 
 ## Loading a Pre-trained Model
-You can easily load a pre-trained Atacformer model from the Hugging Face Hub. For example, you can load the base model used in our paper:
+You can easily load a pre-trained Atacformer model from the Hugging Face Hub. For example, you can load the base model described in our paper:
 
 ```python
 from geniml.atacformer import AtacformerForCellClustering
 
 model = AtacformerForCellClustering.from_pretrained("databio/atacformer-base-hg38")
-model = model.to("cuda")  # Move the model to GPU (if available)
+model = model.to("cuda")  # move the model to GPU (...if available)
 ```
 
 ## Tokenize your data
@@ -66,7 +66,7 @@ Once you have your tokenized data, you can generate embeddings using the model:
 ```python
 cell_embeddings = model.encode_tokenized_cells(
     input_ids=input_ids,
-    batch_size=32,  # Adjust batch size based on your memory capacity
+    batch_size=32,  # adjust based on your memory capacity
 )
 ```
 
