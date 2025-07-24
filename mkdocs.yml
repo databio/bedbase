@@ -139,6 +139,7 @@ nav:
       - Visualizing new embeddings in the latent space of a reference: atacformer/tutorials/ev-projection.md
     - Other documentation:
       - Using atacformer with Apple Silicon: atacformer/other_docs/apple-silicon.md
+      - Using atacformer locally: atacformer/other_docs/local-compute.md
   - Gtars:
     - Gtars: gtars/README.md
     - 💿 Install: gtars/install.md
