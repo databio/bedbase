@@ -136,6 +136,9 @@ nav:
       - Pre-tokenize data for training: atacformer/tutorials/pretokenize-for-training.md
       - Train a model from scratch: atacformer/tutorials/train-from-scratch.md
       - Fine-tune a model: atacformer/tutorials/fine-tune.md
+      - Visualizing new embeddings in the latent space of a reference: atacformer/tutorials/ev-projection.md
+    - Other documentation:
+      - Using atacformer with Apple Silicon: atacformer/other_docs/apple-silicon.md
   - Gtars:
     - Gtars: gtars/README.md
     - 💿 Install: gtars/install.md
