@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [0.2.9]
+- move digests functionality to refget
+- add RefgetStore to refget and its associated python bindings
+
 ## [0.2.5]
 - Rework tokenizer API to be more consistent with the HuggingFace tokenizers API.
 - Updates to `RegionSet` to improve performance and usability.
