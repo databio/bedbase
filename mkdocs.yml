@@ -132,6 +132,7 @@ nav:
     - 💿 Install: gtars/install.md
     - Rust:
       - Rust source API docs: https://docs.rs/gtars/latest/gtars/
+      - Uniwig: gtars/uniwig.md
     - Python bindings:
       - Digests: gtars/python/digests.md
       - RegionSet: gtars/python/regionset.md
