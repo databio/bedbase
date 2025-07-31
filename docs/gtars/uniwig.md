@@ -31,11 +31,11 @@ sort -k1,1V -k2,2n $COMBDATA_DIR$unsorted | grep '.' > $COMBDATA_DIR$chrsorted
 Once you have your single, sorted bedfile, you can run uniwig with the following command:
 
 ```
-cargo run uniwig -f /home/drc/Downloads/uniwig_testing_19apr2024/sourcefiles/test_30_lines_sorted.bed -c /home/drc/Downloads/uniwig_testing_19apr2024/sourcefiles/hg38.chrom.sizes -m 5 -s 1 -l /home/drc/Downloads/uniwig_testing_19apr2024/wiggles_created_with_rust/final_wiggles/ -y wig
+cargo run uniwig -f test_30_lines_sorted.bed -c hg38.chrom.sizes -m 5 -s 1 -l /wiggles_created_with_rust/final_wiggles/ -y wig
 
 ```
 
-Note that we provide a chrom.sizes reference file (hg38) in the testing folder -> `genimtools/tests/hg38.chrom.sizes`
+Note that we provide a chrom.sizes reference file (hg38) in the testing folder -> `/tests/hg38.chrom.sizes`
 
 
 ### Usage
