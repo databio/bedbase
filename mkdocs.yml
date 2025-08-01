@@ -136,6 +136,7 @@ nav:
     - Python bindings:
       - Digests: gtars/python/digests.md
       - RegionSet: gtars/python/regionset.md
+      - RefgetStore: gtars/python/refgetstore.md
     - Using gtars from R: 
       - Usage: gtars/r/usage.md
     - Reference:
