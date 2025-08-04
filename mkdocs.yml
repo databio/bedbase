@@ -133,6 +133,7 @@ nav:
       - Quickstart: atacformer/quickstart.md
       - Core concepts: atacformer/core-concepts.md
     - Tutorials:
+      - Example Brain3k Processing: atacformer/tutorials/example-brain3k-processing.md
       - Pre-tokenize data for training: atacformer/tutorials/pretokenize-for-training.md
       - Train a model from scratch: atacformer/tutorials/train-from-scratch.md
       - Fine-tune a model: atacformer/tutorials/fine-tune.md

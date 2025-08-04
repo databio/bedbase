@@ -5,7 +5,7 @@ For easy reading, writing, and manipulation of pre-tokenized data, we use the Pa
 
 ## Prerequisites
 
-Ensure you have `geniml` and `gtars` installed. `gtars` is our companion library for genomic interval data processing, and `geniml` provides the Atacformer model and tokenizer.
+Ensure you have `geniml` and `gtars` installed. `gtars` is our companion library for genomic interval data processing -- it contains the tokenizers. `geniml` provides the Atacformer model.
 ```bash
 pip install geniml[ml] datasets gtars
 ```

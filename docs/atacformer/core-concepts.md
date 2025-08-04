@@ -1,7 +1,7 @@
 # Atacformer core concepts
 
 ## Infrastructure
-The Atacformer models and training infrastructure are built on top of the [`transformers`](https://github.com/huggingface/transformers) library, which provides a robust framework for building and training transformer-based models. The Atacformer models are designed to be compatible with the Hugging Face ecosystem, allowing users to easily leverage pre-trained models.
+The Atacformer models and training infrastructure are built on top of the [`transformers`](https://github.com/huggingface/transformers) library, which provides a robust framework for building and training transformer-based models. The Atacformer models are designed to be compatible with the Hugging Face ecosystem, allowing users to easily leverage pre-trained models, while customizing them for specific tasks.
 
 ## Tokenization
 Atacformer is designed to handle genomic interval data. It can process _anything that can be represented by a chrom, start, and end_. To represent this data, each Atacformer model has a specified vocabulary of genomic intervals that it can process represented as a `.bed` file. Oftentimes, this is referred to as a consensus peak file. When new data is to be processed, it is first "tokenized" into the model's vocabulary, which is a process of mapping the genomic intervals in the data to the intervals in the model's vocabulary.
