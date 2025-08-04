@@ -102,6 +102,20 @@ nav:
     - BBclient:
       - Cache BED files with BBClient: geniml/bbclient/bbclient.md
       - Use BED cache in R: geniml/bbclient/pyBiocFileCache.md
+    - Atacformer:
+      - Atacformer: atacformer/README.md
+      - Getting started:
+        - Quickstart: atacformer/quickstart.md
+        - Core concepts: atacformer/core-concepts.md
+      - Tutorials:
+        - Example Brain3k Processing: atacformer/tutorials/example-brain3k-processing.md
+        - Pre-tokenize data for training: atacformer/tutorials/pretokenize-for-training.md
+        - Train a model from scratch: atacformer/tutorials/train-from-scratch.md
+        - Fine-tune a model: atacformer/tutorials/fine-tune.md
+        - Visualizing new embeddings in the latent space of a reference: atacformer/tutorials/ev-projection.md
+      - Other documentation:
+        - Using atacformer with Apple Silicon: atacformer/other_docs/apple-silicon.md
+        - Using atacformer locally: atacformer/other_docs/local-compute.md
     - How-to guides:
       - Tokenization: geniml/tutorials/tokenization.md
       - Tokenize a BED file with CLI: geniml/tutorials/cli-tokenization.md
