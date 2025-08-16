@@ -117,8 +117,6 @@ nav:
         - Using atacformer with Apple Silicon: atacformer/other_docs/apple-silicon.md
         - Using atacformer locally: atacformer/other_docs/local-compute.md
     - How-to guides:
-      - Tokenization: geniml/tutorials/tokenization.md
-      - Tokenize a BED file with CLI: geniml/tutorials/cli-tokenization.md
       - Train region2vec embeddings: geniml/tutorials/region2vec.md
       - Train BEDspace model:
         - Train BEDSpace embeddings: geniml/tutorials/bedspace.md
@@ -151,6 +149,7 @@ nav:
       - Digests: gtars/python/digests.md
       - RegionSet: gtars/python/regionset.md
       - RefgetStore: gtars/python/refgetstore.md
+      - Tokenizers: gtars/python/tokenizers.md
     - Using gtars from R: 
       - Usage: gtars/r/usage.md
     - Reference:
