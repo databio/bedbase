@@ -5,7 +5,7 @@ This quickstart guide will help you generate single-cell embeddings using Atacfo
 To install Atacformer, you need to have the `geniml` package installed. You can do this using pip:
 
 ```bash
-pip install geniml[ml]
+pip install geniml[ml] # install with machine learning dependencies
 ```
 
 Test the installation by importing Atacformer in Python:
@@ -31,7 +31,7 @@ To generate embeddings, you need to tokenize your genomic interval data. Frequen
 import scanpy as sc
 
 from gtars.tokenizers import Tokenizer
-from geniml.tokenization import tokenize_anndata
+from geniml.tokenization.utils import tokenize_anndata
 
 tokenizer = Tokenizer.from_pretrained("databio/atacformer-base-hg38")
 adata = sc.read_h5ad("path/to/your/anndata.h5ad")

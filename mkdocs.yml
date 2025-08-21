@@ -105,17 +105,20 @@ nav:
     - Atacformer:
       - Atacformer: atacformer/README.md
       - Getting started:
-        - Quickstart: atacformer/quickstart.md
         - Core concepts: atacformer/core-concepts.md
+        - Quickstart: atacformer/quickstart.md
       - Tutorials:
+        - Generating a UMAP from fragments files: atacformer/tutorials/umap_from_fragments.md
         - Example Brain3k Processing: atacformer/tutorials/example-brain3k-processing.md
-        - Pre-tokenize data for training: atacformer/tutorials/pretokenize-for-training.md
-        - Train a model from scratch: atacformer/tutorials/train-from-scratch.md
-        - Fine-tune a model: atacformer/tutorials/fine-tune.md
         - Visualizing new embeddings in the latent space of a reference: atacformer/tutorials/ev-projection.md
-      - Other documentation:
-        - Using atacformer with Apple Silicon: atacformer/other_docs/apple-silicon.md
-        - Using atacformer locally: atacformer/other_docs/local-compute.md
+        - Training:
+          - Pre-tokenize data for training: atacformer/tutorials/training/pretokenize-for-training.md
+          - Train a model from scratch: atacformer/tutorials/training/train-from-scratch.md
+          - Fine-tune a model: atacformer/tutorials/training/fine-tune.md
+      - Local compute guides:
+        - Compute requirements: atacformer/local_compute/compute_requirements.md
+        - Using atacformer locally: atacformer/local_compute/local_compute.md
+        - Using atacformer with Apple Silicon: atacformer/local_compute/apple_silicon.md
     - How-to guides:
       - Train region2vec embeddings: geniml/tutorials/region2vec.md
       - Train BEDspace model:
