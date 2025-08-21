@@ -1,10 +1,20 @@
 # Atacformer core concepts
 
+Using an Atacformer model requires two steps: **1) tokenization** and **2) model inference**. Step one (tokenization) converts your data into a format that can be processed by the model. Step two actually performs the inference, using the processed data to make predictions and generate embeddings.
+
+All tutorials and documentation related to Atacformer will follow this two-step process:
+> Tokenize first, then infer.
+
+Whether you are working with single-cell data, bulk data, ATAC-seq, ChIP-seq, or fragments files -- they all follow the same two-step process: *tokenize first, then infer*.
+<p align="center">
+    <img align="center" src="../img/core_concepts.svg" width="600">
+</p>
+
 ## Infrastructure
 The Atacformer models and training infrastructure are built on top of the [`transformers`](https://github.com/huggingface/transformers) library, which provides a robust framework for building and training transformer-based models. The Atacformer models are designed to be compatible with the Hugging Face ecosystem, allowing users to easily leverage pre-trained models, while customizing them for specific tasks.
 
 ## Tokenization
-Atacformer is designed to handle genomic interval data. It can process _anything that can be represented by a chrom, start, and end_. To represent this data, each Atacformer model has a specified vocabulary of genomic intervals that it can process represented as a `.bed` file. Oftentimes, this is referred to as a consensus peak file. When new data is to be processed, it is first "tokenized" into the model's vocabulary, which is a process of mapping the genomic intervals in the data to the intervals in the model's vocabulary.
+Atacformer is designed to handle genomic interval data. It can process _anything that can be represented by a chrom, start, and end_. To represent this data, each Atacformer model has a specified vocabulary of genomic intervals that it can process represented as a `.bed` file. Oftentimes, this is referred to as a consensus peak file. We call it a **universe**. When new data is to be processed, it is first "tokenized" into the model's universe, which is a process of mapping the genomic intervals in the data to the intervals in the model's universe.
 
 <p align="center">
     <img align="center" src="../img/tokenization.svg" width="600">
