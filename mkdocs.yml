@@ -54,23 +54,22 @@ nav:
       - 💻 BBClient: bedbase/user/bbclient.md
       - 🔍 BEDbase Search: bedbase/user/bedbase-search.md
     - Developer guides:
-      - BEDhost API server: 
+      - 📇 BEDhost API server:
         - BEDhost overview: bedhost/README.md
         - Building docker image: bedhost/build_image.md
         - Deploy API: bedhost/deployment.md
         - Changelog: bedhost/changelog.md
-      - BBConf configuration:
+      - 🔌 BBConf configuration:
         - BBConf: bbconf/README.md
         - Configuring: bedboss/how-to-configure.md
         - Overview: bbconf/overview.md
         - Guide: bbconf/bbc_api.md
         - Changelog: bbconf/changelog.md
-      - BEDBoss processing pipeline: ../bedboss
-      - Configuration file: bedbase/how-to-configure.md
+      - 🧰 BEDBoss processing pipeline: ../bedboss
+      - 📜 Configuration file: bedbase/how-to-configure.md
     - Reference:
       - How to cite: citations.md
-      - Usage: bedboss/usage.md
-      - Support: https://github.com/bedbase/bedboss/issues
+      - Support: https://github.com/databio/bedhost/issues
       - Contributing: contributing.md
       - Changelog: changelog.md
   - BEDboss:
