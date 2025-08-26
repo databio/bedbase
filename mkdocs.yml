@@ -105,9 +105,24 @@ nav:
     - BBclient:
       - Cache BED files with BBClient: geniml/bbclient/bbclient.md
       - Use BED cache in R: geniml/bbclient/pyBiocFileCache.md
+    - Atacformer:
+      - Atacformer: atacformer/README.md
+      - Getting started:
+        - Core concepts: atacformer/core-concepts.md
+        - Quickstart: atacformer/quickstart.md
+      - Tutorials:
+        - Generating a UMAP from fragments files: atacformer/tutorials/umap_from_fragments.md
+        - Example Brain3k Processing: atacformer/tutorials/example-brain3k-processing.md
+        - Visualizing new embeddings in the latent space of a reference: atacformer/tutorials/ev-projection.md
+        - Training:
+          - Pre-tokenize data for training: atacformer/tutorials/training/pretokenize-for-training.md
+          - Train a model from scratch: atacformer/tutorials/training/train-from-scratch.md
+          - Fine-tune a model: atacformer/tutorials/training/fine-tune.md
+      - Local compute guides:
+        - Compute requirements: atacformer/local_compute/compute_requirements.md
+        - Using atacformer locally: atacformer/local_compute/local_compute.md
+        - Using atacformer with Apple Silicon: atacformer/local_compute/apple_silicon.md
     - How-to guides:
-      - Tokenization: geniml/tutorials/tokenization.md
-      - Tokenize a BED file with CLI: geniml/tutorials/cli-tokenization.md
       - Train region2vec embeddings: geniml/tutorials/region2vec.md
       - Train BEDspace model:
         - Train BEDSpace embeddings: geniml/tutorials/bedspace.md
@@ -135,9 +150,12 @@ nav:
     - 💿 Install: gtars/install.md
     - Rust:
       - Rust source API docs: https://docs.rs/gtars/latest/gtars/
+      - Uniwig: gtars/uniwig.md
     - Python bindings:
       - Digests: gtars/python/digests.md
       - RegionSet: gtars/python/regionset.md
+      - RefgetStore: gtars/python/refgetstore.md
+      - Tokenizers: gtars/python/tokenizers.md
     - Using gtars from R: 
       - Usage: gtars/r/usage.md
     - Reference:
