@@ -1,7 +1,7 @@
 # Reference genome compatibility
 
 Reference genome compatibility is one of the features of BEDbase. Each file that is uploaded to the database is 
-being processed by BEDboss pipline that allows to calculate reference genome compatibility with multiple reference genomes.
+being processed by BEDboss pipeline that allows to calculate reference genome compatibility with multiple reference genomes.
 
 On the bedbase UI user can find comparison of the BED compatibility with most popular reference genomes.
 

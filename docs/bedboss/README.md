@@ -78,9 +78,9 @@ To install UCSC tools, follow initial instructions from the [UCSC website](https
 
 
 
-## ℹ️ Sort information about the pipelines:
+## ℹ️ BEDboss pipelines:
 
-### - bedmaker
+#### 🟢 bedmaker
 Bedmaker can convert different interval region set files to BED and bigBed format, cache it using [Geniml bbclient](../geniml/bbclient/bbclient).
 
 Supported formats are:
@@ -89,12 +89,12 @@ Supported formats are:
 - bigWig
 - wig
 
-### - bedqc
+#### 🟢 bedqc
 Evaluates bed files if statistically they are correct, and if they should be included in the downstream analysis. 
 Currently, it flags bed files that are larger than 2G, has over 5 milliom regions, and/or has mean region width less than 10 bp.
 This threshold can be changed in bedqc function arguments.
 
-### - bedstat
+#### 🟢 bedstat
 
 Pipeline for obtaining statistics about bed files. Statistics include:
 
@@ -110,7 +110,7 @@ Pipeline for obtaining statistics about bed files. Statistics include:
 - **5' UTR percentage**. The percentage of the regions in the BED file that are annotated as 5'-UTR.
 - **3' UTR percentage**. The percentage of the regions in the BED file that are annotated as 3'-UTR.
 
-### - bedbuncher
+#### 🟢 bedbuncher
 
 Pipeline designed to create **bedsets** (collections of BED files) that will be retrieved from bedbase.
 
@@ -122,12 +122,12 @@ Example bedsets:
 
 \*This pipeline is available only in for bedbase processing, and can't be use as a standalone tool.
 
-### - bedclassifier
+#### 🟢 bedclassifier
 
 Pipeline for classifying bed files based on their columns.
 The example output of the bedclassifier is bed_format: `nerrowopeak`/`broadpeak`/`bed` and bed_type: `bed3+5`.
 
-### - refgenome_validator
+#### 🟢 refgenome_validator
 
 Pipeline for validating the reference genome of the bed files. 
 It is standalone tool, and can be used independently. It tries to validate and predict the reference genome of the bed files.
@@ -135,7 +135,7 @@ by comparing the regions in the bed file with the reference genome. It produces 
 where 1 is the best match and 4 is the worst match.
 
 
-### - bbuploader  (correct name GEO uploader)
+#### 🟢 GEOuploader
 
 Module for uploading bed files from GEO database to the BEDbase database and processing them. Data for uploading files 
 are taken from the PEPhub database, where all GEO metadata is stored.
