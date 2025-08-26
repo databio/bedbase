@@ -74,4 +74,4 @@ fig.savefig('./bed_geo_2025_06_summary.svg')
 ### The output plot: 
 
 
-![bed_geo_2025_06_summary.svg](img/bed_geo_2025_06_summary.svg)
+![bed_geo_2025_06_summary.svg](../img/bed_geo_2025_06_summary.svg)
