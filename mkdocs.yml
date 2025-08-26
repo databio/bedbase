@@ -91,6 +91,7 @@ nav:
       - Upload GEO data: bedboss/how-to/upload-geo-data.md
       - Upload BED from PEP: bedboss/how-to/how-to-run-pep.md
       - Reindex vector store: bedboss/how-to/how-to-reindex-db.md
+      - Generate UMAP: bedboss/how-to/how-to-create-umap.md
       - Create BEDbase database: bedboss/how-to/how-to-create-database.md
       - Run BEDboss in Docker: bedboss/how-to/how-to-run-in-docker.md
       - Create config file: bedbase/how-to-configure.md
