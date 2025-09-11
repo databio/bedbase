@@ -2,6 +2,17 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format. 
 
+## [0.11.0] -- 2025-09-11
+### Added:
+- Added umap visualizations of bed embeddings
+- Added bedbase-verse metrics
+- Added filtering by assay and genome in the semantic search
+- Added bed file qc check before running bed to bed search
+
+### Changed:
+- Changed bivec search to text semantic search
+- Multiple UI bug fix
+
 
 ## [0.10.0] -- 2025-04-21
 ### Added:

@@ -61,7 +61,6 @@ nav:
         - Changelog: bedhost/changelog.md
       - 🔌 BBConf configuration:
         - BBConf: bbconf/README.md
-        - Configuring: bedboss/how-to-configure.md
         - Overview: bbconf/overview.md
         - Guide: bbconf/bbc_api.md
         - Changelog: bbconf/changelog.md

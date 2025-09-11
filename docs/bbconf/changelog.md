@@ -2,8 +2,46 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
+### [0.12.0] - 2025-09-11
+### Added:
+- New qdrant semantic search
+- Added more plots to bedbase summary page
+- New reference genome compatibility that supports new refgenie
+- Genomes table, with ability of automatic updates from refgenie
+- Added filter in search (Assay and genome)
+
+### Changed:
+- Improved reindexing methods
+
+### Fixed:
+- Issues in bedfile update method
+
+### [0.11.4] - 2025-06-01
+### Fixed:
+- SQL search
+
+
+### [0.11.3] - 2025-05-27
+### Fixed:
+- Usage tracker
+- Order of comprehensive stats
+
+### Added:
+- Platform usage stats method
+- Concise option in stats method
+
+
+### [0.11.2] - 2025-06-22
+### Added:
+- Statistics about bed files grouped by organism
+
+### [0.11.1] - 2025-05-22
+### Fixed:
+- Bedbuncher bug
+
+
 ## [0.11.0] - 2025-04-21
-##  Added: 
+###  Added: 
 - Added usage tracking and statistics
 - Added platform comprehensive statistics
 - Updated database to a new database schema
@@ -57,7 +95,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## [0.9.0] - 2024-11-07
 
 ### Changed
-- Fixed bug with uploading tss dist plot\
+- Fixed bug with uploading tss dist plot
 
 ### Added
 - Added annotations to bedsets (author, source)

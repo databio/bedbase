@@ -3,6 +3,38 @@
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
 
+# [0.8.0] - 2025-09-11
+## Added:
+
+- Added CLI for automatic UMAP generation from qdrant
+- Added "generate UMAP" cli command
+
+## Changed:
+- Changed data source of chrom sizes in bed reference validator to new refgenie.
+
+## Fixed:
+- Fixed bedboss logger
+- Improved vector db reindexing
+- Improved efficiency of bdd Reference validator function
+
+
+# [0.7.3] - 2025-06-28
+## Added:
+- Added filter for rerunning unprocessed bed files based on genome
+
+
+# [0.7.2] - 2025-06-21
+## Changed:
+- Updated path to the bigbed output folder
+- Added update of metadata of the bed file
+- Updated docker file 
+- Remove bedqc module
+
+
+# [0.7.1] - 2025-04-22
+## Fixed
+- Minor bug fixes
+
 # [0.7.0] - 2025-04-21
 
 ## Added
@@ -36,6 +68,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## Changed:
 - Important speed improvements.
+
 
 
 # [0.5.0] - 2025-01-16
