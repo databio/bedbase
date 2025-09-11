@@ -11,7 +11,7 @@ This document provides tutorials for using `bbclient` via either:
 
 ## 🐍 Python interface
 
-### Instance of BBClient:
+#### Instance of BBClient:
 First, we need to create an instance of the `BBClient` class. Optionally, you can specify a custom cache folder to store downloaded BED files. If not specified, it defaults to `./.bb_cache`.
 ```python
 from geniml.bbclient import BBClient
@@ -19,14 +19,14 @@ from geniml.bbclient import BBClient
 bbclient = BBClient(cache_folder="cache")
 ```
 
-### Load a BED file from cache, or download and cache a remote BED file from BEDbase
+#### Load a BED file from cache, or download and cache a remote BED file from BEDbase
 THis function will try to find the BED file in the cache first. If not found, it will download it from BEDbase, process it, cache it, and return a `RegionSet` object.
 ```python
 bedfile_id = "...."  # find interesting bedfile on bedbase e.g. "3f0aaadf6e8854282f21ea19ab5c061a"
 bedfile = bbclient.load_bed(bedfile_id)  # download, cache and return a RegionSet object
 ```
 
-### Cache a local BED file
+#### Cache a local BED file
 You can just provide a URL, Path or RegionSet object and it will add to cache for you:
 ```python
 from gtars.models import RegionSet
@@ -40,7 +40,7 @@ bedfile = RegionSet("path/to/bedfile")
 bedfile_id = bbclient.add_bed_to_cache(bedfile)
 ```
 
-### Download and cache a **BEDset** from BEDbase
+#### Download and cache a **BEDset** from BEDbase
 
 ```python
 bedset_identifier = "xyz" # find some interesting bedset on bedbase.org
@@ -48,7 +48,7 @@ bedset = bbclient.load_bedset(bedset_identifier)  # download, cache and return a
 grl = bedset.to_granges_list()  # return a GenomicRangesList object
 ```
 
-### Cache a local BEDset
+#### Cache a local BEDset
 
 ```python
 from geniml.io import BedSet
@@ -61,9 +61,9 @@ bedset_id = bbclient.add_bedset_to_cache(bedset)
 ```
 
 ---
-## 🖥️ Command line interface
+### 🖥️ Command line interface
 
-### Cache BED file
+#### Cache BED file
 
 ```bash
 geniml bbclient cache-bed <BED_file_or_identifier_or_url>
@@ -74,7 +74,7 @@ The `<BED_file_or_identifier_or_url>` variable can be one of 3 things:
 2. a BED record identifier from BEDbase; or,
 3. a URL to a BED file hosted anywhere.
 
-### Cache BEDset
+#### Cache BEDset
 
 ```bash
 geniml bbclient cache-bedset <BED_files_folder_or_identifier>
@@ -85,7 +85,7 @@ The `<BED_files_folder_or_identifier>` variable may be:
 2. a BEDbase BEDset identifier
 
 
-### Seek the path of a BED file or BEDset in cache folder
+#### Seek the path of a BED file or BEDset in cache folder
 To retrieve the local file path to a BED file stored locally,
 
 ```bash
@@ -94,35 +94,36 @@ geniml bbclient seek <identifier>
 where <identifier> is the BED file or BEDset identifier.
 
 
-### Count BED files that are cached
+#### Count BED files that are cached
 
 ```bash
 geniml bbclient inspect-bedfiles
 ```
 
-### Count BEDsets that are cached
+#### Count BEDsets that are cached
 
 ```bash
 geniml bbclient inspect-bedsets
 ```
 
-### Remove a BED file or BEDset from the cache folder 
+#### Remove a BED file or BEDset from the cache folder 
 
 ```bash
 geniml bbclient rm <identifier>
 ```
 where <identifier> is the BED file or BEDset identifier.
 
+--
 
 ## 🦀 Rust interface
 
-###  Install gtars
+####  Install gtars
 
 ```bash
 cargo install gtars
 ```
 
-### Cache a BED file
+#### Cache a BED file
 
 ```rust
 use gtars::bbclient::BBClient;
@@ -132,7 +133,7 @@ let mut bbc = BBClient::new(Some(cache_folder.clone()), None).expect("Failed to 
 
 where first argument is an optional cache folder path, and the second argument is an optional BEDbase API URL.
 
-### Add local BED file to cache
+#### Add local BED file to cache
 
 ```rust
 let bed_id: String = bbc
@@ -140,7 +141,7 @@ let bed_id: String = bbc
             .unwrap();
 ```
 
-### Add RegionSet object to cache
+#### Add RegionSet object to cache
 
 ```rust
 use gtars::models::RegionSet;
@@ -150,7 +151,7 @@ let bed_id: String = bbc
             .unwrap();
 ```
 
-### Delete a BED file from cache
+#### Delete a BED file from cache
 
 ```rust
 let result: Result<()> = bbc.remove("bed_id")
