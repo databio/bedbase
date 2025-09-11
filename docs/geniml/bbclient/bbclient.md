@@ -113,7 +113,7 @@ geniml bbclient rm <identifier>
 ```
 where <identifier> is the BED file or BEDset identifier.
 
---
+---
 
 ## 🦀 Rust interface
 
