@@ -65,6 +65,7 @@ nav:
         - Guide: bbconf/bbc_api.md
         - Changelog: bbconf/changelog.md
       - 🧰 BEDBoss processing pipeline: ../bedboss
+      - 🔄 BEDbase auto uploader: bedbase/bedbase-loader.md
       - 📜 Configuration file: bedbase/how-to-configure.md
     - Reference:
       - How to cite: citations.md
