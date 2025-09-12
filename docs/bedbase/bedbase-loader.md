@@ -15,6 +15,7 @@ BEDbase loader repository: [https://github.com/databio/bedbase-loader](https://g
 
 The main and most important part of the bedbase-loader is the automated retrieval of GEO data.
 **Steps**:
+
 1. Metadata is fetched from the PEPhub API (BEDbase repository: https://pephub.databio.org/bedbase).
 It selects GSE projects uploaded within a given time window (e.g., the last 2 days).
 2. BEDboss checks whether these projects have already been processed. If not, it proceeds to the next step.
