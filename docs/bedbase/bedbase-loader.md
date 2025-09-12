@@ -1,7 +1,8 @@
 # 🔄 BEDbase loader 
 
-BEDbase loader is an automated tool and cron job that continuously fetches, processes, and integrates new BED files from public repositories into the BEDbase database. This ensures that BEDbase remains up-to-date with the latest genomic data available.
-
+BEDbase Loader is an automated system with scheduled cron jobs that continuously fetches, processes,
+and integrates new BED files from public repositories into the BEDbase database.
+This ensures that BEDbase stays up to date with the latest available genomic data.
 BEDbase loader repository: [https://github.com/databio/bedbase-loader](https://github.com/databio/bedbase-loader)
 
 ## Key Features
@@ -10,36 +11,38 @@ BEDbase loader repository: [https://github.com/databio/bedbase-loader](https://g
 - **Automated Genomes Updater**
 - **Umap creator**
 
-### Automated GEO Retrieval
+### 🟢 Automated GEO Retrieval
 
-Main and the most important part of the bedbase-loader is automated retrieval of the GEO data. 
+The main and most important part of the bedbase-loader is the automated retrieval of GEO data.
 **Steps**:
-1. First, it is done by fetching metadata from PEPhub API, from bedbase repository: [https://pephub.databio.org/bedbase](https://pephub.databio.org/bedbase). And selects GSE projects that were uploaded in certain period of time (e.g. last 2 days).
-2. After list of GSE projects is fetched, BEDboss checks if this projects were already processed. If not, it is going to the next step.
-3. Then, it is fetching metadata for all the projects from PEPhub, including urls to the files.
-4. Next, files are being downloaded and metadata is inserted into the BEDbase database.
-5. Finally, the status flag is updated to "downloaded" and the project is ready for the next step - heavy processing (Next section).
+1. Metadata is fetched from the PEPhub API (BEDbase repository: https://pephub.databio.org/bedbase).
+It selects GSE projects uploaded within a given time window (e.g., the last 2 days).
+2. BEDboss checks whether these projects have already been processed. If not, it proceeds to the next step.
+3. Metadata for all selected projects is retrieved from PEPhub, including file URLs.
+4. The files are downloaded and the metadata is inserted into the BEDbase database.
+5. Finally, the project status flag is updated to "downloaded", and the project is ready for the next step — heavy processing (see below).
 
 
-### Automated BED heavy processing
+### 🟢 Automated BED heavy processing
 
-A lot of files are downloaded from GEO using automated GEO retrival.
-But to speed up downloading and inserting time we are skipping heavy processing on the initial step.
-Heavy processing is happening in AWS using AWS Fargate and automated cron job, after the files are downloaded and inserted into the database.
-Docker image for heavy processing: [https://github.com/databio/bedboss/blob/main/Dockerfile](https://github.com/databio/bedboss/blob/main/Dockerfile)
+Many files are downloaded from GEO during automated retrieval.
+To speed up the initial download and insertion, heavy processing is skipped at this stage.
 
+Heavy processing is performed later in AWS using AWS Fargate and an automated cron job, after the files are downloaded and stored in the database.
 
-### Automated Genomes Updater
+Docker image for heavy processing: https://github.com/databio/bedboss/blob/main/Dockerfile
 
-BEDbase loader includes automated genomes updater that is fetching genomes from Refgenie server.
-We are storing information about all genomes available on the Refgenie server to make links between BED file stored in the BEDbase
-and the exact reference genome used to create this BED file.
-To automatically update genomes we are using cron job located here: https://github.com/databio/bedbase-loader/blob/master/.github/workflows/update_genomes.yml
+### 🟢 Automated Genome Updates
 
+The bedbase-loader includes an automated genome updater that fetches genomes from the Refgenie server.
+Information about all available genomes is stored in BEDbase, allowing each BED file to be linked to the exact reference genome used to create it.
 
-### Umap Creator
+Genome updates are handled by a scheduled cron job: https://github.com/databio/bedbase-loader/blob/master/.github/workflows/update_genomes.yml
 
-One of the important parts of the BEDbase is embeddings of the BED files.
-Visualization of the embedding provides insights into the data stored in the BEDbase.
-To create embeddings we are using BEDbase package, it automatically creates umap file, that later is visualized here: [https://bedbase.org/umap](https://bedbase.org/umap)
-To provide up-to-date umap we are using cron job located here: https://github.com/databio/bedbase-loader/blob/master/.github/workflows/update_umap.yml
+### 🟢 UMAP Creator
+
+An important part of BEDbase is the creation of embeddings for BED files.
+These embeddings enable visualization, providing insights into the data stored in BEDbase.
+
+The bedbase package automatically creates UMAP files, which are then visualized here: [https://bedbase.org/umap](https://bedbase.org/umap)
+To keep the UMAP visualization up-to-date, a scheduled cron job is used: https://github.com/databio/bedbase-loader/blob/master/.github/workflows/update_umap.yml
