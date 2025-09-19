@@ -1,4 +1,0 @@
-markdown-include
-mkdocs>=1.0
-pydoc-markdown
-mkdocs-material
