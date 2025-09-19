@@ -20,7 +20,7 @@ from geniml.scembed import ScEmbed
 ```
 
 ## Data preparation
-`scembed` requires that the input data is in the [AnnData](https://anndata.readthedocs.io/en/latest/) format. Moreover, the `.var` attribute of this object must have `chr`, `start`, and `end` values. The reason is two fold: 1) we can track which vectors belong to which genmomic regions, and 2) region vectors are now reusable. We ned three files: 1) The `barcodes.txt` file, 2) the `peaks.bed` file, and 3) the `matrix.mtx` file. These will be used to create the `AnnData` object. To begin, download the data from the 10x Genomics website:
+`scembed` requires that the input data is in the [AnnData](https://anndata.readthedocs.io/en/latest/) format. Moreover, the `.var` attribute of this object must have `chr`, `start`, and `end` values. The reason is two fold: 1) we can track which vectors belong to which genmomic regions, and 2) region vectors are now reusable. We need three files: 1) The `barcodes.txt` file, 2) the `peaks.bed` file, and 3) the `matrix.mtx` file. These will be used to create the `AnnData` object. To begin, download the data from the 10x Genomics website:
 
 ```bash
 wget https://cf.10xgenomics.com/samples/cell-atac/2.1.0/10k_pbmc_ATACv2_nextgem_Chromium_Controller/10k_pbmc_ATACv2_nextgem_Chromium_Controller_raw_peak_bc_matrix.tar.gz
@@ -57,16 +57,16 @@ To learn more about pre-tokenizing the data, see the [pre-tokenization tutorial]
 
 ```python
 from genimtools.utils import write_tokens_to_gtok
-from geniml.tokenization import ITTokenizer
+from geniml.tokenization import TreeTokenizer
 
 adata = sc.read_h5ad("path/to/adata.h5ad")
-tokenizer = ITTokenizer("peaks.bed")
+tokenizer = TreeTokenizer("peaks.bed")
 
 tokens = tokenizer(adata)
 
 for i, t in enumerate(tokens):
-    file = f"tokens{i}.gtok"
-    write_tokens_to_gtok(t, file)
+    filename = f"tokens{i}.gtok"
+    write_tokens_to_gtok(filename, t.to_ids())
 ```
 
 ### Training the model

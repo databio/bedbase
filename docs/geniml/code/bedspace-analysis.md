@@ -13786,7 +13786,7 @@ body[data-format='mobile'] .jp-InputPrompt {
   flex-direction: row;
   padding: 0px;
   margin: 0px;
-  /* Added to reveal the box-shadow on the input and output collapsers. */
+  /* Added to reveal the box-shadow on the input and output collapses. */
   overflow: visible;
 }
 
@@ -14968,7 +14968,7 @@ all of MD as it is not optimized for dense, information rich UIs.
 </style>
 
 <style type="text/css">
-/* Force rendering true colors when outputing to pdf */
+/* Force rendering true colors when outputting to pdf */
 * {
   -webkit-print-color-adjust: exact;
 }
@@ -15148,7 +15148,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Scenario-1:-return-a-list-most-similar-region-sets-and-thier-similarity-score-to-a-query-metadata-label-(l2r)">Scenario 1: return a list most similar region sets and thier similarity score to a query metadata label (l2r)<a class="anchor-link" href="#Scenario-1:-return-a-list-most-similar-region-sets-and-thier-similarity-score-to-a-query-metadata-label-(l2r)">&#182;</a></h1>
+<h1 id="Scenario-1:-return-a-list-most-similar-region-sets-and-their-similarity-score-to-a-query-metadata-label-(l2r)">Scenario 1: return a list most similar region sets and their similarity score to a query metadata label (l2r)<a class="anchor-link" href="#Scenario-1:-return-a-list-most-similar-region-sets-and-their-similarity-score-to-a-query-metadata-label-(l2r)">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -15160,7 +15160,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Path to the pre-calcualted distance file between label embedding and region set embeddings</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Path to the pre-calculated distance file between label embedding and region set embeddings</span>
 <span class="n">path_simfile</span> <span class="o">=</span> <span class="s1">&#39;./distance_l2r.csv&#39;</span>
 <span class="n">distance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_simfile</span><span class="p">)</span>
 <span class="n">distance</span><span class="o">.</span><span class="n">file_label</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">file_label</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -15291,7 +15291,7 @@ jp-needs-light-background
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Scenario-2:-return-a-list-of-most-similar-labels-and-thier-similarity-score-to-a-query-region-set-(r2l)">Scenario 2: return a list of most similar labels and thier similarity score to a query region set (r2l)<a class="anchor-link" href="#Scenario-2:-return-a-list-of-most-similar-labels-and-thier-similarity-score-to-a-query-region-set-(r2l)">&#182;</a></h1>
+<h1 id="Scenario-2:-return-a-list-of-most-similar-labels-and-their-similarity-score-to-a-query-region-set-(r2l)">Scenario 2: return a list of most similar labels and their similarity score to a query region set (r2l)<a class="anchor-link" href="#Scenario-2:-return-a-list-of-most-similar-labels-and-their-similarity-score-to-a-query-region-set-(r2l)">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -15409,7 +15409,7 @@ jp-needs-light-background
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Scenario-3:-return-a-list-of-most-similar-region-sets-and-thier-similarity-scores-to-a-query-region-set-(r2r)">Scenario 3: return a list of most similar region sets and thier similarity scores to a query region set (r2r)<a class="anchor-link" href="#Scenario-3:-return-a-list-of-most-similar-region-sets-and-thier-similarity-scores-to-a-query-region-set-(r2r)">&#182;</a></h1>
+<h1 id="Scenario-3:-return-a-list-of-most-similar-region-sets-and-their-similarity-scores-to-a-query-region-set-(r2r)">Scenario 3: return a list of most similar region sets and their similarity scores to a query region set (r2r)<a class="anchor-link" href="#Scenario-3:-return-a-list-of-most-similar-region-sets-and-their-similarity-scores-to-a-query-region-set-(r2r)">&#182;</a></h1>
 </div>
 </div>
 </div>

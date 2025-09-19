@@ -4,7 +4,7 @@ Bedbuncher is used to create bedset of bed files in the bedbase database.
 
 ### 1) Create bedbase config file
 
-How to create config file: [configuration section](../how-to-configure.md).
+How to create config file: [configuration section](../../../bedbase/how-to-configure.md).
 
 
 ### 2) Create pep with bed file record identifiers.

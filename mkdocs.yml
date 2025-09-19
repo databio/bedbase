@@ -2,7 +2,7 @@ site_name: "BEDbase: a unified platform for genomic regions"
 
 theme:
   logo: img/bedbase_logo.svg
-  favicon: img/bedbase_bug.svg
+  favicon: img/bb_docs.svg
   name: material
   custom_dir: overrides
 
@@ -19,6 +19,10 @@ theme:
     - navigation.top
 
 markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
   - pymdownx.highlight:
       use_pygments: true
   - pymdownx.superfences:
@@ -39,60 +43,87 @@ copyright: >
     </a>
 
 nav:
-  - Home: README.md
+#  - Home: README.md
   - BEDbase:
     - BEDbase: bedbase/README.md
     - User guides:
-      - Public BEDbase UI user guide: bedbase/bedbase-ui-user-guide.md
-      - Public BEDbase API user guide: bedbase/bedbase-api-user-guide.md
+      - Public BEDbase UI user guide: bedbase/user/bedbase-ui-user-guide.md
+      - Public BEDbase API user guide: bedbase/user/bedbase-api-user-guide.md
+      - ✅ Reference Genome Compatibility: bedbase/user/reference-genome-compatibility.md
+      - 📝 BED Classification:  bedbase/user/bed_classification.md
+      - 💻 BBClient: bedbase/user/bbclient.md
+      - 🔍 BEDbase Search: bedbase/user/bedbase-search.md
     - Developer guides:
-      - BEDhost API server: 
+      - 📇 BEDhost API server:
         - BEDhost overview: bedhost/README.md
         - Building docker image: bedhost/build_image.md
         - Deploy API: bedhost/deployment.md
         - Changelog: bedhost/changelog.md
-      - BBConf configuration:
+      - 🔌 BBConf configuration:
         - BBConf: bbconf/README.md
-        - Configuring: bedboss/how-to-configure.md
         - Overview: bbconf/overview.md
         - Guide: bbconf/bbc_api.md
         - Changelog: bbconf/changelog.md
-      - BEDBoss processing pipeline: ../bedboss
+      - 🧰 BEDBoss processing pipeline: ../bedboss
+      - 🔄 BEDbase auto uploader: bedbase/bedbase-loader.md
+      - 📜 Configuration file: bedbase/how-to-configure.md
     - Reference:
       - How to cite: citations.md
-      - Usage: bedboss/usage.md
-      - Support: https://github.com/bedbase/bedboss/issues
+      - Support: https://github.com/databio/bedhost/issues
       - Contributing: contributing.md
       - Changelog: changelog.md
   - BEDboss:
     - BEDboss: bedboss/README.md
     - Tutorials:
-      - BEDboss run-pep: bedboss/tutorials/tutorial_run_pep.md
-      - BEDboss-all pipeline: bedboss/tutorials/tutorial_all.md
-      - BEDmaker tutorial: bedboss/tutorials/bedmaker_tutorial.md
-      - BEDqc tutorial: bedboss/tutorials/bedqc_tutorial.md
-      - BEDstat tutorial: bedboss/tutorials/bedstat_tutorial.md
-      - BEDbuncher tutorial: bedboss/tutorials/bedbuncher_tutorial.md
-      - BEDindex tutorial: bedboss/tutorials/bedindex_tutorial.md
-      - BEDclassifier tutorial: bedboss/tutorials/bedclassifier_tutorial.md
-      - BEDMS tutorial: bedboss/tutorials/bedms_tutorial.md
+        - Python modules:
+          - BEDboss run-pep: bedboss/tutorials/python/tutorial_run_pep.md
+          - BEDboss-all pipeline: bedboss/tutorials/python/tutorial_all.md
+          - BEDmaker: bedboss/tutorials/python/bedmaker_tutorial.md
+          - BEDstat: bedboss/tutorials/python/bedstat_tutorial.md
+          - BEDbuncher: bedboss/tutorials/python/bedbuncher_tutorial.md
+          - BEDindex: bedboss/tutorials/python/bedindex_tutorial.md
+          - BEDclassifier: bedboss/tutorials/python/bedclassifier_tutorial.md
+          - Ref_genome validator: bedboss/tutorials/python/ref_genome_tutorial.md
+        - Command line interface: bedboss/usage.md
+        - BEDMS tutorial: bedboss/tutorials/bedms_tutorial.md
     - How to guides:
-      - Create BEDbase database: bedboss/how-to-create-database.md
-      - Create config file: bedboss/how-to-configure.md
-      - Install dependencies: bedboss/how-to-install-requirements.md
+      - Plot GEO BED files number: bedboss/how-to/bedfiles-geo-count.md
+      - Upload GEO data: bedboss/how-to/upload-geo-data.md
+      - Upload BED from PEP: bedboss/how-to/how-to-run-pep.md
+      - Reindex vector store: bedboss/how-to/how-to-reindex-db.md
+      - Generate UMAP: bedboss/how-to/how-to-create-umap.md
+      - Create BEDbase database: bedboss/how-to/how-to-create-database.md
+      - Run BEDboss in Docker: bedboss/how-to/how-to-run-in-docker.md
+      - Create config file: bedbase/how-to-configure.md
+      - Install dependencies: bedboss/how-to/how-to-install-requirements.md
     - Reference:
       - How to cite: citations.md
-      - Usage: bedboss/usage.md
       - Changelog: bedboss/changelog.md
   - Geniml:
     - Geniml: geniml/README.md
     - Getting Started: 
       - Module overviews: geniml/modules.md
-    - How-to guides:    
-      - Cache BED files with BBClient: geniml/tutorials/bbclient.md
-      - Use BED cache in R: geniml/tutorials/pyBiocFileCache.md
-      - Tokenization: geniml/tutorials/tokenization.md
-      - Tokenize a BED file with CLI: geniml/tutorials/cli-tokenization.md
+    - BBclient:
+      - Cache BED files with BBClient: geniml/bbclient/bbclient.md
+      - Use BED cache in R: geniml/bbclient/pyBiocFileCache.md
+    - Atacformer:
+      - Atacformer: atacformer/README.md
+      - Getting started:
+        - Core concepts: atacformer/core-concepts.md
+        - Quickstart: atacformer/quickstart.md
+      - Tutorials:
+        - Generating a UMAP from fragments files: atacformer/tutorials/umap_from_fragments.md
+        - Example Brain3k Processing: atacformer/tutorials/example-brain3k-processing.md
+        - Visualizing new embeddings in the latent space of a reference: atacformer/tutorials/ev-projection.md
+        - Training:
+          - Pre-tokenize data for training: atacformer/tutorials/training/pretokenize-for-training.md
+          - Train a model from scratch: atacformer/tutorials/training/train-from-scratch.md
+          - Fine-tune a model: atacformer/tutorials/training/fine-tune.md
+      - Local compute guides:
+        - Compute requirements: atacformer/local_compute/compute_requirements.md
+        - Using atacformer locally: atacformer/local_compute/local_compute.md
+        - Using atacformer with Apple Silicon: atacformer/local_compute/apple_silicon.md
+    - How-to guides:
       - Train region2vec embeddings: geniml/tutorials/region2vec.md
       - Train BEDspace model:
         - Train BEDSpace embeddings: geniml/tutorials/bedspace.md
@@ -117,6 +148,19 @@ nav:
       - Changelog: geniml/changelog.md
   - Gtars:
     - Gtars: gtars/README.md
+    - 💿 Install: gtars/install.md
+    - Rust:
+      - Rust source API docs: https://docs.rs/gtars/latest/gtars/
+      - Uniwig: gtars/uniwig.md
+    - Python bindings:
+      - Digests: gtars/python/digests.md
+      - RegionSet: gtars/python/regionset.md
+      - RefgetStore: gtars/python/refgetstore.md
+      - Tokenizers: gtars/python/tokenizers.md
+    - Using gtars from R: 
+      - Usage: gtars/r/usage.md
+    - Reference:
+      - Changelog: gtars/changelog.md
   - Manuscripts: 
     - How to cite: citations.md
     - Published manuscripts:

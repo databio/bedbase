@@ -10,7 +10,7 @@ setting up connections to PostgreSQL, PEPhub, S3, and Qdrant databases, managing
 `BedBaseConfig` class is used to store the passwords, configuration, connection objects, and other information.
 
 - `bbconf.modules` - contains modules for managing `bed_files`, `bedsets`, and other common functionalities.
-Users will mainly use this mudule because it provides classes with methods for managing the database.
+Users will mainly use this module because it provides classes with methods for managing the database.
 
 ### Example:
 

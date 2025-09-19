@@ -1,15 +1,23 @@
 # How to create bedbase config file
 
-### Bedbase config file is yaml file with 4 parts:
-- paths and vector models
-- relational database credentials
-- qdrant credentials
-- server information
-- remote info
-- pephub info
-- s3 credentials
+BEDbase config file serves as a configuration file for the BEDbase server to provide credentials and paths to the required resources.
 
-### Example:
+### How to create a bedbase config file
+
+There are two ways to create a bedbase config file: </br>
+1. Create a new file and copy the content from the example below. </br>
+2. Use [BEDboss](../bedboss/README.md) command:
+```bash
+bedboss init-config --outfolder path/to/outfolder
+```
+
+### How to check if the config file is correct:
+Use [BEDboss](../bedboss/README.md) command:
+```bash
+bedboss verify-config --config path/to/config.yaml
+```
+
+### Example of the config file:
 ```yaml
 path:
   remote_url_base: http://data.bedbase.org/
