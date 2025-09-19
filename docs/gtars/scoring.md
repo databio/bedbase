@@ -5,6 +5,7 @@ Fragment scoring functionality for genomic analysis (ATAC-seq and ChIP-seq data)
 ## What it does
 
 Counts overlaps between fragment files and consensus peak regions, producing a count matrix where:
+
 - Rows = fragment files
 - Columns = consensus regions
 - Values = overlap counts
@@ -12,10 +13,13 @@ Counts overlaps between fragment files and consensus peak regions, producing a c
 ## CLI Usage
 
 ```bash
-gtars fscoring <fragments> <consensus> --mode <atac|chip> --output <output.csv.gz>
+gtars fscoring <fragments> <consensus> /
+  --mode <atac|chip> /
+  --output <output.csv.gz>
 ```
 
 **Arguments:**
+
 - `fragments`: Glob pattern for fragment files (e.g., `"*.bed.gz"`)
 - `consensus`: Path to consensus peak set (BED file)
 - `--mode`: Scoring mode (`atac` or `chip`, default: `atac`)
@@ -25,7 +29,9 @@ gtars fscoring <fragments> <consensus> --mode <atac|chip> --output <output.csv.g
 
 **Example:**
 ```bash
-gtars fscoring "fragments/*.bed.gz" peaks.bed --mode atac --output counts.csv.gz
+gtars fscoring "fragments/*.bed.gz" peaks.bed /
+  --mode atac /
+  --output counts.csv.gz
 ```
 
 ## Rust Library Usage
@@ -59,6 +65,7 @@ let count = count_matrix.get(row, col);
 ## Output Format
 
 Gzipped CSV file with:
+
 - Each row = one fragment file
 - Each column = one consensus region
 - Values = count of overlapping fragments

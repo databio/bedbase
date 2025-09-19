@@ -167,19 +167,32 @@ nav:
   - Gtars:
     - Gtars: gtars/README.md
     - 💿 Install: gtars/install.md
-    - Rust:
-      - Rust source API docs: https://docs.rs/gtars/latest/gtars/
-      - Uniwig: gtars/uniwig.md
-      - Region scoring: gtars/scoring.md
-    - Python bindings:
-      - Digests: gtars/python/digests.md
-      - RegionSet: gtars/python/regionset.md
-      - RefgetStore: gtars/python/refgetstore.md
-      - Tokenizers: gtars/python/tokenizers.md
-    - Using gtars from R: 
-      - Usage: gtars/r/usage.md
+    - Modules:
+      - Overview: gtars/modules.md
+      - gtars-core: gtars/core.md
+      - gtars-io: gtars/io.md
+      - gtars-overlaprs: gtars/overlaprs.md
+      - gtars-uniwig: gtars/uniwig.md
+      - gtars-igd: gtars/igd.md
+      - gtars-scoring: gtars/scoring.md
+      - gtars-fragsplit: gtars/fragsplit.md
+      - gtars-tokenizers: gtars/tokenizers.md
+      - gtars-scatrs: gtars/scatrs.md
+      - gtars-refget: gtars/refget.md
+      - gtars-bbcache: gtars/bbcache.md
+    - Bindings:
+      - Python: 
+        - Python: gtars/python.md
+        - Digests: gtars/python/digests.md
+        - RegionSet: gtars/python/regionset.md
+        - RefgetStore: gtars/python/refgetstore.md
+        - Tokenizers: gtars/python/tokenizers.md
+      - Wasm: gtars/wasm.md
+      - CLI: gtars/cli.md
+      - R: gtars/r/usage.md
     - Reference:
       - Changelog: gtars/changelog.md
+      - Rust source API docs: https://docs.rs/gtars/latest/gtars/
   - Manuscripts: 
     - How to cite: citations.md
     - Published manuscripts:
