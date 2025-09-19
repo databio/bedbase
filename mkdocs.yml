@@ -85,6 +85,7 @@ nav:
           - BEDclassifier: bedboss/tutorials/python/bedclassifier_tutorial.md
           - Ref_genome validator: bedboss/tutorials/python/ref_genome_tutorial.md
         - Command line interface: bedboss/usage.md
+        - BEDMS tutorial: bedboss/tutorials/bedms_tutorial.md
     - How to guides:
       - Plot GEO BED files number: bedboss/how-to/bedfiles-geo-count.md
       - Upload GEO data: bedboss/how-to/upload-geo-data.md
