@@ -85,6 +85,7 @@ nav:
           - BEDclassifier: bedboss/tutorials/python/bedclassifier_tutorial.md
           - Ref_genome validator: bedboss/tutorials/python/ref_genome_tutorial.md
         - Command line interface: bedboss/usage.md
+        - BEDMS tutorial: bedboss/tutorials/bedms_tutorial.md
     - How to guides:
       - Plot GEO BED files number: bedboss/how-to/bedfiles-geo-count.md
       - Upload GEO data: bedboss/how-to/upload-geo-data.md
@@ -126,40 +127,72 @@ nav:
       - Train region2vec embeddings: geniml/tutorials/region2vec.md
       - Train BEDspace model:
         - Train BEDSpace embeddings: geniml/tutorials/bedspace.md
-        - BEDspace results notebook: geniml/code/bedspace-analysis.md
+        - BEDspace results notebook: geniml/notebooks/bedspace-analysis.ipynb
       - Use scEmbed model:
         - Train single-cell embeddings: geniml/tutorials/train-scembed-model.md
         - Populate a vector store: geniml/tutorials/load-qdrant-with-cell-embeddings.md
         - Predict cell-types using KNN: geniml/tutorials/cell-type-annotation-with-knn.md
       - Evaluate embeddings: geniml/tutorials/evaluation.md
       - Create consensus peaks with CLI: geniml/tutorials/create-consensus-peaks.md
-      - Create consensus peaks with Python: geniml/code/create-consensus-peaks-python.md
-      - Assess universe fit: geniml/code/assess-universe.md
+      - Create consensus peaks with Python: geniml/notebooks/create-consensus-peaks-python.ipynb
+      - Assess universe fit: geniml/notebooks/assess-universe.ipynb
       - Fine-tune embeddings: geniml/tutorials/fine-tune-region2vec-model.md
       - Randomize bed files: geniml/tutorials/bedshift.md
       - Create evaluation dataset with bedshift: geniml/tutorials/bedshift-evaluation-guide.md
       - Create search backend: geniml/tutorials/text2bednn-search-interface.md
     - Reference:
       - How to cite: citations.md
-      - API documentation: geniml/autodoc_build/geniml.md
+      - Python API documentation:
+        - Assess: geniml/api-reference/assess.md
+        - Atacformer: geniml/api-reference/atacformer.md
+        - BBClient: geniml/api-reference/bbclient.md
+        - BEDshift: geniml/api-reference/bedshift.md
+        - BEDspace: geniml/api-reference/bedspace.md
+        - Craft: geniml/api-reference/craft.md
+        - Evaluation: geniml/api-reference/eval.md
+        - Geneformer: geniml/api-reference/geneformer.md
+        - I/O: geniml/api-reference/io.md
+        - Likelihood: geniml/api-reference/likelihood.md
+        - Models: geniml/api-reference/models.md
+        - Region2Vec: geniml/api-reference/region2vec.md
+        - scEmbed: geniml/api-reference/scembed.md
+        - Search: geniml/api-reference/search.md
+        - Text2BedNN: geniml/api-reference/text2bednn.md
+        - Tokenization: geniml/api-reference/tokenization.md
+        - Universe: geniml/api-reference/universe.md
+        - Utilities: geniml/api-reference/utils.md
       - Support: geniml/support.md
       - Contributing: geniml/contributing.md
       - Changelog: geniml/changelog.md
   - Gtars:
     - Gtars: gtars/README.md
     - 💿 Install: gtars/install.md
-    - Rust:
-      - Rust source API docs: https://docs.rs/gtars/latest/gtars/
-      - Uniwig: gtars/uniwig.md
-    - Python bindings:
-      - Digests: gtars/python/digests.md
-      - RegionSet: gtars/python/regionset.md
-      - RefgetStore: gtars/python/refgetstore.md
-      - Tokenizers: gtars/python/tokenizers.md
-    - Using gtars from R: 
-      - Usage: gtars/r/usage.md
+    - Modules:
+      - Overview: gtars/modules.md
+      - gtars-core: gtars/core.md
+      - gtars-io: gtars/io.md
+      - gtars-overlaprs: gtars/overlaprs.md
+      - gtars-uniwig: gtars/uniwig.md
+      - gtars-igd: gtars/igd.md
+      - gtars-scoring: gtars/scoring.md
+      - gtars-fragsplit: gtars/fragsplit.md
+      - gtars-tokenizers: gtars/tokenizers.md
+      - gtars-scatrs: gtars/scatrs.md
+      - gtars-refget: gtars/refget.md
+      - gtars-bbcache: gtars/bbcache.md
+    - Bindings:
+      - Python: 
+        - Python: gtars/python.md
+        - Digests: gtars/python/digests.md
+        - RegionSet: gtars/python/regionset.md
+        - RefgetStore: gtars/python/refgetstore.md
+        - Tokenizers: gtars/python/tokenizers.md
+      - Wasm: gtars/wasm.md
+      - CLI: gtars/cli.md
+      - R: gtars/r/usage.md
     - Reference:
       - Changelog: gtars/changelog.md
+      - Rust source API docs: https://docs.rs/gtars/latest/gtars/
   - Manuscripts: 
     - How to cite: citations.md
     - Published manuscripts:
@@ -170,9 +203,26 @@ nav:
       - LeRoy et al.  2024: manuscripts/leroy2024.md
       - Zheng et al. 2024: manuscripts/zheng2024.md
 
-autodoc:
-  jupyter:
-  - in: bbconf/notebooks
-    out: bbconf/code
-  - in: geniml/notebooks
-    out: geniml/code
+plugins:
+- mkdocs-jupyter:
+    include:
+      - geniml/notebooks/assess-universe.ipynb
+      - geniml/notebooks/bedspace-analysis.ipynb
+      - geniml/notebooks/create-consensus-peaks-python.ipynb
+    ignore_h1_titles: True
+- mkdocstrings:
+    default_handler: python
+    handlers:
+      python:
+        options:
+          docstring_style: google  # Default to Google style
+          show_symbol_type_heading: true
+          show_symbol_type_toc: true
+          show_root_heading: true
+          show_root_full_path: false
+          show_source: true  # Optional: Show source code links
+          show_signature: true  # Show method signatures
+          show_if_no_docstring: false
+          docstring_section_style: table  # Optional: Format style
+          separate_signature: true  # Ensure __init__ appears clearly
+          merge_init_into_class: true  # This ensures __init__ is documented
