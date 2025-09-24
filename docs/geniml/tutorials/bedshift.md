@@ -92,8 +92,9 @@ Specifying `--addfile` with `-a` add rate will increase the size of `mydata.bed`
 
 Shift from file first calculates which regions overlap between the specified `--shiftfile` and `--bedfile`, then selects which regions to shift among those overlaps.
 
-```
-bedshift -b mydata.bed -s 0.42 --shiftmean 5 --shiftstdev 5 --shiftfile snp.bed
+```bash
+bedshift -b mydata.bed -l hg38.chrom.sizes -s 0.42 --shiftmean 5 --shiftstdev 5 --shiftfile snp.bed
+# NotImplementedError: This relies on pyranges, which was removed with the switch to geniml.
 ```
 
 In this example, we only want to shift regions that are SNPs. The number of shifted regions is 42% of the total regions in `mydata.bed`. Notice here that unlike `--addfile`, we still have to specify the shift mean and standard deviation. This is because `--shiftfile` tells which regions to shift, but not by how much.
