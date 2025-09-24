@@ -11,21 +11,18 @@ Implementation of IGD (Integrated Genome Database) - a high-performance genomic 
 
 ## Usage
 
-### Building an Index
-```rust
-use gtars_igd::IGDBuilder;
+Ensure `gtars` is compiled with igd:
+`cargo build --release --all-features` or `cargo build --release --features igd`
 
-let mut builder = IGDBuilder::new();
-builder.add_intervals_from_bed("regions.bed")?;
-builder.save_to_file("index.igd")?;
+
+### Building an Index
+```shell
+gtars igd create --output /home/igd_output/ --filelist /home/my_bedfiles/
 ```
 
-### Querying
-```rust
-use gtars_igd::IGD;
-
-let igd = IGD::load_from_file("index.igd")?;
-let overlaps = igd.query("chr1", 1000, 2000)?;
+### Querying with a single bed file
+```shell
+gtars igd search --database my_igd_database.igd --query my_query.bed
 ```
 
 ## Performance
