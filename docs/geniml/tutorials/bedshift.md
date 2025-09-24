@@ -175,7 +175,7 @@ done
 In Python, you need the `os` library to get the filenames in a directory. Then you loop through the filenames and apply bedshift.
 
 ```py
-import bedshift
+from geniml.bedshift import bedshift
 import os
 
 files = os.listdir('/path/to/data/')
