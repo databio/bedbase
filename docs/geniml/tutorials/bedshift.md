@@ -56,7 +56,7 @@ run the project out of the box.
 To generate a random BED file, you need to start with is a BED file with one region, which you will delete later. (It will appear at the top of the BED files, so it will be easier to delete later.) On the command line:
 
 ```
-echo "chr1\t1\t1000" > random.bed
+echo -e "chr1\t1\t1000" > random.bed
 ```
 
 The next step is to construct a bedshift command to add regions to this file. We will need to specify the rate of add, which in this case is going to be the number of the new regions we want. Let's try generating 1,000 new regions. Don't forget to specify a chromosome sizes file, which is required for adding regions.
