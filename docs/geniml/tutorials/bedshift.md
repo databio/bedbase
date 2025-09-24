@@ -103,8 +103,9 @@ In this example, we only want to shift regions that are SNPs. The number of shif
 
 Drop from file, like shift from file, calculates overlaps between the specified `--dropfile` and `--bedfile`, then selects regions from those overlaps to drop.
 
-```
-bedshift -b mydata.bed -d 0.4 -dropfile snp.bed
+```bash
+bedshift -b mydata.bed -d 0.4 --dropfile snp.bed
+# NotImplementedError: This relies on pyranges, which was removed with the switch to geniml.
 ```
 
 This command will drop regions that overlap with SNPs. The number of dropped regions is 40% of the total regions in `mydata.bed`.
