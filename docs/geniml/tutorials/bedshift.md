@@ -31,7 +31,7 @@ bedshift -l hg38.chrom.sizes -b tests/test.bed -s 0.1 -a 0.1
 Python:
 
 ```py
-import bedshift
+from geniml.bedshift import bedshift
 
 bedshifter = bedshift.Bedshift('tests/test.bed', 'hg38.chrom.sizes')
 bedshifter.shift(shiftrate=0.1, shiftmean=0.0, shiftstdev=120.0)
