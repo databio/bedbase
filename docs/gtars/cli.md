@@ -1,15 +1,28 @@
-# gtars-cli
+# Gtars command line interface (CLI)
 
-Command-line interface for gtars tools.
+We've packaged some gtars functionality into a command line interface (CLI) for easy use in shell scripts and terminal environments. The CLI provides access to various genomic tools and utilities built on top of the core gtars Rust library.
 
 ## Installation
 
-```bash
-# From source
-cd /path/to/gtars
-cargo install --path gtars-cli
+To facilitate fast compilation and broad compatibility, the CLI is feature-gated. You can enable only the tools you need to minimize dependencies, binary size, and build time.
 
-# Or download pre-built binary from releases page
+There are two main ways to install the gtars CLI:
+
+### Via Cargo (Rust's package manager)
+```bash
+cargo install gtars-cli --features "uniwig overlaprs igd bbcache scoring fragsplit"
+```
+
+### From source
+```bash
+git clone https://github.com/databio/gtars.git
+cd gtars
+cargo install --path gtars-cli --features "uniwig overlaprs igd bbcache scoring fragsplit"
+```
+
+You can also enable all features with:
+```bash
+cargo install gtars-cli --all-features
 ```
 
 ## Available Commands
