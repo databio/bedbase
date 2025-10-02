@@ -14,16 +14,16 @@ Genomic region tokenizers for machine learning applications.
 ```python
 from gtars.tokenizers import Tokenizer
 
-# Load tokenizer from a BED file (creates vocabulary from regions)
+# load tokenizer from a BED file (creates vocabulary from regions)
 tokenizer = Tokenizer.from_bed("path/to/bedfile.bed")
 
-# Load from configuration file
+# load from configuration file
 tokenizer = Tokenizer.from_config("tokenizer_config.toml")
 
-# Load pretrained tokenizer
+# load pretrained tokenizer
 tokenizer = Tokenizer.from_pretrained("path/to/model")
 
-# Tokenize regions
+# tokenize regions
 tokens = tokenizer.tokenize(["chr1:1000-2000", "chr2:3000-4000"])
 ```
 
@@ -32,24 +32,21 @@ tokens = tokenizer.tokenize(["chr1:1000-2000", "chr2:3000-4000"])
 ```rust
 use gtars_tokenizers::Tokenizer;
 
-// Load tokenizer
+// load tokenizer
 let tokenizer = Tokenizer::from_bed("regions.bed")?;
 
-// Tokenize regions
+// lokenize regions
 let tokens = tokenizer.tokenize(&regions)?;
 ```
 
-## Configuration
+## Integration with HuggingFace Transformers
+The tokenizers were designed to be as compatible as possible with HuggingFace Transformers. You can easily integrate them into your ML pipelines.
 
-Tokenizers can be configured via TOML files:
-```toml
-[tokenizer]
-resolution = 100
-max_tokens = 10000
+```python
+from gtars.tokenizers import Tokenizer
+
+tokenizer = Tokenizer.from_pretrained("databio/atacformer-base-hg38")
+
+vocab_size = tokenizer.vocab_size
+special_tokens_map = tokenizer.special_tokens_map
 ```
-
-## Integration
-
-- Compatible with HuggingFace Transformers
-- Supports batch tokenization
-- Provides vocabulary management
