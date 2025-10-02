@@ -170,7 +170,7 @@ nav:
     - Modules:
       - Overview: gtars/modules.md
       - gtars-core: gtars/core.md
-      - gtars-io: gtars/io.md
+      # - gtars-io: gtars/io.md
       - gtars-overlaprs: gtars/overlaprs.md
       - gtars-uniwig: gtars/uniwig.md
       - gtars-igd: gtars/igd.md
