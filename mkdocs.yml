@@ -187,7 +187,9 @@ nav:
         - RegionSet: gtars/python/regionset.md
         - RefgetStore: gtars/python/refgetstore.md
         - Tokenizers: gtars/python/tokenizers.md
-      - Wasm: gtars/wasm.md
+      - Wasm:
+        - Overview: gtars/wasm.md
+        - Overlappers: gtars/wasm/overlappers.md
       - CLI: gtars/cli.md
       - R: gtars/r/usage.md
     - Reference:
