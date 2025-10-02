@@ -35,7 +35,7 @@ use gtars_tokenizers::Tokenizer;
 // load tokenizer
 let tokenizer = Tokenizer::from_bed("regions.bed")?;
 
-// lokenize regions
+// tokenize regions
 let tokens = tokenizer.tokenize(&regions)?;
 ```
 
