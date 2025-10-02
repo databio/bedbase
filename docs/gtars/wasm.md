@@ -16,7 +16,7 @@ npm install @databio/gtars-js
 ```
 
 ## Usage
-We don't currently provide full feature party bindings, but some functionality is available.
+We don't currently provide full feature parity bindings, but some functionality is available.
 
 ```typescript
 import init, { Overlapper } from 'gtars-js';
