@@ -17,7 +17,7 @@ pip install geniml
 The package is available for use both as a command line interface and a python package. To get started, type on the command line:
 
 ```
-bedshift -h
+geniml bedshift -h
 ```
 
 The following examples will shift 10% of the regions and add 10% new regions in `examples/test.bed`. The -l argument is the file in which chromosome sizes are located, and is only required for adding and/or shifting regions. The output is located at `bedshifted_test.bed`.
@@ -25,13 +25,13 @@ The following examples will shift 10% of the regions and add 10% new regions in 
 CLI:
 
 ```
-bedshift -l hg38.chrom.sizes -b tests/test.bed -s 0.1 -a 0.1
+geniml bedshift -l hg38.chrom.sizes -b tests/test.bed -s 0.1 -a 0.1
 ```
 
 Python:
 
 ```py
-import bedshift
+from geniml.bedshift import bedshift
 
 bedshifter = bedshift.Bedshift('tests/test.bed', 'hg38.chrom.sizes')
 bedshifter.shift(shiftrate=0.1, shiftmean=0.0, shiftstdev=120.0)
@@ -55,20 +55,22 @@ run the project out of the box.
 
 To generate a random BED file, you need to start with is a BED file with one region, which you will delete later. (It will appear at the top of the BED files, so it will be easier to delete later.) On the command line:
 
-```
-echo "chr1\t1\t1000" > random.bed
+```bash
+echo -e "chr1\t1\t1000" > random.bed
 ```
 
 The next step is to construct a bedshift command to add regions to this file. We will need to specify the rate of add, which in this case is going to be the number of the new regions we want. Let's try generating 1,000 new regions. Don't forget to specify a chromosome sizes file, which is required for adding regions.
 
-```
-bedshift -b random.bed -l hg38.chrom.sizes -a 1000
+```bash
+geniml bedshift -b random.bed -l hg38.chrom.sizes -a 1000
 ```
 
 The printed output should say that 1000 regions changed. Finally, go into the output at bedshifted_random.bed and delete the original region. If you specified repeats and have many output files that need to have the original region deleted, here is a handy command to delete the first line of every BED file. (Warning: make sure there are no other BED files in the folder before using this command.)
 
-```
-find . -name "*.bed" -exec sed -i '.bak' '1d' {} \;
+```bash
+find . -name "*.bed" -exec sed -i.bak '1d' {} \;
+# if your system is macOS
+# find . -name "*.bed" -exec sed -i .bak '1d' {} \;
 ```
 
 This `find` command will find all BED files and execute a `sed` command to remove the first line. The `sed` command will operate in place and create `.bak` backup files, which can be removed later.
@@ -80,8 +82,8 @@ This `find` command will find all BED files and execute a `sed` command to remov
 
 ## Add from file example
 
-```
-bedshift -b mydata.bed -a 0.07 --addfile exons.bed
+```bash
+geniml bedshift -b mydata.bed -a 0.07 --addfile exons.bed
 ```
 
 Specifying `--addfile` with `-a` add rate will increase the size of `mydata.bed` by 7% with new regions selected from `exons.bed`.
@@ -90,8 +92,8 @@ Specifying `--addfile` with `-a` add rate will increase the size of `mydata.bed`
 
 Shift from file first calculates which regions overlap between the specified `--shiftfile` and `--bedfile`, then selects which regions to shift among those overlaps.
 
-```
-bedshift -b mydata.bed -s 0.42 --shiftmean 5 --shiftstdev 5 --shiftfile snp.bed
+```bash
+geniml bedshift -b mydata.bed -l hg38.chrom.sizes -s 0.42 --shiftmean 5 --shiftstdev 5 --shiftfile snp.bed
 ```
 
 In this example, we only want to shift regions that are SNPs. The number of shifted regions is 42% of the total regions in `mydata.bed`. Notice here that unlike `--addfile`, we still have to specify the shift mean and standard deviation. This is because `--shiftfile` tells which regions to shift, but not by how much.
@@ -100,8 +102,8 @@ In this example, we only want to shift regions that are SNPs. The number of shif
 
 Drop from file, like shift from file, calculates overlaps between the specified `--dropfile` and `--bedfile`, then selects regions from those overlaps to drop.
 
-```
-bedshift -b mydata.bed -d 0.4 -dropfile snp.bed
+```bash
+geniml bedshift -b mydata.bed -d 0.4 --dropfile snp.bed
 ```
 
 This command will drop regions that overlap with SNPs. The number of dropped regions is 40% of the total regions in `mydata.bed`.
@@ -146,7 +148,7 @@ The order of perturbations is run in the same order they are specified. So in th
 
 Assuming you are bedshifting all files in the current working directory using the same parameter, use the following shell script (changing parameters as needed), which iterates over files in the directory and applies bedshift:
 
-```
+```bash
 #!/bin/bash
 for filename in *.bed; do
 	CHROM_LENGTHS=hg38.chrom.sizes
@@ -164,7 +166,7 @@ for filename in *.bed; do
 	CUT_RATE=0.0
 	MERGE_RATE=0.0
 
-	bedshift --bedfile $BEDFILE --chrom-lengths $CHROM_LENGTHS --droprate $DROP_RATE --addrate $ADD_RATE --addmean $ADD_MEAN --addstdev $ADD_STDEV --shiftrate $SHIFT_RATE --shiftmean $SHIFT_MEAN --shiftstdev $SHIFT_STDEV --cutrate $CUT_RATE --mergerate $MERGE_RATE
+	geniml bedshift --bedfile $BEDFILE --chrom-lengths $CHROM_LENGTHS --droprate $DROP_RATE --addrate $ADD_RATE --addmean $ADD_MEAN --addstdev $ADD_STDEV --shiftrate $SHIFT_RATE --shiftmean $SHIFT_MEAN --shiftstdev $SHIFT_STDEV --cutrate $CUT_RATE --mergerate $MERGE_RATE
 done
 ```
 
@@ -173,7 +175,7 @@ done
 In Python, you need the `os` library to get the filenames in a directory. Then you loop through the filenames and apply bedshift.
 
 ```py
-import bedshift
+from geniml.bedshift import bedshift
 import os
 
 files = os.listdir('/path/to/data/')
@@ -191,8 +193,8 @@ for file in files:
 
 Using the basic `--add` option, regions are added randomly onto any chromosome at any location, without any regard for non-coding regions. For use cases of Bedshift more rooted in biology, this effect is not desirable. The `--add-valid` option gives the user the ability to specify a BED file indicating areas where it is valid to add regions. Thus, if an `--add-valid` file has only coding regions, then regions will be randomly added only in those areas. Here is an example:
 
-```
-bedshift -b mydata.bed -a 0.5 --add-valid coding.bed --addmean 500 --addstdev 200
+```bash
+geniml bedshift -b mydata.bed -a 0.5 --add-valid coding.bed --addmean 500 --addstdev 200
 ```
 
 `coding.bed` contains large regions of the genome which are coding. Added regions can be anywhere inside of those regions. In addition, the method considers the size of the valid regions in deciding where the new regions will be added, so the smaller valid regions will contain proportionally less new regions than the larger valid regions.
