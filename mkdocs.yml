@@ -191,7 +191,9 @@ nav:
         - Overview: gtars/wasm.md
         - Overlappers: gtars/wasm/overlappers.md
       - CLI: gtars/cli.md
-      - R: gtars/r/usage.md
+      - R:
+        - R: gtars/r.md
+        - RefgetStore: gtars/r/refgetstore.md
     - Reference:
       - Changelog: gtars/changelog.md
       - Rust source API docs: https://docs.rs/gtars/latest/gtars/
