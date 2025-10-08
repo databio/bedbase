@@ -1,6 +1,6 @@
 ## BEDMS
 
-BEDMS (BED Metadata Standardizer) is a tool desgined to standardize genomics and epigenomics metadata attributes according to user-selected or user-trained schemas. BEDMS ensures consistency and FAIRness of metadata across different platforms. 
+BEDMS (BED Metadata Standardizer) is a tool designed to standardize genomics and epigenomics metadata attributes according to user-selected or user-trained schemas. BEDMS ensures consistency and FAIRness of metadata across different platforms. 
 Users can interact with BEDMS either through Python or via [PEPhub](https://pephub.databio.org/) choosing from predefined schemas provided by the tool. Additionally, BEDMS allows users to create and train custom schemas as per their project requirements. For detailed information on the available schemas, please visit [HuggingFace](https://huggingface.co/databio/attribute-standardizer-model6). 
 
 ### Installation
