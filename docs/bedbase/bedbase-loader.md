@@ -6,7 +6,7 @@ This ensures that BEDbase stays up to date with the latest available genomic dat
 BEDbase loader repository: [https://github.com/databio/bedbase-loader](https://github.com/databio/bedbase-loader)
 
 ## Key Features
-- **Automated GEO Retrival**
+- **Automated GEO Retrieval**
 - **Automated BED heavy processing**
 - **Automated Genomes Updater**
 - **Umap creator**

@@ -13,7 +13,7 @@
 
 ## Introduction
 
-`gtars` is a high-performance toolkit for *genomic tools and algorithms in Rust*. Built with Rust for speed and reliability, gtars provides core utilies for machine learning on genomic intervals for the [geniml](https://github.com/databio/geniml) Python package. It also provides lots of utility as a standalone library for alternative downstream use cases.
+`gtars` is a high-performance toolkit for *genomic tools and algorithms in Rust*. Built with Rust for speed and reliability, gtars provides core utilities for machine learning on genomic intervals for the [geniml](https://github.com/databio/geniml) Python package. It also provides lots of utility as a standalone library for alternative downstream use cases.
 
 ## Installation
 

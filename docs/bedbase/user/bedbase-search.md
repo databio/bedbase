@@ -12,7 +12,7 @@ This search is a first tab in the search page, and is a default search.
 To use the search, provide **text query** (e.g., *“heart”*, or  *“k562”*) and click _search_.
 
 At this moment, we are using semantic search. Compared to traditional keyword-based search, semantic search understands the meaning behind your query, allowing for more relevant results.
-Most of the avaliable platforms (GEO, ENCODE, etc) use traditional search, that limits findability.
+Most of the available platforms (GEO, ENCODE, etc) use traditional search, that limits findability.
 
 How does it work?
 1. The query text is encoded into a vector using a pre-trained language model.  
@@ -45,16 +45,16 @@ Additionally, we have provided filters to narrow down your search results. You c
 which will combine metadata and BED content for more accurate results. Stay tuned for updates!
 
 ### 🟢 BED2BED Search 
-_(Avaliable only for hg38)_
+_(Available only for hg38)_
 
 BED to BED search allows you to find relevant BED files using your own BED file as a query.
 
-It is a poverfull way to find similar files to compare with your own data. This searchcan be used as a quality control step
+It is a powerful way to find similar files to compare with your own data. This search can be used as a quality control step
 of your own data, finding functional similarities to prove the correctness of your data,
 or just to find similar datasets for your analysis.
 
 To use the search, go to the second tab of the search page, and
-upload your BED file. This bed file should be less then 20MB and should be a valid BED format.
+upload your BED file. This bed file should be less than 20MB and should be a valid BED format.
 BED-like file can be both gzipped or unzipped, we will handle both formats. 😃
 
 After file has been uploaded, we are running quality control steps to make sure the file is valid.
