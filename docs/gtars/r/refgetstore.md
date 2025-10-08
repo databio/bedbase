@@ -46,9 +46,9 @@ cat(sprintf("Substring from chr1[5:15]: %s\n", sub_seq))
 # 7. Prepare a BED file for region retrieval
 temp_bed_path <- file.path(temp_dir, "test.bed")
 bed_content <- paste(
-  "chr1\t0\t10\n",
-  "chr2\t2\t6\n", 
-  "chr_nonexistent\t0\t5\n",
+  "chr1\t0\t10",
+  "chr2\t2\t6", 
+  "chr_nonexistent\t0\t5",
   sep = "\n"
 )
 writeLines(bed_content, temp_bed_path)
