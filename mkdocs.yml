@@ -197,6 +197,7 @@ nav:
     - Reference:
       - Changelog: gtars/changelog.md
       - Rust source API docs: https://docs.rs/gtars/latest/gtars/
+      - Versioning policy: gtars/versioning.md
   - Manuscripts: 
     - How to cite: citations.md
     - Published manuscripts:
