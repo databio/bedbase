@@ -4,37 +4,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] -- 2025-10-08
+- introduce web assembly bindings
+- introduce R bindings
 
-## [0.3.0] -- 2023-07-30
+## [0.5.0] -- 2025-09-25
+- converted the codebase into a workspace with multiple crates
+
+## [0.4.0] -- 2025-09-10
+- added `get_max_end_per_chr` and `nucleotides_length` methods to `RegionSet`
+
+## [0.3.0] -- 2025-07-30
 - move digests functionality to refget
 - add RefgetStore to refget and its associated python bindings
 - integrate support for `bits` + backend types for tokenizers (AIList or BITS)
 - reworked the tokenization CLI to support the new `bits` and `backend` options
 
-## [0.2.5] -- 2023-04-06
+## [0.2.5] -- 2025-04-06
 - Rework tokenizer API to be more consistent with the HuggingFace tokenizers API.
 - Updates to `RegionSet` to improve performance and usability.
 - Added file_digest function to RegionSet struct
 - Fixed reqwest error in R bindings
 - Fixed [#107](https://github.com/databio/gtars/issues/107)
 
-## [0.2.4] -- 2023-03-05
+## [0.2.4] -- 2025-03-05
 - Attempt to fix failing python bindings in CI linux [#104](https://github.com/databio/gtars/issues/104)
 
-## [0.2.3] -- 2023-03-05
+## [0.2.3] -- 2025-03-05
 - Improved RegionSet, by adding a multiple new methods: `to_bed`, `to_bed_gz`, `to_bigbed`, `identifier()`, and others.
 - Fixed allowed `fasta_digest` to accept `Path` or `bytes` [#93](https://github.com/databio/gtars/issues/93)
 
-## [0.2.2] -- 2023-02-18
+## [0.2.2] -- 2025-02-18
 - fix [#90](https://github.com/databio/gtars/issues/90)
 - fix [#89](https://github.com/databio/gtars/issues/89)
 
 
-## [0.2.1] -- 2024-02-11 
+## [0.2.1] -- 2025-02-11 
 - allow comments at the beginning of fragment files
 - bump bigtools to 0.5.5, fixing [#74](https://github.com/databio/gtars/issues/74) and [#77](https://github.com/databio/gtars/issues/77)
 
-## [0.2.0] -- 2024-01-13 
+## [0.2.0] -- 2025-01-13 
 - add position shift workflow for bam to bw (was previously added for bam to bed)
 - add scaling argument for bam to bw workflow [#53](https://github.com/databio/gtars/issues/53)
 - fix accumulation issue for bam workflow [#56](https://github.com/databio/gtars/issues/56)
@@ -58,10 +67,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix IGD overlap issue [#45](https://github.com/databio/gtars/issues/45)
 - add ga4gh refget digest functionality [#58](https://github.com/databio/gtars/pull/58)
 
-## [0.1.1] -- 2023-12-03
+## [0.1.1] -- 2024-12-03
 - hot fix for broken python bindings; remove IGD from the python bindings for now
 
-## [0.1.0] -- 2023-12-03
+## [0.1.0] -- 2024-12-03
 - Rust implementation of `uniwig` that expands on the C++ version
   - Uniwig now accepts a single sorted  `.bed` file, `.narrowPeak` file, or `.bam` file.
   - Outputs now include  `.wig`, `.npy`, `.bedGraph`, and `.bw`
@@ -70,21 +79,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Region scoring matrix calculation for region clustering
 - Fragment file splitter for pseudobulking
 
-## [0.0.15] -- 2023-07-29
+## [0.0.15] -- 2024-07-29
 -  added meta tokenization tools and a new `MetaTokenizer` struct that can be used to tokenize regions using the meta-token strategy.
 -  added some annotations to the `pyo3` `#[pyclass]` and `#[pymethods]` attributes to make the python bindings more readable.
 
-## [0.0.14] -- 2023-06-11
+## [0.0.14] -- 2024-06-11
 - renamed repository to `gtars` to better reflect the project's goals.
 
-## [0.0.13] -- 2023-06-03
+## [0.0.13] -- 2024-06-03
 - implemented a fragment file tokenizer that will generate `.gtok` files directly from `fragments.tsv.gz` files.
 - fix an off-by-one error in the `region-to-id` maps in the `Universe` structs. This was leading to critical bugs in our models.
 
-## [0.0.12] -- 2023-05-28
+## [0.0.12] -- 2024-05-28
 - optimize creation of `PyRegionSet` to reduce expensive cloning of `Universe` structs.
 
-## [0.0.11] -- 2023-05-22
+## [0.0.11] -- 2024-05-22
 - redesigned API for the tokenizers to better emulate the huggingface tokenizers API.
 - implemented new traits for tokenizers to allow for more flexibility when creating new tokenizers.
 - bumped the version `pyo3` to `0.21.0`
