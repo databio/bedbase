@@ -21,7 +21,7 @@ from multiprocessing import cpu_count
 
 from geniml.io import RegionSet
 from geniml.tokenization import TreeTokenizer
-from geniml.region2vec import Region2VecExModel
+from geniml.region2vec.main import Region2VecExModel
 from rich.progress import track
 
 
