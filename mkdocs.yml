@@ -186,7 +186,6 @@ nav:
       - Python: 
         - Python: gtars/python.md
         - Digests: gtars/python/digests.md
-        - RegionSet: gtars/python/regionset.md
         - RefgetStore: gtars/python/refgetstore.md
         - Tokenizers: gtars/python/tokenizers.md
       - Wasm:
@@ -211,6 +210,7 @@ nav:
       - Zheng et al. 2024: manuscripts/zheng2024.md
 
 plugins:
+- search
 - mkdocs-jupyter:
     include:
       - geniml/notebooks/assess-universe.ipynb
