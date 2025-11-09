@@ -30,7 +30,8 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: "!!python/name:pymdownx.superfences.fence_code_format"
-
+  - pymdownx.tabbed:
+      alternate_style: true
 extra_css:
   - stylesheets/extra.css
 extra:
@@ -171,6 +172,7 @@ nav:
       - Overview: gtars/modules.md
       - gtars-core: gtars/core.md
       # - gtars-io: gtars/io.md
+      - gtars-models: gtars/models.md
       - gtars-overlaprs: gtars/overlaprs.md
       - gtars-uniwig: gtars/uniwig.md
       - gtars-igd: gtars/igd.md
