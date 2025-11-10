@@ -37,32 +37,6 @@ Region is Python representation of a genomic region. e.g. `chr1:100-200` + addit
     
     ```
 
-=== "TypeScript"
-    
-    ❗ Note: This is test example and may require additional setup to run.
-    
-    ```typescript
-    import init from '@databio/gtars';
-    import { RegionSet } from '@databio/gtars';
-
-    init();
-
-    export type BedEntry1 = [string, number, number, string];
-    
-    // Define entries (regions)
-    export const entries1: BedEntry1[] = [
-      ['chr1', 100, 200, 'peak1'],
-      ['chr2', 150, 250, 'peak2'],
-      ['chr3', 300, 400, 'peak3'],
-    ];
-
-    // Create a Region
-    const rs = new RegionSet(entries1);
-
-    console.log(rs);
-
-    ```
-
 
 ### 🟢 RegionSet
 
@@ -97,6 +71,32 @@ Open BED file from URL and get its identifier.
     let id = rs.identifier();
 
     println!("{:?}", rs);
+    ```
+
+=== "TypeScript"
+    
+    ❗ Note: This is test example and may require additional setup to run.
+    
+    ```typescript
+    import init from '@databio/gtars';
+    import { RegionSet } from '@databio/gtars';
+
+    init();
+
+    export type BedEntry1 = [string, number, number, string];
+    
+    // Define entries (regions)
+    export const entries1: BedEntry1[] = [
+      ['chr1', 100, 200, 'peak1'],
+      ['chr2', 150, 250, 'peak2'],
+      ['chr3', 300, 400, 'peak3'],
+    ];
+
+    // Create a Region
+    const rs = new RegionSet(entries1);
+
+    console.log(rs);
+
     ```
 
 ❗ Note: RegionSet can be created from a local file path, URL, or by passing a list (vector) or Region objects.
