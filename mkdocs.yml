@@ -187,7 +187,6 @@ nav:
         - Overview: gtars/python-overview.md
         - Digests: gtars/python/digests.md
         - RefgetStore: gtars/python/refgetstore.md
-        - Tokenizers: gtars/python/tokenizers.md
       - Wasm:
         - Overview: gtars/wasm.md
         - Overlappers: gtars/wasm/overlappers.md
