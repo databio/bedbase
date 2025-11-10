@@ -1,4 +1,4 @@
-# Models and RegionSet objects in Gtars
+# Models and Region Set objects in Gtars
 
 Gtars has multiple objects (structs/models) for representation of genomic regions and other related data. 
 
@@ -37,13 +37,39 @@ Region is Python representation of a genomic region. e.g. `chr1:100-200` + addit
     
     ```
 
+=== "TypeScript"
+    
+    ❗ Note: This is test example and may require additional setup to run.
+    
+    ```typescript
+    import init from '@databio/gtars';
+    import { RegionSet } from '@databio/gtars';
+
+    init();
+
+    export type BedEntry1 = [string, number, number, string];
+    
+    // Define entries (regions)
+    export const entries1: BedEntry1[] = [
+      ['chr1', 100, 200, 'peak1'],
+      ['chr2', 150, 250, 'peak2'],
+      ['chr3', 300, 400, 'peak3'],
+    ];
+
+    // Create a Region
+    const rs = new RegionSet(entries1);
+
+    console.log(rs);
+
+    ```
+
 
 ### 🟢 RegionSet
 
 RegionSet is Python representation of a genomic region set, commonly named as BED file.
 
 
-#### 🧪 Quick example
+#### Quick example
 Open BED file from URL and get its identifier.
 
 === "Python"

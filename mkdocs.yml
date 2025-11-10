@@ -184,7 +184,7 @@ nav:
       - gtars-bbcache: gtars/bbcache.md
     - Bindings:
       - Python: 
-        - Python: gtars/python.md
+        - Overview: gtars/python-overview.md
         - Digests: gtars/python/digests.md
         - RefgetStore: gtars/python/refgetstore.md
         - Tokenizers: gtars/python/tokenizers.md
