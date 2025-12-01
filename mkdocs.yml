@@ -54,6 +54,8 @@ nav:
       - 📝 BED Classification:  bedbase/user/bed_classification.md
       - 💻 BBClient: bedbase/user/bbclient.md
       - 🔍 BEDbase Search: bedbase/user/bedbase-search.md
+      - 🪩 Embedding Visualization: bedbase/user/umap-visualization.md
+      - ⚙️ BED analyzer: bedbase/user/bed_analyzer.md
     - Developer guides:
       - 📇 BEDhost API server:
         - BEDhost overview: bedhost/README.md
