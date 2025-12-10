@@ -2,6 +2,14 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format. 
 
+## [0.12.0] -- 2025-12-01
+### Added:
+- umap calculation [API]
+- BED-analyzer (qc), which is backed by gtars-wasm package [UI]
+- New improved home page [UI]
+- Added visualization of the UMAP, and interactive [UI]
+
+
 ## [0.11.0] -- 2025-09-11
 ### Added:
 - Added umap visualizations of bed embeddings

@@ -53,7 +53,7 @@ Full usage documentation is available in the Usage documentation is available [B
 RegionSet is a Python/Rust/R representation of a BED file. It allows user to compute identifiers, save bed files, 
 iterate through regions, and perform other operations on the BED file.
 
-How to install and use RegionSet in Python is described in the [RegionSet documentation](../../gtars/python/regionset.md). 
+How to install and use RegionSet in Python is described in the [RegionSet documentation](../../gtars/models.md). 
 
 Quick example:
 

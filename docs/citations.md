@@ -8,17 +8,25 @@ Components of BEDbase and geniml have been published independently. Here, we sho
 
 Thanks for citing us! If you use BEDbase, geniml, or their components in your research, here are papers you can cite.
 
-| If you use... | Please cite ... |
-|---------------|-----------------|
-| `region2vec` embeddings | Gharavi et al. (2021) *Bioinformatics* |
-| `bedspace` search and embeddings | Gharavi et al. (2024) *Bioengineering* |
+| If you use...                             | Please cite ... |
+|-------------------------------------------|-----------------|
+| `region2vec` embeddings                   | Gharavi et al. (2021) *Bioinformatics* |
+| `bedspace` search and embeddings          | Gharavi et al. (2024) *Bioengineering* |
 | `scEmbed` single-cell embedding framework | LeRoy et al. (2024) *NAR Genomics and Bioinformatics* |
-| `geniml` region set evaluations | Zheng et al. (2024) *NAR Genomics and Bioinformatics* |
-| `geniml hmm` module | Rymuza et al. (2024) *Nucleic Acis Research* |
-| `bedbase` database | Unpublished |
+| `geniml` region set evaluations           | Zheng et al. (2024) *NAR Genomics and Bioinformatics* |
+| `geniml hmm` module                       | Rymuza et al. (2024) *Nucleic Acis Research* |
+| `bedbase` database                        | Unpublished |
+| `tokenizers` module                       | LeRoy et al. (2025) *arXiv* |
+| `atacformer` foundation model             | LeRoy et al. (2025) *bioRxiv* |
 
 
 ## Full citation information for manuscripts
+
+- **LeRoy et al. (2025).** *Atacformer: A transformer-based foundation model for analysis and interpretation of ATAC-seq data*.
+  *bioRxiv*. [10.1101/2025.11.03.685753](https://doi.org/10.1101/2025.11.03.685753)
+
+- **LeRoy et al. (2025).** *Fast, memory-efficient genomic interval tokenizers for modern machine learning*.
+  *arXiv*. [10.48550/arXiv.2511.01555](https://doi.org/10.48550/arXiv.2511.01555) 
 
 - **Gharavi et al. (2024).** *Joint representation learning for retrieval and annotation of genomic interval sets*.
   *Bioengineering*. [10.3390/bioengineering11030263](http://dx.doi.org/10.3390/bioengineering11030263)

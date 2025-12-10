@@ -30,7 +30,8 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: "!!python/name:pymdownx.superfences.fence_code_format"
-
+  - pymdownx.tabbed:
+      alternate_style: true
 extra_css:
   - stylesheets/extra.css
 extra:
@@ -53,6 +54,8 @@ nav:
       - 📝 BED Classification:  bedbase/user/bed_classification.md
       - 💻 BBClient: bedbase/user/bbclient.md
       - 🔍 BEDbase Search: bedbase/user/bedbase-search.md
+      - 🪩 Embedding Visualization: bedbase/user/umap-visualizer.md
+      - ⚙️ BED analyzer: bedbase/user/bed-analyzer.md
     - Developer guides:
       - 📇 BEDhost API server:
         - BEDhost overview: bedhost/README.md
@@ -171,6 +174,7 @@ nav:
       - Overview: gtars/modules.md
       - gtars-core: gtars/core.md
       # - gtars-io: gtars/io.md
+      - gtars-models: gtars/models.md
       - gtars-overlaprs: gtars/overlaprs.md
       - gtars-uniwig: gtars/uniwig.md
       - gtars-igd: gtars/igd.md
@@ -182,13 +186,12 @@ nav:
       - gtars-bbcache: gtars/bbcache.md
     - Bindings:
       - Python:
-        - Python: gtars/python.md
+        - Overview: gtars/python-overview.md
         - Digests: gtars/python/digests.md
-        - RegionSet: gtars/python/regionset.md
+        - RefgetStore: gtars/python/refgetstore.md
         - RefgetStore Tutorial: gtars/python/refgetstore.ipynb
         - RefgetStore Python Reference: gtars/python/refget-store.md
         - Refget API Reference: gtars/python/refget-api.md
-        - Tokenizers: gtars/python/tokenizers.md
       - Wasm:
         - Overview: gtars/wasm.md
         - Overlappers: gtars/wasm/overlappers.md
@@ -212,6 +215,7 @@ nav:
       - Zheng et al. 2024: manuscripts/zheng2024.md
 
 plugins:
+- search
 - mkdocs-jupyter:
     include:
       - geniml/notebooks/assess-universe.ipynb
