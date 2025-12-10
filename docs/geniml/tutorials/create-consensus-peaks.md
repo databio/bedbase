@@ -38,11 +38,25 @@ First, you will create a coverage cutoff universe (CC). This is the simplest typ
 geniml build-universe cc --coverage-folder coverage/ \
                           --output-file universe_cc.bed
 
-```  
+```
 
-Depending on the task the universe can be smooth by setting `--merge` 
-flag with the distance beloved witch peaks should be merged together and 
-`--filter-size` with minimum size of peak that should be part of the universe. Instead of using maximum likelihood cutoff one can also defined cutoff with `--cutoff` flag. If it is set to 1 the result is union universe, and when to number of analyzed files it will produce intersection universe.
+Where:
+
+- `--coverage-folder`, takes the path to bigWig folder with genome coverage by collection
+- `--output-file`, takes the path to output file
+
+Or we can import it directly into Python:
+
+```
+from geniml.universe.cc_universe import cc_universe
+
+cc_universe("tests/consenus/coverage/",
+        file_out="tests/consenus/universe/universe.bed")
+```
+
+Depending on the task we can also smooth the output universe by setting `--merge`
+flag with the distance beyond which peaks should be merged together and
+`--filter-size` with minimum size of peak that should be part of the universe. We can also not use the maximum likelihood cut-off and instead of it use user defined cutoff. For that we have to set `--cutoff`. If we set it to 1 we get union universe, and when to number of files we will get intersection universe.
 
 ## Coverage cutoff flexible universe
 A more complex version of coverage cutoff universe is coverage cutoff flexible universe (CCF). In contrast to its' fixed version it produces flexible universe. It builds confidence interval around the maximum likelihood cutoff. This results in two values one for the cutoff for boundaries, and the other one for the region core. Despite the fact that the CFF universe is more complex it is build using the same input as the CC universe: 
@@ -51,7 +65,21 @@ A more complex version of coverage cutoff universe is coverage cutoff flexible u
 geniml build-universe ccf --coverage-folder coverage/ \
                            --output-file universe_ccf.bed
 
-```  
+```
+
+Where:
+
+- `--coverage-folder`, takes the path to bigWig folder with genome coverage by collection
+- `--output-file`, takes the path to output file
+
+Or we can import it directly into Python:
+```
+from geniml.universe.ccf_universe import ccf_universe
+
+ccf_universe("tests/consenus/coverage/",
+        file_out="tests/consenus/universe/universe.bed")
+```
+
 
 ## Maximum likelihood universe
 In the previous examples both CC anf CCF universes used simple likelihood model to calculate the cutoff. However, we also developed more complex likelihood model that takes into account the positions of starts and ends of the regions in the collection. This LH model can build based on coverage files and number of analyzed files:
