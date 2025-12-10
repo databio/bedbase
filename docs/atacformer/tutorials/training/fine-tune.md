@@ -6,7 +6,7 @@ Often, you will want to fine-tune a pre-trained Atacformer model on your own dat
 Before starting, ensure you have:
 
 - A pre-trained Atacformer model (e.g., `databio/atacformer-base-hg38`)
-- Pre-tokenized your dataset. If not, see the [pre-tokenize for training guide.](../tutorials/pretokenize-for-training.md)
+- Pre-tokenized your dataset. If not, see the [pre-tokenize for training guide.](pretokenize-for-training.md)
 
 ## Setup training
 

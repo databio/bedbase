@@ -71,6 +71,6 @@ write_store_to_directory(store, temp_saved_store_path, "{digest_prefix}/{digest}
 cat(sprintf("Store saved to: %s\n", temp_saved_store_path))
 
 # 11. Load store from the directory
-store_load <- load_from_directory(temp_saved_store_path)
+store_load <- load_local(temp_saved_store_path)
 cat(sprintf("Store successfully loaded from: %s\n", temp_saved_store_path))
 ```

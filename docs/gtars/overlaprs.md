@@ -1,13 +1,18 @@
 # gtars-overlaprs
 
-High-performance genomic interval overlap operations in Rust.
+Core infrastructure for all genomic interval overlap computations.
+
+## Purpose
+
+**gtars-overlaprs** provides the foundational overlap computation primitives that all other modules build upon. This is the single source of truth for efficient interval operations in gtars.
 
 ## Features
 
 - Efficient interval intersection algorithms using AIList data structure
-- Coverage calculations
-- Support for large-scale genomic datasets
-- Optimized memory usage
+- Coverage calculations with bit vectors
+- Support for large-scale genomic datasets (millions of intervals)
+- Optimized memory usage and logarithmic query time
+- Common `Overlapper` trait for consistent interface
 
 ## Usage
 

@@ -6,7 +6,7 @@ With `gtars.bbcache`, users can download and cache BED files and BED sets from t
 
 This document provides tutorials for using `gtars.bbcache` via either:
 
-1. the [Rust interface](#Rust-interface), or
+1. the [Rust interface](#rust-interface), or
 2. the [command-line interface](#command-line-interface).
 
 ## Rust interface

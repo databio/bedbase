@@ -1,13 +1,17 @@
 # gtars-tokenizers
 
-Genomic region tokenizers for machine learning applications.
+Wrapper around gtars-overlaprs for producing tokens for machine learning models.
+
+## Purpose
+
+**gtars-tokenizers** wraps the core overlap infrastructure from gtars-overlaprs to convert genomic regions into vocabulary tokens for machine learning pipelines. This module is specifically designed for ML applications that need to represent genomic intervals as discrete tokens.
 
 ## Features
 
 - Multiple tokenization strategies configurable via TOML
 - HuggingFace integration support
 - Configurable tokenization schemes
-- Optimized for ML pipelines
+- Optimized for transformer models and other ML pipelines
 
 ## Python Usage
 

@@ -28,5 +28,5 @@ BEDbase is a unifying platform for aggregating, analyzing and serving genomic re
 - [bedhost](http://github.com/databio/bedhost): FastAPI application with API for accessing data
 - [bedhost-ui](http://github.com/databio/bedhost): Front-end user interface built with React
 - [bedbase.org repository](https://github.com/databio/bedbase.org): Repository for deploying the bedhost container to AWS.
-- [all_geo_beds](all_geo_beds): A subfolder, is the scripts to download all bed files on GEO using geofetch and build a backend to host the metadata using bedstat
+- `all_geo_beds`: A subfolder containing scripts to download all bed files on GEO using geofetch and build a backend to host the metadata using bedstat
 - [geniml](https://github.com/databio/geniml): Machine learning for genomic intervals

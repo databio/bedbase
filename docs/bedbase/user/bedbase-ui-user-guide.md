@@ -12,7 +12,7 @@ The public BEDbase instance at [bedbase.org](https://bedbase.org) hosts public B
 
 ## 🔍 Finding relevant BED files
 
-The best way to locate data is to use the search interface on the bedbase.org home page. This search interface is smart. It relies on our [Text2BED](/geniml/tutorials/text2bednn-search-interface) models, which allow you to search the genome using natural language. We have previously computed embeddings for each BED file in BEDbase, and then you can search them.
+The best way to locate data is to use the search interface on the bedbase.org home page. This search interface is smart. It relies on our [Text2BED](../../geniml/tutorials/text2bednn-search-interface.md) models, which allow you to search the genome using natural language. We have previously computed embeddings for each BED file in BEDbase, and then you can search them.
 
 ## 📥 Downloading data
 

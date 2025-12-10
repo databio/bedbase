@@ -36,7 +36,7 @@ class DATA_FORMAT(str, Enum):
 ```
 
 ??? Note
-    To read documentation of DATA Formats visit this page: [BEDBASE data formats](../../../../bedbase/user/bed_classification/#data-formats)
+    To read documentation of DATA Formats visit this page: [BEDBASE data formats](../../../bedbase/user/bed_classification.md#data-formats)
 
 ## Example usage of the BED classifier:
 

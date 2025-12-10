@@ -92,7 +92,7 @@ closeness_score = get_closeness_score("tests/consensus/raw",
 ## Universe likelihood
 
 We can also calculate the likelihood of universe given collection of file. For that we
-will need [likelihood model](create-consensus-peaks.md#making-likelihood-model-). We can do it
+will need [likelihood model](create-consensus-peaks.md#maximum-likelihood-universe). We can do it
 either for hard universe:
 
 ```

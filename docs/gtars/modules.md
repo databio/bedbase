@@ -2,6 +2,8 @@
 
 gtars is organized as a workspace of independent Rust crates, each providing specific functionality for genomic interval analysis. All modules share common dependencies and infrastructure through `gtars-core`.
 
+📖 **See [Module Vision](module-vision.md) for the conceptual organization and design principles.**
+
 ## Core Infrastructure
 
 - **[gtars-core](core.md)** - Fundamental data structures and utilities

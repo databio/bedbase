@@ -1,13 +1,21 @@
-# Scoring Module
+# gtars-scoring
 
-Fragment scoring functionality for genomic analysis (ATAC-seq and ChIP-seq data).
+Wrapper around gtars-overlaprs for generating X-by-peak count matrices.
+
+## Purpose
+
+**gtars-scoring** wraps the core overlap infrastructure from gtars-overlaprs to produce count matrices for genomic analysis. This module handles all use cases that need X-by-peak matrices:
+
+- **Cell-by-peak** matrices (single-cell ATAC-seq)
+- **Sample-by-peak** matrices (bulk ATAC-seq/ChIP-seq)
+- **Pseudobulk-by-peak** matrices (aggregated single-cell data)
 
 ## What it does
 
-Counts overlaps between fragment files and consensus peak regions, producing a count matrix where:
+Generates count matrices from fragment-peak overlaps where:
 
-- Rows = fragment files
-- Columns = consensus regions
+- Rows = analysis units (cells, samples, or pseudobulk aggregations)
+- Columns = consensus regions (peaks)
 - Values = overlap counts
 
 ## CLI Usage

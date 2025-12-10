@@ -64,7 +64,7 @@ nav:
         - Overview: bbconf/overview.md
         - Guide: bbconf/bbc_api.md
         - Changelog: bbconf/changelog.md
-      - 🧰 BEDBoss processing pipeline: ../bedboss
+      - 🧰 BEDBoss processing pipeline: bedboss/README.md
       - 🔄 BEDbase auto uploader: bedbase/bedbase-loader.md
       - 📜 Configuration file: bedbase/how-to-configure.md
     - Reference:
@@ -181,11 +181,13 @@ nav:
       - gtars-refget: gtars/refget.md
       - gtars-bbcache: gtars/bbcache.md
     - Bindings:
-      - Python: 
+      - Python:
         - Python: gtars/python.md
         - Digests: gtars/python/digests.md
         - RegionSet: gtars/python/regionset.md
-        - RefgetStore: gtars/python/refgetstore.md
+        - RefgetStore Tutorial: gtars/python/refgetstore.ipynb
+        - RefgetStore Python Reference: gtars/python/refget-store.md
+        - Refget API Reference: gtars/python/refget-api.md
         - Tokenizers: gtars/python/tokenizers.md
       - Wasm:
         - Overview: gtars/wasm.md
@@ -196,6 +198,7 @@ nav:
         - RefgetStore: gtars/r/refgetstore.md
     - Reference:
       - Changelog: gtars/changelog.md
+      - RefgetStore structure: gtars/refget-store-format.md
       - Rust source API docs: https://docs.rs/gtars/latest/gtars/
       - Versioning policy: gtars/versioning.md
   - Manuscripts: 
@@ -214,6 +217,7 @@ plugins:
       - geniml/notebooks/assess-universe.ipynb
       - geniml/notebooks/bedspace-analysis.ipynb
       - geniml/notebooks/create-consensus-peaks-python.ipynb
+      - gtars/python/refgetstore.ipynb
     ignore_h1_titles: True
 - mkdocstrings:
     default_handler: python

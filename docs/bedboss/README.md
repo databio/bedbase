@@ -81,7 +81,7 @@ To install UCSC tools, follow initial instructions from the [UCSC website](https
 ## ℹ️ BEDboss pipelines:
 
 #### 🟢 bedmaker
-Bedmaker can convert different interval region set files to BED and bigBed format, cache it using [Geniml bbclient](../geniml/bbclient/bbclient).
+Bedmaker can convert different interval region set files to BED and bigBed format, cache it using [Geniml bbclient](../geniml/bbclient/bbclient.md).
 
 Supported formats are:
 - bedGraph

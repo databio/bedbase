@@ -10,7 +10,7 @@
 
 Atacformer is a general-purpose transformer-based foundation model for genomic interval data, specifically designed for ATAC-seq data. It is part of the Geniml toolkit, which provides a suite of tools for genomic interval machine learning. Trained on a large corpus of ATAC-seq data, Atacformer can be fine-tuned for various downstream tasks such as classification, regression, and sequence generation.
 
-All pre-trained models are available on the [Hugging Face Hub](huggignface.co/databio), and you can easily load them using the `geniml` package:
+All pre-trained models are available on the [Hugging Face Hub](https://huggingface.co/databio), and you can easily load them using the `geniml` package:
 
 ```python
 from geniml.atacformer import AtacformerForCellClustering

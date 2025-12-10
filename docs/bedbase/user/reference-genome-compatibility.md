@@ -72,4 +72,4 @@ Finally, tiers are assigned based on the combination of how well each query file
 
 
 ## ℹ️ References:
-- BEDBoss tutorial of assessing reference genome compatibility can be found here: [Reference genome validator tutorial](../../../bedboss/tutorials/python/ref_genome_tutorial/)
+- BEDBoss tutorial of assessing reference genome compatibility can be found here: [Reference genome validator tutorial](../../bedboss/tutorials/python/ref_genome_tutorial.md)

@@ -2,7 +2,7 @@
 
 BED classification is a calculated metadata about RegionSet file that classifies RegionSet files based on the number of columns and the types of data contained within those columns.
 
-BED classifier calculates 2 metadata fields: BED compliance and Data Format. *(BED classifier tutorial can be found here: [BED Classifier tutorial](../../../bedboss/tutorials/python/bedclassifier_tutorial/))*
+BED classifier calculates 2 metadata fields: BED compliance and Data Format. *(BED classifier tutorial can be found here: [BED Classifier tutorial](../../bedboss/tutorials/python/bedclassifier_tutorial.md))*
 
 ### 🟢 BED compliance (`compliant_columns` + `non_compliant_columns`)
 
@@ -94,5 +94,5 @@ Conforms to [ENCODE RNA elements](https://genome.ucsc.edu/FAQ/FAQformat.html#for
 - Additional detailed specifications for the Browser Extensible Data (BED) format can be found here:
 [https://samtools.github.io/hts-specs/BEDv1.pdf](https://samtools.github.io/hts-specs/BEDv1.pdf)
 
-- BEDBoss tutorial of bedclassifier can be found here: [BED Classifier tutorial](../../../bedboss/tutorials/python/bedclassifier_tutorial/)
+- BEDBoss tutorial of bedclassifier can be found here: [BED Classifier tutorial](../../bedboss/tutorials/python/bedclassifier_tutorial.md)
 
