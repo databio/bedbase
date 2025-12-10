@@ -11,21 +11,21 @@ Pretokenizing data is easy. You can use the built-in tokenizers and utilities in
 
 ```python
 from genimtools.utils import write_tokens_to_gtok
-from geniml.tokenization import ITTokenizer
+from geniml.tokenization import TreeTokenizer
 
 # instantiate a tokenizer
-tokenizer = ITTokenizer("path/to/universe.bed")
+tokenizer = TreeTokenizer("path/to/universe.bed")
 
 # get tokens
 tokens = tokenizer.tokenize("path/to/bedfile.bed")
-write_tokens_to_gtok(tokens.ids, "path/to/bedfile.gtok")
+write_tokens_to_gtok("path/to/bedfile.gtok", tokens.to_ids())
 ```
 
 Thats it! Now you can use the `.gtok` file to train a model.
 
 ## How to use the `.gtok` files
 
-To facilitate working with `.gtok` files, we have some helper-classes that can be used to train a model directly from `.gtok` files. For example, you can use teh `Region2VecDataset` class to load the `.gtok` files and train a model. See the [training documentation](./train-region2vec.md) for more information.
+To facilitate working with `.gtok` files, we have some helper-classes that can be used to train a model directly from `.gtok` files. For example, you can use the `Region2VecDataset` class to load the `.gtok` files and train a model. See the [training documentation](./train-region2vec.md) for more information.
 
 ```python
 from geniml.region2vec.utils import Region2VecDataset

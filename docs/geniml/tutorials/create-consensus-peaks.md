@@ -1,37 +1,49 @@
-# How to build a new universe
-
-We will start with simple example of how to create a consensus peak set from a
-collection of files. Example data can be found in `tests/consenus/raw`. 
+# How to build a new universe?
 
 ## Data preprocessing
+In this tutorial, you will use CLI of geniml package to build different types of universes from example files, which can be downloaded from XXX. In there you will find a compressed folder:
 
-First step of analysis is creating three tracks with genome coverage by peaks,
-their starts and ends. To do that we have to:
+```
+consensus:
+    - raw
+        test_1.bed
+        test_2.bed
+        test_3.bed
+        test_4.bed
+    file_list.txt
+    chrom.sizes
+```
 
-1. install [uniwig](https://github.com/databio/uniwig/tree/smoothing), make sure to use branch dev
-2. use [create_unsorted.sh](https://github.com/databio/uniwig/blob/smoothing/create_unsorted.sh) to make three bigWig:
-    - {prefix}_start.bw - with smoothed coverage of genome by starts
-    - {prefix}_core.bw - with coverage of genome by peaks
-    - {prefix}_start.bw - with smoothed coverage of genome by ends
+In the raw folder there are example BED files used in this tutorial and in file_list.txt are names of files you will analyze. Additionally there is a file with chromosome sizes, which you will use to preprocess the data. 
 
-In this tutorial we will use prefix "all" as it is a default prefix in
-`geniml` module
+To build any kind of a universe you need bigWig files with genome coverage by the analyzed collection, which can be made it using [uniwig](https://github.com/databio/uniwig/). First we have to combine all the analyzed files into one BED file:
+
+```
+cat raw/* > raw/combined_files.bed
+```
+
+This combined file can next be used to prepare the genome coverage tracks, with window size for smoothing of breakpoints set to 25:
+
+```
+$UNIWIG_PATH/bin/uniwig -m 25 raw/combined_files.bed chrom.sizes coverage/all
+```
+
+This will create three files: `coverage/all_start.bw`, `coverage/all_core.bw`, `coverage/all_end.bw`, with coverage of the genome by regions' starts, regions and regions' ends respectively. Those files can be loaded into Genomic Viewer for visualization.  
 
 ## Coverage cutoff universe
 
-We will start by making a coverage universe with cutoff that results in maximum 
-likelihood universe. We can build it through CLI:
+First, you will create a coverage cutoff universe (CC). This is the simplest type of a universe that only includes genomic positions with coverage greater or equal to cutoff *x*. This cutoff by default is calculated using simple likelihood model that calculates the probability of appearing in a collection. The universe can be build just based on genome coverage:
 
-```console
- geniml build-universe cc --coverage-folder tests/consenus/coverage/ \
-                        --output-file tests/consenus/universe/universe.bed
+```
+geniml build-universe cc --coverage-folder coverage/ \
+                          --output-file universe_cc.bed
 
-```  
+```
 
 Where:
 
-- `--coverage-folder`, takes the path to bigWig folder with genome coverage by collection 
-- `--output-file`, takes the path to output file 
+- `--coverage-folder`, takes the path to bigWig folder with genome coverage by collection
+- `--output-file`, takes the path to output file
 
 Or we can import it directly into Python:
 
@@ -42,25 +54,25 @@ cc_universe("tests/consenus/coverage/",
         file_out="tests/consenus/universe/universe.bed")
 ```
 
-Depending on the task we can also smooth the output universe by setting `--merge` 
-flag with the distance beyond which peaks should be merged together and 
-`--filter-size` with minimum size of peak that should be part of the universe. We can also not use the maximum likelihood cut-off and instead of it use user defined cutoff. For that we have to set `--cutoff` . If we set it to 1 we get union universe, and when to number of files we will get intersection universe.
+Depending on the task we can also smooth the output universe by setting `--merge`
+flag with the distance beyond which peaks should be merged together and
+`--filter-size` with minimum size of peak that should be part of the universe. We can also not use the maximum likelihood cut-off and instead of it use user defined cutoff. For that we have to set `--cutoff`. If we set it to 1 we get union universe, and when to number of files we will get intersection universe.
 
 ## Coverage cutoff flexible universe
-Next presented universe is coverage cutoff flexible universe. We can do it through CLI:
+A more complex version of coverage cutoff universe is coverage cutoff flexible universe (CCF). In contrast to its' fixed version it produces flexible universe. It builds confidence interval around the maximum likelihood cutoff. This results in two values one for the cutoff for boundaries, and the other one for the region core. Despite the fact that the CFF universe is more complex it is build using the same input as the CC universe: 
 
 ```
- geniml build-universe ccf --coverage-folder tests/consenus/coverage/ \
-                       --output-file tests/consenus/universe/universe.bed
+geniml build-universe ccf --coverage-folder coverage/ \
+                           --output-file universe_ccf.bed
 
-```  
+```
 
 Where:
 
-- `--coverage-folder`, takes the path to bigWig file with genome coverage by collection 
-- `--output-file`, takes the path to output file 
+- `--coverage-folder`, takes the path to bigWig folder with genome coverage by collection
+- `--output-file`, takes the path to output file
 
-Or we can import it directly into python:
+Or we can import it directly into Python:
 ```
 from geniml.universe.ccf_universe import ccf_universe
 
@@ -68,84 +80,33 @@ ccf_universe("tests/consenus/coverage/",
         file_out="tests/consenus/universe/universe.bed")
 ```
 
+
 ## Maximum likelihood universe
-Another type of universe that we can make is maximum likelihood flexible universe. To make it first we have to have a likelihood model of genome coverage by collection of files.
-
-#### Making likelihood model:
-To make a likelihood model we can use this CLI:
+In the previous examples both CC anf CCF universes used simple likelihood model to calculate the cutoff. However, we also developed more complex likelihood model that takes into account the positions of starts and ends of the regions in the collection. This LH model can build based on coverage files and number of analyzed files:
 
 ```
-geniml lh build_model --model-file tests/consenus/model.tar \
-                    --coverage-folder tests/consenus/coverage/ \
-                    --file-no 4 
+geniml lh build_model --model-file model.tar \
+                      --coverage-folder coverage/ \
+                      --file-no `wc -l file_list.txt`
 ```
 
-Where:
-
-- `--model-file`, takes the name of tar archive that will contain the likelihood model
-- `--file-no`, number of files used in analysis
-- `--coverage-folder` path to folder with coverage tracks
-
-Or, we can do it directly in python:
+The resulting tar archiver contains LH model. This model can be used as a scoring function that assigns to each position probability of it being a start, core or end of a region. It can be both used for universe assessment and universe building. Combination of LH model and optimization algorithm for building flexible universes results in maximum likelihood universe (ML):
 
 ```
-from geniml.likelihood.build_model import main
-
-main("tests/consenus/model.tar", "tests/consesnus/coverage",
-     "all",
-     file_no=4)
-```
-
-#### Making universe:
-Now that we have the model we make the universe:
-
-```
-geniml build-universe ml --model-file tests/consenus/model.tar \
-                          --output-file tests/consenus/universe/universe.bed \
-                          --coverage-folder tests/consesnus/coverage
-```
-
-Where:
-
-- `--model-file`, takes the name of tar archive that contains the likelihood model
-- `--output-file`, takes the path to output file 
-- `--coverage-folder` path to folder with coverage tracks
-
-Similarly, we can do it in python:
-
-```
-from geniml.universe.ml_universe import ml_universe
-
-ml_universe("tests/consesnus/model.tar",
-     "/home/hee6jn/Documents/geniml/tests/consesnus/coverage",
-     "all",
-     "tests/consenus/universe/universe.bed")
+geniml build-universe ml --model-file model.tar \
+                         --coverage-folder coverage/ \
+                         --output-file universe_ml.bed 
 ```
 
 ## HMM 
-Another approach to making flexible universes is using Hidden Markov Models.
-We can do it for example with:
+The forth presented method of creating universes utilizes Hidden Markov Models (HMM). In this approach the parts of flexible regions are hidden states of the model, while genome coverage by the collections are emissions. The resulting universe is called Hidden Markov Model universe. It can be build only based on the genome coverage by the collection:
 
 ```
-geniml build-universe hmm --out-file tests/consenus/universe/universe.bed \
-         --coverage-folder tests/consenus/coverage/ \
-         --save-max-cove
-```
-
-Where:
-
-- `--output-file`, takes the path to output file 
-- `--coverage-folder`, path to folder with coverage tracks
-- `--coverage-prefix` prefix used in uniwig for making files, default is "all"
-- `--not-normlaize`, is a flag that specifies whether not to normalize tracks before running HMM
-- `--save-max-cove`,  is a flag that specifies whether to save maximum coverage of each output peak
-
-Similarly, we can do it in python:
+geniml build-universe hmm --coverage-folder coverage/ \
+                          --output-file universe_hmm.bed
 
 ```
-from geniml.universe.hmm_universe import hmm_universe
 
-hmm_universe("tests/consenus/coverage/",
-                 "tests/consenus/universe/universe.bed",
-                 save_max_cove=True)
-```
+# How to assess new universe?
+
+So far you used many different methods for creating new universes. But choosing, which universe represents data the best can be challenging. To help with this we created a tutorial that can be found [here](../notebooks/assess-universe.ipynb), which presents different  methods that assess universe fit to the collection of files.

@@ -4,21 +4,8 @@
 [![Github badge](https://img.shields.io/badge/source-github-354a75?logo=github)](https://github.com/databio/bedhost)
 
 
-`bedhost` is a Python FastAPI module for the API that powers BEDbase
+`bedhost` is a Python FastAPI module for the API that powers BEDbase.
 It needs a path to the *bedbase configuration file*, which can be provided either via `-c`/`--config` argument or read from `$BEDBASE_CONFIG` environment variable. 
-
----
-
-**Deployed public instance**: <a href="https://bedbase.org/" target="_blank">https://bedbase.org/</a>
-
-**Documentation**: <a href="https://docs.bedbase.org/" target="_blank">https://docs.bedbase.org/bedhost</a>
-
-**API**: <a href="https://api.bedbase.org/" target="_blank">https://api.bedbase.org/</a>
-
-**Source Code**: <a href="https://github.com/databio/bedhost/" target="_blank">https://github.com/databio/bedhost/</a>
-
----
-
 
 ## Introduction
 

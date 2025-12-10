@@ -20,8 +20,8 @@ import os
 from multiprocessing import cpu_count
 
 from geniml.io import RegionSet
-from geniml.tokenization import ITTokenizer
-from geniml.region2vec import Region2VecExModel
+from geniml.tokenization import TreeTokenizer
+from geniml.region2vec.main import Region2VecExModel
 from rich.progress import track
 
 
@@ -32,7 +32,7 @@ universe_path = os.path.expandvars("$RESOURCES/regions/genome_tiles/tiles1000.hg
 data_path = os.path.expandvars("$DATA/ChIP-Atlas/hg38/ATAC_seq/tokens")
 
 model = Region2VecExModel(
-    tokenizer=ITTokenizer(universe_path),
+    tokenizer=TreeTokenizer(universe_path),
 )
 ```
 

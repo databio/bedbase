@@ -16,15 +16,17 @@ pip install geniml
 Then import `scEmbed` from `geniml`:
 
 ```python
-from geniml.scembed import ScEmbed
+from geniml.scembed.main import ScEmbed
 ```
 
 ## Data preparation
-`scembed` requires that the input data is in the [AnnData](https://anndata.readthedocs.io/en/latest/) format. Moreover, the `.var` attribute of this object must have `chr`, `start`, and `end` values. The reason is two fold: 1) we can track which vectors belong to which genmomic regions, and 2) region vectors are now reusable. We ned three files: 1) The `barcodes.txt` file, 2) the `peaks.bed` file, and 3) the `matrix.mtx` file. These will be used to create the `AnnData` object. To begin, download the data from the 10x Genomics website:
+`scembed` requires that the input data is in the [AnnData](https://anndata.readthedocs.io/en/latest/) format. Moreover, the `.var` attribute of this object must have `chr`, `start`, and `end` values. The reason is two fold: 1) we can track which vectors belong to which genmomic regions, and 2) region vectors are now reusable. We need three files: 1) The `barcodes.txt` file, 2) the `peaks.bed` file, and 3) the `matrix.mtx` file. These will be used to create the `AnnData` object. To begin, download the data from the 10x Genomics website:
+
+# TODO: This needs to be the filtered_peak_bc_matrix, not the raw_peak_bc_matrix
 
 ```bash
-wget https://cf.10xgenomics.com/samples/cell-atac/2.1.0/10k_pbmc_ATACv2_nextgem_Chromium_Controller/10k_pbmc_ATACv2_nextgem_Chromium_Controller_raw_peak_bc_matrix.tar.gz
-tar -xzf 10k_pbmc_ATACv2_nextgem_Chromium_Controller_raw_peak_bc_matrix.tar.gz
+wget https://cf.10xgenomics.com/samples/cell-atac/2.1.0/10k_pbmc_ATACv2_nextgem_Chromium_Controller/10k_pbmc_ATACv2_nextgem_Chromium_Controller_filtered_peak_bc_matrix.tar.gz
+tar -xzf 10k_pbmc_ATACv2_nextgem_Chromium_Controller_filtered_peak_bc_matrix.tar.gz
 ```
 
 Your files will be inside `filtered_peak_bc_matrix/`. Assuming you've installed the proper dependencies, you can now use python to build the `AnnData` object:
@@ -53,20 +55,27 @@ We will use the `pbmc.h5ad` file for downstream work.
 Training an `scEmbed` model requires two key steps: 1) pre-tokenizing the data, and 2) training the model.
 
 ### Pre-tokenizing the data
-To learn more about pre-tokenizing the data, see the [pre-tokenization tutorial](./pre-tokenization.md). Pre-tokenization offers many benefits, the two most important being 1) speeding up training, and 2) lower resource requirements. The pre-tokenization process is simple and can be done with a combination of `geniml` and `genimtools` utilities. Here is an example of how to pre-tokenize the 10x Genomics PBMC 10k dataset:
+To learn more about pre-tokenizing the data, see the [pre-tokenization tutorial](./pre-tokenization.md). Pre-tokenization offers many benefits, the two most important being 1) speeding up training, and 2) lower resource requirements. The pre-tokenization process is simple and can be done with a combination of `geniml` and `gtars` utilities. Here is an example of how to pre-tokenize the 10x Genomics PBMC 10k dataset:
 
 ```python
-from genimtools.utils import write_tokens_to_gtok
-from geniml.tokenization import ITTokenizer
+import pyarrow as pa
+import pyarrow.parquet as pq
+
+from geniml.tokenization.utils import tokenize_anndata
+from gtars.tokenizers import Tokenizer
 
 adata = sc.read_h5ad("path/to/adata.h5ad")
-tokenizer = ITTokenizer("peaks.bed")
+tokenizer = Tokenizer("peaks.bed")
 
-tokens = tokenizer(adata)
-
-for i, t in enumerate(tokens):
-    file = f"tokens{i}.gtok"
-    write_tokens_to_gtok(t, file)
+# ensure that the data is in csr format (this speeds up tokenization)
+adata.X = adata.X.tocsr()
+tokenized_cells = tokenize_anndata(
+    adata,
+    tokenizer
+)
+cells = [t['input_ids'] for t in tokenized_cells]
+table = pa.table({'tokens': pa.array(cells, type=pa.list_(pa.int32()))})
+pq.write_table(table, '/path/to/tokens.parquet')
 ```
 
 ### Training the model
@@ -77,15 +86,10 @@ Now that the data is pre-tokenized, we can train the model. The `scEmbed` model 
 
 from geniml.region2vec.utils import Region2VecDataset
 
-dataset = Region2VecDataset("path/to/tokens")
+dataset = Region2VecDataset("/path/to/tokens.parquet")
 
-model = ScEmbed(
-    tokenizer=tokenizer,
-)
-model.train(
-    dataset,
-    epochs=100,
-)
+model = ScEmbed(tokenizer=tokenizer)
+model.train(dataset, epochs=100)
 ```
 
 We can then export the model for upload to huggingface:
