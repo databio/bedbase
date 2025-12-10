@@ -319,4 +319,4 @@ MD5 support provides compatibility with legacy systems, easier migration from MD
 - [GA4GH refget specification](https://samtools.github.io/hts-specs/refget.html)
 - [gtars-refget module documentation](refget.md)
 - [Python reference guide with examples](python/refget-store.md)
-- [Python bindings documentation](python.md)
+- [Python bindings documentation](python-overview.md)

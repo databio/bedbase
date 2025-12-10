@@ -18,7 +18,7 @@ This paper published 2 types of method: 1. Methods to *construct* a universe, an
 You can construct a universe either on the command line, or using geniml as a library:
 
 - [Create consensus peaks with CLI](../geniml/tutorials/create-consensus-peaks.md)
-- [Create consensus peaks with Python](../geniml/code/create-consensus-peaks-python.md)
+- [Create consensus peaks with Python](../geniml/notebooks/create-consensus-peaks-python.ipynb)
 
 ### 2. Evaluating a universe
 

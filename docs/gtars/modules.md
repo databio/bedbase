@@ -28,6 +28,6 @@ gtars is organized as a workspace of independent Rust crates, each providing spe
 
 ## Language Bindings
 
-- **[gtars-python](python.md)** - Python API bindings
+- **[gtars-python](python-overview.md)** - Python API bindings
 - **[gtars-wasm](wasm.md)** - WebAssembly bindings
 - **[gtars-cli](cli.md)** - Command-line interface

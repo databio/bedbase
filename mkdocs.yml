@@ -188,7 +188,6 @@ nav:
       - Python:
         - Overview: gtars/python-overview.md
         - Digests: gtars/python/digests.md
-        - RefgetStore: gtars/python/refgetstore.md
         - RefgetStore Tutorial: gtars/python/refgetstore.ipynb
         - RefgetStore Python Reference: gtars/python/refget-store.md
         - Refget API Reference: gtars/python/refget-api.md

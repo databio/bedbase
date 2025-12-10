@@ -81,4 +81,4 @@ geniml build-universe hmm --coverage-folder coverage/ \
 
 # How to assess new universe?
 
-So far you used many different methods for creating new universes. But choosing, which universe represents data the best can be challenging. To help with this we created a tutorial that can be found [here](../code/assess-universe.md), which presents different  methods that assess universe fit to the collection of files.
+So far you used many different methods for creating new universes. But choosing, which universe represents data the best can be challenging. To help with this we created a tutorial that can be found [here](../notebooks/assess-universe.ipynb), which presents different  methods that assess universe fit to the collection of files.
