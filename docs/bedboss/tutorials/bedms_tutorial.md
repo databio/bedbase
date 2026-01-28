@@ -75,7 +75,7 @@ To develop training sets, follow the step by step protocol mentioned below:
         values_1000.csv
     ```
         To see an example of what a `values_*.csv` and `headers_*.csv` might look like, you can check our sample csv files on PEPhub: [sample_bedms_values_1.csv](https://pephub.databio.org/databio/sample_bedms_values_1?tag=default) and [sample_bedms-headers_1.csv](https://pephub.databio.org/databio/sample_bedms_headers_1?tag=default).
-    While these are only samples and are not information dense, we recommend having large vocabulary for the training files for both the `values_directory` and `headers_directory`. To get a better understanding of the training data that we trained BEDMS on, you can visit this [link](https://big.databio.org/bedms/)
+    While these are only samples and are not information dense, we recommend having large vocabulary for the training files for both the `values_directory` and `headers_directory`. To get a better understanding of the training data that we trained BEDMS on, you can visit this [link](http://big.databio.org/bedms/)
 
 3. Once your training sets are ready, you can make a directory for your schema in your HuggingFace repository. If the name of your schema is `new_schema` and the name of your repository is `new_repo`, this is what the directory structure will look like:
     ```

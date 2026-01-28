@@ -60,8 +60,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [0.4.0] -- 2024-06-04
 
-- Added bed tokens caching to bbclient [bbclient] Add tokenized file cache and download [#153](https://github.com/databio/geniml_dev/issues/153)
-- Added pyBiocFileCache for bedfiles to support R caching [bbclient] Integrate bedbase caching with R [#151](https://github.com/databio/geniml_dev/issues/151)
+- Added bed tokens caching to bbclient [bbclient] Add tokenized file cache and download #153
+- Added pyBiocFileCache for bedfiles to support R caching [bbclient] Integrate bedbase caching with R #151
 - Added support of Python3.12
 - Optimized encoding of regions for Region2Vec models
 - Added updates to the new Atacformer

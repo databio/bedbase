@@ -9,7 +9,7 @@ It needs a path to the *bedbase configuration file*, which can be provided eithe
 
 ## Introduction
 
-You can find the formal OpenAPI documentation and interactive interface at <http://api.bedbase.org/docs>. This document provides more conceptual introduction and explanations to how to use the API effectively.
+You can find the formal OpenAPI documentation and interactive interface at <https://api.bedbase.org/v1/docs>. This document provides more conceptual introduction and explanations to how to use the API effectively.
 
 
 ## General API organization

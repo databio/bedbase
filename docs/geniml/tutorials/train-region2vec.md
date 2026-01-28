@@ -4,7 +4,7 @@ Region2Vec is an unsupervised method for creating embeddings of genomic regions 
 ## Training data and universe
 Training a model requires two things: 1) a set of pre-tokenized data and 2) a universe. The universe is a set of regions that the model will be trained on. The universe is used to create the tokenizer, which is used to convert the raw data into tokens. The universe should be representative of the data that you will be training the model on. For example, if you are training a model on human data, you should use a universe that contains human regions. If you dont have a universe, a safe bet is to use the 1000 tiles hg38 genome.
 
-You can download the 1000 tiles hg38 genome [here](https://big.databio.org/geniml/universes/tiles1000.hg38.bed).
+You can download the 1000 tiles hg38 genome [here](http://big.databio.org/geniml/universes/tiles1000.hg38.bed).
 
 The pre-tokenized data is a set of `.gtok` files. These are binary files that contain the tokenized data in the form of integers. The `.gtok` files are used directly to train the model. If you have not pre-tokenized your data, see the [pre-tokenization documentation](./pre-tokenization.md).
 

@@ -48,7 +48,7 @@ If you're looking to use Bedshift in your own experiment, we created an [example
 2. Run a pipeline on the dataset and obtain results
 3. Aggregate and visualize the results
 
-It integrates the [PEP](http://pep.databio.org/en/latest/) and [looper](http://looper.databio.org/en/latest/) workflow allowing you to easily
+It integrates the [PEP](https://pep.databio.org/) and [looper](https://pep.databio.org/looper/) workflow allowing you to easily
 run the project out of the box.
 
 ## Generate a random BED file

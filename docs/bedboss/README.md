@@ -118,7 +118,7 @@ Example bedsets:
 
 - Bed files from the AML database.
 - Bed files from the [Excluderanges](https://github.com/dozmorovlab/excluderanges#bedbase-data-download) database.
-- Bed files from the LOLA database [http://lolaweb.databio.org/](http://lolaweb.databio.org/)
+- Bed files from the LOLA database [https://databio.org/regiondb](https://databio.org/regiondb)
 
 \*This pipeline is available only in for bedbase processing, and can't be use as a standalone tool.
 

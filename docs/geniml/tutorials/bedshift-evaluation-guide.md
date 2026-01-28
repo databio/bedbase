@@ -28,7 +28,7 @@ You can repeat this for each of the similarity scores and each of the perturbati
 
 ## Using a PEP to quickly submit multiple bedshift jobs
 
-Using a [Portable Encapsulated Project](http://pep.databio.org/en/latest/) (PEP), creating multiple combinations of bedshift files becomes faster and more organized. The PEP consists of a sample table containing the perturbation parameters and a config file. Here is what the `sample_table.csv` may look like. Each row specifies the arguments for a bedshift command.
+Using a [Portable Encapsulated Project](https://pep.databio.org/) (PEP), creating multiple combinations of bedshift files becomes faster and more organized. The PEP consists of a sample table containing the perturbation parameters and a config file. Here is what the `sample_table.csv` may look like. Each row specifies the arguments for a bedshift command.
 
 | sample_name | add | drop | shift | cut | merge |
 |-------------|-----|------|------|------|-------|
