@@ -1,0 +1,7726 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../tutorials/python/ref_genome_tutorial/">
+      
+      
+        <link rel="next" href="../tutorials/bedms_tutorial/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../img/bb_docs.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Command line interface - BEDbase: a unified platform for genomic regions</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#command-line-interface-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BEDbase: a unified platform for genomic regions" class="md-header__button md-logo" aria-label="BEDbase: a unified platform for genomic regions" data-md-component="logo">
+      
+  <img src="../../img/bedbase_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BEDbase: a unified platform for genomic regions
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Command line interface
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../bedbase/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  BEDbase
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  BEDboss
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../geniml/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Geniml
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../gtars/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Gtars
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../citations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Manuscripts
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BEDbase: a unified platform for genomic regions" class="md-nav__button md-logo" aria-label="BEDbase: a unified platform for genomic regions" data-md-component="logo">
+      
+  <img src="../../img/bedbase_logo.svg" alt="logo">
+
+    </a>
+    BEDbase: a unified platform for genomic regions
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../bedbase/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDbase
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BEDbase
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/user/bedbase-ui-user-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Public BEDbase UI user guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/user/bedbase-api-user-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Public BEDbase API user guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/user/reference-genome-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ✅ Reference Genome Compatibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/user/bed_classification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📝 BED Classification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/user/bbclient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💻 BBClient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/user/bedbase-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔍 BEDbase Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/user/umap-visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🪩 Embedding Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/user/bed-analyzer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚙️ BED analyzer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer guides
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../bedhost/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📇 BEDhost API server
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_3_1" id="__nav_1_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📇 BEDhost API server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedhost/build_image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building docker image
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedhost/deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploy API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedhost/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../bbconf/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔌 BBConf configuration
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_3_2" id="__nav_1_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔌 BBConf configuration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bbconf/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bbconf/bbc_api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bbconf/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/bedbase-loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔄 BEDbase auto uploader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/how-to-configure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📜 Configuration file
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../citations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to cite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/databio/bedhost/issues" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDboss
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BEDboss
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/python/tutorial_run_pep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDboss run-pep
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/python/tutorial_all/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDboss-all pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/python/bedmaker_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDmaker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/python/bedstat_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDstat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/python/bedbuncher_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDbuncher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/python/bedindex_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDindex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/python/bedclassifier_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDclassifier
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/python/ref_genome_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ref_genome validator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line interface
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-geo-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss geo --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-geo-upload-all-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss geo upload-all --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-geo-upload-gse-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss geo upload-gse --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-run-all-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss run-all --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-run-pep-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss run-pep --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-reprocess-all-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss reprocess-all --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-reprocess-one-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss reprocess-one --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-reprocess-bedset-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss reprocess-bedset --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-make-bed-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss make-bed --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-make-bigbed-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss make-bigbed --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-run-qc-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss run-qc --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-run-stats-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss run-stats --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-reindex-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss reindex --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-make-bedset-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss make-bedset --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-init-config-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss init-config --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-delete-bed-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss delete-bed --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-delete-bedset-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss delete-bedset --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-tokenize-bed-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss tokenize-bed --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-delete-tokenized-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss delete-tokenized --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-convert-universe-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss convert-universe --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-check-requirements-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss check-requirements --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-install-requirements-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss install-requirements --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-verify-config-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss verify-config --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-get-commands-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss get-commands --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/bedms_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDMS tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How to guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/bedfiles-geo-count/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plot GEO BED files number
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/upload-geo-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upload GEO data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/how-to-run-pep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upload BED from PEP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/how-to-reindex-db/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reindex vector store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/how-to-create-umap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generate UMAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/how-to-create-database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create BEDbase database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/how-to-run-in-docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run BEDboss in Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bedbase/how-to-configure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📜 Configuration file
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/how-to-install-requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../citations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to cite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../geniml/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geniml
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Geniml
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module overviews
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BBclient
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BBclient
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/bbclient/bbclient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache BED files with BBClient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/bbclient/pyBiocFileCache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use BED cache in R
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../atacformer/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atacformer
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atacformer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/core-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_3" id="__nav_3_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/tutorials/umap_from_fragments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generating a UMAP from fragments files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/tutorials/example-brain3k-processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Example Brain3k Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/tutorials/ev-projection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualizing new embeddings in the latent space of a reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_3_4" id="__nav_3_4_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Training
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/tutorials/training/pretokenize-for-training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pre-tokenize data for training
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/tutorials/training/train-from-scratch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Train a model from scratch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/tutorials/training/fine-tune/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-tune a model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_4" id="__nav_3_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Local compute guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Local compute guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/local_compute/compute_requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/local_compute/local_compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using atacformer locally
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atacformer/local_compute/apple_silicon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using atacformer with Apple Silicon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-to guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How-to guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/region2vec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Train region2vec embeddings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_2" id="__nav_3_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Train BEDspace model
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Train BEDspace model
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/bedspace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Train BEDSpace embeddings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/notebooks/bedspace-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDspace results notebook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_3" id="__nav_3_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use scEmbed model
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Use scEmbed model
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/train-scembed-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Train single-cell embeddings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/load-qdrant-with-cell-embeddings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Populate a vector store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/cell-type-annotation-with-knn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Predict cell-types using KNN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluate embeddings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/create-consensus-peaks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create consensus peaks with CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/notebooks/create-consensus-peaks-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create consensus peaks with Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/notebooks/assess-universe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assess universe fit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/fine-tune-region2vec-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-tune embeddings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/bedshift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Randomize bed files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/bedshift-evaluation-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create evaluation dataset with bedshift
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/tutorials/text2bednn-search-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create search backend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../citations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to cite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2" id="__nav_3_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python API documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python API documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/assess/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assess
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/atacformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atacformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/bbclient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BBClient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/bedshift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDshift
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/bedspace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEDspace
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/craft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Craft
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/eval/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/geneformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geneformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/likelihood/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Likelihood
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/region2vec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Region2Vec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/scembed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    scEmbed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/text2bednn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text2BedNN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/tokenization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tokenization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/universe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Universe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/api-reference/utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geniml/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../gtars/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gtars
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gtars
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💿 Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/overlaprs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-overlaprs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/uniwig/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-uniwig
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/igd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-igd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/scoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-scoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/fragsplit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-fragsplit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/tokenizers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-tokenizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/scatrs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-scatrs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/refget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-refget
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/bbcache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gtars-bbcache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bindings
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bindings
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_1" id="__nav_4_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/python-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/python/digests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/python/refgetstore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RefgetStore Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/python/refget-store/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RefgetStore Python Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/python/refget-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Refget API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_2" id="__nav_4_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasm
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wasm
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/wasm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/wasm/overlappers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overlappers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_4" id="__nav_4_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    R
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/r/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/r/refgetstore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RefgetStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/refget-store-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RefgetStore structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.rs/gtars/latest/gtars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rust source API docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gtars/versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versioning policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manuscripts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manuscripts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../citations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to cite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Published manuscripts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Published manuscripts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manuscripts/gharavi2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gharavi et al. 2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manuscripts/gu2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gu et al. 2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manuscripts/rymuza2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rymuza et al. 2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manuscripts/gharavi2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gharavi et al. 2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manuscripts/leroy2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LeRoy et al.  2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manuscripts/zheng2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zheng et al. 2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-geo-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss geo --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-geo-upload-all-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss geo upload-all --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-geo-upload-gse-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss geo upload-gse --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-run-all-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss run-all --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-run-pep-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss run-pep --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-reprocess-all-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss reprocess-all --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-reprocess-one-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss reprocess-one --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-reprocess-bedset-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss reprocess-bedset --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-make-bed-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss make-bed --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-make-bigbed-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss make-bigbed --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-run-qc-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss run-qc --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-run-stats-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss run-stats --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-reindex-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss reindex --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-make-bedset-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss make-bedset --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-init-config-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss init-config --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-delete-bed-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss delete-bed --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-delete-bedset-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss delete-bedset --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-tokenize-bed-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss tokenize-bed --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-delete-tokenized-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss delete-tokenized --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-convert-universe-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss convert-universe --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-check-requirements-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss check-requirements --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-install-requirements-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss install-requirements --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-verify-config-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss verify-config --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bedboss-get-commands-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bedboss get-commands --help
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="command-line-interface-reference">Command line interface reference</h1>
+<p>BEDboss is command-line tool-manager and a set of tools for working with BED files and BEDbase. Main components of BEDboss are: </br>
+1) Pipeline for processing BED files: bedmaker, bedqc, and bedstats.</br>
+2) Indexing of the Bed files in bedbase</br>
+3) Managing bed and bedsets in the database</br></p>
+<p>Here you can see the command-line usage instructions for the main bedboss command and for each subcommand:</p>
+<h2 id="bedboss-help"><code>bedboss --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss [OPTIONS] COMMAND [ARGS]...                                             </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ --version             -v        App version                                          │</span>
+<span class="go">│ --install-completion            Install completion for the current shell.            │</span>
+<span class="go">│ --show-completion               Show completion for the current shell, to copy it or │</span>
+<span class="go">│                                 customize the installation.                          │</span>
+<span class="go">│ --help                          Show this message and exit.                          │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+<span class="go">╭─ Commands ───────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ run-all                Run all the bedboss pipeline for a single bed file            │</span>
+<span class="go">│ run-pep                Run the all bedboss pipeline for a bed files in a PEP         │</span>
+<span class="go">│ reprocess-all          Run unprocessed files, or reprocess them                      │</span>
+<span class="go">│ reprocess-one          Run unprocessed file, or reprocess it [Only 1 file]           │</span>
+<span class="go">│ reprocess-bedset       Reprocess a bedset                                            │</span>
+<span class="go">│ make-bed               Create a bed files form a [bigwig, bedgraph, bed, bigbed,     │</span>
+<span class="go">│                        wig] file                                                     │</span>
+<span class="go">│ make-bigbed            Create a bigbed files form a bed file                         │</span>
+<span class="go">│ run-qc                 Run the quality control for a bed file                        │</span>
+<span class="go">│ run-stats              Create the statistics for a single bed file.                  │</span>
+<span class="go">│ reindex                Reindex the bedbase database and insert all files to the      │</span>
+<span class="go">│                        qdrant database.                                              │</span>
+<span class="go">│ make-bedset            Create a bedset from a pep file, and insert it to the bedbase │</span>
+<span class="go">│                        database.                                                     │</span>
+<span class="go">│ init-config            Initialize the new, sample configuration file                 │</span>
+<span class="go">│ delete-bed             Delete bed from the bedbase database                          │</span>
+<span class="go">│ delete-bedset          Delete BedSet from the bedbase database                       │</span>
+<span class="go">│ tokenize-bed           Tokenize a bedfile                                            │</span>
+<span class="go">│ delete-tokenized       Delete tokenized bed file                                     │</span>
+<span class="go">│ convert-universe       Convert bed file to universe                                  │</span>
+<span class="go">│ check-requirements     Check installed R packages                                    │</span>
+<span class="go">│ install-requirements   Install R dependencies                                        │</span>
+<span class="go">│ verify-config          Verify configuration file                                     │</span>
+<span class="go">│ geo                    Automatic BEDbase uploader for GEO data                       │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-geo-help"><code>bedboss geo --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss geo [OPTIONS] COMMAND [ARGS]...                                         </span>
+
+<span class="go"> Automatic BEDbase uploader for GEO data                                                </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ --version  -v        App version                                                     │</span>
+<span class="go">│ --help               Show this message and exit.                                     │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+<span class="go">╭─ Commands ───────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ upload-all   Run bedboss uploading pipeline for specified genome in specified period │</span>
+<span class="go">│              of time.                                                                │</span>
+<span class="go">│ upload-gse   Run bedboss uploading pipeline for GSE.                                 │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-geo-upload-all-help"><code>bedboss geo upload-all --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss geo upload-all [OPTIONS]                                                </span>
+
+<span class="go"> Run bedboss uploading pipeline for specified genome in specified period of time.       </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bedbase-config                               TEXT     Path to bedbase config    │</span>
+<span class="go">│                                                            file                      │</span>
+<span class="go">│                                                            [default: None]           │</span>
+<span class="go">│                                                            [required]                │</span>
+<span class="go">│ *  --outfolder                                    TEXT     Path to output folder     │</span>
+<span class="go">│                                                            [default: None]           │</span>
+<span class="go">│                                                            [required]                │</span>
+<span class="go">│    --start-date                                   TEXT     The earliest date when    │</span>
+<span class="go">│                                                            opep was updated          │</span>
+<span class="go">│                                                            [Default: 2000/01/01]     │</span>
+<span class="go">│                                                            [default: None]           │</span>
+<span class="go">│    --end-date                                     TEXT     The latest date when opep │</span>
+<span class="go">│                                                            was updated [Default:     │</span>
+<span class="go">│                                                            today&#39;s date]             │</span>
+<span class="go">│                                                            [default: None]           │</span>
+<span class="go">│    --search-limit                                 INTEGER  Limit of projects to be   │</span>
+<span class="go">│                                                            searched. [Default: 50]   │</span>
+<span class="go">│                                                            [default: 50]             │</span>
+<span class="go">│    --search-offset                                INTEGER  Limit of projects to be   │</span>
+<span class="go">│                                                            searched. [Default: 0]    │</span>
+<span class="go">│                                                            [default: 0]              │</span>
+<span class="go">│    --download-limit                               INTEGER  Limit of projects to be   │</span>
+<span class="go">│                                                            downloaded [Default: 100] │</span>
+<span class="go">│                                                            [default: 100]            │</span>
+<span class="go">│    --genome                                       TEXT     Reference genome          │</span>
+<span class="go">│                                                            [Default: None] (e.g.     │</span>
+<span class="go">│                                                            hg38) - if None, all      │</span>
+<span class="go">│                                                            genomes will be processed │</span>
+<span class="go">│                                                            [default: None]           │</span>
+<span class="go">│    --preload             --no-preload                      Download bedfile before   │</span>
+<span class="go">│                                                            caching it. [Default:     │</span>
+<span class="go">│                                                            True]                     │</span>
+<span class="go">│                                                            [default: preload]        │</span>
+<span class="go">│    --create-bedset       --no-create-bedset                Create bedset from bed    │</span>
+<span class="go">│                                                            files. [Default: True]    │</span>
+<span class="go">│                                                            [default: create-bedset]  │</span>
+<span class="go">│    --overwrite           --no-overwrite                    Overwrite existing        │</span>
+<span class="go">│                                                            bedfiles. [Default:       │</span>
+<span class="go">│                                                            False]                    │</span>
+<span class="go">│                                                            [default: no-overwrite]   │</span>
+<span class="go">│    --overwrite-bedset    --no-overwrite-bedset             Overwrite existing        │</span>
+<span class="go">│                                                            bedset. [Default: False]  │</span>
+<span class="go">│                                                            [default:                 │</span>
+<span class="go">│                                                            overwrite-bedset]         │</span>
+<span class="go">│    --rerun               --no-rerun                        Re-run all the samples.   │</span>
+<span class="go">│                                                            [Default: False]          │</span>
+<span class="go">│                                                            [default: no-rerun]       │</span>
+<span class="go">│    --run-skipped         --no-run-skipped                  Run skipped projects.     │</span>
+<span class="go">│                                                            [Default: False]          │</span>
+<span class="go">│                                                            [default: run-skipped]    │</span>
+<span class="go">│    --run-failed          --no-run-failed                   Run failed projects.      │</span>
+<span class="go">│                                                            [Default: False]          │</span>
+<span class="go">│                                                            [default: run-failed]     │</span>
+<span class="go">│    --standardize-pep     --no-standardize-pep              Standardize pep with      │</span>
+<span class="go">│                                                            BEDMESS. [Default: False] │</span>
+<span class="go">│                                                            [default:                 │</span>
+<span class="go">│                                                            no-standardize-pep]       │</span>
+<span class="go">│    --use-skipper         --no-use-skipper                  Use skipper to skip       │</span>
+<span class="go">│                                                            projects if they were     │</span>
+<span class="go">│                                                            processed locally         │</span>
+<span class="go">│                                                            [Default: False]          │</span>
+<span class="go">│                                                            [default: no-use-skipper] │</span>
+<span class="go">│    --reinit-skipper      --no-reinit-skipper               Reinitialize skipper.     │</span>
+<span class="go">│                                                            [Default: False]          │</span>
+<span class="go">│                                                            [default:                 │</span>
+<span class="go">│                                                            no-reinit-skipper]        │</span>
+<span class="go">│    --lite                --no-lite                         Run the pipeline in lite  │</span>
+<span class="go">│                                                            mode. [Default: False]    │</span>
+<span class="go">│                                                            [default: no-lite]        │</span>
+<span class="go">│    --help                                                  Show this message and     │</span>
+<span class="go">│                                                            exit.                     │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-geo-upload-gse-help"><code>bedboss geo upload-gse --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss geo upload-gse [OPTIONS]                                                </span>
+
+<span class="go"> Run bedboss uploading pipeline for GSE.                                                </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bedbase-config                               TEXT  Path to bedbase config file  │</span>
+<span class="go">│                                                         [default: None]              │</span>
+<span class="go">│                                                         [required]                   │</span>
+<span class="go">│ *  --outfolder                                    TEXT  Path to output folder        │</span>
+<span class="go">│                                                         [default: None]              │</span>
+<span class="go">│                                                         [required]                   │</span>
+<span class="go">│ *  --gse                                          TEXT  GSE number that can be found │</span>
+<span class="go">│                                                         in pephub. eg. GSE123456     │</span>
+<span class="go">│                                                         [default: None]              │</span>
+<span class="go">│                                                         [required]                   │</span>
+<span class="go">│    --create-bedset       --no-create-bedset             Create bedset from bed       │</span>
+<span class="go">│                                                         files. [Default: True]       │</span>
+<span class="go">│                                                         [default: create-bedset]     │</span>
+<span class="go">│    --genome                                       TEXT  reference genome to upload   │</span>
+<span class="go">│                                                         to database. If None, all    │</span>
+<span class="go">│                                                         genomes will be processed    │</span>
+<span class="go">│                                                         [default: None]              │</span>
+<span class="go">│    --preload             --no-preload                   Download bedfile before      │</span>
+<span class="go">│                                                         caching it. [Default: True]  │</span>
+<span class="go">│                                                         [default: preload]           │</span>
+<span class="go">│    --rerun               --no-rerun                     Re-run all the samples.      │</span>
+<span class="go">│                                                         [Default: False]             │</span>
+<span class="go">│                                                         [default: rerun]             │</span>
+<span class="go">│    --run-skipped         --no-run-skipped               Run skipped projects.        │</span>
+<span class="go">│                                                         [Default: False]             │</span>
+<span class="go">│                                                         [default: run-skipped]       │</span>
+<span class="go">│    --run-failed          --no-run-failed                Run failed projects.         │</span>
+<span class="go">│                                                         [Default: False]             │</span>
+<span class="go">│                                                         [default: run-failed]        │</span>
+<span class="go">│    --overwrite           --no-overwrite                 Overwrite existing bedfiles. │</span>
+<span class="go">│                                                         [Default: False]             │</span>
+<span class="go">│                                                         [default: no-overwrite]      │</span>
+<span class="go">│    --overwrite-bedset    --no-overwrite-bedset          Overwrite existing bedset.   │</span>
+<span class="go">│                                                         [Default: False]             │</span>
+<span class="go">│                                                         [default: overwrite-bedset]  │</span>
+<span class="go">│    --standardize-pep     --no-standardize-pep           Standardize pep with         │</span>
+<span class="go">│                                                         BEDMESS. [Default: False]    │</span>
+<span class="go">│                                                         [default:                    │</span>
+<span class="go">│                                                         no-standardize-pep]          │</span>
+<span class="go">│    --use-skipper         --no-use-skipper               Use local skipper to skip    │</span>
+<span class="go">│                                                         projects if they were        │</span>
+<span class="go">│                                                         processed locally [Default:  │</span>
+<span class="go">│                                                         False]                       │</span>
+<span class="go">│                                                         [default: no-use-skipper]    │</span>
+<span class="go">│    --reinit-skipper      --no-reinit-skipper            Reinitialize skipper.        │</span>
+<span class="go">│                                                         [Default: False]             │</span>
+<span class="go">│                                                         [default: no-reinit-skipper] │</span>
+<span class="go">│    --lite                --no-lite                      Run the pipeline in lite     │</span>
+<span class="go">│                                                         mode. [Default: False]       │</span>
+<span class="go">│                                                         [default: no-lite]           │</span>
+<span class="go">│    --help                                               Show this message and exit.  │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-run-all-help"><code>bedboss run-all --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss run-all [OPTIONS]                                                       </span>
+
+<span class="go"> Run all the bedboss pipeline for a single bed file                                     </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --input-file                                    TEXT  Path to the input file      │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│                                                          [required]                  │</span>
+<span class="go">│ *  --input-type                                    TEXT  Type of the input file.     │</span>
+<span class="go">│                                                          Options are: bigwig,        │</span>
+<span class="go">│                                                          bedgraph, bed, bigbed, wig  │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│                                                          [required]                  │</span>
+<span class="go">│ *  --outfolder                                     TEXT  Path to the output folder   │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│                                                          [required]                  │</span>
+<span class="go">│ *  --genome                                        TEXT  Genome name. Example:       │</span>
+<span class="go">│                                                          &#39;hg38&#39;                      │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│                                                          [required]                  │</span>
+<span class="go">│ *  --bedbase-config                                TEXT  Path to the bedbase config  │</span>
+<span class="go">│                                                          file                        │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│                                                          [required]                  │</span>
+<span class="go">│    --license-id                                    TEXT  License ID. If not provided │</span>
+<span class="go">│                                                          for in PEPfor each bed      │</span>
+<span class="go">│                                                          file, this license will be  │</span>
+<span class="go">│                                                          used                        │</span>
+<span class="go">│                                                          [default: DUO:0000042]      │</span>
+<span class="go">│    --rfg-config                                    TEXT  Path to the rfg config file │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│    --narrowpeak            --no-narrowpeak               Is the input file a         │</span>
+<span class="go">│                                                          narrowpeak file?            │</span>
+<span class="go">│                                                          [default: no-narrowpeak]    │</span>
+<span class="go">│    --check-qc              --no-check-qc                 Check the quality of the    │</span>
+<span class="go">│                                                          input file?                 │</span>
+<span class="go">│                                                          [default: check-qc]         │</span>
+<span class="go">│    --chrom-sizes                                   TEXT  Path to the chrom sizes     │</span>
+<span class="go">│                                                          file                        │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│    --open-signal-matrix                            TEXT  Path to the open signal     │</span>
+<span class="go">│                                                          matrix file                 │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│    --ensdb                                         TEXT  Path to the EnsDb database  │</span>
+<span class="go">│                                                          file                        │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│    --just-db-commit        --no-just-db-commit           Just commit to the          │</span>
+<span class="go">│                                                          database?                   │</span>
+<span class="go">│                                                          [default:                   │</span>
+<span class="go">│                                                          no-just-db-commit]          │</span>
+<span class="go">│    --force-overwrite       --no-force-overwrite          Force overwrite the output  │</span>
+<span class="go">│                                                          files                       │</span>
+<span class="go">│                                                          [default:                   │</span>
+<span class="go">│                                                          no-force-overwrite]         │</span>
+<span class="go">│    --update                --no-update                   Update the bedbase database │</span>
+<span class="go">│                                                          with the new record if it   │</span>
+<span class="go">│                                                          exists. This overwrites     │</span>
+<span class="go">│                                                          &#39;force_overwrite&#39; option    │</span>
+<span class="go">│                                                          [default: no-update]        │</span>
+<span class="go">│    --lite                  --no-lite                     Run the pipeline in lite    │</span>
+<span class="go">│                                                          mode. [Default: False]      │</span>
+<span class="go">│                                                          [default: no-lite]          │</span>
+<span class="go">│    --upload-qdrant         --no-upload-qdrant            Upload to Qdrant            │</span>
+<span class="go">│                                                          [default: no-upload-qdrant] │</span>
+<span class="go">│    --upload-s3             --no-upload-s3                Upload to S3                │</span>
+<span class="go">│                                                          [default: no-upload-s3]     │</span>
+<span class="go">│    --upload-pephub         --no-upload-pephub            Upload to PEPHub            │</span>
+<span class="go">│                                                          [default: no-upload-pephub] │</span>
+<span class="go">│    --universe              --no-universe                 Create a universe           │</span>
+<span class="go">│                                                          [default: no-universe]      │</span>
+<span class="go">│    --universe-method                               TEXT  Method used to create the   │</span>
+<span class="go">│                                                          universe                    │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│    --universe-bedset                               TEXT  Bedset used used to create  │</span>
+<span class="go">│                                                          the universe                │</span>
+<span class="go">│                                                          [default: None]             │</span>
+<span class="go">│    --multi                 --no-multi                    Run multiple samples        │</span>
+<span class="go">│                                                          [default: no-multi]         │</span>
+<span class="go">│    --recover               --no-recover                  Recover from previous run   │</span>
+<span class="go">│                                                          [default: recover]          │</span>
+<span class="go">│    --dirty                 --no-dirty                    Run without removing        │</span>
+<span class="go">│                                                          existing files              │</span>
+<span class="go">│                                                          [default: no-dirty]         │</span>
+<span class="go">│    --help                                                Show this message and exit. │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-run-pep-help"><code>bedboss run-pep --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss run-pep [OPTIONS]                                                       </span>
+
+<span class="go"> Run the all bedboss pipeline for a bed files in a PEP                                  </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --pep                                        TEXT  PEP file. Local or remote path │</span>
+<span class="go">│                                                       [default: None]                │</span>
+<span class="go">│                                                       [required]                     │</span>
+<span class="go">│ *  --outfolder                                  TEXT  Path to the output folder      │</span>
+<span class="go">│                                                       [default: None]                │</span>
+<span class="go">│                                                       [required]                     │</span>
+<span class="go">│ *  --bedbase-config                             TEXT  Path to the bedbase config     │</span>
+<span class="go">│                                                       file                           │</span>
+<span class="go">│                                                       [default: None]                │</span>
+<span class="go">│                                                       [required]                     │</span>
+<span class="go">│    --create-bedset      --no-create-bedset            Create a new bedset            │</span>
+<span class="go">│                                                       [default: create-bedset]       │</span>
+<span class="go">│    --bedset-heavy       --no-bedset-heavy             Run the heavy version of the   │</span>
+<span class="go">│                                                       bedbuncher pipeline            │</span>
+<span class="go">│                                                       [default: no-bedset-heavy]     │</span>
+<span class="go">│    --bedset-id                                  TEXT  Bedset ID [default: None]      │</span>
+<span class="go">│    --rfg-config                                 TEXT  Path to the rfg config file    │</span>
+<span class="go">│                                                       [default: None]                │</span>
+<span class="go">│    --check-qc           --no-check-qc                 Check the quality of the input │</span>
+<span class="go">│                                                       file?                          │</span>
+<span class="go">│                                                       [default: check-qc]            │</span>
+<span class="go">│    --ensdb                                      TEXT  Path to the EnsDb database     │</span>
+<span class="go">│                                                       file                           │</span>
+<span class="go">│                                                       [default: None]                │</span>
+<span class="go">│    --just-db-commit     --no-just-db-commit           Just commit to the database?   │</span>
+<span class="go">│                                                       [default: no-just-db-commit]   │</span>
+<span class="go">│    --force-overwrite    --no-force-overwrite          Force overwrite the output     │</span>
+<span class="go">│                                                       files                          │</span>
+<span class="go">│                                                       [default: no-force-overwrite]  │</span>
+<span class="go">│    --update             --no-update                   Update the bedbase database    │</span>
+<span class="go">│                                                       with the new record if it      │</span>
+<span class="go">│                                                       exists. This overwrites        │</span>
+<span class="go">│                                                       &#39;force_overwrite&#39; option       │</span>
+<span class="go">│                                                       [default: no-update]           │</span>
+<span class="go">│    --upload-qdrant      --no-upload-qdrant            Upload to Qdrant               │</span>
+<span class="go">│                                                       [default: upload-qdrant]       │</span>
+<span class="go">│    --upload-s3          --no-upload-s3                Upload to S3                   │</span>
+<span class="go">│                                                       [default: upload-s3]           │</span>
+<span class="go">│    --upload-pephub      --no-upload-pephub            Upload to PEPHub               │</span>
+<span class="go">│                                                       [default: upload-pephub]       │</span>
+<span class="go">│    --no-fail            --no-no-fail                  Do not fail on error           │</span>
+<span class="go">│                                                       [default: no-no-fail]          │</span>
+<span class="go">│    --license-id                                 TEXT  License ID                     │</span>
+<span class="go">│                                                       [default: DUO:0000042]         │</span>
+<span class="go">│    --standardize-pep    --no-standardize-pep          Standardize the PEP using      │</span>
+<span class="go">│                                                       bedMS                          │</span>
+<span class="go">│                                                       [default: no-standardize-pep]  │</span>
+<span class="go">│    --lite               --no-lite                     Run the pipeline in lite mode. │</span>
+<span class="go">│                                                       [Default: False]               │</span>
+<span class="go">│                                                       [default: no-lite]             │</span>
+<span class="go">│    --rerun              --no-rerun                    Rerun already processed        │</span>
+<span class="go">│                                                       samples                        │</span>
+<span class="go">│                                                       [default: no-rerun]            │</span>
+<span class="go">│    --multi              --no-multi                    Run multiple samples           │</span>
+<span class="go">│                                                       [default: no-multi]            │</span>
+<span class="go">│    --recover            --no-recover                  Recover from previous run      │</span>
+<span class="go">│                                                       [default: recover]             │</span>
+<span class="go">│    --dirty              --no-dirty                    Run without removing existing  │</span>
+<span class="go">│                                                       files                          │</span>
+<span class="go">│                                                       [default: no-dirty]            │</span>
+<span class="go">│    --help                                             Show this message and exit.    │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-reprocess-all-help"><code>bedboss reprocess-all --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss reprocess-all [OPTIONS]                                                 </span>
+
+<span class="go"> Run unprocessed files, or reprocess them                                               </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bedbase-config                    TEXT     Path to the bedbase config file      │</span>
+<span class="go">│                                                 [default: None]                      │</span>
+<span class="go">│                                                 [required]                           │</span>
+<span class="go">│ *  --outfolder                         TEXT     Path to the output folder            │</span>
+<span class="go">│                                                 [default: None]                      │</span>
+<span class="go">│                                                 [required]                           │</span>
+<span class="go">│    --limit                             INTEGER  Limit the number of files to         │</span>
+<span class="go">│                                                 reprocess                            │</span>
+<span class="go">│                                                 [default: 100]                       │</span>
+<span class="go">│    --no-fail           --no-no-fail             Do not fail on error                 │</span>
+<span class="go">│                                                 [default: no-fail]                   │</span>
+<span class="go">│    --help                                       Show this message and exit.          │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-reprocess-one-help"><code>bedboss reprocess-one --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss reprocess-one [OPTIONS]                                                 </span>
+
+<span class="go"> Run unprocessed file, or reprocess it [Only 1 file]                                    </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bedbase-config        TEXT  Path to the bedbase config file [default: None]     │</span>
+<span class="go">│                                  [required]                                          │</span>
+<span class="go">│ *  --outfolder             TEXT  Path to the output folder [default: None]           │</span>
+<span class="go">│                                  [required]                                          │</span>
+<span class="go">│ *  --identifier            TEXT  Identifier of the bed file [default: None]          │</span>
+<span class="go">│                                  [required]                                          │</span>
+<span class="go">│    --help                        Show this message and exit.                         │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-reprocess-bedset-help"><code>bedboss reprocess-bedset --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss reprocess-bedset [OPTIONS]                                              </span>
+
+<span class="go"> Reprocess a bedset                                                                     </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bedbase-config                    TEXT  Path to the bedbase config file         │</span>
+<span class="go">│                                              [default: None]                         │</span>
+<span class="go">│                                              [required]                              │</span>
+<span class="go">│ *  --outfolder                         TEXT  Path to the output folder               │</span>
+<span class="go">│                                              [default: None]                         │</span>
+<span class="go">│                                              [required]                              │</span>
+<span class="go">│ *  --identifier                        TEXT  Bedset ID [default: None] [required]    │</span>
+<span class="go">│    --no-fail           --no-no-fail          Do not fail on error [default: no-fail] │</span>
+<span class="go">│    --heavy             --no-heavy            Run the heavy version of the pipeline   │</span>
+<span class="go">│                                              [default: no-heavy]                     │</span>
+<span class="go">│    --help                                    Show this message and exit.             │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-make-bed-help"><code>bedboss make-bed --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss make-bed [OPTIONS]                                                      </span>
+
+<span class="go"> Create a bed files form a [bigwig, bedgraph, bed, bigbed, wig] file                    </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --input-file                        TEXT  Path to the input file [default: None]  │</span>
+<span class="go">│                                              [required]                              │</span>
+<span class="go">│ *  --input-type                        TEXT  Type of the input file. Options are:    │</span>
+<span class="go">│                                              bigwig, bedgraph, bed, bigbed, wig      │</span>
+<span class="go">│                                              [default: None]                         │</span>
+<span class="go">│                                              [required]                              │</span>
+<span class="go">│ *  --outfolder                         TEXT  Path to the output folder               │</span>
+<span class="go">│                                              [default: None]                         │</span>
+<span class="go">│                                              [required]                              │</span>
+<span class="go">│ *  --genome                            TEXT  Genome name. Example: &#39;hg38&#39;            │</span>
+<span class="go">│                                              [default: None]                         │</span>
+<span class="go">│                                              [required]                              │</span>
+<span class="go">│    --rfg-config                        TEXT  Path to the rfg config file             │</span>
+<span class="go">│                                              [default: None]                         │</span>
+<span class="go">│    --narrowpeak     --no-narrowpeak          Is the input file a narrowpeak file?    │</span>
+<span class="go">│                                              [default: no-narrowpeak]                │</span>
+<span class="go">│    --chrom-sizes                       TEXT  Path to the chrom sizes file            │</span>
+<span class="go">│                                              [default: None]                         │</span>
+<span class="go">│    --multi          --no-multi               Run multiple samples                    │</span>
+<span class="go">│                                              [default: no-multi]                     │</span>
+<span class="go">│    --recover        --no-recover             Recover from previous run               │</span>
+<span class="go">│                                              [default: recover]                      │</span>
+<span class="go">│    --dirty          --no-dirty               Run without removing existing files     │</span>
+<span class="go">│                                              [default: no-dirty]                     │</span>
+<span class="go">│    --help                                    Show this message and exit.             │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-make-bigbed-help"><code>bedboss make-bigbed --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss make-bigbed [OPTIONS]                                                   </span>
+
+<span class="go"> Create a bigbed files form a bed file                                                  </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bed-file                       TEXT  Path to the input file [default: None]     │</span>
+<span class="go">│                                           [required]                                 │</span>
+<span class="go">│ *  --bed-type                       TEXT  bed type to be used for bigBed file        │</span>
+<span class="go">│                                           generation &#39;bed{bedtype}+{n}&#39; [Default:    │</span>
+<span class="go">│                                           None] (e.g bed3+1)                         │</span>
+<span class="go">│                                           [default: None]                            │</span>
+<span class="go">│                                           [required]                                 │</span>
+<span class="go">│ *  --outfolder                      TEXT  Path to the output folder [default: None]  │</span>
+<span class="go">│                                           [required]                                 │</span>
+<span class="go">│ *  --genome                         TEXT  Genome name. Example: &#39;hg38&#39;               │</span>
+<span class="go">│                                           [default: None]                            │</span>
+<span class="go">│                                           [required]                                 │</span>
+<span class="go">│    --rfg-config                     TEXT  Path to the rfg config file                │</span>
+<span class="go">│                                           [default: None]                            │</span>
+<span class="go">│    --chrom-sizes                    TEXT  Path to the chrom sizes file               │</span>
+<span class="go">│                                           [default: None]                            │</span>
+<span class="go">│    --multi          --no-multi            Run multiple samples [default: no-multi]   │</span>
+<span class="go">│    --recover        --no-recover          Recover from previous run                  │</span>
+<span class="go">│                                           [default: recover]                         │</span>
+<span class="go">│    --dirty          --no-dirty            Run without removing existing files        │</span>
+<span class="go">│                                           [default: no-dirty]                        │</span>
+<span class="go">│    --help                                 Show this message and exit.                │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-run-qc-help"><code>bedboss run-qc --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss run-qc [OPTIONS]                                                        </span>
+
+<span class="go"> Run the quality control for a bed file                                                 </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bed-file                             TEXT     Path to the bed file to check the │</span>
+<span class="go">│                                                    quality control on.               │</span>
+<span class="go">│                                                    [default: None]                   │</span>
+<span class="go">│                                                    [required]                        │</span>
+<span class="go">│ *  --outfolder                            TEXT     Path to the output folder         │</span>
+<span class="go">│                                                    [default: None]                   │</span>
+<span class="go">│                                                    [required]                        │</span>
+<span class="go">│    --max-file-size                        INTEGER  Maximum file size threshold to    │</span>
+<span class="go">│                                                    pass the quality                  │</span>
+<span class="go">│                                                    [default: 2147483648]             │</span>
+<span class="go">│    --max-region-number                    INTEGER  Maximum number of regions         │</span>
+<span class="go">│                                                    threshold to pass the quality     │</span>
+<span class="go">│                                                    [default: 5000000]                │</span>
+<span class="go">│    --min-region-width                     INTEGER  Minimum region width threshold to │</span>
+<span class="go">│                                                    pass the quality                  │</span>
+<span class="go">│                                                    [default: 10]                     │</span>
+<span class="go">│    --multi                --no-multi               Run multiple samples              │</span>
+<span class="go">│                                                    [default: no-multi]               │</span>
+<span class="go">│    --recover              --no-recover             Recover from previous run         │</span>
+<span class="go">│                                                    [default: recover]                │</span>
+<span class="go">│    --dirty                --no-dirty               Run without removing existing     │</span>
+<span class="go">│                                                    files                             │</span>
+<span class="go">│                                                    [default: no-dirty]               │</span>
+<span class="go">│    --help                                          Show this message and exit.       │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-run-stats-help"><code>bedboss run-stats --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss run-stats [OPTIONS]                                                     </span>
+
+<span class="go"> Create the statistics for a single bed file.                                           </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bed-file                                     TEXT  Path to the bed file         │</span>
+<span class="go">│                                                         [default: None]              │</span>
+<span class="go">│                                                         [required]                   │</span>
+<span class="go">│ *  --genome                                       TEXT  Genome name. Example: &#39;hg38&#39; │</span>
+<span class="go">│                                                         [default: None]              │</span>
+<span class="go">│                                                         [required]                   │</span>
+<span class="go">│ *  --outfolder                                    TEXT  Path to the output folder    │</span>
+<span class="go">│                                                         [default: None]              │</span>
+<span class="go">│                                                         [required]                   │</span>
+<span class="go">│    --ensdb                                        TEXT  Path to the EnsDb database   │</span>
+<span class="go">│                                                         file                         │</span>
+<span class="go">│                                                         [default: None]              │</span>
+<span class="go">│    --open-signal-matrix                           TEXT  Path to the open signal      │</span>
+<span class="go">│                                                         matrix file                  │</span>
+<span class="go">│                                                         [default: None]              │</span>
+<span class="go">│    --just-db-commit        --no-just-db-commit          Just commit to the database? │</span>
+<span class="go">│                                                         [default: no-just-db-commit] │</span>
+<span class="go">│    --multi                 --no-multi                   Run multiple samples         │</span>
+<span class="go">│                                                         [default: no-multi]          │</span>
+<span class="go">│    --recover               --no-recover                 Recover from previous run    │</span>
+<span class="go">│                                                         [default: recover]           │</span>
+<span class="go">│    --dirty                 --no-dirty                   Run without removing         │</span>
+<span class="go">│                                                         existing files               │</span>
+<span class="go">│                                                         [default: no-dirty]          │</span>
+<span class="go">│    --help                                               Show this message and exit.  │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-reindex-help"><code>bedboss reindex --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss reindex [OPTIONS]                                                       </span>
+
+<span class="go"> Reindex the bedbase database and insert all files to the qdrant database.              </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bedbase-config        TEXT  Path to the bedbase config file [default: None]     │</span>
+<span class="go">│                                  [required]                                          │</span>
+<span class="go">│    --help                        Show this message and exit.                         │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-make-bedset-help"><code>bedboss make-bedset --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss make-bedset [OPTIONS]                                                   </span>
+
+<span class="go"> Create a bedset from a pep file, and insert it to the bedbase database.                </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --pep                                        TEXT  PEP file. Local or remote path │</span>
+<span class="go">│                                                       [default: None]                │</span>
+<span class="go">│                                                       [required]                     │</span>
+<span class="go">│ *  --outfolder                                  TEXT  Path to the output folder      │</span>
+<span class="go">│                                                       [default: None]                │</span>
+<span class="go">│                                                       [required]                     │</span>
+<span class="go">│ *  --bedbase-config                             TEXT  Path to the bedbase config     │</span>
+<span class="go">│                                                       file                           │</span>
+<span class="go">│                                                       [default: None]                │</span>
+<span class="go">│                                                       [required]                     │</span>
+<span class="go">│ *  --bedset-name                                TEXT  Name of the bedset             │</span>
+<span class="go">│                                                       [default: None]                │</span>
+<span class="go">│                                                       [required]                     │</span>
+<span class="go">│    --heavy              --no-heavy                    Run the heavy version of the   │</span>
+<span class="go">│                                                       pipeline                       │</span>
+<span class="go">│                                                       [default: no-heavy]            │</span>
+<span class="go">│    --force-overwrite    --no-force-overwrite          Force overwrite the output     │</span>
+<span class="go">│                                                       files                          │</span>
+<span class="go">│                                                       [default: no-force-overwrite]  │</span>
+<span class="go">│    --upload-s3          --no-upload-s3                Upload to S3                   │</span>
+<span class="go">│                                                       [default: no-upload-s3]        │</span>
+<span class="go">│    --upload-pephub      --no-upload-pephub            Upload to PEPHub               │</span>
+<span class="go">│                                                       [default: no-upload-pephub]    │</span>
+<span class="go">│    --no-fail            --no-no-fail                  Do not fail on error           │</span>
+<span class="go">│                                                       [default: no-no-fail]          │</span>
+<span class="go">│    --help                                             Show this message and exit.    │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-init-config-help"><code>bedboss init-config --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss init-config [OPTIONS]                                                   </span>
+
+<span class="go"> Initialize the new, sample configuration file                                          </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --outfolder        TEXT  Path to the output folder [default: None] [required]     │</span>
+<span class="go">│    --help                   Show this message and exit.                              │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-delete-bed-help"><code>bedboss delete-bed --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss delete-bed [OPTIONS]                                                    </span>
+
+<span class="go"> Delete bed from the bedbase database                                                   </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --sample-id        TEXT  Sample ID [default: None] [required]                     │</span>
+<span class="go">│ *  --config           TEXT  Path to the bedbase config file [default: None]          │</span>
+<span class="go">│                             [required]                                               │</span>
+<span class="go">│    --help                   Show this message and exit.                              │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-delete-bedset-help"><code>bedboss delete-bedset --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss delete-bedset [OPTIONS]                                                 </span>
+
+<span class="go"> Delete BedSet from the bedbase database                                                </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --identifier        TEXT  BedSet ID [default: None] [required]                    │</span>
+<span class="go">│ *  --config            TEXT  Path to the bedbase config file [default: None]         │</span>
+<span class="go">│                              [required]                                              │</span>
+<span class="go">│    --help                    Show this message and exit.                             │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-tokenize-bed-help"><code>bedboss tokenize-bed --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss tokenize-bed [OPTIONS]                                                  </span>
+
+<span class="go"> Tokenize a bedfile                                                                     </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bed-id                              TEXT  Path to the bed file [default: None]  │</span>
+<span class="go">│                                                [required]                            │</span>
+<span class="go">│ *  --universe-id                         TEXT  Universe ID [default: None]           │</span>
+<span class="go">│                                                [required]                            │</span>
+<span class="go">│    --cache-folder                        TEXT  Path to the cache folder              │</span>
+<span class="go">│                                                [default: None]                       │</span>
+<span class="go">│    --add-to-db         --no-add-to-db          Add the tokenized bed file to the     │</span>
+<span class="go">│                                                bedbase database                      │</span>
+<span class="go">│                                                [default: no-add-to-db]               │</span>
+<span class="go">│    --bedbase-config                      TEXT  Path to the bedbase config file       │</span>
+<span class="go">│                                                [default: None]                       │</span>
+<span class="go">│    --overwrite         --no-overwrite          Overwrite the existing tokenized bed  │</span>
+<span class="go">│                                                file                                  │</span>
+<span class="go">│                                                [default: no-overwrite]               │</span>
+<span class="go">│    --help                                      Show this message and exit.           │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-delete-tokenized-help"><code>bedboss delete-tokenized --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss delete-tokenized [OPTIONS]                                              </span>
+
+<span class="go"> Delete tokenized bed file                                                              </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --universe-id        TEXT  Universe ID [default: None] [required]                 │</span>
+<span class="go">│ *  --bed-id             TEXT  Bed ID [default: None] [required]                      │</span>
+<span class="go">│    --config             TEXT  Path to the bedbase config file [default: None]        │</span>
+<span class="go">│    --help                     Show this message and exit.                            │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-convert-universe-help"><code>bedboss convert-universe --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss convert-universe [OPTIONS]                                              </span>
+
+<span class="go"> Convert bed file to universe                                                           </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --bed-id        TEXT  Path to the bed file [default: None] [required]             │</span>
+<span class="go">│ *  --config        TEXT  Path to the bedbase config file [default: None] [required]  │</span>
+<span class="go">│    --method        TEXT  Method used to create the universe [default: None]          │</span>
+<span class="go">│    --bedset        TEXT  Bedset used to create the universe [default: None]          │</span>
+<span class="go">│    --help                Show this message and exit.                                 │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-check-requirements-help"><code>bedboss check-requirements --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss check-requirements [OPTIONS]                                            </span>
+
+<span class="go"> Check installed R packages                                                             </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ --help          Show this message and exit.                                          │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-install-requirements-help"><code>bedboss install-requirements --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss install-requirements [OPTIONS]                                          </span>
+
+<span class="go"> Install R dependencies                                                                 </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ --help          Show this message and exit.                                          │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-verify-config-help"><code>bedboss verify-config --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss verify-config [OPTIONS]                                                 </span>
+
+<span class="go"> Verify configuration file                                                              </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ *  --config        TEXT  Path to the bedbase config file [default: None] [required]  │</span>
+<span class="go">│    --help                Show this message and exit.                                 │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+<h2 id="bedboss-get-commands-help"><code>bedboss get-commands --help</code></h2>
+<div class="highlight"><pre><span></span><code><span class="go"> Usage: bedboss get-commands [OPTIONS]                                                  </span>
+
+<span class="go"> Get available commands                                                                 </span>
+
+<span class="go">╭─ Options ────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="go">│ --help          Show this message and exit.                                          │</span>
+<span class="go">╰──────────────────────────────────────────────────────────────────────────────────────╯</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../tutorials/python/ref_genome_tutorial/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Ref_genome validator">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Ref_genome validator
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../tutorials/bedms_tutorial/" class="md-footer__link md-footer__link--next" aria-label="Next: BEDMS tutorial">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                BEDMS tutorial
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <a class="" href="http://databio.org/">
+  <img src="https://databio.org/images/logo/logo_databio_long.svg"
+    style="height:60px;"
+    alt="Databio logo">
+</a>
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["header.autohide", "navigation.sections", "navigation.footer", "navigation.indexes", "toc.follow", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.top"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
