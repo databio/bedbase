@@ -1,14 +1,14 @@
-# GlobalRefgetStore Python Reference
+# RefgetStore Python Reference
 
-This is a Python-specific reference guide that provides quick examples for using the `GlobalRefgetStore` class from the `gtars.refget` module. For detailed information about the underlying RefgetStore file format specification, see [refget-store-format.md](../refget-store-format.md).
+This is a Python-specific reference guide that provides quick examples for using the `RefgetStore` class from the `gtars.refget` module. For detailed information about the underlying RefgetStore file format specification, see [refget-store-format.md](../refget-store-format.md).
 
 ## Creating and Populating a Store
 
 ```python
-from gtars.refget import GlobalRefgetStore, StorageMode, digest_fasta
+from refget import RefgetStore
 
-# Create a new store in Encoded mode (space-efficient)
-store = GlobalRefgetStore(StorageMode.Encoded)
+# Create a new store (defaults to Encoded mode, space-efficient)
+store = RefgetStore.in_memory()
 print(f"Initialized store: {store}")
 
 # Add sequences from a FASTA file
@@ -39,7 +39,7 @@ store_path = "my_refget_store"
 store.write_store_to_dir(store_path, "sequences/%s2/%s.seq")
 
 # Load a local store
-loaded_store = GlobalRefgetStore.load_local(store_path)
+loaded_store = RefgetStore.load_local(store_path)
 ```
 
 ## Loading Remote Stores with Caching
@@ -50,7 +50,7 @@ You can load stores from remote URLs (HTTP/HTTPS) with local caching:
 # Load from a remote server with local caching
 cache_dir = "local_cache"
 remote_url = "https://refget-server.example.com/hg38"
-remote_store = GlobalRefgetStore.load_remote(cache_dir, remote_url)
+remote_store = RefgetStore.load_remote(cache_dir, remote_url)
 
 # Get sequence metadata
 seq_metadata = list(remote_store.sequence_metadata())
@@ -127,7 +127,7 @@ python -m http.server 8200
 Then connect to it:
 
 ```python
-remote_store = GlobalRefgetStore.load_remote(
+remote_store = RefgetStore.load_remote(
     "local_cache",
     "http://localhost:8200/my_refget_store/"
 )
