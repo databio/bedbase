@@ -50,6 +50,7 @@ nav:
     - User guides:
       - Public BEDbase UI user guide: bedbase/user/bedbase-ui-user-guide.md
       - Public BEDbase API user guide: bedbase/user/bedbase-api-user-guide.md
+      - 📖 API Cookbook: bedbase/user/api-cookbook.md
       - ✅ Reference Genome Compatibility: bedbase/user/reference-genome-compatibility.md
       - 📝 BED Classification:  bedbase/user/bed_classification.md
       - 💻 BBClient: bedbase/user/bbclient.md
@@ -108,6 +109,7 @@ nav:
       - Module overviews: geniml/modules.md
     - BBclient:
       - Cache BED files with BBClient: geniml/bbclient/bbclient.md
+      - BEDbase Python Workflow: geniml/tutorials/bbclient-workflow.md
       - Use BED cache in R: geniml/bbclient/pyBiocFileCache.md
     - Atacformer:
       - Atacformer: atacformer/README.md
