@@ -132,3 +132,6 @@ rs.to_bed_gz("path/to/save/bedfile.bed.gz")  # gzipped
 ```python
 rs.to_bigbed("path/to/save/bedfile.bb", chrom_sizes="path/to/chrom.sizes")
 ```
+
+!!! info 
+    - Detailed documentation for RegionSet is available in the [API reference](https://docs.rs/gtars-core/latest/gtars_core/models/region_set/).

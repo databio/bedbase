@@ -48,11 +48,11 @@ nav:
   - BEDbase:
     - BEDbase: bedbase/README.md
     - User guides:
-      - Public BEDbase UI user guide: bedbase/user/bedbase-ui-user-guide.md
-      - Public BEDbase API user guide: bedbase/user/bedbase-api-user-guide.md
+      - 📖 Public BEDbase UI user guide: bedbase/user/bedbase-ui-user-guide.md
+      - 📖 Public BEDbase API user guide: bedbase/user/bedbase-api-user-guide.md
       - ✅ Reference Genome Compatibility: bedbase/user/reference-genome-compatibility.md
       - 📝 BED Classification:  bedbase/user/bed_classification.md
-      - 💻 BBClient: bedbase/user/bbclient.md
+      - 💻 BBClient & caching: bedbase/user/bbclient.md
       - 🔍 BEDbase Search: bedbase/user/bedbase-search.md
       - 🪩 Embedding Visualization: bedbase/user/umap-visualizer.md
       - ⚙️ BED analyzer: bedbase/user/bed-analyzer.md
@@ -108,6 +108,7 @@ nav:
       - Module overviews: geniml/modules.md
     - BBclient:
       - Cache BED files with BBClient: geniml/bbclient/bbclient.md
+      - BBClient tutorial: geniml/tutorials/bbclient-workflow.md
       - Use BED cache in R: geniml/bbclient/pyBiocFileCache.md
     - Atacformer:
       - Atacformer: atacformer/README.md
@@ -174,7 +175,7 @@ nav:
       - Overview: gtars/modules.md
       - gtars-core: gtars/core.md
       # - gtars-io: gtars/io.md
-      - gtars-models: gtars/models.md
+      - gtars-models: gtars/regionSet.md
       - gtars-overlaprs: gtars/overlaprs.md
       - gtars-uniwig: gtars/uniwig.md
       - gtars-igd: gtars/igd.md

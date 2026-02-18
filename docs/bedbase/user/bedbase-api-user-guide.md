@@ -1,37 +1,117 @@
 # BEDbase API user guide
 
-### Introduction
+BEDbase exposes a REST API that lets you query metadata, download files, and search BED records and BEDsets programmatically.
 
-#### Data types
+!!! info "Full API reference"
+    The complete, interactive API reference is at **[api.bedbase.org/v1/docs](https://api.bedbase.org/v1/docs)**.
+    This page is a brief introduction to help you get started.
 
-BEDbase stores two types of data, which we call *records*. They are 1. BEDs, and 2. BEDsets. 
-BEDsets are simply collections of BEDs. Each record in the database is either a BED or a BEDset.
+---
 
-#### Endpoint organization
+## Base URL
 
-The endpoints are divided into 3 groups:
+```
+https://api.bedbase.org/v1
+```
 
+All endpoints described below are relative to this base URL.
 
-1. **`/bed`** endpoints are used to interact with metadata for BED records.
-2. **`/bedset`** endpoints are used to interact with metadata for BEDset records.
-3. **`/objects`** endpoints are used to download metadata and get URLs to retrieve the underlying data itself. These endpoints implement the [GA4GH DRS standard](https://ga4gh.github.io/data-repository-service-schemas/).
+---
 
-Therefore, to get information and statistics about BED or BEDset records, or what is contained in the database, look through the `/bed` and `/bedset` endpoints. But if you need to write a tool that gets the actual underlying files, then you'll need to use the `/objects` endpoints. The type of identifiers used in each case differ.
+## Data types
 
-### Record identifiers vs. object identifiers
+BEDbase stores two types of records:
 
-Each record has an identifier. For example, `eaf9ee97241f300f1c7e76e1f945141f` is a BED identifier. You can use this identifier for the metadata endpoints. To download files, you'll need something slightly different -- you need an *object identifier*. This is because each BED record includes multiple files, such as the original BED file, the BigBed file, analysis plots, and so on. To download a file, you will construct what we call the `object_id`, which identifies the specific file.
+| Type | Description |
+|------|-------------|
+| **BED** | A single BED file with associated metadata, statistics, and analysis outputs |
+| **BEDset** | A named collection of BED files |
 
-### How to construct object identifiers
+---
 
-Object IDs take the form `<record_type>.<record_identifier>.<result_id>`. An example of an object_id for a BED file is `bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile`
+## Endpoint groups
 
-So, you can get information about this object like this:
+The API is organized into four groups:
 
-`GET` [/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile](https://api.bedbase.org/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile)
+| Group | Path prefix | Purpose |
+|-------|-------------|---------|
+| **BED** | `/v1/bed/` | Metadata, statistics, and analysis for individual BED records |
+| **BEDset** | `/v1/bedset/` | Metadata and contents for BEDset records |
+| **Search** | `/v1/bed/search/` | Text, exact, and similarity-based search |
+| **Objects** | `/v1/objects/` | File download URLs (implements [GA4GH DRS](https://ga4gh.github.io/data-repository-service-schemas/)) |
 
-Or, you can get a URL to download the actual file with:
+---
 
-`GET` [/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile/access/http](https://api.bedbase.org/objects/bed.eaf9ee97241f300f1c7e76e1f945141f.bedfile/access/http)
+## Record identifiers and object identifiers
 
+Every BED and BEDset record has a **record identifier** — a hexadecimal digest, for example `dcc005e8761ad5599545cc538f6a2a4d`. Use this with the `/bed/` and `/bedset/` endpoints to retrieve metadata.
 
+To download actual files you need an **object identifier**, which specifies both the record and the particular file associated with it. Object IDs follow this pattern:
+
+```
+<record_type>.<record_id>.<file_type>
+```
+
+For example, `bed.dcc005e8761ad5599545cc538f6a2a4d.bedfile` refers to the BED file for that record.
+
+Common `<file_type>` values:
+
+| File type | Description |
+|-----------|-------------|
+| `bedfile` | The BED file (gzipped) |
+| `bigbed` | BigBed format |
+| `bedfile_figure` | Summary statistics plots |
+
+---
+
+## Examples
+
+### Get metadata for a BED record
+
+```
+GET /v1/bed/{bed_id}/metadata
+```
+
+```bash
+curl https://api.bedbase.org/v1/bed/dcc005e8761ad5599545cc538f6a2a4d/metadata
+```
+
+Returns a JSON object with fields such as genome assembly, region count, file size, and tissue/assay annotations.
+
+---
+
+### Search BED files by text
+
+```
+GET /v1/bed/search/text?query={query}
+```
+
+```bash
+curl "https://api.bedbase.org/v1/bed/search/text?query=CTCF+K562&limit=5"
+```
+
+Returns a ranked list of BED records whose metadata matches the query. Supports optional `genome` and `assay` filters.
+
+---
+
+### Download a BED file
+
+First, get the download URL via the Objects endpoint:
+
+```
+GET /v1/objects/{object_id}/access/http
+```
+
+```bash
+curl "https://api.bedbase.org/v1/objects/bed.dcc005e8761ad5599545cc538f6a2a4d.bedfile/access/http"
+```
+
+The response contains an `url` field. You can then download the file directly from that URL.
+
+---
+
+## See also
+
+- [Full API reference (Swagger)](https://api.bedbase.org/v1/docs)
+- [BBClient](bbclient.md) — Python/CLI/Rust client that handles downloads and caching for you
+- [BEDbase search guide](bedbase-search.md)
