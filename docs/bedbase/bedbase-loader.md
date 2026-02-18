@@ -31,14 +31,14 @@ To speed up the initial download and insertion, heavy processing is skipped at t
 
 Heavy processing is performed later in AWS using AWS Fargate and an automated cron job, after the files are downloaded and stored in the database.
 
-Docker image for heavy processing: https://github.com/databio/bedboss/blob/main/Dockerfile
+Docker image for heavy processing: [https://github.com/databio/bedboss/blob/main/Dockerfile](https://github.com/databio/bedboss/blob/main/Dockerfile)
 
 ### 🟢 Automated Genome Updates
 
 The bedbase-loader includes an automated genome updater that fetches genomes from the Refgenie server.
 Information about all available genomes is stored in BEDbase, allowing each BED file to be linked to the exact reference genome used to create it.
 
-Genome updates are handled by a scheduled cron job: https://github.com/databio/bedbase-loader/blob/master/.github/workflows/update_genomes.yml
+Genome updates are handled by a scheduled cron job: [https://github.com/databio/bedbase-loader/blob/master/.github/workflows/update_genomes.yml](https://github.com/databio/bedbase-loader/blob/master/.github/workflows/update_genomes.yml
 
 ### 🟢 UMAP Creator
 
@@ -46,4 +46,4 @@ An important part of BEDbase is the creation of embeddings for BED files.
 These embeddings enable visualization, providing insights into the data stored in BEDbase.
 
 The bedbase package automatically creates UMAP files, which are then visualized here: [https://bedbase.org/umap](https://bedbase.org/umap)
-To keep the UMAP visualization up-to-date, a scheduled cron job is used: https://github.com/databio/bedbase-loader/blob/master/.github/workflows/update_umap.yml
+To keep the UMAP visualization up-to-date, a scheduled cron job is used: [https://github.com/databio/bedbase-loader/blob/master/.github/workflows/update_umap.yml](https://github.com/databio/bedbase-loader/blob/master/.github/workflows/update_umap.yml
