@@ -4,6 +4,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] -- 2026-02-24
+- updated all crates to Rust 2024 edition
+- refactored R bindings to use `ExternalPtr<T>` for `RefgetStore` with GC finalizer
+- fixed off-by-one errors in uniwig and implemented variable format support
+- added `is_persisting` property and `add_sequence_collection` method to RefgetStore
+- code quality and maintenance improvements to gtars-refget
+- added FHR metadata spec compliance to refget
+- added alias extraction and management for sequences and collections
+- added ancillary digests, compare function, and seqcol spec consistency improvements
+- added streaming FASTA WASM support for refget computation
+- fixed RegionSet for bedboss pipeline and added custom error handling
+- removed outdated docs folder and fixed compiler warnings
+
+## [0.6.0] -- 2025-12-15
+- complete restructure of RefgetStore for improved user ergonomics
+- revamped GlobalRefgetStore with distinct disk-vs-memory backing modes
+- implemented FAI (FASTA index) computation in refget
+- added in-memory remote RefgetStore support
+- added compressed FASTA export
+- handle FASTA files with dots in filenames and sequence names with spaces
+- added quiet mode to store and return metadata when adding sequences
+- implemented nearest TSS calculation in RegionSet
+- added genomic distribution functions from gdrs
+- added bed classifier to WASM and genomicdist bindings
+- implemented bloom filter proof-of-concept for IGD
+- added `to_polars` function for converting RegionSet to polars DataFrame
+- added builder pattern for BBCache
+- added barcode mode to scoring function
+- implemented genome index in overlaprs
+- bumped PyO3, added pytests back
+- various bug fixes, linting, and documentation improvements
+- renamed genomic distributions crate to gtars-genomicdist
+
 ## [0.5.1] -- 2025-10-08
 - introduce web assembly bindings
 - introduce R bindings
