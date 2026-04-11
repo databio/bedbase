@@ -4,6 +4,52 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] -- 2026-03-06
+
+### RefgetStore (`gtars-refget`)
+- Major refactoring of RefgetStore for concurrent use and readonly mode
+- Add `load_all_collections`, `load_all_sequences`, and other bulk loading methods
+- Implement pipeline chain method for more efficient FASTA encoding
+- Add BGZF file support via MultiGzDecoder
+- Add jemalloc allocator for better memory management during FASTA ingestion
+- Add `clear` method for store cleanup
+- Store ancillary digests in RGSI index
+- Feature-gate Python bindings for faster compiling
+- FASTA reading optimizations for genomes with many chromosomes
+
+### Genomic Distributions (`gtars-genomicdist` 0.6.0)
+- Add GDA binary format and simplified partition loading
+- Add partition system, statistics ports, and GTF gene model loading
+- Add `IntervalRanges` trait with genomic range operations
+- Add `calcSummarySignal` port (signal matrix overlap + boxplot stats)
+- Replace `is_sorted` flag with `SortedRegionSet` newtype
+- Fix TSS distances and add promoter parameters
+- Add `--compact` flag for pipeline JSON output
+- Add genomicdist CLI, prep command, and packed binary serialization
+
+### Uniwig (`gtars-uniwig`)
+- Add streaming uniwig alongside current batch parallel implementation
+
+### Python bindings (`gtars` PyPI package)
+- Updated Python bindings for new RefgetStore API
+- Feature-gated bindings for faster compilation
+- Add jemalloc support
+
+### R bindings
+- Add genomicdist R bindings (statistics, partitions, signal, intervals, distances)
+- Update refget R bindings for new store API
+- Fix OpenSSL build issues
+
+### CLI
+- Add genomicdist, ranges, and consensus CLI subcommands
+
+### Multi-BED set operations
+- Add concat, union, jaccard, and consensus set operations
+- Add WASM bindings for genomicdist functions
+
+### CI/CD
+- Revamp publish workflows
+
 ## [0.7.0] -- 2026-02-24
 - updated all crates to Rust 2024 edition
 - refactored R bindings to use `ExternalPtr<T>` for `RefgetStore` with GC finalizer
