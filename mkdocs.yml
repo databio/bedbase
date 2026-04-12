@@ -201,7 +201,6 @@ nav:
         - RefgetStore: gtars/r/refgetstore.md
     - Reference:
       - Changelog: gtars/changelog.md
-      - RefgetStore structure: gtars/refget-store-format.md
       - Rust source API docs: https://docs.rs/gtars/latest/gtars/
       - Versioning policy: gtars/versioning.md
   - Manuscripts: 
