@@ -135,3 +135,62 @@ rs.to_bigbed("path/to/save/bedfile.bb", chrom_sizes="path/to/chrom.sizes")
 
 !!! info 
     - Detailed documentation for RegionSet is available in the [API reference](https://docs.rs/gtars-core/latest/gtars_core/models/region_set/).
+
+### 🟢 RegionSetList
+
+`RegionSetList` is the gtars equivalent of Bioconductor's `GRangesList` — an ordered collection of `RegionSet`s with optional names. It's the type downstream crates (genomicdist, lola) use to pass multiple region sets across FFI boundaries without paying N×clone costs.
+
+#### Example
+
+=== "Python"
+    ```python
+    from gtars.models import RegionSet, RegionSetList
+
+    rs1 = RegionSet("rep1.bed")
+    rs2 = RegionSet("rep2.bed")
+    rs3 = RegionSet("rep3.bed")
+
+    # Unnamed
+    rsl = RegionSetList([rs1, rs2, rs3])
+
+    # Or with names
+    rsl = RegionSetList([rs1, rs2, rs3], names=["rep1", "rep2", "rep3"])
+
+    print(len(rsl))                # number of sets
+    combined = rsl.concat()        # flatten into a single RegionSet (no merge)
+    set_id = rsl.identifier()      # stable order-independent identifier
+    ```
+
+=== "Rust"
+    ```rust
+    use gtars_core::models::{RegionSet, RegionSetList};
+
+    let rs1 = RegionSet::try_from("rep1.bed")?;
+    let rs2 = RegionSet::try_from("rep2.bed")?;
+    let rs3 = RegionSet::try_from("rep3.bed")?;
+
+    let rsl = RegionSetList::with_names(
+        vec![rs1, rs2, rs3],
+        vec!["rep1".into(), "rep2".into(), "rep3".into()],
+    );
+
+    // Iterate
+    for rs in &rsl {
+        println!("{} regions", rs.len());
+    }
+
+    // Flatten all regions into a single RegionSet (no merge/dedup)
+    let combined = rsl.concat();
+    let id = rsl.identifier();
+    # Ok::<(), gtars_core::errors::RegionSetError>(())
+    ```
+
+`RegionSetList::try_from` in Rust also accepts a **bedset manifest file** (text file listing one BED path per line) or a `Vec<&Path>` / `Vec<&str>` / `Vec<String>` / `Vec<PathBuf>`.
+
+`concat()` flattens without merging; if you need a reduced union, call `.reduce()` on the result — that method comes from the `IntervalRanges` trait in [gtars-genomicdist](genomicdist.md).
+
+## See also
+
+- **[gtars-core](core.md)** — the canonical Rust API reference for `Region`, `RegionSet`, `RegionSetList`, `Interval`, `Fragment`, `CoordinateMode`, and `RegionSetError`.
+- **[gtars-genomicdist](genomicdist.md)** — the `IntervalRanges` and `GenomicIntervalSetStatistics` traits that extend `RegionSet` with set-algebra and summary stats.
+- **[gtars-lola](lola.md)** — LOLA enrichment, which consumes `RegionSetList` for user-set and database-set inputs.
