@@ -2,6 +2,85 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
+# [0.11.0] - 2026-04-17
+## Added:
+- HPC module for running bedboss on HPC
+- CLI tool for bulk uploading files to Qdrant
+
+## Fixed:
+- Bed classifier
+- DB connection
+
+
+# [0.10.0] - 2026-04-05
+## Added:
+- Creation of parquet file for umap with more metadata inside
+
+## Changed:
+- Testing version of new peppy
+- New project style
+- Modernized docstrings and typing
+
+
+# [0.9.6] - 2026-02-18
+## Added:
+- Added scripts for downloading and analyzing ENCODE metadata
+
+## Changed:
+- Updated pep processing in GEO uploader and bedboss
+- Updated UMAP creation
+
+
+# [0.9.5] - 2026-02-16
+## Changed:
+- Improved metadata extractor with expanded cell line and assay extraction
+- Updated UMAP creation scripts
+- Updated requirements
+
+
+# [0.9.4] - 2026-02-06
+## Fixed:
+- Fixed large downloads of embeddings from qdrant
+
+
+# [0.9.3] - 2026-02-04
+## Changed:
+- Improved genome predictor
+- Updated bbconf version requirement
+
+## Fixed:
+- Added file check for GEO files that don't have size in their soft data
+
+
+# [0.9.2] - 2026-01-31
+## Added:
+- Added file size check for project-level files in GEO uploader
+
+
+# [0.9.1] - 2026-01-31
+## Changed:
+- Removed unpredictable cell lines from metadata extractor
+
+
+# [0.9.0] - 2026-01-31
+## Added:
+- Processing of gse series bed files #143
+- Added metadata extraction from description if cell line or assay is not avaliable
+
+## Changed:
+- Improved reference genome predictor
+
+## Fixed:
+- Fix reference genome update and upload in bedbase db #144
+
+# [0.8.2] - 2025-09-22
+## Fixed:
+- Downloading Refgenie chrom sizes (due to endpoint change)
+
+
+# [0.8.1] - 2025-09-12
+## Fixed:
+- Creation of UMAP 
 
 # [0.8.0] - 2025-09-11
 ## Added:

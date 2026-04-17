@@ -2,11 +2,74 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
+### [0.14.11] - 2026-04-15
+### Fixed:
+- External id search
 
-### [0.13.0] - 2025-12-01
+
+### [0.14.10] - 2026-04-05
+### Fixed:
+- version info bug
+
+### [0.14.9] - 2026-02-26
+### Changed:
+- Modernized docstrings
+- Type annotation for python 3.10+
+- Updated requirements
+- Updated package installation way to use pyproject.toml and hatchling
+
+### [0.14.8] - 2026-02-17
+### Changed:
+- Updated versions of dependencies
+
+### [0.14.7] - 2026-02-16
+### Changed:
+- Updated requirements
+
+### [0.14.6] - 2026-02-06
+### Fixed:
+- Fixed qdrant upload exception catching
+
+### [0.14.5] - 2026-02-05
+### Changed:
+- Updated reindexing script
+
+### [0.14.4] - 2026-02-04
+### Changed:
+- Updated reindexing of bed files to use only verified genome digests
+
+### [0.14.3] - 2026-01-31
 ### Added:
-- UMAP calculation
+- Cell line to detailed bedbase statistics
 
+### Fixed:
+- Saving of big file size (changed to bigint db column type)
+
+### [0.14.2] - 2026-01-21
+### Added:
+- Added method that fetches available reference genomes
+
+### [0.14.1] - 2025-12-22
+### Fixed:
+- Fixed hybrid search reindexing
+- Updated limits in reindexing
+
+### [0.14.0] - 2025-12-18
+### Fixed:
+- Insertion of tokenized files
+
+### Changed:
+- Updated qdrant and encoder model initialization. (One connection for qdrant and one initialized object per model)
+
+### Added:
+- Hybrid semantic search: dense + sparse search
+
+### Added:
+- Added hybrid semantic search.(dense + sparse search)
+
+### [0.13.0] - 2025-11-24
+### Added:
+- Conversion of bedfile to umap from predefined model
 
 ### [0.12.0] - 2025-09-11
 ### Added:
