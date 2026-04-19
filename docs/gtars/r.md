@@ -67,7 +67,7 @@ show(peaks)
 
 # 2. Summary statistics
 calcWidth(peaks) |> summary()
-interPeakSpacing(peaks)
+chromosomeStatistics(peaks)
 
 # 3. Interval set algebra
 merged <- reduce(peaks)

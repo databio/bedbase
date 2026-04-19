@@ -73,7 +73,7 @@ rd <- regionDistribution(query, nBins = 250L, chromSizes = chromSizes)
 Returns a data.table compatible with R GenomicDistributions' `plotChromBins`.
 
 !!! warning "`nBins` is a target, not a total"
-    When `chromSizes` is provided, `nBins` is the target bin count for the **longest** chromosome in `chromSizes`. Bin width is derived as `max(chromSizes) %/% nBins` (floored, minimum 1 bp), and every chromosome is tiled at the same bp width — so shorter chromosomes get proportionally fewer bins. The total bin count returned is `sum(ceiling(chrom_size / bin_width))`, which can substantially exceed `nBins` when `chromSizes` has many entries. To target a specific bin width in bp instead, pass `nBins = max_chrom_len %/% desired_bp`. This applies identically to `densityVector` and `densityHomogeneity` from [`r/regionset.md`](regionset.md#statistics-methods).
+    When `chromSizes` is provided, `nBins` is the target bin count for the **longest** chromosome in `chromSizes`. Bin width is derived as `max(chromSizes) %/% nBins` (floored, minimum 1 bp), and every chromosome is tiled at the same bp width — so shorter chromosomes get proportionally fewer bins. The total bin count returned is `sum(ceiling(chrom_size / bin_width))`, which can substantially exceed `nBins` when `chromSizes` has many entries. To target a specific bin width in bp instead, pass `nBins = max_chrom_len %/% desired_bp`.
 
 ## GC content and dinucleotides
 

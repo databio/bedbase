@@ -83,17 +83,13 @@ distribution(rs, nBins = 250)                     # bin counts across the genome
 distribution(rs, nBins = 250, chromSizes = hg38)  # with reference chrom sizes
 
 clusterRegions(rs, maxGap = 5000L)  # cluster id per region
-interPeakSpacing(rs)                 # spacing stats list
-peakClusters(rs, radius_bp = 5000L, min_cluster_size = 2L)
-densityVector(rs, chrom_sizes = hg38, nBins = 250L)
-densityHomogeneity(rs, chrom_sizes = hg38, nBins = 250L)
 ```
 
 !!! warning "Output length for `neighborDistances` / `nearestNeighbors`"
     Both skip chromosomes with only one region (matching R GenomicDistributions). The returned vector is **not aligned 1:1** with the input — it's shorter than `length(rs)` whenever any chromosome has a single peak.
 
 !!! warning "`nBins` is a target, not a total"
-    In `distribution(chromSizes = ...)`, `densityVector`, and `densityHomogeneity`, `nBins` is the target bin count for the **longest** chromosome in `chromSizes`. Bin width is derived as `max(chromSizes) %/% nBins` (floored, minimum 1 bp), and every chromosome is tiled at the same bp width — so shorter chromosomes get proportionally fewer bins. The total bin count returned is `sum(ceiling(chrom_size / bin_width))`, which can substantially exceed `nBins` when `chromSizes` has many entries. To target a specific bin width in bp instead, pass `nBins = max_chrom_len %/% desired_bp`.
+    In `distribution(chromSizes = ...)`, `nBins` is the target bin count for the **longest** chromosome in `chromSizes`. Bin width is derived as `max(chromSizes) %/% nBins` (floored, minimum 1 bp), and every chromosome is tiled at the same bp width — so shorter chromosomes get proportionally fewer bins. The total bin count returned is `sum(ceiling(chrom_size / bin_width))`, which can substantially exceed `nBins` when `chromSizes` has many entries. To target a specific bin width in bp instead, pass `nBins = max_chrom_len %/% desired_bp`.
 
 ### Interval set algebra
 

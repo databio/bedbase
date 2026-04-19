@@ -10,7 +10,6 @@ Rust port of the R [GenomicDistributions](https://code.databio.org/GenomicDistri
 - **Nearest-TSS / nearest-feature distance** calculations (`TssIndex`).
 - **GC content** and **dinucleotide frequency** against a reference genome.
 - **BED file classification** (optional `bedclassifier` feature, polars-backed).
-- **Density and clustering** statistics used for ML feature vectors and peak-clustering summaries.
 - The **GDA** binary gene-model format and the **.fab** binary FASTA format for fast mmap-backed sequence lookup.
 
 All operations take a `&RegionSet` (from `gtars-core`) as input and either extend it via trait implementations or run as free functions. If you're new to the crate, start with the `IntervalRanges` and `GenomicIntervalSetStatistics` traits — those cover the GRanges/GenomicDistributions surface area most users need.
@@ -47,7 +46,6 @@ All of these are re-exported at the crate root, so you typically import them dir
 use gtars_genomicdist::{
     // Statistics
     GenomicIntervalSetStatistics,
-    ClusterStats, DensityHomogeneity, DensityVector, SpacingStats,
     // Interval algebra
     IntervalRanges, RegionSetListOps, pairwise_jaccard,
     // Strand-aware wrappers
@@ -78,13 +76,9 @@ The submodules (`statistics`, `interval_ranges`, `partitions`, `signal`, `consen
 
 ## Statistics
 
-The `GenomicIntervalSetStatistics` trait extends `RegionSet` with two kinds of summaries:
+The `GenomicIntervalSetStatistics` trait extends `RegionSet` with per-region and per-pair quantities — direct ports of the R GenomicDistributions functions (`calcWidth`, `calcNeighborDist`, `calcNearestNeighbors`, `calcChromBins`). These return vectors or per-chromosome tables, one number per peak or per gap. Use them when you want to *see* each value — plot a histogram, feed them to a downstream test, render a per-chromosome heatmap.
 
-1. **Per-region and per-pair quantities** — direct ports of the R GenomicDistributions functions (`calcWidth`, `calcNeighborDist`, `calcNearestNeighbors`, `calcChromBins`). These return vectors or per-chromosome tables, one number per peak or per gap. Use them when you want to *see* each value — plot a histogram, feed them to a downstream test, render a per-chromosome heatmap.
-
-2. **Whole-set scalar summaries** — new in gtars. These collapse an entire peak set into a handful of numbers that answer questions like "how regularly are my peaks spaced?", "how clumpy is this peak set?", or "how evenly is it spread across the genome?". Each one wraps a per-region calculation and reduces it to a scalar / small struct. Use them when you want to *compare* peak sets against each other or a baseline, build ML feature vectors, or run peak-set QC.
-
-Bring the trait into scope and both kinds of methods appear on any `RegionSet`.
+Bring the trait into scope and the methods appear on any `RegionSet`.
 
 ### Per-region and per-pair quantities
 
@@ -125,68 +119,6 @@ let nn: Vec<u32> = peaks.calc_nearest_neighbors()?;
 | `calc_neighbor_distances()` | "What's the bp gap between every pair of consecutive peaks on each chromosome?" | `Result<Vec<i64>>` |
 | `calc_nearest_neighbors()` | "How far is each peak from its closest neighbor?" — port of R `calcNearestNeighbors()` | `Result<Vec<u32>>` |
 
-### Whole-set scalar summaries
-
-These collapse the peak set to a handful of numbers, answering questions about **spatial arrangement** across the genome. They're complementary to the per-region quantities above — each one internally calls one of the per-region methods and then summarizes the result.
-
-```rust
-use std::collections::HashMap;
-use gtars_core::models::RegionSet;
-use gtars_genomicdist::GenomicIntervalSetStatistics;
-
-let peaks = RegionSet::try_from("peaks.bed")?;
-let chrom_sizes: HashMap<String, u32> =
-    [("chr1".into(), 248_956_422), ("chr2".into(), 242_193_529)].into();
-
-// 1. How regularly are peaks spaced?
-//    Returns SpacingStats: mean/median/std/IQR plus log-space stats that
-//    handle heavy-tailed gap distributions. Small log_std => regular arrays
-//    (CTCF-style); large log_std => bursty pileups.
-let spacing = peaks.calc_inter_peak_spacing();
-println!("n_gaps={}, median={:.0} bp, log_std={:.2}",
-    spacing.n_gaps, spacing.median, spacing.log_std);
-
-// 2. How much does the peak set cluster at a 5 kb stitching radius?
-//    Single-linkage clustering — two peaks link if the gap between them is
-//    ≤ radius_bp. The default `min_cluster_size = 2` answers "fraction of
-//    peaks that have at least one neighbor within 5 kb", matching typical
-//    super-enhancer-stitching / enhancer-clustering analyses.
-let clusters = peaks.calc_peak_clusters(5_000, 2);
-println!(
-    "{} clusters, {:.1}% of peaks clustered, biggest={}",
-    clusters.n_clusters,
-    clusters.fraction_clustered * 100.0,
-    clusters.max_cluster_size,
-);
-
-// 3. Dense per-window count vector across the whole genome — an ML-ready
-//    feature vector. Stable karyotypic ordering means vectors from different
-//    BED files are aligned column-for-column, so you can stack them into a
-//    matrix and feed to downstream models.
-let density = peaks.calc_density_vector(&chrom_sizes, 250);
-println!("density vector: {} windows, bin_width={} bp",
-    density.counts.len(), density.bin_width);
-
-// 4. How evenly is the peak set spread across the genome, as a scalar?
-//    Mean count per window + variance + coefficient of variation (Poisson
-//    ≈ 1, clustered >> 1, even << 1) + Gini + nonzero-window count. The
-//    canonical "how uniform is this peak set" measure.
-let homog = peaks.calc_density_homogeneity(&chrom_sizes, 250);
-println!(
-    "mean={:.2}, CV={:.2}, gini={:.3}, {}/{} windows nonzero",
-    homog.mean_count, homog.cv, homog.gini,
-    homog.n_nonzero_windows, homog.n_windows,
-);
-# Ok::<(), Box<dyn std::error::Error>>(())
-```
-
-| method | question it answers | wraps | returns |
-|---|---|---|---|
-| `calc_inter_peak_spacing()` | "How regularly are my peaks spaced?" — mean/median/std/IQR and log-space stats of inter-peak gaps | `calc_neighbor_distances` | `SpacingStats` |
-| `calc_peak_clusters(radius_bp, min_cluster_size)` | "How clumpy is my peak set at a given stitching radius?" — cluster counts, sizes, and the fraction of peaks in multi-peak clusters | `cluster(radius_bp)` from `IntervalRanges` | `ClusterStats` |
-| `calc_density_vector(chrom_sizes, n_bins)` | "Give me a stable, ML-ready per-window count vector across the whole genome" — dense, zero-padded, karyotypically ordered | per-region midpoint binning | `DensityVector` |
-| `calc_density_homogeneity(chrom_sizes, n_bins)` | "How evenly are my peaks spread across the genome, as a scalar?" — mean/variance/CV/Gini of the density vector | `calc_density_vector` | `DensityHomogeneity` |
-
 ### Output structs
 
 ```rust
@@ -202,45 +134,13 @@ pub struct ChromosomeStatistics {
 }
 
 pub struct RegionBin { pub chr: String, pub start: u32, pub end: u32, pub n: u32, pub rid: u32 }
-
-pub struct SpacingStats {
-    pub n_gaps: usize,
-    pub mean: f64, pub median: f64, pub std: f64, pub iqr: f64,
-    pub log_mean: f64, pub log_std: f64,
-}
-
-pub struct ClusterStats {
-    pub radius_bp: u32,
-    pub n_clusters: usize,
-    pub n_clustered_peaks: usize,
-    pub mean_cluster_size: f64,
-    pub max_cluster_size: usize,
-    pub fraction_clustered: f64,
-}
-
-pub struct DensityVector {
-    pub n_bins: u32,        // target bins for the longest chromosome
-    pub bin_width: u32,     // derived as max_chrom_len / n_bins, floored, min 1
-    pub counts: Vec<u32>,   // dense, row-major across chromosomes in karyotype order
-    pub chrom_offsets: Vec<(String, usize)>,
-}
-
-pub struct DensityHomogeneity {
-    pub bin_width: u32,
-    pub n_windows: usize,
-    pub n_nonzero_windows: usize,
-    pub mean_count: f64,
-    pub variance: f64,
-    pub cv: f64,
-    pub gini: f64,
-}
 ```
 
 !!! warning "Output length for spacing/nearest calculations"
     `calc_neighbor_distances` and `calc_nearest_neighbors` **skip single-region chromosomes** (matching R GenomicDistributions behavior). The output length is therefore **not 1:1 with the input region count** — it's the number of multi-region chromosomes' regions. No sentinel values are emitted. If you need 1:1 alignment, filter your input to multi-region chromosomes first.
 
 !!! warning "`n_bins` is a target, not a total"
-    In `calc_density_vector`, `calc_density_homogeneity`, and `region_distribution_with_chrom_sizes`, `n_bins` is the target bin count for the **longest** chromosome in `chrom_sizes`. Bin width is derived from that, and every chromosome is tiled at the same bp width — so shorter chromosomes get fewer bins and the total bin count is `sum(ceil(chrom_size / bin_width))`, which can exceed `n_bins` substantially. To target a specific bin width in bp, set `n_bins = max_chrom_len / desired_bp`.
+    In `region_distribution_with_chrom_sizes`, `n_bins` is the target bin count for the **longest** chromosome in `chrom_sizes`. Bin width is derived from that, and every chromosome is tiled at the same bp width — so shorter chromosomes get fewer bins and the total bin count is `sum(ceil(chrom_size / bin_width))`, which can exceed `n_bins` substantially. To target a specific bin width in bp, set `n_bins = max_chrom_len / desired_bp`.
 
 ## Interval set algebra
 

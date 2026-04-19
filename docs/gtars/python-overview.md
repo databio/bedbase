@@ -44,7 +44,7 @@ merged = rs.reduce()                 # merge overlapping
 promoters = rs.promoters(2000, 0)    # 2kb upstream
 ```
 
-See [`gtars.models`](python/models.md) for the full `RegionSet` surface — including `reduce`, `setdiff`, `union`, `intersect_all`, `jaccard`, `coverage`, `neighbor_distances`, `peak_clusters`, `density_vector`, and more.
+See [`gtars.models`](python/models.md) for the full `RegionSet` surface — including `reduce`, `setdiff`, `union`, `intersect_all`, `jaccard`, `coverage`, `neighbor_distances`, `nearest_neighbors`, and more.
 
 ## Extended example — genomic distributions
 

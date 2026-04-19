@@ -6,7 +6,7 @@ WebAssembly bindings for gtars, enabling genomic interval analysis directly in b
 
 - Zero-installation genomic tools running client-side.
 - Full `RegionSet` interval algebra and summary statistics.
-- Genomic distribution analysis: partitions, signal matrices, density vectors, consensus regions.
+- Genomic distribution analysis: partitions, signal matrices, consensus regions.
 - LOLA enrichment testing with in-memory region databases.
 - TypeScript-friendly — the published package ships `.d.ts` declarations generated from the Rust source.
 
@@ -85,5 +85,5 @@ function ConsensusComponent({ replicates }: { replicates: Array<[string, number,
 
 - `RegionSet` construction sorts on load. Repeated operations don't re-sort.
 - Overlap queries (`jaccard`, `setdiff`, `intersect`, etc.) route through the AIList index under the hood, giving O(log n) per-query lookups.
-- Statistics methods like `densityVector` and `peakClusters` are implemented in Rust and called via zero-copy boundary — they're substantially faster than pure-JS equivalents for typical peak-set sizes.
+- Statistics methods are implemented in Rust and called via zero-copy boundary — they're substantially faster than pure-JS equivalents for typical peak-set sizes.
 - For very large numeric outputs, the Wasm glue converts between Rust `Vec<u32>` and JS arrays — if you're hitting GC pressure, consider batching calls or keeping `RegionSet` handles around instead of returning raw arrays.

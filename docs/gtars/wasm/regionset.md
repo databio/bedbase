@@ -63,22 +63,14 @@ const gaps: number[] = rs.calcNeighborDistances();
 // Per-region min-neighbor distance
 const nn: number[] = rs.calcNearestNeighbors();
 
-// Descriptive summary of inter-peak spacing
-const spacing = rs.interPeakSpacing();
-// { n_gaps, mean, median, std, iqr, log_mean, log_std }
-
 // Single-linkage clusters at a stitching radius; returns a cluster id per region
 const clusterIds: number[] = rs.cluster(5_000);
-
-// Cluster-level summary at a stitching radius (default min_cluster_size = 2)
-const clusters = rs.peakClusters(5_000, 2);
-// { radius_bp, n_clusters, n_clustered_peaks, mean_cluster_size, max_cluster_size, fraction_clustered }
 ```
 
 !!! warning "Output length for `calcNeighborDistances` / `calcNearestNeighbors`"
     Both methods **skip chromosomes with only one region** (matching R GenomicDistributions). The returned array is therefore **not aligned 1:1 with input regions** — it's shorter than `rs.numberOfRegions` whenever any chromosome has a single peak. No sentinel values are emitted.
 
-### Region distribution and density
+### Region distribution
 
 ```ts
 // Bin counts for plotting; chrom_sizes is optional
@@ -90,18 +82,10 @@ const dist = rs.regionDistribution(250, chromSizes);
 // Without chrom_sizes → bins derived from observed max end (NOT comparable)
 const distLocal = rs.regionDistribution(250, null);
 // Array of { chr, start, end, n, rid }
-
-// Dense zero-padded per-window count vector (ML-ready feature vector)
-const density = rs.densityVector(chromSizes, 250);
-// { n_bins, bin_width, counts: number[], chrom_offsets: [chr, start][] }
-
-// Summary of density vector
-const homogeneity = rs.densityHomogeneity(chromSizes, 250);
-// { bin_width, n_windows, n_nonzero_windows, mean_count, variance, cv, gini }
 ```
 
 !!! warning "`n_bins` is a target, not a total"
-    `n_bins` is the target bin count for the **longest** chromosome in `chrom_sizes`. Bin width is derived from that, and every chromosome is tiled at the same bp width — so the total window count `counts.length` equals `sum(ceil(size / bin_width))` over `chrom_sizes`, which can substantially exceed `n_bins`.
+    When `chrom_sizes` is provided, `n_bins` is the target bin count for the **longest** chromosome in `chrom_sizes`. Bin width is derived from that, and every chromosome is tiled at the same bp width — so the total bin count across chromosomes is `sum(ceil(size / bin_width))`, which can substantially exceed `n_bins`.
 
 ### Interval set algebra
 
@@ -261,15 +245,6 @@ Returned by the `rs.classify` getter. Identifies the BED/ENCODE subtype based on
 | `bed_compliance` | `string` |
 | `data_format` | `string` — e.g. `"UcscBed"`, `"EncodeNarrowPeak"`, etc. |
 | `compliant_columns`, `non_compliant_columns` | `number` |
-
-### `SpacingStats`, `ClusterStats`, `DensityVector`, `DensityHomogeneity`
-
-Returned as plain JS objects (via `serde_wasm_bindgen`). Field semantics are identical to the Rust types in [gtars-genomicdist](../genomicdist.md#statistics). Full reference:
-
-- **`SpacingStats`**: `n_gaps`, `mean`, `median`, `std`, `iqr`, `log_mean`, `log_std` — all NaN when `n_gaps == 0`.
-- **`ClusterStats`**: `radius_bp`, `n_clusters`, `n_clustered_peaks`, `mean_cluster_size`, `max_cluster_size`, `fraction_clustered`. `min_cluster_size=2` is the typical call.
-- **`DensityVector`**: `n_bins` (target for longest chrom), `bin_width`, `counts: number[]`, `chrom_offsets: [chr, start][]`. Ordered by karyotype.
-- **`DensityHomogeneity`**: `bin_width`, `n_windows`, `n_nonzero_windows`, `mean_count`, `variance`, `cv`, `gini`. Gini is biased high on sparse inputs; check `n_nonzero_windows`.
 
 ## See also
 

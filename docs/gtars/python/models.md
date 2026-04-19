@@ -6,7 +6,7 @@ The `gtars.models` submodule exposes the core genomic data types and — unlike 
     `gtars.models` combines types from three Rust crates:
 
     - `gtars-core::models` → `Region`, `Interval`, `RegionSet`, `RegionSetList`
-    - `gtars-genomicdist::models` → `ChromosomeStatistics`, `SpacingStats`, `ClusterStats`, `DensityVector`, `DensityHomogeneity`, `GenomeAssembly`, `BinaryGenomeAssembly`, `TssIndex`, `GeneModel`, `PartitionList`, `SignalMatrix`, `GenomicDistAnnotation`
+    - `gtars-genomicdist::models` → `ChromosomeStatistics`, `GenomeAssembly`, `BinaryGenomeAssembly`, `TssIndex`, `GeneModel`, `PartitionList`, `SignalMatrix`, `GenomicDistAnnotation`
     - `gtars-genomicdist::{IntervalRanges, GenomicIntervalSetStatistics}` → methods on `RegionSet`
 
     Free functions that need a reference genome or a partition list live in [`gtars.genomic_distributions`](genomic_distributions.md).
@@ -153,17 +153,13 @@ Ports of the R GenomicDistributions functions, exposed via the Rust `GenomicInte
 ```python
 rs.neighbor_distances()              # list[int], signed gaps per chromosome (multi-region chroms only)
 rs.nearest_neighbors()               # list[int], per-region min neighbor distance
-rs.inter_peak_spacing()              # SpacingStats
-rs.peak_clusters(radius_bp=5000, min_cluster_size=2)  # ClusterStats
-rs.density_vector(chrom_sizes, n_bins)                # DensityVector — ML-ready dense count vector
-rs.density_homogeneity(chrom_sizes, n_bins)           # DensityHomogeneity — CV, Gini, etc.
 ```
 
 !!! warning "Output length for `neighbor_distances` / `nearest_neighbors`"
     Both methods **skip chromosomes with only one region** (matching R GenomicDistributions). The returned list is therefore **not aligned 1:1 with input regions** — it's shorter than `len(rs)` whenever any chromosome has exactly one peak. No sentinel values are emitted.
 
 !!! warning "`n_bins` is a target, not a total"
-    In `density_vector`, `density_homogeneity`, and `distribution(chrom_sizes=...)`, `n_bins` is the target bin count for the **longest** chromosome. Bin width is derived from that, and every chromosome is tiled at the same bp width — so the total window count is `sum(ceil(size / bin_width))` across chromosomes, often much larger than `n_bins`. See `DensityVector` for details.
+    In `distribution(chrom_sizes=...)`, `n_bins` is the target bin count for the **longest** chromosome. Bin width is derived from that, and every chromosome is tiled at the same bp width — so the total window count is `sum(ceil(size / bin_width))` across chromosomes, often much larger than `n_bins`.
 
 ### `RegionSetList`
 
@@ -214,55 +210,6 @@ Returned by `rs.chromosome_statistics()` → `dict[str, ChromosomeStatistics]`.
 | `maximum_region_length` | `int` | |
 | `mean_region_length` | `float` | |
 | `median_region_length` | `float` | |
-
-#### `SpacingStats`
-
-Returned by `rs.inter_peak_spacing()`. All float fields are NaN when `n_gaps == 0`.
-
-| field | type |
-|---|---|
-| `n_gaps` | `int` — count of *positive* inter-region gaps |
-| `mean`, `median`, `std`, `iqr` | `float` |
-| `log_mean`, `log_std` | `float` — `log10(gap + 1)` stats, more robust for heavy-tailed gap distributions |
-
-#### `ClusterStats`
-
-Returned by `rs.peak_clusters(radius_bp, min_cluster_size)`.
-
-| field | type |
-|---|---|
-| `radius_bp` | `int` — pass-through |
-| `n_clusters` | `int` — clusters with size ≥ `min_cluster_size` |
-| `n_clustered_peaks` | `int` — peaks belonging to those clusters |
-| `mean_cluster_size` | `float` — NaN if no clusters meet threshold |
-| `max_cluster_size` | `int` — always over all clusters, not filtered |
-| `fraction_clustered` | `float` — `n_clustered_peaks / total_peaks` |
-
-The identity `n_clusters * mean_cluster_size == n_clustered_peaks` holds exactly at any threshold. With `min_cluster_size=2` (the default), `fraction_clustered` is the fraction of peaks with at least one neighbor within `radius_bp` — the typical meaning in super-enhancer-stitching analyses.
-
-#### `DensityVector`
-
-Returned by `rs.density_vector(chrom_sizes, n_bins)`.
-
-| field | type |
-|---|---|
-| `n_bins` | `int` — target bin count for the longest chromosome (**not** the length of `counts`) |
-| `bin_width` | `int` — `max(chrom_sizes.values()) // n_bins`, min 1 |
-| `counts` | `list[int]` — dense, row-major, karyotypic chromosome order |
-| `chrom_offsets` | `list[(str, int)]` — `(chr_name, start_index_in_counts)` per chromosome |
-
-Supports `len()`. Suitable as an ML feature vector — stable ordering across files when you pass the same `chrom_sizes`.
-
-#### `DensityHomogeneity`
-
-Returned by `rs.density_homogeneity(chrom_sizes, n_bins)`.
-
-| field | type |
-|---|---|
-| `bin_width`, `n_windows`, `n_nonzero_windows` | `int` |
-| `mean_count`, `variance`, `cv`, `gini` | `float` |
-
-Poisson-distributed peaks give `cv ≈ 1`; clustered sets give `cv >> 1`; evenly-spread sets give `cv << 1`. **Caveat:** Gini is biased high for sparse count distributions; check `n_nonzero_windows` before interpreting it.
 
 ## Reference genome and annotation types
 
