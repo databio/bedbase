@@ -34,6 +34,9 @@ markdown_extensions:
       alternate_style: true
 extra_css:
   - stylesheets/extra.css
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.css
+extra_javascript:
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
 extra:
   generator: false  # turn off theme link
 copyright: >
