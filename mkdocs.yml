@@ -29,7 +29,7 @@ markdown_extensions:
       custom_fences:
         - name: mermaid
           class: mermaid
-          format: "!!python/name:pymdownx.superfences.fence_code_format"
+          format: !!python/name:pymdownx.superfences.fence_div_format
   - pymdownx.tabbed:
       alternate_style: true
 extra_css:
@@ -37,6 +37,7 @@ extra_css:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.css
 extra_javascript:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - javascripts/mermaid-init.js
 extra:
   generator: false  # turn off theme link
 copyright: >
