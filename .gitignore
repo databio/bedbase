@@ -15,4 +15,4 @@ site/
 
 docs_jupyter/bedbase_tutorial
 
-site/
+site/.cache/
