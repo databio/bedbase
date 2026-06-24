@@ -179,7 +179,7 @@ nav:
       - Overview: gtars/modules.md
       - gtars-core: gtars/core.md
       # - gtars-io: gtars/io.md
-      - gtars-models: gtars/regionSet.md
+      - Core models: gtars/regionSet.md
       - gtars-overlaprs: gtars/overlaprs.md
       - gtars-uniwig: gtars/uniwig.md
       - gtars-igd: gtars/igd.md
@@ -187,11 +187,16 @@ nav:
       - gtars-fragsplit: gtars/fragsplit.md
       - gtars-tokenizers: gtars/tokenizers.md
       - gtars-scatrs: gtars/scatrs.md
+      - gtars-genomicdist: gtars/genomicdist.md
+      - gtars-lola: gtars/lola.md
       - gtars-refget: gtars/refget.md
       - gtars-bbcache: gtars/bbcache.md
     - Bindings:
       - Python:
         - Overview: gtars/python-overview.md
+        - Models: gtars/python/models.md
+        - GenomicDist: gtars/python/genomic_distributions.md
+        - LOLA: gtars/python/lola.md
         - Digests: gtars/python/digests.md
         - RefgetStore Tutorial: gtars/python/refgetstore.ipynb
         - RefgetStore Python Reference: gtars/python/refget-store.md
@@ -199,9 +204,17 @@ nav:
       - Wasm:
         - Overview: gtars/wasm.md
         - Overlappers: gtars/wasm/overlappers.md
+        - RegionSet: gtars/wasm/regionset.md
+        - Partitions: gtars/wasm/partitions.md
+        - Signal: gtars/wasm/signal.md
+        - LOLA: gtars/wasm/lola.md
       - CLI: gtars/cli.md
       - R:
         - R: gtars/r.md
+        - RegionSet: gtars/r/regionset.md
+        - GenomicDist: gtars/r/genomicdist.md
+        - LOLA: gtars/r/lola.md
+        - IGD: gtars/r/igd.md
         - RefgetStore: gtars/r/refgetstore.md
     - Reference:
       - Changelog: gtars/changelog.md
