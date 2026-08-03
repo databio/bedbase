@@ -91,7 +91,9 @@ download end-to-end.
 
 Parquet plus open CORS and HTTP range requests means you can query a snapshot
 directly over HTTPS — no download, no server — from the [DuckDB](https://duckdb.org/)
-CLI or DuckDB-WASM in a browser:
+CLI or DuckDB-WASM in a browser.
+
+**Try it today with DuckDB — no download or pagination needed:**
 
 ```sql
 SELECT *
