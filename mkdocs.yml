@@ -73,6 +73,7 @@ nav:
         - Changelog: bbconf/changelog.md
       - 🧰 BEDBoss processing pipeline: bedboss/README.md
       - 🔄 Data Loading: bedbase/bedbase-data-loading.md
+      - 📦 Bulk metadata exports: bedbase/bulk-metadata-exports.md
       - 📜 Configuration file: bedbase/how-to-configure.md
     - Reference:
       - How to cite: citations.md
