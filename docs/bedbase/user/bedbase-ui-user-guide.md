@@ -28,7 +28,7 @@ will be able to create their own BEDsets.
 ## 🧬 Reference genomes compatibility comparison
 
 BED files in BEDbase are mapped to different reference genomes. Bedbase provides a validation of BED files to the reference genomes 
-available on https://ui.refgenie.org/ . It provides an insight into which reference genome is most likely used in mapping the BED file.
+available on https://refgenie.org/ . It provides an insight into which reference genome is most likely used in mapping the BED file.
 More information about reference genome validation can be found [here](./reference-genome-compatibility.md).
 
 
