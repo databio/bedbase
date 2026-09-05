@@ -19,6 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - overlaprs: remove unused `MultiChromOverlapperError`
 - wasm: fix `encodedByteRange` return type in typings
 
+## [0.9.1] -- 2026-06-17
+Point release of refget 0.9.1, python 0.9.2, R 0.9.2, node 0.7.1, wasm 0.9.1 [#268](https://github.com/databio/gtars/pull/268).
+- refget: unify remote on-demand sequence retrieval into three flows: `get_substring` (byte-range read), `stream_sequence` (streaming reader), `load_sequence` (download and cache)
+- refget: bulk substring reads on a remote-only sequence download and cache the `.seq` once instead of one request per range
+- python, R, node: expose `stream_sequence`, `load_sequence`, and `load_all_sequences`; node no longer auto-downloads whole chromosomes
+- wasm: add `RemoteRefgetStore` JS layer (HTTP byte-range + OPFS caching) via `@databio/gtars/remote`
+
 ## [0.9.0] -- 2026-06-15
 - add `gtars-vrs` crate: GA4GH VRS allele identifiers from VCF/HGVS, with an HGVS parser, allele normalization, and transcript-anchored mapping
 - add Node.js bindings (`gtars-node`)
