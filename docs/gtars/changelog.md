@@ -4,6 +4,61 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] -- 2026-09-05
+- refget: writers now take an exclusive store lock and commit only their own changes; concurrent imports no longer lose collections, and a stale handle no longer resurrects removed rows
+- refget: all index, manifest, alias, and sequence files are written atomically (write-temp then rename)
+- refget: fix cleanup after a failed import deleting pre-existing sequences on a reopened store
+- refget: orphan-sequence GC is linear instead of quadratic; large removals finish in seconds instead of hours
+- refget: `export_fasta` and `get_sequence_by_name` use the collection's own names and descriptions [#270](https://github.com/databio/gtars/issues/270)
+- refget: add `ImportReport` with per-run counters (`n_sequences_written`, `n_sequences_deduped`, `n_collections_new`); `add_sequence_collections_from_fastas` now returns it
+- refget: add import-time collection aliases (`--collection-alias ns:alias`, `FastaImportOptions::collection_alias`, Python `collection_alias=`)
+- refget: add `logical_sequence_bytes` to the store manifest; rename `total_disk_size()` to `logical_sequence_bytes()`
+- refget: rename `StoreStats` fields `n_sequences_loaded`/`n_collections_loaded` to `n_sequences_in_memory`/`n_collections_in_memory` across Rust, Python, R, and Node
+- refget: encoded stores accept pre-packed sequences at insert time
+- cli: add `gtars refget export` (`-c <digest|ns:alias>`, `-w 0` for unwrapped FASTA, `.gz` output)
+- overlaprs: remove unused `MultiChromOverlapperError`
+- wasm: fix `encodedByteRange` return type in typings
+
+## [0.9.0] -- 2026-06-15
+- add `gtars-vrs` crate: GA4GH VRS allele identifiers from VCF/HGVS, with an HGVS parser, allele normalization, and transcript-anchored mapping
+- add Node.js bindings (`gtars-node`)
+- refget: on-disk sequence store overhaul; add binary transcript store and coordinate mapper
+- genomicdist: add binary FASTA (`.fab`) format with zero-copy mmap access; add stranded region-set operations
+- uniwig: add BAM QC tooling
+- overlaprs: overlap-engine rewrite
+- expanded WASM and Python bindings
+- correctness fixes across vrs, refget, bamqc, and the Python HGVS AST
+
+## [0.8.0] -- 2026-03-19
+- genomicdist: port of genomic distributions [#231](https://github.com/databio/gtars/pull/231), bug fixes [#244](https://github.com/databio/gtars/pull/244)
+- uniwig: add streaming implementation alongside the batch parallel one [#236](https://github.com/databio/gtars/pull/236)
+- refget: RefgetStore updates [#237](https://github.com/databio/gtars/pull/237)
+- add `gtars-lola` crate; IGD supports an in-memory database [#242](https://github.com/databio/gtars/pull/242)
+- expose more functionality via Python [#241](https://github.com/databio/gtars/pull/241)
+
+## [0.7.0] -- 2026-02-24
+- update all crates to Rust edition 2024
+- refget: add sequence and collection aliases, ancillary digests, seqcol comparison, and FHR metadata; sequences can exist independently of a collection
+- refget: add streaming FASTA digest computation in WASM
+- uniwig: fix off-by-one errors; add variable-step format
+- refactor R bindings; RefgetStore uses `ExternalPtr` so R garbage collection works
+- `RegionSet` returns an error instead of panicking on bad input
+
+## [0.6.0] -- 2026-01-26
+- refget: add FAI (FASTA index) computation and metadata storage
+- refget: add remote-access RefgetStore with lazy loading and caching; `SequenceRecord` is now an enum (Stub vs Full)
+- refget: add `on_disk()`, `in_memory()`, `load_remote()` constructors and export methods
+
+## [0.5.3] -- 2026-01-21
+- remove reqwest dependency from gtars-core
+- merge the gdrs package into gtars
+- genomicdist: add bed classifier
+
+## [0.5.2] -- 2025-11-04
+- switch overlap operations to `MultiChromOverlapper`
+- genomicdist: more tests, fix region distribution plot, fix function naming in wasm bindings
+- load/write functions accept `AsRef<Path>`
+
 ## [0.5.1] -- 2025-10-08
 - introduce web assembly bindings
 - introduce R bindings
