@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] -- 2026-09-22
+
+### RefgetStore (`gtars-refget`)
+- Add `StorageMode::Zstd` for compressed novel/unplaced sequence storage
+- Lazy-load sequence index on first read (`list_sequences()` now returns `Result`)
+- Add content-based sequence name matching
+- Add resident overlay for RAM-cached sequence reads
+- Detect gzip by magic bytes instead of file extension
+- Fix remote listing, export, and WASM build
+- Fix encoded sequence ingestion
+
+### Python bindings (`gtars` PyPI package)
+- Add RefgetStore docstrings visible in Python (fixes #272)
+- Polish refget Python docstrings
+
 ## [0.8.0] -- 2026-03-06
 
 ### RefgetStore (`gtars-refget`)
