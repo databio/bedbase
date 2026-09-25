@@ -6,7 +6,7 @@ gtars is organized as a workspace of independent Rust crates, each providing spe
 
 ## Core Infrastructure
 
-- **[gtars-core](core.md)** - Fundamental data structures (`Region`, `RegionSet`, `RegionSetList`, `Interval`, `Fragment`, `CoordinateMode`) and utilities
+- **[gtars-core](core.md)** - Fundamental data structures (`Region`, `RegionSet`, `RegionSetList`, `Interval`, `Fragment`, `CoordinateMode`), interval set operations, and utilities
 - **[gtars-io](io.md)** - I/O operations and file format parsers
 
 ## Genomic Analysis
@@ -19,7 +19,7 @@ gtars is organized as a workspace of independent Rust crates, each providing spe
 
 ## Distribution Analysis & Enrichment
 
-- **[gtars-genomicdist](genomicdist.md)** - Rust port of R GenomicDistributions: summary stats, interval set algebra, partitions, signal matrices, consensus
+- **[gtars-genomicdist](genomicdist.md)** - Rust port of R GenomicDistributions: summary stats, partitions, signal matrices, consensus
 - **[gtars-lola](lola.md)** - LOLA (Locus Overlap Analysis) enrichment testing built on IGD + genomicdist
 
 ## Machine Learning
@@ -30,9 +30,12 @@ gtars is organized as a workspace of independent Rust crates, each providing spe
 
 - **[gtars-refget](refget.md)** - GA4GH refget protocol implementation
 - **[gtars-bbcache](bbcache.md)** - BED file caching for bedbase.org
+- **gtars-vrs** - GA4GH VRS (Variation Representation Specification) allele digest computation
 
 ## Language Bindings
 
 - **[gtars-python](python-overview.md)** - Python API bindings
 - **[gtars-wasm](wasm.md)** - WebAssembly bindings
+- **[gtars-r](r.md)** - R bindings
+- **gtars-node** - Native Node.js bindings (refget)
 - **[gtars-cli](cli.md)** - Command-line interface

@@ -66,13 +66,13 @@ tokenizer = Tokenizer.from_pretrained("databio/atacformer-base-hg38")
 ## Wasm/JS Package
 To use gtars in a JavaScript environment, you can install the Wasm package via npm. First, ensure you have Node.js and npm installed. Then, you can install the gtars package with the following command:
 ```bash
-npm install @databio/gtars-js
+npm install @databio/gtars
 ```
 
 You can then import and use gtars in your JavaScript code as follows:
 
 ```ts
-import { Overlapper } from '@databio/gtars-js';
+import { Overlapper } from '@databio/gtars';
 
 const universe = [
     ['chr1', 100, 200],

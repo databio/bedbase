@@ -14,7 +14,7 @@ import init, {
   LolaRegionDB,
   runLOLA,
   checkUniverseAppropriateness,
-} from '@databio/gtars-js';
+} from '@databio/gtars';
 
 await init();
 ```
@@ -54,7 +54,7 @@ The constructor builds an IGD overlap index internally and wraps it with minimal
 ```ts
 db.numRegionSets              // number
 db.listRegionSets()           // string[] — filenames
-db.collectionAnno             // Array of { collectionname, collector, date, source, description }
+db.collectionAnno             // Array of { collectionname, collector, date, source, description } (empty for an in-memory DB)
 
 // Extract region sets by 0-based index as a RegionSetList
 // (pass null for "all sets"; names are populated from filenames)
@@ -62,7 +62,7 @@ const rsl = db.getRegionSets(null);
 const rsl2 = db.getRegionSets([0, 5, 12]);
 ```
 
-`getRegionSets()` returns a [`RegionSetList`](regionset.md#regionsetlist) with `.names` populated from the database filenames — the one path in Wasm where a `RegionSetList` has non-null names.
+`getRegionSets()` returns a [`RegionSetList`](regionset.md#regionsetlist) with `.names` populated from the database filenames.
 
 ## `runLOLA`
 
@@ -83,7 +83,7 @@ runLOLA(
 - `universe` — a single array of `[chr, start, end]` tuples representing the background.
 - `regionDb` — a `LolaRegionDB`.
 - `minOverlap` — minimum bp overlap to count as overlapping (default 1).
-- `direction` — `"enrichment"` (default, P(X ≥ a), alternative "greater") or `"depletion"` (P(X ≤ a), alternative "less"). The strings `"greater"` / `"less"` are accepted as aliases on the Python side but Wasm only recognizes `"enrichment"` / `"depletion"` explicitly; anything else falls back to enrichment.
+- `direction` — `"enrichment"` (default, P(X ≥ a), alternative "greater") or `"depletion"` (P(X ≤ a), alternative "less"). `"less"` is accepted as an alias for depletion; any other value (including `"greater"`) runs enrichment.
 
 **Returns** an object with parallel arrays (one entry per `(user_set, db_set)` pair) using camelCase keys:
 
@@ -113,7 +113,7 @@ import init, {
   LolaRegionDB,
   runLOLA,
   RegionSet,
-} from '@databio/gtars-js';
+} from '@databio/gtars';
 
 await init();
 

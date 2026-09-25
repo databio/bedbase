@@ -129,7 +129,7 @@ LOLA results are only meaningful if your universe **contains** your user sets: e
 ```r
 report <- checkUniverseAppropriateness(userSets, userUniverse)
 # data.frame with columns:
-#   user_set, total_regions, regions_in_universe, coverage, many_to_many
+#   userSet (1-based), totalRegions, regionsInUniverse, coverage, manyToMany
 # Warnings are emitted via warning() for low coverage or many-to-many mappings.
 ```
 
@@ -159,6 +159,8 @@ restricted <- buildRestrictedUniverse(list(peaks_a, peaks_b, peaks_c))
 # Returns a RegionSet
 ```
 
+Unlike the other functions on this page, `buildRestrictedUniverse` only accepts `RegionSet` objects (not file paths or `GRanges`), so wrap inputs with `RegionSet()` first.
+
 ## Porting from R LOLA
 
 Most LOLA scripts port by changing one line — replacing `library(LOLA)` with `library(gtars)`. The core API is compatible:
@@ -171,7 +173,7 @@ Most LOLA scripts port by changing one line — replacing `library(LOLA)` with `
 | `redefineUserSets()` | `redefineUserSets()` | same signature; returns list of `RegionSet` |
 | `writeCombinedEnrichment()` | *(use `data.table::fwrite`)* | output table is already in the right format |
 | `extractEnrichmentOverlaps()` | *(not implemented)* | file an issue if needed |
-| `getRegionFile()` | `getRegionSets(regionDB, index)` | returns `RegionSet`, not `GRanges` — call `as_granges()` to convert |
+| `getRegionFile()` | `getRegionSets(regionDB, index)` | returns a `RegionSetList`, not `GRanges`; take `[[1]]` and call `as_granges()` to convert |
 
 The notable differences:
 

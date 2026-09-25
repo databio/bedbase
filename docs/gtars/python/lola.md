@@ -108,7 +108,7 @@ rsl = db.get_region_sets(indices=[0, 5, 12])
 
 # Annotations as lists of dicts
 db.region_anno       # per-file dicts with filename/cellType/description/tissue/...
-db.collection_anno   # per-collection dicts with collector/date/source/description
+db.collection_anno   # per-collection dicts with collectionname/collector/date/source/description
 ```
 
 `get_region_sets()` returns a [`gtars.models.RegionSetList`](models.md#regionsetlist), which has `names` populated from the database filenames. This is the one path in Python where `RegionSetList.names` is non-None — normal `RegionSetList(...)` construction can't set names.
@@ -265,5 +265,4 @@ for us in df["userSet"].unique():
 ## See also
 
 - **[`gtars.models`](models.md)** — `RegionSet`, `RegionSetList`, and the types returned by `RegionDB.get_region_sets()`.
-- **[`gtars.genomic_distributions`](genomic_distributions.md)** — set algebra on `RegionSet` (which internally powers universe redefinition).
 - **[gtars-lola](../lola.md)** — full Rust API reference, including contingency table math, p-value computation via hypergeometric survival function, CMLE odds ratio, and the R LOLA TSV output format.

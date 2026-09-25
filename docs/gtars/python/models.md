@@ -1,13 +1,13 @@
 # `gtars.models`
 
-The `gtars.models` submodule exposes the core genomic data types and — unlike the Rust layout, where statistics and set algebra live in separate crates — attaches almost the entire `gtars-genomicdist` method surface directly to `RegionSet`. In Python, you generally interact with `RegionSet` and the rest is built up on top of it.
+The `gtars.models` submodule exposes the core genomic data types and — unlike the Rust layout, where statistics and set algebra live in separate crates — attaches the `gtars-core` interval algebra and the `gtars-genomicdist` statistics directly to `RegionSet`. In Python, you generally interact with `RegionSet` and the rest is built up on top of it.
 
 !!! info "Python ↔ Rust correspondence"
     `gtars.models` combines types from three Rust crates:
 
     - `gtars-core::models` → `Region`, `Interval`, `RegionSet`, `RegionSetList`
     - `gtars-genomicdist::models` → `ChromosomeStatistics`, `GenomeAssembly`, `BinaryGenomeAssembly`, `TssIndex`, `GeneModel`, `PartitionList`, `SignalMatrix`, `GenomicDistAnnotation`
-    - `gtars-genomicdist::{IntervalRanges, GenomicIntervalSetStatistics}` → methods on `RegionSet`
+    - `gtars-core` (`RegionSet` methods and the `IntervalSetOps` trait) + `gtars-genomicdist::GenomicIntervalSetStatistics` → methods on `RegionSet`
 
     Free functions that need a reference genome or a partition list live in [`gtars.genomic_distributions`](genomic_distributions.md).
 
@@ -26,13 +26,13 @@ print(len(r))     # 100 (width)
 print(r.chr, r.start, r.end, r.rest)
 ```
 
-Constructor: `Region(chr, start, end, rest=None)`.
+Constructor: `Region(chr, start, end, rest)`. `rest` is required; pass `None` if there is no extra data.
 Attributes: `chr: str`, `start: int`, `end: int`, `rest: str | None`.
-Supports `==`, `!=`, `len()`, `str()`, `repr()`.
+Supports `==`, `!=` (compares `chr`, `start`, `end` only), `len()`, `str()`, `repr()`.
 
 ### `RegionSet`
 
-The main workhorse — a collection of regions loaded from a BED file (or a URL, via the `http` feature on the underlying crate), and the attachment point for ~50 methods covering load/save, iteration, summaries, interval set algebra, overlap queries, and peak statistics.
+The main workhorse — a collection of regions loaded from a BED file (or a URL, via the `http` feature on the underlying crate), and the attachment point for about 35 methods covering load/save, iteration, summaries, interval set algebra, overlap queries, and peak statistics.
 
 #### Construction
 
@@ -46,8 +46,8 @@ rs = RegionSet("https://example.org/peaks.bed.gz")
 
 # From a list of Region objects
 regions = [
-    Region("chr1", 100, 200),
-    Region("chr1", 300, 400),
+    Region("chr1", 100, 200, None),
+    Region("chr1", 300, 400, None),
 ]
 rs = RegionSet.from_regions(regions)
 
@@ -62,7 +62,7 @@ rs = RegionSet.from_vectors(
 rs = RegionSet.from_regions(regions, strands=["+", "-"])
 ```
 
-Regions are auto-sorted by `(chr, start)` on construction.
+Loading from a file sorts regions by `(chr, start)`. `from_regions` and `from_vectors` keep the input order; call `rs.sort()` if you need sorted regions.
 
 #### Properties and iteration
 
@@ -114,7 +114,6 @@ rs.promoters(upstream=2000, downstream=0)
 rs.reduce()                          # merge overlapping/adjacent
 rs.disjoin()                         # tile at every boundary into disjoint pieces
 rs.setdiff(other)                    # remove other from self
-rs.subtract(other)                   # alias for setdiff
 rs.pintersect(other)                 # pairwise (index-aligned) intersect
 rs.intersect_all(other)              # all-vs-all intersection fragments
 rs.concat(other)                     # combine without merging
@@ -159,7 +158,7 @@ rs.nearest_neighbors()               # list[int], per-region min neighbor distan
     Both methods **skip chromosomes with only one region** (matching R GenomicDistributions). The returned list is therefore **not aligned 1:1 with input regions** — it's shorter than `len(rs)` whenever any chromosome has exactly one peak. No sentinel values are emitted.
 
 !!! warning "`n_bins` is a target, not a total"
-    In `distribution(chrom_sizes=...)`, `n_bins` is the target bin count for the **longest** chromosome. Bin width is derived from that, and every chromosome is tiled at the same bp width — so the total window count is `sum(ceil(size / bin_width))` across chromosomes, often much larger than `n_bins`.
+    In `distribution(chrom_sizes=...)`, `n_bins` is the target bin count for the **longest** chromosome. Bin width is derived from that, and every chromosome is tiled at the same bp width (capped at `n_bins` bins per chromosome; the last bin absorbs any remainder) — so the total window count is about `sum(ceil(size / bin_width))` across chromosomes, often much larger than `n_bins`. Regions on chromosomes missing from `chrom_sizes`, or whose midpoint falls past the chromosome end, are skipped.
 
 ### `RegionSetList`
 
@@ -190,7 +189,7 @@ jac = rsl.pairwise_jaccard()  # list[list[float]], symmetric, 1.0 on diagonal
 
 ### `Interval`
 
-A generic integer interval with a payload. Primarily a helper for overlap indexes — most user code should use `Region` / `RegionSet` instead.
+A bare integer interval: `Interval(start, end)`, with read/write `start` and `end` attributes. Primarily a helper for overlap indexes — most user code should use `Region` / `RegionSet` instead.
 
 ### Statistics result types
 

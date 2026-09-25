@@ -51,7 +51,7 @@ library(gtars)
 gr <- GRanges(...)
 
 widths <- calcWidth(gr)                        # GRanges works directly
-merged <- reduce(gr)                            # overridden S4 method
+merged <- reduce("peaks.bed")                   # file path dispatches to gtars
 jac <- jaccard(gr, "other_peaks.bed")           # mix GRanges with file path
 ```
 
@@ -105,7 +105,7 @@ readable <- "ACGTACGT"
 gtars::sha512t24u_digest(readable)
 gtars::md5_digest(readable)
 
-store <- global_refget_store("raw")
+store <- refget_store("raw")
 ```
 
 ## IGD quick start

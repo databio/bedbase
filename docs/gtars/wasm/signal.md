@@ -10,7 +10,7 @@ See [gtars-genomicdist → Signal matrix overlap](../genomicdist.md#signal-matri
 import init, {
   SignalMatrix,
   calcSummarySignal,
-} from '@databio/gtars-js';
+} from '@databio/gtars';
 
 await init();
 ```
@@ -21,7 +21,7 @@ A region × condition matrix of signal values, loaded from either the packed bin
 
 ### `SignalMatrix.fromBin`
 
-Load from a packed binary buffer (the `.sigm` format produced by the Rust `SignalMatrix::save_bin` or the CLI). This is the fast path — drop the bytes of a `.sigm` file served from your API into the constructor.
+Load from a packed binary buffer (the `.sigm` format produced by the Rust `SignalMatrix::save_bin` or the CLI). This is the fast path — pass the bytes of a `.sigm` file served from your API to `SignalMatrix.fromBin`.
 
 ```ts
 const response = await fetch('/api/signal-matrix/my_matrix.sigm');
@@ -97,7 +97,7 @@ console.log(result.matrixStats);
 **Top level:**
 - `signalMatrix: { region: string, values: number[] }[]` — one entry per query region that matched at least one signal row. `region` is the query region label in `chr_start_end` form; `values` are the per-condition max signals.
 - `matrixStats: ConditionStats[]` — one entry per condition, in the order of `conditionNames`.
-- `conditionNames: string[]` — column labels, same as the input `SignalMatrix.conditionNames`.
+- `conditionNames: string[]` — column labels, same as the condition names stored in the input `SignalMatrix`.
 
 **`ConditionStats`** (per condition, standard Tukey 5-number summary):
 
@@ -113,7 +113,7 @@ console.log(result.matrixStats);
 ## End-to-end example
 
 ```ts
-import init, { RegionSet, SignalMatrix, calcSummarySignal } from '@databio/gtars-js';
+import init, { RegionSet, SignalMatrix, calcSummarySignal } from '@databio/gtars';
 
 await init();
 

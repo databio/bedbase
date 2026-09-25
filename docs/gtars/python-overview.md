@@ -21,7 +21,9 @@ The `gtars` Python package exposes several submodules, each wrapping a gtars Rus
 | `gtars.lola` | `gtars-lola` | LOLA enrichment testing: `RegionDB`, `run_lola`, universe helpers | [lola](python/lola.md) |
 | `gtars.tokenizers` | `gtars-tokenizers` | Genomic region tokenizers for ML | *(see in-package docs)* |
 | `gtars.refget` | `gtars-refget` | GA4GH refget protocol client + local store | [digests](python/digests.md), [refget API](python/refget-api.md), [RefgetStore](python/refget-store.md) |
-| `gtars.utils` | `gtars-core::utils` | File-reading and parsing helpers | *(see in-package docs)* |
+| `gtars.reftx` | `gtars-refget` (transcripts) | Transcript store, MANE index, and transcript-to-genome coordinate mapping | *(see in-package docs)* |
+| `gtars.vrs` | `gtars-vrs` | GA4GH VRS allele digests, ids, and normalization; HGVS parsing in `gtars.vrs.hgvs` | *(see in-package docs)* |
+| `gtars.utils` | `gtars-io` | Read and write `.gtok` token files | *(see in-package docs)* |
 
 ## Quick start
 
@@ -94,7 +96,7 @@ See [`gtars.lola`](python/lola.md) for universe preparation helpers, `RegionDB` 
 
 ## Performance notes
 
-- `RegionSet` construction sorts on load; repeated operations don't re-sort.
+- Loading a `RegionSet` from a file sorts it; repeated operations don't re-sort. `RegionSet.from_regions` / `from_vectors` keep the input order.
 - Overlap queries (`count_overlaps`, `find_overlaps`, `subset_by_overlaps`) go through an AIList index for O(log n) per-query lookups.
 - `BinaryGenomeAssembly` uses `mmap` for zero-copy sequence access — use it over `GenomeAssembly` for large genomes unless you specifically need the in-memory version.
 - Most numeric-result methods return Python lists; for very large outputs, consider iterating or using numpy wrappers at the call site.

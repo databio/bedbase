@@ -3,7 +3,7 @@
 Python bindings for [`gtars-genomicdist`](../genomicdist.md) — the Rust port of R GenomicDistributions plus extras. This submodule contains the **free functions** that operate on regions-plus-something-else (a reference genome, a partition list, a signal matrix). Methods that operate only on a `RegionSet` (summary stats, interval algebra, peak clustering) live directly on `RegionSet` in [`gtars.models`](models.md).
 
 !!! info "Where to look for what"
-    - Per-region summaries, nearest-neighbor distances, density vectors, set algebra → `RegionSet` methods in [`gtars.models`](models.md).
+    - Per-region summaries, nearest-neighbor distances, region distribution bins, set algebra → `RegionSet` methods in [`gtars.models`](models.md).
     - GC content / dinucleotide frequencies → **this module** (need a reference genome).
     - Partition classification → **this module** (need a `PartitionList`).
     - Signal matrix overlap → **this module** (need a `SignalMatrix`).
@@ -29,7 +29,7 @@ gc = calc_gc_content(peaks, genome, ignore_unk_chroms=True)
 # gc: list[float] — one value per region, 0.0–1.0
 ```
 
-Setting `ignore_unk_chroms=False` raises if any region lives on a chromosome missing from the assembly. Set to `True` (default) to skip them silently.
+With `ignore_unk_chroms=False` (default), the call raises if any region lives on a chromosome missing from the assembly. Set it to `True` to skip those regions silently.
 
 ### `calc_dinucl_freq`
 

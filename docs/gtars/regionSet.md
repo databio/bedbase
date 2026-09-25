@@ -23,14 +23,14 @@ Region is Python representation of a genomic region. e.g. `chr1:100-200` + addit
 
 === "Rust"
     ```rust
-    use gtars::models::Region;
+    use gtars_core::models::Region;
     
     // Create a Region
     let genomic_region: Region = Region { chr: "chr1".to_string(), 
                                           start: 100, 
                                           end: 200, 
                                           rest: Some("peak1".to_string()) 
-                                        },
+                                        };
     let identifier = genomic_region.digest();
 
     println!("{:?}", identifier);
@@ -62,9 +62,9 @@ Open BED file from URL and get its identifier.
     ```
 === "Rust"
     ```rust
-    use gtars::models::RegionSet;
+    use gtars_core::models::RegionSet;
     
-    // Create a RegionSet from a url, or lcoal BED file.
+    // Create a RegionSet from a url (requires the `http` feature), or lcoal BED file.
     let rs = RegionSet::try_from("https://data2.bedbase.org/files/d/a/dafd661aa70590999e0ff9e1980217db.bed.gz").unwrap();
     
     // Get identifier for the RegionSet
@@ -99,7 +99,7 @@ Open BED file from URL and get its identifier.
 
     ```
 
-❗ Note: RegionSet can be created from a local file path, URL, or by passing a list (vector) or Region objects.
+❗ Note: RegionSet can be created from a local file path, URL, or from a list (vector) of Region objects (in Python, `RegionSet.from_regions([...])`).
 
 #### Main commands in Python
 
@@ -117,7 +117,7 @@ rs.mean_region_width()
 ```
 - Get last base pair location for each chromosome
 ```python
-rs.get_max_end_per_ch()
+rs.get_max_end_per_chr()
 ```
 - Get number of base pairs in the region set
 ```python
@@ -130,7 +130,7 @@ rs.to_bed_gz("path/to/save/bedfile.bed.gz")  # gzipped
 ```
 - Save the regionSet as a bigBed file
 ```python
-rs.to_bigbed("path/to/save/bedfile.bb", chrom_sizes="path/to/chrom.sizes")
+rs.to_bigbed("path/to/save/bedfile.bb", "path/to/chrom.sizes")
 ```
 
 !!! info 
@@ -150,15 +150,12 @@ rs.to_bigbed("path/to/save/bedfile.bb", chrom_sizes="path/to/chrom.sizes")
     rs2 = RegionSet("rep2.bed")
     rs3 = RegionSet("rep3.bed")
 
-    # Unnamed
     rsl = RegionSetList([rs1, rs2, rs3])
 
-    # Or with names
-    rsl = RegionSetList([rs1, rs2, rs3], names=["rep1", "rep2", "rep3"])
-
     print(len(rsl))                # number of sets
+    first = rsl[0]                 # index like a list
     combined = rsl.concat()        # flatten into a single RegionSet (no merge)
-    set_id = rsl.identifier()      # stable order-independent identifier
+    jac = rsl.pairwise_jaccard()   # N x N Jaccard matrix (list of lists)
     ```
 
 === "Rust"
@@ -187,10 +184,10 @@ rs.to_bigbed("path/to/save/bedfile.bb", chrom_sizes="path/to/chrom.sizes")
 
 `RegionSetList::try_from` in Rust also accepts a **bedset manifest file** (text file listing one BED path per line) or a `Vec<&Path>` / `Vec<&str>` / `Vec<String>` / `Vec<PathBuf>`.
 
-`concat()` flattens without merging; if you need a reduced union, call `.reduce()` on the result — that method comes from the `IntervalRanges` trait in [gtars-genomicdist](genomicdist.md).
+`concat()` flattens without merging; if you need a reduced union, call `.reduce()` on the result. In Rust, `reduce` and the other interval set operations are methods on `RegionSet` in [gtars-core](core.md).
 
 ## See also
 
-- **[gtars-core](core.md)** — the canonical Rust API reference for `Region`, `RegionSet`, `RegionSetList`, `Interval`, `Fragment`, `CoordinateMode`, and `RegionSetError`.
-- **[gtars-genomicdist](genomicdist.md)** — the `IntervalRanges` and `GenomicIntervalSetStatistics` traits that extend `RegionSet` with set-algebra and summary stats.
+- **[gtars-core](core.md)** — the canonical Rust API reference for `Region`, `RegionSet`, `RegionSetList`, `Interval`, `Fragment`, `CoordinateMode`, `RegionSetError`, and the interval set operations.
+- **[gtars-genomicdist](genomicdist.md)** — the `GenomicIntervalSetStatistics` trait that extends `RegionSet` with summary stats.
 - **[gtars-lola](lola.md)** — LOLA enrichment, which consumes `RegionSetList` for user-set and database-set inputs.

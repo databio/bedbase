@@ -1,6 +1,6 @@
 # RegionSet & models (Wasm)
 
-The `@databio/gtars-js` Wasm bindings expose gtars' core interval-analysis types directly to JavaScript and TypeScript, with no server round-trip. This page covers everything in the `regionset` Wasm module — `RegionSet`, `RegionSetList`, `ConsensusBuilder`, and the result types for statistics and BED classification.
+The `@databio/gtars` Wasm bindings expose gtars' core interval-analysis types directly to JavaScript and TypeScript, with no server round-trip. This page covers everything in the `regionset` Wasm module — `RegionSet`, `RegionSetList`, `ConsensusBuilder`, and the result types for statistics and BED classification.
 
 See the Rust reference pages for the underlying semantics:
 
@@ -14,7 +14,7 @@ import init, {
   RegionSet,
   RegionSetList,
   ConsensusBuilder,
-} from '@databio/gtars-js';
+} from '@databio/gtars';
 
 await init();  // initializes the wasm module; top-level await in ESM environments
 ```
@@ -57,7 +57,7 @@ const stats = rs.chromosomeStatistics();
 // Region widths (end - start)
 const widths: number[] = rs.calcWidths();
 
-// Signed gaps between consecutive regions (positive gaps only)
+// Gaps between consecutive regions (positive gaps only; overlapping pairs are dropped)
 const gaps: number[] = rs.calcNeighborDistances();
 
 // Per-region min-neighbor distance
@@ -68,7 +68,7 @@ const clusterIds: number[] = rs.cluster(5_000);
 ```
 
 !!! warning "Output length for `calcNeighborDistances` / `calcNearestNeighbors`"
-    Both methods **skip chromosomes with only one region** (matching R GenomicDistributions). The returned array is therefore **not aligned 1:1 with input regions** — it's shorter than `rs.numberOfRegions` whenever any chromosome has a single peak. No sentinel values are emitted.
+    Both methods **skip chromosomes with only one region** (matching R GenomicDistributions). The returned array is therefore **not aligned 1:1 with input regions**. `calcNearestNeighbors` is shorter than `rs.numberOfRegions` whenever any chromosome has a single peak; `calcNeighborDistances` returns one value per positive gap, so it is always shorter. No sentinel values are emitted.
 
 ### Region distribution
 
@@ -85,7 +85,7 @@ const distLocal = rs.regionDistribution(250, null);
 ```
 
 !!! warning "`n_bins` is a target, not a total"
-    When `chrom_sizes` is provided, `n_bins` is the target bin count for the **longest** chromosome in `chrom_sizes`. Bin width is derived from that, and every chromosome is tiled at the same bp width — so the total bin count across chromosomes is `sum(ceil(size / bin_width))`, which can substantially exceed `n_bins`.
+    When `chrom_sizes` is provided, `n_bins` is the bin count for the **longest** chromosome in `chrom_sizes`. Bin width is derived from that, and every chromosome is tiled at the same bp width, so the total bin count across chromosomes can substantially exceed `n_bins`. No chromosome gets more than `n_bins` bins: a midpoint in the leftover tail is clamped into the last bin, which stretches to the chromosome end. Regions on chromosomes missing from `chrom_sizes`, or whose midpoint falls past the stated chromosome size, are skipped.
 
 ### Interval set algebra
 
@@ -191,7 +191,7 @@ const result = rsl.pairwiseJaccard();
 Builder pattern for consensus region analysis — given N input region sets, compute the reduced union annotated with per-region replicate support.
 
 ```ts
-import { ConsensusBuilder } from '@databio/gtars-js';
+import { ConsensusBuilder } from '@databio/gtars';
 
 const cb = new ConsensusBuilder();
 cb.add(rep1);
@@ -223,7 +223,7 @@ Returned by `rs.chromosomeStatistics()` → `{ [chr: string]: ChromosomeStatisti
 | `minimum_region_length`, `maximum_region_length` | `number` |
 | `mean_region_length`, `median_region_length` | `number` |
 
-Fields are exposed as getters on a Wasm-bound class.
+The values in the returned object are plain JS objects with these fields (serialized from Rust), not class instances.
 
 ### `RegionDistribution`
 

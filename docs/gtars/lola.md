@@ -7,8 +7,7 @@ Given a **user set** of regions (your peaks), a **universe** (the background you
 The crate is built on top of:
 
 - **[gtars-igd](igd.md)** — the interval overlap index. A LOLA database is exposed as a single `Igd` index over all its files, so one call can score a user set against thousands of reference sets simultaneously.
-- **[gtars-genomicdist](genomicdist.md)** — the `IntervalRanges` trait (for `concat`, `disjoin`, `union`, etc.) is used to build restricted universes and redefine user sets in terms of universe regions.
-- **[gtars-core](core.md)** — all region types come from here; `RegionSetList` is used as the FFI-friendly return type for extracting region sets from a database.
+- **[gtars-core](core.md)** — all region types come from here; `RegionSet::concat` and `RegionSet::disjoin` are used to build restricted universes, and `RegionSetList` is used as the FFI-friendly return type for extracting region sets from a database.
 
 ## Installation
 
@@ -353,6 +352,5 @@ pub enum LolaError {
 ## Where to go next
 
 - **[gtars-igd](igd.md)** — the overlap index that backs `RegionDB.igd`. Worth reading if you're tuning universe construction or wrapping your own database.
-- **[gtars-genomicdist](genomicdist.md)** — `IntervalRanges` operations used during `build_restricted_universe` and `redefine_user_sets`.
-- **[gtars-core](core.md)** — `RegionSet` and `RegionSetList`, the input/output types throughout this page.
+- **[gtars-core](core.md)** — `RegionSet` and `RegionSetList`, the input/output types throughout this page (plus the `concat`/`disjoin` operations used by `build_restricted_universe`).
 - **R LOLA** ([docs](http://lola.databio.org/)) — the reference implementation this port targets.

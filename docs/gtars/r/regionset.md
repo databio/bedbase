@@ -56,7 +56,7 @@ rs                      # same — calls show()
 
 as.data.frame(rs)       # convert to a data.frame with chr/start/end/strand
 rs[1:10]                # subset by index (numeric, logical, or character)
-rs[rs$strand == "+"]    # Note: use as.data.frame(rs)$strand for filtering
+rs[as.data.frame(rs)$strand == "+"]   # filter by strand
 ```
 
 ### Converting to `GRanges`
@@ -77,7 +77,7 @@ All of these accept `RegionSet`, `GRanges`, file path, or data.frame as input:
 widths(rs)                     # numeric vector of region widths (end - start)
 neighborDistances(rs)          # signed gaps between consecutive regions per chromosome
 nearestNeighbors(rs)           # per-region min neighbor distance
-chromosomeStatistics(rs)       # named list of per-chromosome stats
+chromosomeStatistics(rs)       # data.frame, one row per chromosome
 
 distribution(rs, nBins = 250)                     # bin counts across the genome
 distribution(rs, nBins = 250, chromSizes = hg38)  # with reference chrom sizes
@@ -89,11 +89,13 @@ clusterRegions(rs, maxGap = 5000L)  # cluster id per region
     Both skip chromosomes with only one region (matching R GenomicDistributions). The returned vector is **not aligned 1:1** with the input — it's shorter than `length(rs)` whenever any chromosome has a single peak.
 
 !!! warning "`nBins` is a target, not a total"
-    In `distribution(chromSizes = ...)`, `nBins` is the target bin count for the **longest** chromosome in `chromSizes`. Bin width is derived as `max(chromSizes) %/% nBins` (floored, minimum 1 bp), and every chromosome is tiled at the same bp width — so shorter chromosomes get proportionally fewer bins. The total bin count returned is `sum(ceiling(chrom_size / bin_width))`, which can substantially exceed `nBins` when `chromSizes` has many entries. To target a specific bin width in bp instead, pass `nBins = max_chrom_len %/% desired_bp`.
+    In `distribution(chromSizes = ...)`, `nBins` is the target bin count for the **longest** chromosome in `chromSizes`. Bin width is derived as `max(chromSizes) %/% nBins` (floored, minimum 1 bp), and every chromosome is tiled at the same bp width, so shorter chromosomes get proportionally fewer bins. No chromosome gets more than `nBins` bins: a midpoint in the leftover tail is folded into the last bin, which runs to the chromosome end. The genome-wide bin count can still substantially exceed `nBins` when `chromSizes` has many entries. Only bins that contain at least one region midpoint are returned, and regions on chromosomes missing from `chromSizes` (or whose midpoint lies past the chromosome end) are skipped. To target a specific bin width in bp instead, pass `nBins = max_chrom_len %/% desired_bp`.
 
 ### Interval set algebra
 
 R gtars overrides the standard Bioconductor generics (`union`, `intersect`, `setdiff`, `reduce`, `promoters`, `shift`, `flank`, `resize`, `narrow`, `disjoin`, `gaps`, `findOverlaps`, `countOverlaps`) plus adds gtars-specific ones (`trim`, `pintersect`, `concat`, `jaccard`).
+
+The unary methods (`reduce`, `trim`, `promoters`, `shift`, `flank`, `resize`, `narrow`, `disjoin`, `gaps`) dispatch to gtars for a `RegionSet`, file path, or data.frame. A `GRanges` input keeps its own IRanges method and returns a `GRanges`; wrap it in `RegionSet()` first to use gtars.
 
 ```r
 merged   <- reduce(rs)

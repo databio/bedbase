@@ -18,12 +18,12 @@ igd_create(
 
 **Arguments:**
 
-- `output_path` — directory where the IGD database files will be written. Must exist.
+- `output_path` — directory where the IGD database files will be written. Created if it does not exist.
 - `filelist` — one of:
-    - a path to a text file listing BED file paths (one per line),
-    - a path to a directory containing BED files (all `.bed` / `.bed.gz` files will be indexed),
+    - a path to a `.txt` file listing BED file paths (one per line; the `.txt` extension is how it is recognized),
+    - a path to a directory containing BED files (all `.bed` and `.gz` files in it are indexed),
     - `"-"` or `"stdin"` to read paths from standard input.
-- `db_name` — prefix for the output filenames (default `"igd_database"`). The function produces two files: `<db_name>.igd` (the index) and `<db_name>_index.tsv` (file metadata).
+- `db_name` — prefix for the output filenames (default `"igd_database"`). The function produces two files: `<db_name>.igd` (the index) and `<db_name>.tsv` (file metadata).
 
 Returns `NULL` invisibly on success. Errors are raised via `stop()` on invalid input.
 
@@ -39,7 +39,7 @@ igd_create(
 
 # Produces:
 # ./igd_out/my_peaks.igd
-# ./igd_out/my_peaks_index.tsv
+# ./igd_out/my_peaks.tsv
 
 # From an explicit file list
 writeLines(
@@ -67,7 +67,7 @@ hits <- igd_search(
 - `database_path` — path to an existing `.igd` file (produced by `igd_create` or any other IGD-compatible tool).
 - `query_path` — path to a BED file containing the query regions.
 
-**Returns** a `data.frame` of overlap hits. The exact columns depend on the query result schema — typically `file_id`, `filename`, `overlap_count`, etc. Use `colnames(hits)` to discover the structure for your version.
+**Returns** a `data.frame` with one row per database file that has at least one hit, and columns `filename`, `numRegions` (regions in that file), and `hits` (number of overlaps with the query).
 
 ### Example
 
@@ -77,12 +77,10 @@ hits <- igd_search(
   query_path    = "query.bed",
 )
 
-# Inspect the schema
-colnames(hits)
 head(hits)
 
-# Typical analysis: count overlaps per database file
-aggregate(overlap_count ~ filename, data = hits, sum)
+# Typical analysis: rank database files by overlap count
+hits[order(-hits$hits), ]
 ```
 
 ## Relationship to other gtars R functions

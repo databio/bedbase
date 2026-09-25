@@ -12,14 +12,16 @@ Core library providing the fundamental data structures and utilities that every 
     - **Typed error enum** `RegionSetError` — replaces the previous panicking parse paths.
     - **`to_polars`** + `dataframe` feature flag — zero-copy conversion to a Polars DataFrame.
     - **`bigbed`** and **`http`** feature flags — optional bigBed writing and URL-backed `RegionSet::try_from`.
+    - **Interval set operations**: `reduce`, `union`, `trim`, `promoters`, `gaps`, and friends are now inherent methods on `RegionSet`, with `setdiff`/`intersect`/`jaccard` in the `IntervalSetOps` trait. `SortedRegionSet` also lives here now (re-exported by `gtars-genomicdist`).
 
 ## Core data types
 
-The `gtars_core::models` module re-exports all six core types at the top level, so you typically import them directly:
+The `gtars_core::models` module re-exports the core types at the top level, so you typically import them directly:
 
 ```rust
 use gtars_core::models::{
-    Region, RegionSet, RegionSetList, Interval, Fragment, CoordinateMode,
+    Region, RegionSet, RegionSetList, SortedRegionSet, Interval, Fragment, CoordinateMode,
+    IntervalSetOps,
 };
 ```
 
@@ -50,12 +52,13 @@ Methods:
 | `digest()` | `String` | MD5 digest of `"chr,start,end"` |
 | `mid_point()` | `u32` | `start + width() / 2` (BED/floor) |
 | `mid_point_with_mode(mode)` | `u32` | BED or GRanges convention — see `CoordinateMode` below |
+| `distance_to(&other)` | `i64` | gap in bp between the two regions; 0 if they overlap |
 
 `Region` implements `Display` (as tab-separated text), `Clone`, `Debug`, `Eq`, `Hash`, and — under the `serde` feature — `Serialize`/`Deserialize`.
 
 ### `RegionSet`
 
-An ordered collection of `Region`s. `RegionSet::try_from` accepts `&Path`, `&str`, `String`, `PathBuf`, or `Vec<u8>`, auto-detects gzip by extension, and with the `http` feature will fetch from URLs. Construction always sorts by `(chr, start)`.
+An ordered collection of `Region`s. `RegionSet::try_from` accepts `&Path`, `&str`, `String`, or `PathBuf`, auto-detects gzip by magic bytes (not file extension), and with the `http` feature will fetch from URLs. Loading from a file always sorts by `(chr, start)`; `RegionSet::from(Vec<Region>)` keeps the order you give it.
 
 ```rust
 use gtars_core::models::RegionSet;
@@ -111,6 +114,19 @@ Key methods:
 
 - `sort()` — in-place sort by `(chr, start)`.
 
+**Interval set operations**
+
+GRanges-style operations are inherent methods on `RegionSet`; each returns a new `RegionSet` (with `rest: None`):
+
+- `reduce()`, `concat(&other)`, `union(&other)` (plus consuming `concat_into` / `union_into`).
+- `trim(&chrom_sizes)`, `gaps(&chrom_sizes)`, `promoters(upstream, downstream)`.
+- `shift(offset)`, `flank(width, use_start, both)`, `resize(width, fix)`, `narrow(start, end, width)`.
+- `pintersect(&other)`, `disjoin()`, `cluster(max_gap)` → `Vec<u32>`, `closest(&other)` → `Vec<(usize, usize, i64)>`.
+
+Two-set operations live in the `IntervalSetOps` trait (also implemented by the overlap indexes in `gtars-overlaprs`): `setdiff`, `intersect`, `jaccard`, `coverage`, `overlap_coefficient`, and `closest`. Bring it into scope with `use gtars_core::models::IntervalSetOps;`.
+
+`SortedRegionSet` is a newtype (`SortedRegionSet(pub RegionSet)`) that guarantees `(chr, start)` order. `SortedRegionSet::new(rs)` sorts in place without cloning.
+
 ### `RegionSetList`
 
 A collection of `RegionSet`s — the gtars equivalent of Bioconductor's `GRangesList`. This is the type that downstream crates (genomicdist, lola) use to pass multiple region sets across FFI boundaries without paying N × clone costs.
@@ -149,7 +165,7 @@ let id = rsl.identifier();
 - A path to a **bedset manifest file** — a text file listing one BED path per line (`read_bedset_file` under the hood).
 - A `Vec<&Path>`, `Vec<&str>`, `Vec<String>`, or `Vec<PathBuf>` — each is loaded as its own `RegionSet`.
 
-`concat()` flattens without merging; if you need a reduced union, call `.reduce()` on the result (the `reduce` method lives in `gtars-genomicdist` via the `IntervalRanges` trait).
+`concat()` flattens without merging; if you need a reduced union, call `.reduce()` on the result.
 
 Key methods: `new`, `with_names`, `add`, `get(i)`, `iter`, `len`, `is_empty`, `concat`, `identifier`.
 
@@ -236,22 +252,23 @@ gtars-core = { version = "0.5", features = ["serde", "dataframe"] }
 
 ## Available modules
 
-- **`models`** — all core data types (`Region`, `RegionSet`, `RegionSetList`, `Interval`, `Fragment`, `CoordinateMode`). Re-exported at the crate root.
+- **`models`** — all core data types (`Region`, `RegionSet`, `RegionSetList`, `SortedRegionSet`, `Interval`, `Fragment`, `CoordinateMode`) and the `IntervalSetOps` trait. Import them from `gtars_core::models`.
 - **`errors`** — `RegionSetError` enum.
 - **`utils`** — readers, file-type detection, chromosome-sizes parsing, and `Region` ↔ id hash-map helpers:
-    - `get_dynamic_reader(&Path)` / `get_dynamic_reader_w_stdin(&str)` — transparent gzip/stdin handling.
+    - `get_dynamic_reader(&Path)` / `get_dynamic_reader_w_stdin(&str)` — transparent gzip/stdin handling (gzip detected by magic bytes).
     - `get_dynamic_reader_from_url(&Path)` — under the `http` feature.
     - `get_file_info(&Path) -> FileInfo` — detect type (BED, BAM, NARROWPEAK, UNKNOWN) and gzip.
-    - `parse_bedlike_file(line)` → `(chr, start, end)` tuple from a single line.
+    - `parse_bedlike_file(line)` → `Option<(chr, start, end)>` from a single line.
     - `get_chrom_sizes(path)` → `HashMap<String, u32>`.
     - `read_bedset_file(path)` → `Vec<String>` of BED paths from a bedset manifest.
     - `generate_region_to_id_map` / `generate_id_to_region_map` and string variants — stable id assignment for tokenizer vocabularies.
     - `remove_all_extensions(&Path)` → stem with *all* extensions stripped (handles `.bed.gz`).
+    - `chrom_karyotype_key(chr)` → sort key for karyotype order (`chr1`…`chr22`, `chrX`, `chrY`, `chrM`, then others).
 - **`consts`** — column-name constants (`CHR_COL_NAME`, `START_COL_NAME`, `END_COL_NAME`, `DELIMITER`) and file-extension constants (`BED_FILE_EXTENSION`, `BAM_FILE_EXTENSION`, `GZ_FILE_EXTENSION`, `IGD_FILE_EXTENSION`, `GTOK_EXT`).
 
 ## Where to go next
 
 - **[Core models tour](regionSet.md)** — a cross-language (Python + Rust) walkthrough of `Region`, `RegionSet`, and friends.
 - **[gtars-overlaprs](overlaprs.md)** — high-performance overlap queries that operate on `RegionSet`.
-- **[gtars-genomicdist](genomicdist.md)** — the `IntervalRanges` and `GenomicIntervalSetStatistics` traits extend `RegionSet` with R GenomicDistributions–style set algebra and summary stats.
+- **[gtars-genomicdist](genomicdist.md)** — the `GenomicIntervalSetStatistics` trait extends `RegionSet` with R GenomicDistributions–style summary stats, plus partitions, signal, and consensus.
 - **[gtars-lola](lola.md)** — LOLA enrichment built on top of the IGD index and `RegionSetList`.

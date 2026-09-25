@@ -3,7 +3,7 @@
 Rust port of the R [GenomicDistributions](https://code.databio.org/GenomicDistributions/) package — plus a handful of extra calculations and binary serialization formats used by BEDbase. The crate provides:
 
 - **Summary statistics** and per-chromosome distributions (`GenomicIntervalSetStatistics` trait).
-- **Interval set algebra** in the GRanges/IRanges idiom (`IntervalRanges` trait, 26+ methods).
+- **Multi-set algebra** over a `RegionSetList` (`RegionSetListOps`, `pairwise_jaccard`). Single-set GRanges-style operations (`reduce`, `setdiff`, `promoters`, ...) now live on `RegionSet` in [gtars-core](core.md).
 - **Genomic partitioning** using a gene model (promoter / UTR / exon / intron / intergenic).
 - **Signal matrix overlap and summary** (`calc_summary_signal`, TSV + packed-binary I/O).
 - **Consensus region calling** across multiple input sets.
@@ -12,7 +12,7 @@ Rust port of the R [GenomicDistributions](https://code.databio.org/GenomicDistri
 - **BED file classification** (optional `bedclassifier` feature, polars-backed).
 - The **GDA** binary gene-model format and the **.fab** binary FASTA format for fast mmap-backed sequence lookup.
 
-All operations take a `&RegionSet` (from `gtars-core`) as input and either extend it via trait implementations or run as free functions. If you're new to the crate, start with the `IntervalRanges` and `GenomicIntervalSetStatistics` traits — those cover the GRanges/GenomicDistributions surface area most users need.
+All operations take a `&RegionSet` (from `gtars-core`) as input and either extend it via trait implementations or run as free functions. If you're new to the crate, start with the `GenomicIntervalSetStatistics` trait (plus the interval set operations on `RegionSet` in gtars-core); together those cover the GRanges/GenomicDistributions surface area most users need.
 
 !!! tip "Coming from R GenomicDistributions?"
     Most function names follow the pattern `calc_*` where R used `calc*`, and behavior is matched where practical. A few deliberate divergences are documented inline — the most notable is that midpoint calculations default to BED (floor) conventions rather than GRanges banker's rounding, and spacing/nearest-neighbor calculations *exclude* single-region chromosomes rather than emitting sentinel values.
@@ -21,7 +21,7 @@ All operations take a `&RegionSet` (from `gtars-core`) as input and either exten
 
 ```toml
 [dependencies]
-gtars-genomicdist = "0.7"
+gtars-genomicdist = "0.8"
 ```
 
 ### Feature flags
@@ -35,7 +35,7 @@ Enable the classifier feature:
 
 ```toml
 [dependencies]
-gtars-genomicdist = { version = "0.7", features = ["bedclassifier"] }
+gtars-genomicdist = { version = "0.8", features = ["bedclassifier"] }
 ```
 
 ## Core types
@@ -46,9 +46,9 @@ All of these are re-exported at the crate root, so you typically import them dir
 use gtars_genomicdist::{
     // Statistics
     GenomicIntervalSetStatistics,
-    // Interval algebra
-    IntervalRanges, RegionSetListOps, pairwise_jaccard,
-    // Strand-aware wrappers
+    // Multi-set algebra
+    RegionSetListOps, pairwise_jaccard,
+    // Strand-aware wrappers (SortedRegionSet is re-exported from gtars-core)
     SortedRegionSet, Strand, StrandedRegionSet,
     // Partitions
     GeneModel, PartitionList, PartitionResult,
@@ -72,7 +72,7 @@ use gtars_genomicdist::{
 };
 ```
 
-The submodules (`statistics`, `interval_ranges`, `partitions`, `signal`, `consensus`, `models`, `asset`, `bed_classifier`, `utils`) are all `pub` as well, so both `gtars_genomicdist::calc_partitions` and `gtars_genomicdist::partitions::calc_partitions` resolve to the same symbol.
+The submodules (`statistics`, `region_set_list_ops`, `stranded_region_set`, `partitions`, `signal`, `consensus`, `models`, `asset`, `bed_classifier`, `errors`, `utils`) are all `pub` as well, so both `gtars_genomicdist::calc_partitions` and `gtars_genomicdist::partitions::calc_partitions` resolve to the same symbol.
 
 ## Statistics
 
@@ -140,15 +140,14 @@ pub struct RegionBin { pub chr: String, pub start: u32, pub end: u32, pub n: u32
     `calc_neighbor_distances` and `calc_nearest_neighbors` **skip single-region chromosomes** (matching R GenomicDistributions behavior). The output length is therefore **not 1:1 with the input region count** — it's the number of multi-region chromosomes' regions. No sentinel values are emitted. If you need 1:1 alignment, filter your input to multi-region chromosomes first.
 
 !!! warning "`n_bins` is a target, not a total"
-    In `region_distribution_with_chrom_sizes`, `n_bins` is the target bin count for the **longest** chromosome in `chrom_sizes`. Bin width is derived from that, and every chromosome is tiled at the same bp width — so shorter chromosomes get fewer bins and the total bin count is `sum(ceil(chrom_size / bin_width))`, which can exceed `n_bins` substantially. To target a specific bin width in bp, set `n_bins = max_chrom_len / desired_bp`.
+    In `region_distribution_with_chrom_sizes`, `n_bins` is the target bin count for the **longest** chromosome in `chrom_sizes`. Bin width is derived from that, and every chromosome is tiled at the same bp width — so shorter chromosomes get fewer bins and the total bin count is `sum(min(n_bins, ceil(chrom_size / bin_width)))`, which can exceed `n_bins` substantially. No chromosome gets more than `n_bins` bins: the last bin absorbs any leftover tail. Regions on chromosomes missing from `chrom_sizes`, or whose midpoint lies past the stated chromosome end, are skipped. To target a specific bin width in bp, set `n_bins = max_chrom_len / desired_bp`.
 
 ## Interval set algebra
 
-`IntervalRanges` is a second trait on `RegionSet` that provides GRanges/IRanges-style set algebra. All operations return new `RegionSet`s (immutable pattern) and are strand-unaware by default — use `StrandedRegionSet` if you need strand-aware promoters, reduce, or setdiff.
+GRanges/IRanges-style set algebra now lives in **gtars-core**: most operations are inherent methods on `RegionSet`, and the two-set operations `setdiff`, `intersect`, `jaccard`, `coverage`, and `overlap_coefficient` come from the `gtars_core::models::IntervalSetOps` trait. All operations return new `RegionSet`s (immutable pattern) and are strand-unaware by default — use `StrandedRegionSet` if you need strand-aware promoters, reduce, or setdiff.
 
 ```rust
-use gtars_core::models::RegionSet;
-use gtars_genomicdist::IntervalRanges;
+use gtars_core::models::{IntervalSetOps, RegionSet};
 
 let a = RegionSet::try_from("peaks_a.bed")?;
 let b = RegionSet::try_from("peaks_b.bed")?;
@@ -170,15 +169,14 @@ let clustered = a.cluster(1000);                   // per-region cluster id
 | `trim(chrom_sizes)` | clamp regions to `[0, chrom_size)`; drop regions on unknown chromosomes |
 | `promoters(upstream, downstream)` | `[start - upstream, start + downstream)` per region |
 | `reduce()` | merge overlapping/adjacent intervals per chromosome |
-| `setdiff(other)` / `subtract(other)` | remove `other` from self |
+| `setdiff(other)` | remove `other` from self (`IntervalSetOps`) |
 | `pintersect(other)` | *pairwise* (by index) intersection |
-| `intersect(other)` | range-level intersection |
-| `intersect_all(other)` | all-vs-all pairwise intersection fragments (AIList-backed) |
+| `intersect(other)` | range-level intersection (`IntervalSetOps`) |
 | `concat(other)` | concatenate without merging |
 | `union(other)` | `concat(other).reduce()` |
-| `jaccard(other)` | bp-level Jaccard `|A ∩ B| / |A ∪ B|` |
-| `coverage(other)` | fraction of `self` bp covered by `other` |
-| `overlap_coefficient(other)` | `|A ∩ B| / min(|A|, |B|)` |
+| `jaccard(other)` | bp-level Jaccard `|A ∩ B| / |A ∪ B|` (`IntervalSetOps`) |
+| `coverage(other)` | fraction of `self` bp covered by `other` (`IntervalSetOps`) |
+| `overlap_coefficient(other)` | `|A ∩ B| / min(|A|, |B|)` (`IntervalSetOps`) |
 | `shift(offset)` | translate by signed bp offset (saturating at 0) |
 | `flank(width, use_start, both)` | upstream/downstream/both-side flanks |
 | `resize(width, fix)` | fixed width anchored at `"start"`, `"end"`, or `"center"` |
@@ -188,8 +186,10 @@ let clustered = a.cluster(1000);                   // per-region cluster id
 | `closest(other)` | `Vec<(self_idx, other_idx, signed_dist)>` |
 | `cluster(max_gap)` | `Vec<u32>` cluster ids in original order |
 
+All-vs-all intersection fragments (`intersect_all`) are provided by the overlap indexes in [gtars-overlaprs](overlaprs.md).
+
 !!! note "`rest` fields are dropped"
-    Operations that merge or synthesize new intervals (reduce, setdiff, promoters, etc.) produce regions with `rest: None`. There is no unambiguous way to carry the original metadata through a merge, so the contract is: use `IntervalRanges` methods for coordinate-only work.
+    Operations that merge or synthesize new intervals (reduce, setdiff, promoters, etc.) produce regions with `rest: None`. There is no unambiguous way to carry the original metadata through a merge, so the contract is: use the interval set operations for coordinate-only work.
 
 ### `pairwise_jaccard`
 
@@ -470,7 +470,7 @@ From `gtars_genomicdist::utils`:
 
 Two wrappers extend `RegionSet` with stronger invariants:
 
-- **`SortedRegionSet`** — a newtype guaranteeing `(chr, start)` sort order. Constructed via `SortedRegionSet::new(rs)`, which sorts in place (move, no clone). Downstream code that requires sorted input can accept `&SortedRegionSet` to avoid re-sorting on every call.
+- **`SortedRegionSet`** — a newtype guaranteeing `(chr, start)` sort order (defined in gtars-core, re-exported here). Constructed via `SortedRegionSet::new(rs)`, which sorts in place (move, no clone). Downstream code that requires sorted input can accept `&SortedRegionSet` to avoid re-sorting on every call.
 - **`StrandedRegionSet`** — pairs a `RegionSet` with a parallel `Vec<Strand>`. Strand-aware `promoters_stranded`, `reduce`, `setdiff`, and `trim` are methods on this type and are used internally by `genome_partition_list` to produce correct partitions for minus-strand genes.
 
 ```rust
@@ -504,6 +504,6 @@ The `bedclassifier` feature has its own `BedClassifierError` enum for format-cla
 ## Where to go next
 
 - **[gtars-core](core.md)** — `RegionSet`, `RegionSetList`, and `CoordinateMode`, which this crate consumes.
-- **[gtars-lola](lola.md)** — LOLA enrichment is built on `IntervalRanges` (for universe construction) and the IGD index.
+- **[gtars-lola](lola.md)** — LOLA enrichment is built on the `RegionSet` interval operations (for universe construction) and the IGD index.
 - **[gtars-overlaprs](overlaprs.md)** — the overlap-detection engine used internally by `calc_partitions` and `consensus`.
 - **[gtars CLI](cli.md)** — `gtars genomicdist` subcommands for running these analyses from the command line.

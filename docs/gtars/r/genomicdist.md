@@ -15,7 +15,7 @@ For algorithmic detail and caveats that apply identically in R, see [gtars-genom
 | `calcNearestNeighbors(query)` | `calcNearestNeighbors()` | per-region min neighbor distance |
 | `regionDistribution(query, nBins, chromSizes)` | `calcChromBins()` | bin counts; pass `chromSizes` for reference-aligned bins |
 | `calcGCContent(query, ref, ignoreUnkChroms)` | `calcGCContent()` | requires a `GenomeAssembly` pointer, not BSgenome |
-| `calcDinuclFreq(query, ref, rawCounts)` | `calcDinuclFreq()` | returns a data.frame with region + 16 dinucleotide columns |
+| `calcDinuclFreq(query, ref, rawCounts, ignoreUnknownChroms)` | `calcDinuclFreq()` | returns a data.frame with region + 16 dinucleotide columns |
 | `genomePartitionList(...)` | `genomePartitionList()` | build partition list from gene model components |
 | `partitionListFromGTF(path, ...)` | *(not in original)* | convenience — loads gene model from GTF in one step |
 | `calcPartitions(query, partitionList, bpProportion)` | `calcPartitions()` | priority-based (or bp-proportion) partition classification |
@@ -24,6 +24,8 @@ For algorithmic detail and caveats that apply identically in R, see [gtars-genom
 | `calcFeatureDist(query, features)` | `calcFeatureDist()` | signed distance to nearest feature |
 | `calcTSSDist(query, features)` | *(not in original)* | absolute distance variant |
 | `loadGenomeAssembly(fasta_path)` | — | replaces BSgenome loading (FASTA directly) |
+
+Lower-level snake_case loaders are also exported for pre-built `gtars prep` assets: `load_binary_genome_assembly()` (`.fab` genome), `load_gda_bin()` with `gda_partition_list()`, `gda_tss_index()`, and `gda_gene_model()`, and `load_signal_matrix_bin()` / `load_signal_matrix_tsv()`.
 
 ## Porting an analysis
 
@@ -73,7 +75,7 @@ rd <- regionDistribution(query, nBins = 250L, chromSizes = chromSizes)
 Returns a data.table compatible with R GenomicDistributions' `plotChromBins`.
 
 !!! warning "`nBins` is a target, not a total"
-    When `chromSizes` is provided, `nBins` is the target bin count for the **longest** chromosome in `chromSizes`. Bin width is derived as `max(chromSizes) %/% nBins` (floored, minimum 1 bp), and every chromosome is tiled at the same bp width — so shorter chromosomes get proportionally fewer bins. The total bin count returned is `sum(ceiling(chrom_size / bin_width))`, which can substantially exceed `nBins` when `chromSizes` has many entries. To target a specific bin width in bp instead, pass `nBins = max_chrom_len %/% desired_bp`.
+    When `chromSizes` is provided, `nBins` is the target bin count for the **longest** chromosome in `chromSizes`. Bin width is derived as `max(chromSizes) %/% nBins` (floored, minimum 1 bp), and every chromosome is tiled at the same bp width, so shorter chromosomes get proportionally fewer bins. No chromosome gets more than `nBins` bins: a midpoint in the leftover tail is folded into the last bin, which runs to the chromosome end. The genome-wide bin count can still substantially exceed `nBins` when `chromSizes` has many entries. Only bins that contain at least one region midpoint are returned, and regions on chromosomes missing from `chromSizes` (or whose midpoint lies past the chromosome end) are skipped. To target a specific bin width in bp instead, pass `nBins = max_chrom_len %/% desired_bp`.
 
 ## GC content and dinucleotides
 

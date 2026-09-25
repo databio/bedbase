@@ -22,7 +22,7 @@ collection_digest <- collection@digest
 cat(sprintf("Source FASTA digested. Collection digest: %s\n", collection_digest))
 
 # 3. Initialize GlobalRefgetStore in Encoded mode
-store <- global_refget_store("encoded")
+store <- refget_store("encoded")
 cat(sprintf("Initialized store: %s\n", store))
 
 # 4. Import FASTA into the store

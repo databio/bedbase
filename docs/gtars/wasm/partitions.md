@@ -9,10 +9,11 @@ See [gtars-genomicdist → Partitions](../genomicdist.md#partitions) for the ful
 ```ts
 import init, {
   GeneModel,
+  GenomicDistAnnotation,
   PartitionList,
   calcPartitions,
   calcExpectedPartitions,
-} from '@databio/gtars-js';
+} from '@databio/gtars';
 
 await init();
 ```
@@ -41,8 +42,18 @@ const model = new GeneModel(genes, exons, threeUtr, fiveUtr);
 !!! note "No GTF loader in Wasm"
     The Rust `GeneModel::from_gtf` and `GeneModel::from_bed_files` methods are **not** available in Wasm — they require filesystem access. In the browser, typically:
 
-    - Fetch a pre-built `.gda` (Genomic Dist Annotation) binary from the BEDbase API and decode it, **or**
+    - Fetch a pre-built `.gda` (Genomic Dist Annotation) binary from the BEDbase API and decode it with `GenomicDistAnnotation.fromBin` (see below), **or**
     - Parse regions yourself from JSON / TSV over the network and pass them into the `GeneModel` constructor.
+
+### From a `.gda` binary
+
+`GenomicDistAnnotation.fromBin(bytes)` loads a packed annotation. From it you can get a `GeneModel` (`geneModel()`), a `PartitionList` (`partitionList(coreSize, proxSize, chromSizes)`, with `chromSizes` optional), or a `TssIndex` (`tssIndex()`).
+
+```ts
+const bytes = new Uint8Array(await (await fetch('/api/annotations/hg38.gda')).arrayBuffer());
+const gda = GenomicDistAnnotation.fromBin(bytes);
+const pl = gda.partitionList(100, 2000, null);  // or pass a chromSizes object
+```
 
 ## `PartitionList`
 
@@ -118,7 +129,7 @@ import init, {
   GeneModel,
   PartitionList,
   calcExpectedPartitions,
-} from '@databio/gtars-js';
+} from '@databio/gtars';
 
 await init();
 
