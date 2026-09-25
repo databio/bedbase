@@ -1,4 +1,0 @@
-mkdocs-material
-mkdocstrings[python]
-geniml
-mkdocs-jupyter

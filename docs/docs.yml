@@ -1,0 +1,24 @@
+site_name: BEDbase
+nav:
+  - BEDbase: README.md
+  - User guides:
+    - 📖 Public BEDbase UI user guide: user/bedbase-ui-user-guide.md
+    - 📖 Public BEDbase API user guide: user/bedbase-api-user-guide.md
+    - ✅ Reference Genome Compatibility: user/reference-genome-compatibility.md
+    - 📝 BED Classification: user/bed_classification.md
+    - 💻 BBClient & caching: user/bbclient.md
+    - 🔍 BEDbase Search: user/bedbase-search.md
+    - 🪩 Embedding Visualization: user/umap-visualizer.md
+    - ⚙️ BED analyzer: user/bed-analyzer.md
+  - Developer guides:
+    - 📇 BEDhost API server: /bedhost/
+    - 🔌 BBConf configuration: /bbconf/
+    - 🧰 BEDBoss processing pipeline: /bedboss/
+    - 🔄 Data Loading: bedbase-data-loading.md
+    - 📦 Bulk metadata exports: bulk-metadata-exports.md
+    - 📜 Configuration file: how-to-configure.md
+  - Reference:
+    - How to cite: /citations/
+    - Support: https://github.com/databio/bedhost/issues
+    - Contributing: contributing.md
+    - Changelog: changelog.md
