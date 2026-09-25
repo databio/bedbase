@@ -8,7 +8,12 @@ The versioning and tagging scheme was influenced by several other Rust projects 
 - `noodles`: https://github.com/zaeleus/noodles/tags?after=noodles-fastq-0.19.0
 
 ## Versioning scheme
-In general, we will follow [Semantic Versioning](https://semver.org/) for all crates, bindings, and command line tools. We allow independent versioning for each crate, and we will bump the version(s) of any wrapper/binding/CLI crate that depends on a crate that has been updated.
+We follow [Semantic Versioning](https://semver.org/) for all crates, bindings, and command line tools, with two tiers:
+
+- **Internal library crates** (e.g. `gtars-core`, `gtars-uniwig`, `gtars-refget`) version independently. Patch versions are bumped as needed and do not need to stay in sync across crates.
+- **Wrapper/binding/CLI crates** (`gtars`, `gtars-cli`, `gtars-py`, `gtars-r`, `gtars-js`) sync their **minor version** to the main `gtars` crate at each release. For example, when `gtars` releases `0.7.0`, all wrapper crates with changes are bumped to `0.7.0` as well. This makes it easy to tell which release a wrapper corresponds to.
+
+Patch versions within wrappers can still increment independently between minor releases (e.g. `0.7.0` → `0.7.1`), but the next minor release will re-sync them.
 
 Finally, we also have a specific tagging scheme for releases on GitHub.
 
@@ -17,6 +22,16 @@ Finally, we also have a specific tagging scheme for releases on GitHub.
 - Python Bindings: `py-X.Y.Z` (e.g., `py-0.3.1`). This tag signifies a release of the Python package to PyPI.
 - CLI: `cli-X.Y.Z` (e.g., `cli-1.1.0`). This tag signifies a release of the CLI binaries, which will be attached to a GitHub Release.
 - WASM Bindings: `wasm-X.Y.Z` (e.g., `wasm-0.1.5`). This tag signifies a release of the WASM package to npm.
+
+## Automated release workflow
+
+Pushing a `vX.Y.Z` tag (e.g. `v0.7.0`) triggers the `release-all.yml` GitHub Actions workflow, which orchestrates the entire release process automatically:
+
+1. **Rust crates** are published to crates.io in dependency order (leaf crates first, then dependents, then aggregators), with pauses between waves for index propagation. Already-published crates are skipped.
+2. **Python bindings**, **CLI binaries**, and **WASM bindings** are built and published in parallel once the Rust crates are done.
+3. Component tags (`py-X.Y.Z`, `cli-X.Y.Z`, `wasm-X.Y.Z`) are created automatically after all publishes succeed.
+
+Each individual publish workflow (`rust-publish.yml`, `build-python-bindings.yml`, `build-binaries.yml`, `build-wasm-bindings.yml`) can still be triggered manually via `workflow_dispatch` for one-off publishes.
 
 ## An example scenario:
 
