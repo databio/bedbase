@@ -2,18 +2,18 @@
 
 BEDbase publishes a monthly snapshot of the metadata corpus as
 [Apache Parquet](https://parquet.apache.org/) files on S3. This is the supported
-way to get the whole corpus in bulk — you do not need to page through the API.
+way to get the whole corpus in bulk; you do not need to page through the API.
 
 ## Where the exports live
 
-Artifacts are published under the `exports/` prefix of the public storage bucket,
+Artifacts are published under the `snapshot/` prefix of the public storage bucket,
 served over HTTPS at `https://data2.bedbase.org/`:
 
 ```
-https://data2.bedbase.org/exports/bedbase_metadata_2026_08_03.parquet
-https://data2.bedbase.org/exports/bedbase_bedsets_2026_08_03.parquet
-https://data2.bedbase.org/exports/bedbase_bedset_membership_2026_08_03.parquet
-https://data2.bedbase.org/exports/manifest_2026_08_03.json
+https://data2.bedbase.org/snapshot/bedbase_metadata_2026_08_03.parquet
+https://data2.bedbase.org/snapshot/bedbase_bedsets_2026_08_03.parquet
+https://data2.bedbase.org/snapshot/bedbase_bedset_membership_2026_08_03.parquet
+https://data2.bedbase.org/snapshot/manifest_2026_08_03.json
 ```
 
 Each run publishes:
@@ -32,7 +32,7 @@ overwritten, and there is **no** `latest` alias. Do not construct or hardcode a
 filename. Instead, discover the current snapshot through the index endpoint:
 
 ```
-GET https://api.bedbase.org/v1/bed/exports
+GET https://api.bedbase.org/v1/exports
 ```
 
 It returns the index newest-first, with `file_path` already rewritten to an
@@ -40,14 +40,14 @@ absolute `https://data2.bedbase.org/` URL:
 
 ```json
 {
-  "count": 4,
+  "count": 8,
   "results": [
     {
-      "file_path": "https://data2.bedbase.org/exports/bedbase_metadata_2026_08_03.parquet",
+      "file_path": "https://data2.bedbase.org/snapshot/bedbase_metadata_2026_09_01.parquet",
       "file_type": "metadata",
-      "creation_date": "2026-08-03T00:00:00+00:00",
-      "record_count": 663150,
-      "file_size": 47208172,
+      "creation_date": "2026-09-01T00:49:48.355278Z",
+      "record_count": 663721,
+      "file_size": 52850770,
       "checksum": "…sha256…",
       "schema_version": 1
     }
@@ -56,7 +56,8 @@ absolute `https://data2.bedbase.org/` URL:
 ```
 
 The newest row is first; take the first `metadata` entry to find the current
-snapshot.
+snapshot. The same artifacts are also listed as GA4GH DRS objects at
+`GET https://api.bedbase.org/v1/objects/exports`.
 
 ## Retention
 
@@ -72,13 +73,13 @@ prefer a quarterly snapshot.
 ```json
 {
   "schema_version": 1,
-  "build_started": "2026-08-03T00:00:01+00:00",
-  "build_ended": "2026-08-03T00:00:22+00:00",
+  "build_started": "2026-08-03T22:18:11.356975+00:00",
+  "build_ended": "2026-08-03T22:28:48.207622+00:00",
   "source_database": "bedbase",
   "files": [
     {"name": "bedbase_metadata_2026_08_03.parquet",
-     "file_type": "metadata", "rows": 663150,
-     "bytes": 47208172, "sha256": "…"}
+     "file_type": "metadata", "rows": 663242,
+     "bytes": 52754000, "sha256": "…"}
   ]
 }
 ```
@@ -90,14 +91,14 @@ download end-to-end.
 ## Querying with DuckDB
 
 Parquet plus open CORS and HTTP range requests means you can query a snapshot
-directly over HTTPS — no download, no server — from the [DuckDB](https://duckdb.org/)
+directly over HTTPS (no download, no server) from the [DuckDB](https://duckdb.org/)
 CLI or DuckDB-WASM in a browser.
 
-**Try it today with DuckDB — no download or pagination needed:**
+**Try it today with DuckDB, no download or pagination needed:**
 
 ```sql
 SELECT *
-FROM read_parquet('https://data2.bedbase.org/exports/bedbase_metadata_2026_08_03.parquet')
+FROM read_parquet('https://data2.bedbase.org/snapshot/bedbase_metadata_2026_08_03.parquet')
 WHERE assay = 'ChIP-seq' AND genome_alias = 'hg38';
 ```
 
@@ -107,8 +108,10 @@ the whole file.
 ## How it is produced
 
 A monthly [databio/bedbase-loader](https://github.com/databio/bedbase-loader)
-GitHub Action (`export_metadata.yml`) streams the tables straight from PostgreSQL
-as unordered sequential scans through server-side cursors (joining `bed_metadata`
-on the runner), writes zstd-compressed Parquet, verifies row counts against a
-pre-scan `count(*)`, and refuses to publish a partial artifact. The read runs in a
+GitHub Action (`export_metadata.yml`) runs `bedboss snapshot new`, which streams
+the tables straight from PostgreSQL as unordered sequential scans through
+server-side cursors (`bed` left-joined with `bed_metadata`), writes
+zstd-compressed Parquet, checks row counts against a pre-scan `count(*)`, and
+refuses to publish a partial artifact (more than 1% of rows missing, by default).
+`bbconf` then uploads the files and records them in the index. The read runs in a
 single `REPEATABLE READ` transaction, so each snapshot is internally consistent.
