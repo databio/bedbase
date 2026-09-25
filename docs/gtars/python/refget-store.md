@@ -15,8 +15,8 @@ print(f"Initialized store: {store}")
 store.add_sequence_collection_from_fasta("genome.fa")
 
 # Inspect what's in the store
-sequence_records = store.sequence_records()
-sequence_metadata = store.sequence_metadata()
+sequence_records = store.iter_sequences()
+sequence_metadata = store.list_sequences()
 collections = store.collections()
 
 # Access individual sequences
@@ -38,8 +38,8 @@ import os
 store_path = "my_refget_store"
 store.write_store_to_dir(store_path, "sequences/%s2/%s.seq")
 
-# Load a local store
-loaded_store = RefgetStore.load_local(store_path)
+# Open a local store
+loaded_store = RefgetStore.open_local(store_path)
 ```
 
 ## Loading Remote Stores with Caching
@@ -50,10 +50,10 @@ You can load stores from remote URLs (HTTP/HTTPS) with local caching:
 # Load from a remote server with local caching
 cache_dir = "local_cache"
 remote_url = "https://refget-server.example.com/hg38"
-remote_store = RefgetStore.load_remote(cache_dir, remote_url)
+remote_store = RefgetStore.open_remote(cache_dir, remote_url)
 
 # Get sequence metadata
-seq_metadata = list(remote_store.sequence_metadata())
+seq_metadata = list(remote_store.list_sequences())
 first_seq = seq_metadata[0]
 
 # Get a substring (automatically fetches and caches data)
@@ -73,7 +73,7 @@ collections = store.collections()
 collection = collections[0]
 
 # Get a sequence by collection and name
-record = store.get_sequence_by_collection_and_name(
+record = store.get_sequence_by_name(
     collection.digest,
     "chr1"
 )
@@ -127,7 +127,7 @@ python -m http.server 8200
 Then connect to it:
 
 ```python
-remote_store = RefgetStore.load_remote(
+remote_store = RefgetStore.open_remote(
     "local_cache",
     "http://localhost:8200/my_refget_store/"
 )
