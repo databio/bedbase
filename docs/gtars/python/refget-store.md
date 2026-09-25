@@ -5,7 +5,7 @@ This is a Python-specific reference guide that provides quick examples for using
 ## Creating and Populating a Store
 
 ```python
-from refget import RefgetStore
+from gtars.refget import RefgetStore
 
 # Create a new store (defaults to Encoded mode, space-efficient)
 store = RefgetStore.in_memory()
