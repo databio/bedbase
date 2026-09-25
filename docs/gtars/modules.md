@@ -6,7 +6,7 @@ gtars is organized as a workspace of independent Rust crates, each providing spe
 
 ## Core Infrastructure
 
-- **[gtars-core](core.md)** - Fundamental data structures and utilities
+- **[gtars-core](core.md)** - Fundamental data structures (`Region`, `RegionSet`, `RegionSetList`, `Interval`, `Fragment`, `CoordinateMode`) and utilities
 - **[gtars-io](io.md)** - I/O operations and file format parsers
 
 ## Genomic Analysis
@@ -16,6 +16,11 @@ gtars is organized as a workspace of independent Rust crates, each providing spe
 - **[gtars-igd](igd.md)** - Fast genomic interval search
 - **[gtars-scoring](scoring.md)** - Fragment overlap scoring
 - **[gtars-fragsplit](fragsplit.md)** - Fragment file splitting for pseudobulk
+
+## Distribution Analysis & Enrichment
+
+- **[gtars-genomicdist](genomicdist.md)** - Rust port of R GenomicDistributions: summary stats, interval set algebra, partitions, signal matrices, consensus
+- **[gtars-lola](lola.md)** - LOLA (Locus Overlap Analysis) enrichment testing built on IGD + genomicdist
 
 ## Machine Learning
 
