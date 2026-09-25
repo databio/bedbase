@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### RefgetStore (`gtars-refget`)
+- Fix residues that did not round-trip through `StorageMode::Encoded`:
+  - `D` and `H` in the IUPAC alphabet decoded as `H` and `V`. Fixed in the decoder, so existing stores read correctly without re-importing.
+  - `U` in the IUPAC alphabet was stored as `T`. `U` now has its own code.
+  - `U` (selenocysteine) and `B` in proteins were stored as `A`. The protein alphabet now holds `U`, `B`, `Z`, `O` and `J`.
+- Choose the smallest alphabet that holds every character in a sequence, instead of assuming each alphabet contains the one before it
+- Encoding a character that the chosen alphabet cannot hold is now an error instead of silently storing it as another residue (`encode_sequence`, `SequenceEncoder::finalize` and `set_encoding_mode` now return `Result`)
+- The 3-bit alphabet stores `U` in place of `X`, so RNA fits in 3 bits. Sequences with `X` now use the protein alphabet.
+- Add `verify` to check that every stored sequence still hashes to its digest (Rust, CLI `gtars refget verify`, Python `store.verify()`, R `verify_store()`)
+- Faster alphabet detection and encoding
+
+Stores built with 0.11.0 or earlier that contain `U` or `B` in proteins, or `U` in nucleotide sequences, must be re-imported. Run `gtars refget verify <store>` to list affected sequences.
+
 ## [0.11.0] -- 2026-09-22
 
 ### RefgetStore (`gtars-refget`)
