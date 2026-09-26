@@ -8,7 +8,7 @@ Each point on the plot represents one BED file. Points that are close together a
 
 BED file embeddings are computed using the [Region2Vec](/geniml/tutorials/use-pretrained-region2vec-model/) model, which encodes each BED file as a numeric vector capturing the genomic content of its regions. [UMAP](https://umap-learn.readthedocs.io/en/latest/) is then applied to reduce these high-dimensional vectors to 2D for visualization.
 
-The UMAP data is regenerated automatically on a scheduled basis to incorporate newly added BED files. See [BEDbase Loader](../bedbase-loader.md) for details.
+The UMAP data is regenerated automatically on a scheduled basis to incorporate newly added BED files. See [BEDbase Loader](../bedbase-data-loading.md#bedbase-loader-repository) for details.
 
 ## Using the visualizer
 ![umap_page.png](../img/umap_page.png)
