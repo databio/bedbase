@@ -1,0 +1,14 @@
+# Site-level pages of docs.bedbase.org. This spoke is mounted at the site root
+# (spoke "site", mount = "/" in doc-hubs hubs/bedbase/spokes.toml): index.mdx
+# is the home page, citations.md is /citations/, manuscripts/ is /manuscripts/.
+# site_name is the sidebar group's label.
+site_name: Manuscripts
+nav:
+  - How to cite: citations.md
+  - Published manuscripts:
+    - Gharavi et al. 2021: manuscripts/gharavi2021.md
+    - Gu et al. 2021: manuscripts/gu2021.md
+    - Rymuza et al. 2024: manuscripts/rymuza2024.md
+    - Gharavi et al. 2024: manuscripts/gharavi2024.md
+    - LeRoy et al. 2024: manuscripts/leroy2024.md
+    - Zheng et al. 2024: manuscripts/zheng2024.md

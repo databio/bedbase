@@ -1,0 +1,35 @@
+---
+title: Welcome to BEDbase documentation
+template: splash
+hero:
+  title: Welcome to BEDbase documentation
+  image:
+    # Relative to the hub's src/content/docs/: the logo is hub branding.
+    file: ../../assets/bedbase_logo.svg
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+This website hosts user and developer documentation for BEDbase, it's components, and related tools, notably including:
+
+<CardGrid>
+  <Card title="Geniml">
+    <a href="/geniml/"><img src="/geniml/img/geniml_logo_horizontal.svg" alt="geniml" width="110" /></a>
+
+    Genomic interval machine learning toolkit.
+  </Card>
+  <Card title="Gtars">
+    <a href="/gtars/"><img src="/gtars/img/gtars_logo.svg" alt="gtars" width="100" /></a>
+
+    Rust package with Python bindings for genomic interval analysis.
+  </Card>
+  <Card title="BEDboss">
+    <a href="/bedboss/"><img src="/bedboss/img/bedboss_logo.svg" alt="bedboss" width="110" /></a>
+
+    BEDbase companion package for processing and managing interval datasets.
+  </Card>
+</CardGrid>
+
+<hr />
+
+You can access the main BEDbase interface at [https://bedbase.org](https://bedbase.org).
